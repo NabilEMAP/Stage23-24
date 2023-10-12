@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PlanningsTool.DAL.Configurations;
 using PlanningsTool.DAL.Models;
+using PlanningsTool.DAL.Seeding;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,7 @@ namespace PlanningsTool.DAL.Contexts
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             //base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new ZorgkundigeConfiguration());
+            modelBuilder.Entity<Zorgkundige>().Seed();
         }
     }
 }
