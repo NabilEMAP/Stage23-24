@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using PlanningsTool.DAL.Contexts;
 using PlanningsTool.DAL.Repositories;
+using PlanningsTool.DAL.UOW;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,8 +28,7 @@ namespace PlanningsTool.DAL.Extensions
 
         public static IServiceCollection RegisterUnitOfWork(this IServiceCollection services)
         {
-            // Service Scopes moeten hier nog toegevoegd worden
-            // ...
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             return services;
         }
 
