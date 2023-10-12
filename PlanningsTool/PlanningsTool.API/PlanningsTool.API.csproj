@@ -19,10 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\PlanningsTool.BLL\PlanningsTool.BLL.csproj" />
     <ProjectReference Include="..\PlanningsTool.Common\PlanningsTool.Common.csproj" />
     <ProjectReference Include="..\PlanningsTool.DAL\PlanningsTool.DAL.csproj" />
