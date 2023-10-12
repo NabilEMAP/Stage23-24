@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using PlanningsTool.DAL.Contexts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,8 @@ namespace PlanningsTool.DAL.Extensions
     {
         public static IServiceCollection RegisterDbContext(this IServiceCollection services)
         {
-            // Service AddDbContext moet hier nog toegevoegd worden
-            // ...
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer("name=ConnectionStrings:Stage2324"));
             return services;
         }
 
