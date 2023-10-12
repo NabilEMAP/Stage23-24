@@ -17,13 +17,13 @@ namespace PlanningsTool.DAL.Repositories
 
         public async Task<Zorgkundige> GetZorgkundigeByAchternaam(string achternaam)
         {
-            string query = $"SELECT * FROM [StartPlanningsTool].[Zorgkundige].[tblZorgkundigen] AS z WHERE z.Achternaam like '%{achternaam}%'";
+            string query = $"SELECT * FROM [Zorgkundige].[tblZorgkundigen] AS z WHERE z.Achternaam like '%{achternaam}%'";
             return await _context.Zorgkundigen.FromSqlRaw(query).FirstAsync();
         }
 
         public async Task<Zorgkundige> GetZorgkundigeByVoornaam(string voornaam)
         {
-            string query = $"SELECT * FROM [StartPlanningsTool].[Zorgkundige].[tblZorgkundigen] AS z WHERE z.Voornaam like '%{voornaam}%'";
+            string query = $"SELECT * FROM [Zorgkundige].[tblZorgkundigen] AS z WHERE z.Voornaam like '%{voornaam}%'";
             return await _context.Zorgkundigen.FromSqlRaw(query).FirstAsync();
         }
     }
