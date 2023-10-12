@@ -47,18 +47,18 @@ namespace PlanningsTool.API.Controllers
         [HttpGet("voornaam/{voornaam}")]
         public async Task<IActionResult> GetZorgkundigeByVoornaam(string voornaam)
         {
-            var zorgkundige = await _zorgkundigenServices.GetZorgkundigeByVoornaam(voornaam);
-            if (zorgkundige == null) { return NotFound(); }
-            return Ok(zorgkundige);
+            var zorgkundigen = await _zorgkundigenServices.GetZorgkundigenByVoornaam(voornaam);
+            if (zorgkundigen == null) { return NotFound(); }
+            return Ok(zorgkundigen);
         }
 
         // GET api/Zorgkundigen/achternaam/{achternaam}
         [HttpGet("achternaam/{achternaam}")]
         public async Task<IActionResult> GetZorgkundigeByAchternaam(string achternaam)
         {
-            var zorgkundige = await _zorgkundigenServices.GetZorgkundigeByAchternaam(achternaam);
-            if (zorgkundige == null) { return NotFound(); }
-            return Ok(zorgkundige);
+            var zorgkundigen = await _zorgkundigenServices.GetZorgkundigenByAchternaam(achternaam);
+            if (zorgkundigen == null) { return NotFound(); }
+            return Ok(zorgkundigen);
         }
 
         // POST api/Zorgkundigen

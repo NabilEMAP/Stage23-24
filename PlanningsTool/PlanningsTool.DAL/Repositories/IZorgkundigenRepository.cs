@@ -10,8 +10,8 @@ namespace PlanningsTool.DAL.Repositories
 {
     public interface IZorgkundigenRepository : IGenericRepository<Zorgkundige>
     {
-        Task<Zorgkundige> GetZorgkundigeByAchternaam(string achternaam);
-        Task<Zorgkundige> GetZorgkundigeByVoornaam(string voornaam);
+        Task<IEnumerable<Zorgkundige>> GetZorgkundigenByAchternaam(string achternaam);
+        Task<IEnumerable<Zorgkundige>> GetZorgkundigenByVoornaam(string voornaam);
 
     }
 }

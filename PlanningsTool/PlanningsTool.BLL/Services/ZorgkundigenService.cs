@@ -60,16 +60,16 @@ namespace PlanningsTool.BLL.Services
             return _mapper.Map<ZorgkundigeDetailDTO>(zorgkundige);
         }
 
-        public async Task<ZorgkundigeDetailDTO> GetZorgkundigeByAchternaam(string achternaam)
+        public async Task<IEnumerable<ZorgkundigeDetailDTO>> GetZorgkundigenByAchternaam(string achternaam)
         {
-            var zorgkundige = await _uow.ZorgkundigenRepository.GetZorgkundigeByAchternaam(achternaam);
-            return _mapper.Map<ZorgkundigeDetailDTO>(zorgkundige);
+            var zorgkundigen = await _uow.ZorgkundigenRepository.GetZorgkundigenByAchternaam(achternaam);
+            return _mapper.Map<IEnumerable<ZorgkundigeDetailDTO>>(zorgkundigen);
         }
 
-        public async Task<ZorgkundigeDetailDTO> GetZorgkundigeByVoornaam(string voornaam)
+        public async Task<IEnumerable<ZorgkundigeDetailDTO>> GetZorgkundigenByVoornaam(string voornaam)
         {
-            var zorgkundige = await _uow.ZorgkundigenRepository.GetZorgkundigeByVoornaam(voornaam);
-            return _mapper.Map<ZorgkundigeDetailDTO>(zorgkundige);
+            var zorgkundigen = await _uow.ZorgkundigenRepository.GetZorgkundigenByVoornaam(voornaam);
+            return _mapper.Map<IEnumerable<ZorgkundigeDetailDTO>>(zorgkundigen);
         }
 
         public async Task<ZorgkundigeDetailDTO> Update(int id, UpdateZorgkundigeDTO entity)
