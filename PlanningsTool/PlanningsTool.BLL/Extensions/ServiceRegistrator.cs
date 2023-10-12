@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using PlanningsTool.BLL.Interfaces;
+using PlanningsTool.BLL.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +14,7 @@ namespace PlanningsTool.BLL.Extensions
     {
         public static IServiceCollection RegisterServices(this IServiceCollection services)
         {
-            // Service Scopes moeten hier nog toegevoegd worden
-            // ...
+            services.AddScoped<IZorgkundigenService, ZorgkundigenService>();
             return services;
         }
 
