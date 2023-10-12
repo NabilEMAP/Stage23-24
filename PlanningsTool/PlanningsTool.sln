@@ -3,7 +3,37 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanningsTool.API", "PlanningsTool.API\PlanningsTool.API.csproj", "{E2BA7654-C3B8-42F1-997F-1640612F34BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanningsTool.BLL", "PlanningsTool.BLL\PlanningsTool.BLL.csproj", "{E9F88DD6-AF60-46C3-AE4C-8A7A308EB68C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanningsTool.DAL", "PlanningsTool.DAL\PlanningsTool.DAL.csproj", "{657EAC79-1661-4EBD-BF54-10AC85E4066A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanningsTool.Common", "PlanningsTool.Common\PlanningsTool.Common.csproj", "{DB3C1CCA-4809-4A38-9A47-A4D697E7FDC4}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E2BA7654-C3B8-42F1-997F-1640612F34BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2BA7654-C3B8-42F1-997F-1640612F34BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2BA7654-C3B8-42F1-997F-1640612F34BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2BA7654-C3B8-42F1-997F-1640612F34BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9F88DD6-AF60-46C3-AE4C-8A7A308EB68C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9F88DD6-AF60-46C3-AE4C-8A7A308EB68C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9F88DD6-AF60-46C3-AE4C-8A7A308EB68C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9F88DD6-AF60-46C3-AE4C-8A7A308EB68C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{657EAC79-1661-4EBD-BF54-10AC85E4066A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{657EAC79-1661-4EBD-BF54-10AC85E4066A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{657EAC79-1661-4EBD-BF54-10AC85E4066A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{657EAC79-1661-4EBD-BF54-10AC85E4066A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB3C1CCA-4809-4A38-9A47-A4D697E7FDC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB3C1CCA-4809-4A38-9A47-A4D697E7FDC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB3C1CCA-4809-4A38-9A47-A4D697E7FDC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB3C1CCA-4809-4A38-9A47-A4D697E7FDC4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
