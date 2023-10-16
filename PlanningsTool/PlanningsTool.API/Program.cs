@@ -17,11 +17,6 @@ builder.Services.RegisterApplication();
 
 var app = builder.Build();
 
-app.UseCors(policy => policy.AllowAnyHeader()
-                            .AllowAnyMethod()
-                            .SetIsOriginAllowed(origin => true)
-                            .AllowCredentials());
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
