@@ -62,10 +62,10 @@ function ZorgkundigePagina() {
         const API = 'https://localhost:8000/api/Zorgkundigen/details'
         axios.get(API)
             .then((result) => {
-                setData(result.data)
+                setData(result.data);
             })
             .catch((error) => {
-                console.log(error)
+                console.log(error);
             })
     }
 
@@ -89,12 +89,12 @@ function ZorgkundigePagina() {
     }
 
     const clear = () => {
-        setVoornaam('')
-        setAchternaam('')
-        setIsVasteNacht(false)
-        setEditVoornaam('')
-        setEditAchternaam('')
-        setEditIsVasteNacht(false)
+        setVoornaam('');
+        setAchternaam('');
+        setIsVasteNacht(false);
+        setEditVoornaam('');
+        setEditAchternaam('');
+        setEditIsVasteNacht(false);
     }
 
     const handleActiveChange = (e) => {
