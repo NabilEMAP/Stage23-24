@@ -17,26 +17,29 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import MyToastify from "./MyToastify";
+import { Checkbox, FormControlLabel, Stack, TextField } from "@mui/material";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
+        backgroundColor: theme.palette.common.black,
+        color: theme.palette.common.white,
     },
     [`&.${tableCellClasses.body}`]: {
-      fontSize: 16,
+        fontSize: 16,
     },
-  }));
-  
-  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
     '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.action.hover,
+        backgroundColor: theme.palette.action.hover,
     },
     // hide last border
     '&:last-child td, &:last-child th': {
-      border: 0,
+        border: 0,
     },
-  }));
+}));
 
 function ZorgkundigePagina() {
     const [show, setShow] = useState(false);
@@ -172,7 +175,7 @@ function ZorgkundigePagina() {
             <Container>
                 <Row>
                     <Col>
-                        <input
+                        <TextField
                             type="text"
                             className="form-control"
                             placeholder="Voornaam..."
@@ -181,7 +184,7 @@ function ZorgkundigePagina() {
                         />
                     </Col>
                     <Col>
-                        <input
+                        <TextField
                             type="text"
                             className="form-control"
                             placeholder="Achternaam..."
@@ -190,13 +193,14 @@ function ZorgkundigePagina() {
                         />
                     </Col>
                     <Col>
-                        <input
-                            type="checkbox"
-                            checked={isVasteNacht === true ? true : false}
-                            value={isVasteNacht}
-                            onChange={(e) => handleActiveChange(e)}
-                        />
-                        <label>Vaste Nacht?</label>
+                        <FormControlLabel label="Vaste Nacht" control={
+                            <Checkbox
+                                type="checkbox"
+                                checked={isVasteNacht === true ? true : false}
+                                value={isVasteNacht}
+                                onChange={(e) => handleActiveChange(e)}
+                            />
+                        } />
                     </Col>
                     <Col>
                         <Button
@@ -214,42 +218,42 @@ function ZorgkundigePagina() {
                     <Modal.Title>Zorgkundige wijzigen</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Row>
-                        <Col>
-                            <input
-                                type="text"
-                                className="form-control"
-                                placeholder="Voornaam..."
-                                value={editVoornaam}
-                                onChange={(e) => setEditVoornaam(e.target.value)}
-                            />
-                        </Col>
-                        <Col>
-                            <input
-                                type="text"
-                                className="form-control"
-                                placeholder="Achternaam..."
-                                value={editAchternaam}
-                                onChange={(e) => setEditAchternaam(e.target.value)}
-                            />
-                        </Col>
-                        <Col>
-                            <input
-                                type="checkbox"
+                    <Stack
+                        direction="column"
+                        justifyContent="center"
+                        alignItems="center"
+                        spacing={4}
+                    >
+                        <TextField
+                            style={{ width: '75%' }}
+                            type="text"
+                            className="form-control"
+                            placeholder="Vul uw voornaam..."
+                            value={editVoornaam}
+                            onChange={(e) => setEditVoornaam(e.target.value)}
+                        />
+                        <TextField
+                            style={{ width: '75%' }}
+                            type="text"
+                            className="form-control"
+                            placeholder="Vul uw achternaam..."
+                            value={editAchternaam}
+                            onChange={(e) => setEditAchternaam(e.target.value)}
+                        />
+                        <FormControlLabel label="Vaste Nacht" control={
+                            <Checkbox type="checkbox"
                                 checked={editIsVasteNacht === true ? true : false}
                                 value={editIsVasteNacht}
-                                onChange={(e) => handleEditActiveChange(e)}
-                            />
-                            <label>Vaste Nacht?</label>
-                        </Col>
-                    </Row>
+                                onChange={(e) => handleEditActiveChange(e)} />
+                        } />
+                    </Stack>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
-                        Close
+                        Terug
                     </Button>
                     <Button variant="primary" onClick={handleUpdate}>
-                        Save Changes
+                        Wijzig verandering
                     </Button>
                 </Modal.Footer>
             </Modal>
@@ -275,8 +279,8 @@ function ZorgkundigePagina() {
                                             <StyledTableCell>{item.achternaam}</StyledTableCell>
                                             <StyledTableCell>{(item.isVasteNacht) ? "Ja" : "Nee"}</StyledTableCell>
                                             <StyledTableCell>
-                                                <Button className="btn btn-primary" onClick={() => handleEdit(item.id)}>Edit</Button>
-                                                <Button className="btn btn-danger" onClick={() => handleDelete(item.id)}>Delete</Button>
+                                                <Button className="btn btn-primary" onClick={() => handleEdit(item.id)}><FontAwesomeIcon icon={faPen} /></Button>
+                                                <Button className="btn btn-danger" onClick={() => handleDelete(item.id)}><FontAwesomeIcon icon={faTrash} /></Button>
                                             </StyledTableCell>
                                         </StyledTableRow>
                                     )
