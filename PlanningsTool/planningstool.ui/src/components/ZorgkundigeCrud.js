@@ -1,16 +1,44 @@
 import axios from "axios";
 import React, { Fragment, useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
-function ZorgkundigeCrud() {
+import { styled } from '@mui/material/styles';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import MyToastify from "./MyToastify";
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 16,
+    },
+  }));
+  
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+    // hide last border
+    '&:last-child td, &:last-child th': {
+      border: 0,
+    },
+  }));
+
+function ZorgkundigePagina() {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -140,7 +168,7 @@ function ZorgkundigeCrud() {
 
     return (
         <Fragment>
-            <ToastContainer />
+            <MyToastify />
             <Container>
                 <Row>
                     <Col>
@@ -225,37 +253,39 @@ function ZorgkundigeCrud() {
                     </Button>
                 </Modal.Footer>
             </Modal>
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Voornaam</th>
-                        <th>Achternaam</th>
-                        <th>Vaste Nacht?</th>
-                        <th>Veranderingen</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        data && data.length > 0 ?
-                            data.map((item, index) => {
-                                return (
-                                    <tr key={index}>
-                                        <td>{item.id}</td>
-                                        <td>{item.voornaam}</td>
-                                        <td>{item.achternaam}</td>
-                                        <td>{(item.isVasteNacht) ? "Ja" : "Nee"}</td>
-                                        <td>
-                                            <Button className="btn btn-primary" onClick={() => handleEdit(item.id)}>Edit</Button>
-                                            <Button className="btn btn-danger" onClick={() => handleDelete(item.id)}>Delete</Button>
-                                        </td>
-                                    </tr>
-                                )
-                            }) : 'No data found'}
-                </tbody>
-            </Table>
+            <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                    <TableHead>
+                        <TableRow>
+                            <StyledTableCell></StyledTableCell>
+                            <StyledTableCell>Voornaam</StyledTableCell>
+                            <StyledTableCell>Achternaam</StyledTableCell>
+                            <StyledTableCell>Vaste Nacht?</StyledTableCell>
+                            <StyledTableCell>Veranderingen</StyledTableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {
+                            data && data.length > 0 ?
+                                data.map((item, index) => {
+                                    return (
+                                        <StyledTableRow key={index}>
+                                            <StyledTableCell>{item.id}</StyledTableCell>
+                                            <StyledTableCell>{item.voornaam}</StyledTableCell>
+                                            <StyledTableCell>{item.achternaam}</StyledTableCell>
+                                            <StyledTableCell>{(item.isVasteNacht) ? "Ja" : "Nee"}</StyledTableCell>
+                                            <StyledTableCell>
+                                                <Button className="btn btn-primary" onClick={() => handleEdit(item.id)}>Edit</Button>
+                                                <Button className="btn btn-danger" onClick={() => handleDelete(item.id)}>Delete</Button>
+                                            </StyledTableCell>
+                                        </StyledTableRow>
+                                    )
+                                }) : 'No data found'}
+                    </TableBody>
+                </Table>
+            </TableContainer>
         </Fragment>
     );
 }
 
-export default ZorgkundigeCrud;
+export default ZorgkundigePagina;
