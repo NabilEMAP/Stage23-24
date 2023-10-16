@@ -77,7 +77,7 @@ namespace PlanningsTool.API.Controllers
         }
 
         // PUT api/Zorgkundigen
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, UpdateZorgkundigeDTO zorgkundige)
         {
             if (zorgkundige == null)
@@ -89,7 +89,7 @@ namespace PlanningsTool.API.Controllers
         }
 
         // DELETE api/Zorgkundigen
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var zorgkundige = await _zorgkundigenServices.GetById(id);
