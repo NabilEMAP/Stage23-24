@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { Fragment, useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { toast } from 'react-toastify';
 import { styled } from '@mui/material/styles';
@@ -13,7 +12,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import MyToastify from "../components/MyToastify";
-import { Checkbox, FormControlLabel, Stack, TextField } from "@mui/material";
+import { Button, Checkbox, FormControlLabel, Stack, TextField } from "@mui/material";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 
@@ -191,8 +190,9 @@ function ZorgkundigePage() {
         <Fragment>
             <MyToastify />
             <Button
-                style={{float: 'right'}}
-                className="btn btn-success"
+                variant="contained"
+                style={{ float: 'right' }}
+                color="success"
                 onClick={() => handleShowAdd()}
             >
                 Zorgkundige toevoegen
@@ -236,12 +236,14 @@ function ZorgkundigePage() {
                     </Stack>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseAdd}>
-                        Terug
-                    </Button>
-                    <Button variant="success" onClick={handleCreate}>
-                        Toevoegen
-                    </Button>
+                    <Stack direction="row" alignItems="center" spacing={2}>
+                        <Button variant="contained" color="inherit" onClick={handleCloseAdd}>
+                            Terug
+                        </Button>
+                        <Button variant="contained" color="success" onClick={handleCreate}>
+                            Toevoegen
+                        </Button>
+                    </Stack>
                 </Modal.Footer>
             </Modal>
             <Modal show={showEdit} onHide={handleCloseEdit}>
@@ -281,12 +283,14 @@ function ZorgkundigePage() {
                     </Stack>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseEdit}>
-                        Terug
-                    </Button>
-                    <Button variant="primary" onClick={handleUpdate}>
-                        Wijzigen
-                    </Button>
+                    <Stack direction="row" alignItems="center" spacing={2}>
+                        <Button variant="contained" color="inherit" onClick={handleCloseEdit}>
+                            Terug
+                        </Button>
+                        <Button variant="contained" color="primary" onClick={handleUpdate}>
+                            Wijzigen
+                        </Button>
+                    </Stack>
                 </Modal.Footer>
             </Modal>
             <Modal show={showDelete} onHide={handleCloseDelete}>
@@ -330,12 +334,14 @@ function ZorgkundigePage() {
                     </Stack>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseDelete}>
-                        Terug
-                    </Button>
-                    <Button variant="danger" onClick={handlePostDelete}>
-                        Verwijderen
-                    </Button>
+                    <Stack direction="row" alignItems="center" spacing={2}>
+                        <Button variant="contained" color="inherit" onClick={handleCloseDelete}>
+                            Terug
+                        </Button>
+                        <Button variant="contained" color="error" onClick={handlePostDelete}>
+                            Verwijderen
+                        </Button>
+                    </Stack>
                 </Modal.Footer>
             </Modal>
             <TableContainer component={Paper}>
@@ -360,8 +366,8 @@ function ZorgkundigePage() {
                                             <StyledTableCell>{item.achternaam}</StyledTableCell>
                                             <StyledTableCell>{(item.isVasteNacht) ? "Ja" : "Nee"}</StyledTableCell>
                                             <StyledTableCell>
-                                                <Button className="btn btn-primary" onClick={() => handleEdit(item.id)}><FontAwesomeIcon icon={faPen} /></Button>
-                                                <Button className="btn btn-danger" onClick={() => handleDelete(item.id)}><FontAwesomeIcon icon={faTrash} /></Button>
+                                                <Button variant="contained" color="primary" onClick={() => handleEdit(item.id)}><FontAwesomeIcon icon={faPen} /></Button>
+                                                <Button variant="contained" color="error" onClick={() => handleDelete(item.id)}><FontAwesomeIcon icon={faTrash} /></Button>
                                             </StyledTableCell>
                                         </StyledTableRow>
                                     )
