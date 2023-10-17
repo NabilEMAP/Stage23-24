@@ -1,9 +1,9 @@
-import ZorgkundigeCrud from "./components/ZorgkundigeCrud";
+import ZorgkundigePage from "./pages/ZorgkundigePage";
 
 function App() {
   return (
     <div>
-      <ZorgkundigeCrud/>
+      <ZorgkundigePage/>
     </div>
   );
 }

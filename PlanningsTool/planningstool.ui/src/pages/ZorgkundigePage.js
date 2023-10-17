@@ -3,11 +3,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import { toast } from 'react-toastify';
-
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -16,7 +12,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import MyToastify from "./MyToastify";
+import MyToastify from "../components/MyToastify";
 import { Checkbox, FormControlLabel, Stack, TextField } from "@mui/material";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -41,7 +37,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-function ZorgkundigePagina() {
+function ZorgkundigePage() {
     const [showAdd, setShowAdd] = useState(false);
     const handleCloseAdd = () => setShowAdd(false);
     const handleShowAdd = () => setShowAdd(true);
@@ -377,4 +373,4 @@ function ZorgkundigePagina() {
     );
 }
 
-export default ZorgkundigePagina;
+export default ZorgkundigePage;
