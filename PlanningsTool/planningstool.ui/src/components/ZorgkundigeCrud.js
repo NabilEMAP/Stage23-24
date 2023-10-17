@@ -42,9 +42,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 function ZorgkundigePagina() {
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const [showEdit, setShowEdit] = useState(false);
+    const handleCloseEdit = () => setShowEdit(false);
+    const handleShowEdit = () => setShowEdit(true);
+
+    const [showDelete, setShowDelete] = useState(false);
+    const handleCloseDelete = () => setShowDelete(false);
+    const handleShowDelete = () => setShowDelete(true);
 
     const [voornaam, setVoornaam] = useState('');
     const [achternaam, setAchternaam] = useState('');
@@ -119,7 +123,7 @@ function ZorgkundigePagina() {
     }
 
     const handleEdit = (id) => {
-        handleShow();
+        handleShowEdit();
         const API = `https://localhost:8000/api/Zorgkundigen/${id}`;
         axios.get(API)
             .then((result) => {
@@ -134,19 +138,32 @@ function ZorgkundigePagina() {
     }
 
     const handleDelete = (id) => {
+        handleShowDelete();
         const API = `https://localhost:8000/api/Zorgkundigen/${id}`;
-        const message = "Ben je zeker dat je deze zorgkundige wilt verwijderen?";
-        if (window.confirm(message) === true) {
-            axios.delete(API)
-                .then(() => {
-                    toast.success('Zorgkundige is verwijderd');
-                    getData();
+        axios.get(API)
+            .then((result) => {
+                setEditVoornaam(result.data.voornaam,);
+                setEditAchternaam(result.data.achternaam);
+                setEditIsVasteNacht(result.data.isVasteNacht);
+                setEditID(id);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
 
-                })
-                .catch((error) => {
-                    toast.error(error);
-                })
-        }
+    const handlePostDelete = () => {
+        const API = `https://localhost:8000/api/Zorgkundigen/${editID}`;
+        axios.delete(API)
+            .then(() => {
+                toast.success('Zorgkundige is verwijderd');
+                getData();
+                handleCloseDelete();
+            })
+            .catch((error) => {
+                toast.error(`${error}`);
+            })
+
     }
 
     const handleUpdate = () => {
@@ -162,10 +179,10 @@ function ZorgkundigePagina() {
             .then((result) => {
                 toast.success('Zorgkundige is gewijzigd');
                 getData();
-                handleClose();
+                handleCloseEdit();
             })
             .catch((error) => {
-                console.log(error);
+                toast.error(`${error}`);
             })
     }
 
@@ -213,7 +230,7 @@ function ZorgkundigePagina() {
                 </Row>
             </Container>
             <br />
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={showEdit} onHide={handleCloseEdit}>
                 <Modal.Header closeButton>
                     <Modal.Title>Zorgkundige wijzigen</Modal.Title>
                 </Modal.Header>
@@ -244,16 +261,66 @@ function ZorgkundigePagina() {
                             <Checkbox type="checkbox"
                                 checked={editIsVasteNacht === true ? true : false}
                                 value={editIsVasteNacht}
-                                onChange={(e) => handleEditActiveChange(e)} />
+                                onChange={(e) => handleEditActiveChange(e)}
+                            />
                         } />
                     </Stack>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                    <Button variant="secondary" onClick={handleCloseEdit}>
                         Terug
                     </Button>
                     <Button variant="primary" onClick={handleUpdate}>
                         Wijzig verandering
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+            <Modal show={showDelete} onHide={handleCloseDelete}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Zorgkundige verwijderen</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Stack
+                        direction="column"
+                        justifyContent="center"
+                        alignItems="center"
+                        spacing={4}
+                    >
+                        <h6>Ben je zeker dat je deze zorgkundige wilt verwijderen?</h6>
+                        <TextField
+                            style={{ width: '75%' }}
+                            type="text"
+                            className="form-control"
+                            placeholder="Vul uw voornaam..."
+                            value={editVoornaam}
+                            onChange={(e) => setEditVoornaam(e.target.value)}
+                            disabled
+                        />
+                        <TextField
+                            style={{ width: '75%' }}
+                            type="text"
+                            className="form-control"
+                            placeholder="Vul uw achternaam..."
+                            value={editAchternaam}
+                            onChange={(e) => setEditAchternaam(e.target.value)}
+                            disabled
+                        />
+                        <FormControlLabel label="Vaste Nacht" control={
+                            <Checkbox type="checkbox"
+                                checked={editIsVasteNacht === true ? true : false}
+                                value={editIsVasteNacht}
+                                onChange={(e) => handleEditActiveChange(e)}
+                                disabled
+                            />
+                        } />
+                    </Stack>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseDelete}>
+                        Terug
+                    </Button>
+                    <Button variant="danger" onClick={handlePostDelete}>
+                        Verwijderen
                     </Button>
                 </Modal.Footer>
             </Modal>
