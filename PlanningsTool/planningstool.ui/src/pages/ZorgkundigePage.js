@@ -11,7 +11,6 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import MyToastify from "../components/MyToastify";
 import { Button, Checkbox, FormControlLabel, Stack, TextField } from "@mui/material";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -188,7 +187,6 @@ function ZorgkundigePage() {
 
     return (
         <Fragment>
-            <MyToastify />
             <Button
                 variant="contained"
                 style={{ float: 'right' }}
