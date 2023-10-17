@@ -42,6 +42,10 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 function ZorgkundigePagina() {
+    const [showAdd, setShowAdd] = useState(false);
+    const handleCloseAdd = () => setShowAdd(false);
+    const handleShowAdd = () => setShowAdd(true);
+
     const [showEdit, setShowEdit] = useState(false);
     const handleCloseEdit = () => setShowEdit(false);
     const handleShowEdit = () => setShowEdit(true);
@@ -76,7 +80,7 @@ function ZorgkundigePagina() {
             })
     }
 
-    const handleSave = () => {
+    const handleCreate = () => {
         const API = 'https://localhost:8000/api/Zorgkundigen';
         const data =
         {
@@ -87,39 +91,13 @@ function ZorgkundigePagina() {
         axios.post(API, data)
             .then((result) => {
                 getData();
-                clear();
                 toast.success('Zorgkundige is toegevoegd');
+                clear();
+                handleCloseAdd();
             })
             .catch((error) => {
                 toast.error(error);
             })
-    }
-
-    const clear = () => {
-        setVoornaam('');
-        setAchternaam('');
-        setIsVasteNacht(false);
-        setEditVoornaam('');
-        setEditAchternaam('');
-        setEditIsVasteNacht(false);
-    }
-
-    const handleActiveChange = (e) => {
-        if (e.target.checked) {
-            setIsVasteNacht(true);
-        }
-        else {
-            setIsVasteNacht(false);
-        }
-    }
-
-    const handleEditActiveChange = (e) => {
-        if (e.target.checked) {
-            setEditIsVasteNacht(true);
-        }
-        else {
-            setEditIsVasteNacht(false);
-        }
     }
 
     const handleEdit = (id) => {
@@ -134,6 +112,26 @@ function ZorgkundigePagina() {
             })
             .catch((error) => {
                 console.log(error);
+            })
+    }
+
+    const handleUpdate = () => {
+        const API = `https://localhost:8000/api/Zorgkundigen/${editID}`;
+        const data =
+        {
+            "id": editID,
+            "voornaam": editVoornaam,
+            "achternaam": editAchternaam,
+            "isVasteNacht": editIsVasteNacht
+        }
+        axios.put(API, data)
+            .then((result) => {
+                toast.success('Zorgkundige is gewijzigd');
+                getData();
+                handleCloseEdit();
+            })
+            .catch((error) => {
+                toast.error(`${error}`);
             })
     }
 
@@ -166,50 +164,71 @@ function ZorgkundigePagina() {
 
     }
 
-    const handleUpdate = () => {
-        const API = `https://localhost:8000/api/Zorgkundigen/${editID}`;
-        const data =
-        {
-            "id": editID,
-            "voornaam": editVoornaam,
-            "achternaam": editAchternaam,
-            "isVasteNacht": editIsVasteNacht
+    const handleActiveChange = (e) => {
+        if (e.target.checked) {
+            setIsVasteNacht(true);
         }
-        axios.put(API, data)
-            .then((result) => {
-                toast.success('Zorgkundige is gewijzigd');
-                getData();
-                handleCloseEdit();
-            })
-            .catch((error) => {
-                toast.error(`${error}`);
-            })
+        else {
+            setIsVasteNacht(false);
+        }
+    }
+
+    const handleEditActiveChange = (e) => {
+        if (e.target.checked) {
+            setEditIsVasteNacht(true);
+        }
+        else {
+            setEditIsVasteNacht(false);
+        }
+    }
+
+    const clear = () => {
+        setVoornaam('');
+        setAchternaam('');
+        setIsVasteNacht(false);
+        setEditVoornaam('');
+        setEditAchternaam('');
+        setEditIsVasteNacht(false);
     }
 
     return (
         <Fragment>
             <MyToastify />
-            <Container>
-                <Row>
-                    <Col>
+            <Button
+                style={{float: 'right'}}
+                className="btn btn-success"
+                onClick={() => handleShowAdd()}
+            >
+                Zorgkundige toevoegen
+            </Button>
+            <br />
+            <Modal show={showAdd} onHide={handleCloseAdd}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Zorgkundige toevoegen</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Stack
+                        direction="column"
+                        justifyContent="center"
+                        alignItems="center"
+                        spacing={4}
+                    >
                         <TextField
+                            style={{ width: '75%' }}
                             type="text"
                             className="form-control"
-                            placeholder="Voornaam..."
+                            placeholder="Vul uw voornaam..."
                             value={voornaam}
                             onChange={(e) => setVoornaam(e.target.value)}
                         />
-                    </Col>
-                    <Col>
                         <TextField
+                            style={{ width: '75%' }}
                             type="text"
                             className="form-control"
-                            placeholder="Achternaam..."
+                            placeholder="Vul uw achternaam..."
                             value={achternaam}
                             onChange={(e) => setAchternaam(e.target.value)}
                         />
-                    </Col>
-                    <Col>
                         <FormControlLabel label="Vaste Nacht" control={
                             <Checkbox
                                 type="checkbox"
@@ -218,18 +237,17 @@ function ZorgkundigePagina() {
                                 onChange={(e) => handleActiveChange(e)}
                             />
                         } />
-                    </Col>
-                    <Col>
-                        <Button
-                            className="btn btn-primary"
-                            onClick={() => handleSave()}
-                        >
-                            Submit
-                        </Button>
-                    </Col>
-                </Row>
-            </Container>
-            <br />
+                    </Stack>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseAdd}>
+                        Terug
+                    </Button>
+                    <Button variant="success" onClick={handleCreate}>
+                        Toevoegen
+                    </Button>
+                </Modal.Footer>
+            </Modal>
             <Modal show={showEdit} onHide={handleCloseEdit}>
                 <Modal.Header closeButton>
                     <Modal.Title>Zorgkundige wijzigen</Modal.Title>
@@ -271,7 +289,7 @@ function ZorgkundigePagina() {
                         Terug
                     </Button>
                     <Button variant="primary" onClick={handleUpdate}>
-                        Wijzig verandering
+                        Wijzigen
                     </Button>
                 </Modal.Footer>
             </Modal>
