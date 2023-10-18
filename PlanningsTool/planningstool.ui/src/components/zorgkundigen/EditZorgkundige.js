@@ -81,7 +81,7 @@ function EditZorgkundige(props) {
       <Button
         variant="contained"
         color="primary"
-        onClick={() => handleEdit()}
+        onClick={() => handleEdit(props.id)}
       >
         <FontAwesomeIcon icon={faPen} />
       </Button>

@@ -160,7 +160,7 @@ function ZorgkundigePage() {
                                     <MyTC>{item.achternaam}</MyTC>
                                     <MyTC>{(item.isVasteNacht) ? "Ja" : "Nee"}</MyTC>
                                     <MyTC>
-                                        <EditZorgkundige />
+                                        <EditZorgkundige id={item.id} />
                                         <Button variant="contained" color="error" onClick={() => handleDelete(item.id)}><FontAwesomeIcon icon={faTrash} /></Button>
                                     </MyTC>
                                 </MyTR>
