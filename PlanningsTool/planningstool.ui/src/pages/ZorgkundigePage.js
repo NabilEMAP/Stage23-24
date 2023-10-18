@@ -13,12 +13,9 @@ import { Button, Checkbox, FormControlLabel, Stack, TextField } from "@mui/mater
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { MyTC, MyTR } from "../components/MyTable";
+import AddZorgkundige from "../components/zorgkundigen/AddZorgkundige";
 
 function ZorgkundigePage() {
-    const [showAdd, setShowAdd] = useState(false);
-    const handleCloseAdd = () => setShowAdd(false);
-    const handleShowAdd = () => setShowAdd(true);
-
     const [showEdit, setShowEdit] = useState(false);
     const handleCloseEdit = () => setShowEdit(false);
     const handleShowEdit = () => setShowEdit(true);
@@ -26,10 +23,6 @@ function ZorgkundigePage() {
     const [showDelete, setShowDelete] = useState(false);
     const handleCloseDelete = () => setShowDelete(false);
     const handleShowDelete = () => setShowDelete(true);
-
-    const [voornaam, setVoornaam] = useState('');
-    const [achternaam, setAchternaam] = useState('');
-    const [isVasteNacht, setIsVasteNacht] = useState(false);
 
     const [editID, setEditID] = useState('');
     const [editVoornaam, setEditVoornaam] = useState('');
@@ -50,26 +43,6 @@ function ZorgkundigePage() {
             })
             .catch((error) => {
                 console.log(error);
-            })
-    }
-
-    const handleCreate = () => {
-        const API = 'https://localhost:8000/api/Zorgkundigen';
-        const data =
-        {
-            "voornaam": voornaam,
-            "achternaam": achternaam,
-            "isVasteNacht": isVasteNacht
-        }
-        axios.post(API, data)
-            .then((result) => {
-                getData();
-                toast.success('Zorgkundige is toegevoegd');
-                clear();
-                handleCloseAdd();
-            })
-            .catch((error) => {
-                toast.error(error);
             })
     }
 
@@ -137,15 +110,6 @@ function ZorgkundigePage() {
 
     }
 
-    const handleActiveChange = (e) => {
-        if (e.target.checked) {
-            setIsVasteNacht(true);
-        }
-        else {
-            setIsVasteNacht(false);
-        }
-    }
-
     const handleEditActiveChange = (e) => {
         if (e.target.checked) {
             setEditIsVasteNacht(true);
@@ -155,74 +119,9 @@ function ZorgkundigePage() {
         }
     }
 
-    const clear = () => {
-        setVoornaam('');
-        setAchternaam('');
-        setIsVasteNacht(false);
-        setEditVoornaam('');
-        setEditAchternaam('');
-        setEditIsVasteNacht(false);
-    }
-
     return (
         <Fragment>
-            <Button
-                variant="contained"
-                style={{ float: 'right' }}
-                color="success"
-                onClick={() => handleShowAdd()}
-            >
-                Zorgkundige toevoegen
-            </Button>
-            <br />
-            <Modal show={showAdd} onHide={handleCloseAdd}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Zorgkundige toevoegen</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Stack
-                        direction="column"
-                        justifyContent="center"
-                        alignItems="center"
-                        spacing={4}
-                    >
-                        <TextField
-                            style={{ width: '75%' }}
-                            type="text"
-                            className="form-control"
-                            placeholder="Vul uw voornaam..."
-                            value={voornaam}
-                            onChange={(e) => setVoornaam(e.target.value)}
-                        />
-                        <TextField
-                            style={{ width: '75%' }}
-                            type="text"
-                            className="form-control"
-                            placeholder="Vul uw achternaam..."
-                            value={achternaam}
-                            onChange={(e) => setAchternaam(e.target.value)}
-                        />
-                        <FormControlLabel label="Vaste Nacht" control={
-                            <Checkbox
-                                type="checkbox"
-                                checked={isVasteNacht === true ? true : false}
-                                value={isVasteNacht}
-                                onChange={(e) => handleActiveChange(e)}
-                            />
-                        } />
-                    </Stack>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Stack direction="row" alignItems="center" spacing={2}>
-                        <Button variant="contained" color="inherit" onClick={handleCloseAdd}>
-                            Terug
-                        </Button>
-                        <Button variant="contained" color="success" onClick={handleCreate}>
-                            Toevoegen
-                        </Button>
-                    </Stack>
-                </Modal.Footer>
-            </Modal>
+            <AddZorgkundige />
             <Modal show={showEdit} onHide={handleCloseEdit}>
                 <Modal.Header closeButton>
                     <Modal.Title>Zorgkundige wijzigen</Modal.Title>
