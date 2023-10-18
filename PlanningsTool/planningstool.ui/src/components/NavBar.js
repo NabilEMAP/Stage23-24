@@ -32,7 +32,7 @@ export const NavBar = () => {
                 </Typography>
                 <Stack direction='row' spacing={2}>
                     <Button href='/' color='inherit'>Teamplanning</Button>
-                    <Button href='/' color='inherit'>Zorgkundige</Button>
+                    <Button href='/zorgkundige' color='inherit'>Zorgkundige</Button>
                     <Button href='/' color='inherit'>Verlofdag</Button>
                     <Button href='/' color='inherit'>Shift</Button>
                     <Button
