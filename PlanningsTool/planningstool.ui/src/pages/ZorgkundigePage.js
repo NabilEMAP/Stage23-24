@@ -30,6 +30,25 @@ function ZorgkundigePage() {
             })
     }
 
+    const renderTableData = () => {
+        if (data && data.length > 0) {
+            return data.map((item, index) => (
+                <MyTR key={index}>
+                    <MyTC>{item.id}</MyTC>
+                    <MyTC>{item.voornaam}</MyTC>
+                    <MyTC>{item.achternaam}</MyTC>
+                    <MyTC>{item.isVasteNacht ? "Ja" : "Nee"}</MyTC>
+                    <MyTC>
+                        <EditZorgkundige id={item.id} />
+                        <DeleteZorgkundige id={item.id} />
+                    </MyTC>
+                </MyTR>
+            ));
+        } else {
+            return <TableRow><MyTC colSpan={5}>No data found</MyTC></TableRow>;
+        }
+    }
+
     return (
         <Fragment>
             <AddZorgkundige />
@@ -45,20 +64,7 @@ function ZorgkundigePage() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {data && data.length > 0 ? data.map((item, index) => {
-                            return (
-                                <MyTR key={index}>
-                                    <MyTC>{item.id}</MyTC>
-                                    <MyTC>{item.voornaam}</MyTC>
-                                    <MyTC>{item.achternaam}</MyTC>
-                                    <MyTC>{(item.isVasteNacht) ? "Ja" : "Nee"}</MyTC>
-                                    <MyTC>
-                                        <EditZorgkundige id={item.id} />
-                                        <DeleteZorgkundige id={item.id} />
-                                    </MyTC>
-                                </MyTR>
-                            )
-                        }) : 'No data found'}
+                        {renderTableData()}
                     </TableBody>
                 </Table>
             </TableContainer>
