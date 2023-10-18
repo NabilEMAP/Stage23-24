@@ -15,11 +15,11 @@ function EditZorgkundige(props) {
   const [voornaam, setVoornaam] = useState('');
   const [achternaam, setAchternaam] = useState('');
   const [isVasteNacht, setIsVasteNacht] = useState(false);
-  const [data, setData] = useState([]);
+  const [setData] = useState([]);
 
   useEffect(() => {
     getData();
-  }, []);
+  });
 
   const getData = () => {
     const API = 'https://localhost:8000/api/Zorgkundigen/details'
