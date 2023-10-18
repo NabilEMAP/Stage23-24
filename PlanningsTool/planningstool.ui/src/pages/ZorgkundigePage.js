@@ -11,15 +11,12 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Button, Checkbox, FormControlLabel, Stack, TextField } from "@mui/material";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { MyTC, MyTR } from "../components/MyTable";
 import AddZorgkundige from "../components/zorgkundigen/AddZorgkundige";
+import EditZorgkundige from "../components/zorgkundigen/EditZorgkundige";
 
 function ZorgkundigePage() {
-    const [showEdit, setShowEdit] = useState(false);
-    const handleCloseEdit = () => setShowEdit(false);
-    const handleShowEdit = () => setShowEdit(true);
-
     const [showDelete, setShowDelete] = useState(false);
     const handleCloseDelete = () => setShowDelete(false);
     const handleShowDelete = () => setShowDelete(true);
@@ -46,40 +43,9 @@ function ZorgkundigePage() {
             })
     }
 
-    const handleEdit = (id) => {
-        handleShowEdit();
-        const API = `https://localhost:8000/api/Zorgkundigen/${id}`;
-        axios.get(API)
-            .then((result) => {
-                setEditVoornaam(result.data.voornaam,);
-                setEditAchternaam(result.data.achternaam);
-                setEditIsVasteNacht(result.data.isVasteNacht);
-                setEditID(id);
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-    }
 
-    const handleUpdate = () => {
-        const API = `https://localhost:8000/api/Zorgkundigen/${editID}`;
-        const data =
-        {
-            "id": editID,
-            "voornaam": editVoornaam,
-            "achternaam": editAchternaam,
-            "isVasteNacht": editIsVasteNacht
-        }
-        axios.put(API, data)
-            .then((result) => {
-                toast.success('Zorgkundige is gewijzigd');
-                getData();
-                handleCloseEdit();
-            })
-            .catch((error) => {
-                toast.error(`${error}`);
-            })
-    }
+
+
 
     const handleDelete = (id) => {
         handleShowDelete();
@@ -122,53 +88,7 @@ function ZorgkundigePage() {
     return (
         <Fragment>
             <AddZorgkundige />
-            <Modal show={showEdit} onHide={handleCloseEdit}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Zorgkundige wijzigen</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Stack
-                        direction="column"
-                        justifyContent="center"
-                        alignItems="center"
-                        spacing={4}
-                    >
-                        <TextField
-                            style={{ width: '75%' }}
-                            type="text"
-                            className="form-control"
-                            placeholder="Vul uw voornaam..."
-                            value={editVoornaam}
-                            onChange={(e) => setEditVoornaam(e.target.value)}
-                        />
-                        <TextField
-                            style={{ width: '75%' }}
-                            type="text"
-                            className="form-control"
-                            placeholder="Vul uw achternaam..."
-                            value={editAchternaam}
-                            onChange={(e) => setEditAchternaam(e.target.value)}
-                        />
-                        <FormControlLabel label="Vaste Nacht" control={
-                            <Checkbox type="checkbox"
-                                checked={editIsVasteNacht === true ? true : false}
-                                value={editIsVasteNacht}
-                                onChange={(e) => handleEditActiveChange(e)}
-                            />
-                        } />
-                    </Stack>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Stack direction="row" alignItems="center" spacing={2}>
-                        <Button variant="contained" color="inherit" onClick={handleCloseEdit}>
-                            Terug
-                        </Button>
-                        <Button variant="contained" color="primary" onClick={handleUpdate}>
-                            Wijzigen
-                        </Button>
-                    </Stack>
-                </Modal.Footer>
-            </Modal>
+
             <Modal show={showDelete} onHide={handleCloseDelete}>
                 <Modal.Header closeButton>
                     <Modal.Title>Zorgkundige verwijderen</Modal.Title>
@@ -240,7 +160,7 @@ function ZorgkundigePage() {
                                     <MyTC>{item.achternaam}</MyTC>
                                     <MyTC>{(item.isVasteNacht) ? "Ja" : "Nee"}</MyTC>
                                     <MyTC>
-                                        <Button variant="contained" color="primary" onClick={() => handleEdit(item.id)}><FontAwesomeIcon icon={faPen} /></Button>
+                                        <EditZorgkundige />
                                         <Button variant="contained" color="error" onClick={() => handleDelete(item.id)}><FontAwesomeIcon icon={faTrash} /></Button>
                                     </MyTC>
                                 </MyTR>
