@@ -3,10 +3,8 @@ import React, { Fragment, useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Modal from 'react-bootstrap/Modal';
 import { toast } from 'react-toastify';
-import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
@@ -14,26 +12,7 @@ import Paper from '@mui/material/Paper';
 import { Button, Checkbox, FormControlLabel, Stack, TextField } from "@mui/material";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
-
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-        backgroundColor: theme.palette.common.black,
-        color: theme.palette.common.white,
-    },
-    [`&.${tableCellClasses.body}`]: {
-        fontSize: 16,
-    },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    '&:nth-of-type(odd)': {
-        backgroundColor: theme.palette.action.hover,
-    },
-    // hide last border
-    '&:last-child td, &:last-child th': {
-        border: 0,
-    },
-}));
+import { MyTC, MyTR } from "../components/MyTable";
 
 function ZorgkundigePage() {
     const [showAdd, setShowAdd] = useState(false);
@@ -346,30 +325,28 @@ function ZorgkundigePage() {
                 <Table sx={{ minWidth: 700 }} aria-label="customized table">
                     <TableHead>
                         <TableRow>
-                            <StyledTableCell></StyledTableCell>
-                            <StyledTableCell>Voornaam</StyledTableCell>
-                            <StyledTableCell>Achternaam</StyledTableCell>
-                            <StyledTableCell>Vaste Nacht?</StyledTableCell>
-                            <StyledTableCell>Veranderingen</StyledTableCell>
+                            <MyTC></MyTC>
+                            <MyTC>Voornaam</MyTC>
+                            <MyTC>Achternaam</MyTC>
+                            <MyTC>Vaste Nacht?</MyTC>
+                            <MyTC>Veranderingen</MyTC>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {
-                            data && data.length > 0 ?
-                                data.map((item, index) => {
-                                    return (
-                                        <StyledTableRow key={index}>
-                                            <StyledTableCell>{item.id}</StyledTableCell>
-                                            <StyledTableCell>{item.voornaam}</StyledTableCell>
-                                            <StyledTableCell>{item.achternaam}</StyledTableCell>
-                                            <StyledTableCell>{(item.isVasteNacht) ? "Ja" : "Nee"}</StyledTableCell>
-                                            <StyledTableCell>
-                                                <Button variant="contained" color="primary" onClick={() => handleEdit(item.id)}><FontAwesomeIcon icon={faPen} /></Button>
-                                                <Button variant="contained" color="error" onClick={() => handleDelete(item.id)}><FontAwesomeIcon icon={faTrash} /></Button>
-                                            </StyledTableCell>
-                                        </StyledTableRow>
-                                    )
-                                }) : 'No data found'}
+                        {data && data.length > 0 ? data.map((item, index) => {
+                            return (
+                                <MyTR key={index}>
+                                    <MyTC>{item.id}</MyTC>
+                                    <MyTC>{item.voornaam}</MyTC>
+                                    <MyTC>{item.achternaam}</MyTC>
+                                    <MyTC>{(item.isVasteNacht) ? "Ja" : "Nee"}</MyTC>
+                                    <MyTC>
+                                        <Button variant="contained" color="primary" onClick={() => handleEdit(item.id)}><FontAwesomeIcon icon={faPen} /></Button>
+                                        <Button variant="contained" color="error" onClick={() => handleDelete(item.id)}><FontAwesomeIcon icon={faTrash} /></Button>
+                                    </MyTC>
+                                </MyTR>
+                            )
+                        }) : 'No data found'}
                     </TableBody>
                 </Table>
             </TableContainer>
