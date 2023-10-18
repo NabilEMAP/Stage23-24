@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using PlanningsTool.DAL.Contexts;
 using PlanningsTool.DAL.Repositories;
 using PlanningsTool.DAL.UOW;
@@ -16,9 +17,16 @@ namespace PlanningsTool.DAL.Extensions
         public static IServiceCollection RegisterDbContext(this IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer("name=ConnectionStrings:Stage2324"));
+            {
+                options.UseSqlServer("name=ConnectionStrings:Stage2324");
+
+                // Set up a logger factory that doesn't log anything
+                options.UseLoggerFactory(LoggerFactory.Create(builder => builder.AddFilter((category, level) => false)));
+            });
+
             return services;
         }
+
 
         public static IServiceCollection RegisterRepositories(this IServiceCollection services)
         {
