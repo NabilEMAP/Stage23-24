@@ -8,13 +8,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 function DeleteZorgkundige(props) {
-  const [showDelete, setShowDelete] = useState(false);
-  const handleCloseDelete = () => setShowDelete(false);
-  const handleShowDelete = () => setShowDelete(true);
-  const [editID, setEditID] = useState('');
-  const [editVoornaam, setEditVoornaam] = useState('');
-  const [editAchternaam, setEditAchternaam] = useState('');
-  const [editIsVasteNacht, setEditIsVasteNacht] = useState(false);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [Id, editId] = useState('');
+  const [voornaam, setVoornaam] = useState('');
+  const [achternaam, setAchternaam] = useState('');
+  const [isVasteNacht, setIsVasteNacht] = useState(false);
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -33,14 +33,14 @@ function DeleteZorgkundige(props) {
   }
 
   const handleDelete = (id) => {
-    handleShowDelete();
+    handleShow();
     const API = `https://localhost:8000/api/Zorgkundigen/${id}`;
     axios.get(API)
       .then((result) => {
-        setEditVoornaam(result.data.voornaam,);
-        setEditAchternaam(result.data.achternaam);
-        setEditIsVasteNacht(result.data.isVasteNacht);
-        setEditID(id);
+        setVoornaam(result.data.voornaam);
+        setAchternaam(result.data.achternaam);
+        setIsVasteNacht(result.data.isVasteNacht);
+        editId(id);
       })
       .catch((error) => {
         console.log(error);
@@ -48,12 +48,12 @@ function DeleteZorgkundige(props) {
   }
 
   const handlePostDelete = () => {
-    const API = `https://localhost:8000/api/Zorgkundigen/${editID}`;
+    const API = `https://localhost:8000/api/Zorgkundigen/${Id}`;
     axios.delete(API)
       .then(() => {
         toast.success('Zorgkundige is verwijderd');
         getData();
-        handleCloseDelete();
+        handleClose();
       })
       .catch((error) => {
         toast.error(`${error}`);
@@ -63,10 +63,10 @@ function DeleteZorgkundige(props) {
 
   const handleEditActiveChange = (e) => {
     if (e.target.checked) {
-      setEditIsVasteNacht(true);
+      setIsVasteNacht(true);
     }
     else {
-      setEditIsVasteNacht(false);
+      setIsVasteNacht(false);
     }
   }
 
@@ -79,7 +79,7 @@ function DeleteZorgkundige(props) {
       >
         <FontAwesomeIcon icon={faTrash} />
       </Button>
-      <Modal show={showDelete} onHide={handleCloseDelete}>
+      <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Zorgkundige verwijderen</Modal.Title>
         </Modal.Header>
@@ -96,8 +96,8 @@ function DeleteZorgkundige(props) {
               type="text"
               className="form-control"
               placeholder="Vul uw voornaam..."
-              value={editVoornaam}
-              onChange={(e) => setEditVoornaam(e.target.value)}
+              value={voornaam}
+              onChange={(e) => setVoornaam(e.target.value)}
               disabled
             />
             <TextField
@@ -105,14 +105,14 @@ function DeleteZorgkundige(props) {
               type="text"
               className="form-control"
               placeholder="Vul uw achternaam..."
-              value={editAchternaam}
-              onChange={(e) => setEditAchternaam(e.target.value)}
+              value={achternaam}
+              onChange={(e) => setAchternaam(e.target.value)}
               disabled
             />
             <FormControlLabel label="Vaste Nacht" control={
               <Checkbox type="checkbox"
-                checked={editIsVasteNacht === true ? true : false}
-                value={editIsVasteNacht}
+                checked={isVasteNacht === true ? true : false}
+                value={isVasteNacht}
                 onChange={(e) => handleEditActiveChange(e)}
                 disabled
               />
@@ -121,7 +121,7 @@ function DeleteZorgkundige(props) {
         </Modal.Body>
         <Modal.Footer>
           <Stack direction="row" alignItems="center" spacing={2}>
-            <Button variant="contained" color="inherit" onClick={handleCloseDelete}>
+            <Button variant="contained" color="inherit" onClick={handleClose}>
               Terug
             </Button>
             <Button variant="contained" color="error" onClick={handlePostDelete}>

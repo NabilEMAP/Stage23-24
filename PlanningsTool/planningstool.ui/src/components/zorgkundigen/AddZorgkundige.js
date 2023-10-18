@@ -6,9 +6,9 @@ import { toast } from 'react-toastify';
 import { Button, Checkbox, FormControlLabel, Stack, TextField } from "@mui/material";
 
 function AddZorgkundige() {
-  const [showAdd, setShowAdd] = useState(false);
-  const handleCloseAdd = () => setShowAdd(false);
-  const handleShowAdd = () => setShowAdd(true);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const [voornaam, setVoornaam] = useState('');
   const [achternaam, setAchternaam] = useState('');
   const [isVasteNacht, setIsVasteNacht] = useState(false);
@@ -42,7 +42,7 @@ function AddZorgkundige() {
         getData();
         toast.success('Zorgkundige is toegevoegd');
         clear();
-        handleCloseAdd();
+        handleClose();
       })
       .catch((error) => {
         toast.error(error);
@@ -51,12 +51,12 @@ function AddZorgkundige() {
 
   const handleActiveChange = (e) => {
     if (e.target.checked) {
-        setIsVasteNacht(true);
+      setIsVasteNacht(true);
     }
     else {
-        setIsVasteNacht(false);
+      setIsVasteNacht(false);
     }
-}
+  }
 
   const clear = () => {
     setVoornaam('');
@@ -70,12 +70,12 @@ function AddZorgkundige() {
         variant="contained"
         style={{ float: 'right' }}
         color="success"
-        onClick={() => handleShowAdd()}
+        onClick={() => handleShow()}
       >
         Zorgkundige toevoegen
       </Button>
       <br />
-      <Modal show={showAdd} onHide={handleCloseAdd}>
+      <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Zorgkundige toevoegen</Modal.Title>
         </Modal.Header>
@@ -114,7 +114,7 @@ function AddZorgkundige() {
         </Modal.Body>
         <Modal.Footer>
           <Stack direction="row" alignItems="center" spacing={2}>
-            <Button variant="contained" color="inherit" onClick={handleCloseAdd}>
+            <Button variant="contained" color="inherit" onClick={handleClose}>
               Terug
             </Button>
             <Button variant="contained" color="success" onClick={handleCreate}>
