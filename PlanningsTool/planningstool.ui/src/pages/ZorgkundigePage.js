@@ -11,6 +11,7 @@ import { MyTC, MyTR } from "../components/MyTable";
 import AddZorgkundige from "../components/zorgkundigen/AddZorgkundige";
 import EditZorgkundige from "../components/zorgkundigen/EditZorgkundige";
 import DeleteZorgkundige from "../components/zorgkundigen/DeleteZorgkundige";
+import { Container, Typography } from "@mui/material";
 
 function ZorgkundigePage() {
     const [data, setData] = useState([]);
@@ -38,7 +39,7 @@ function ZorgkundigePage() {
                     <MyTC>{item.voornaam}</MyTC>
                     <MyTC>{item.achternaam}</MyTC>
                     <MyTC>{item.isVasteNacht ? "Ja" : "Nee"}</MyTC>
-                    <MyTC>
+                    <MyTC style={{width: '150px'}}>
                         <EditZorgkundige id={item.id} />
                         <DeleteZorgkundige id={item.id} />
                     </MyTC>
@@ -51,23 +52,28 @@ function ZorgkundigePage() {
 
     return (
         <Fragment>
-            <AddZorgkundige />
-            <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 700 }} aria-label="customized table">
-                    <TableHead>
-                        <TableRow>
-                            <MyTC></MyTC>
-                            <MyTC>Voornaam</MyTC>
-                            <MyTC>Achternaam</MyTC>
-                            <MyTC>Vaste Nacht?</MyTC>
-                            <MyTC>Veranderingen</MyTC>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {renderTableData()}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+            <Container>
+                <div style={{margin: '24px 0px'}}>
+                    <Typography variant="h5" style={{width: 'fit-content', verticalAlign: 'sub', display:'inline-block'}} >Zorgkundige Lijst</Typography>
+                    <AddZorgkundige />
+                </div>
+                <TableContainer component={Paper}>
+                    <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                        <TableHead>
+                            <TableRow>
+                                <MyTC></MyTC>
+                                <MyTC>Voornaam</MyTC>
+                                <MyTC>Achternaam</MyTC>
+                                <MyTC>Vaste Nacht?</MyTC>
+                                <MyTC style={{width: '150px'}}>Veranderingen</MyTC>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {renderTableData()}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </Container>
         </Fragment>
     );
 }
