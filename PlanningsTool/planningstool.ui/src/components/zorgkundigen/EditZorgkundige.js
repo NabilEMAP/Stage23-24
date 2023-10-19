@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Modal from 'react-bootstrap/Modal';
 import { toast } from 'react-toastify';
-import { Button, Checkbox, FormControlLabel, Stack, TextField } from "@mui/material";
+import { Button, Checkbox, FormControlLabel, IconButton, Stack, TextField } from "@mui/material";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 
@@ -78,13 +78,13 @@ function EditZorgkundige(props) {
 
   return (
     <>
-      <Button
-        variant="contained"
+      <IconButton
+        size="medium"
         color="primary"
         onClick={() => handleEdit(props.id)}
       >
         <FontAwesomeIcon icon={faPen} />
-      </Button>
+      </IconButton>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Zorgkundige wijzigen</Modal.Title>

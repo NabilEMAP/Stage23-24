@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Modal from 'react-bootstrap/Modal';
 import { toast } from 'react-toastify';
-import { Button, Checkbox, FormControlLabel, Stack, TextField } from "@mui/material";
+import { Button, Checkbox, FormControlLabel, IconButton, Stack, TextField } from "@mui/material";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
@@ -72,13 +72,13 @@ function DeleteZorgkundige(props) {
 
   return (
     <>
-      <Button
-        variant="contained"
+      <IconButton
+        size="medium"
         color="error"
         onClick={() => handleDelete(props.id)}
       >
         <FontAwesomeIcon icon={faTrash} />
-      </Button>
+      </IconButton>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Zorgkundige verwijderen</Modal.Title>
