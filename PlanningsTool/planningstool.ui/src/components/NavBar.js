@@ -24,11 +24,13 @@ export const NavBar = () => {
     return (
         <AppBar position='static' color='transparent'>
             <Toolbar>
-                <IconButton size='large' edge='start' color='inherit' aria-label='logo'>
+                <IconButton href='/' size='large' edge='start' color='inherit' aria-label='logo'>
                     <EditCalendarIcon style={{ color: "#d10202" }} />
                 </IconButton>
                 <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
-                    Planningstool <span style={{ color: "#d10202" }}>voor</span> Ziekenhuisdienst
+                    <a href='/' style={{textDecoration: "none", color: "inherit"}}>
+                        Planningstool <span style={{ color: "#d10202" }}>voor</span> Ziekenhuisdienst
+                    </a>
                 </Typography>
                 <Stack direction='row' spacing={2}>
                     <Button href='/teamplanning' color='inherit'>Teamplanning</Button>
