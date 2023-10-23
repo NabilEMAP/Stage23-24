@@ -38,6 +38,7 @@ function ZorgkundigePage() {
                     <MyTC>{item.id}</MyTC>
                     <MyTC>{item.voornaam}</MyTC>
                     <MyTC>{item.achternaam}</MyTC>
+                    <MyTC>{item.regimeType.regime}</MyTC>
                     <MyTC>{item.isVasteNacht ? "Ja" : "Nee"}</MyTC>
                     <MyTC style={{width: '150px'}}>
                         <EditZorgkundige id={item.id} />
@@ -64,6 +65,7 @@ function ZorgkundigePage() {
                                 <MyTC></MyTC>
                                 <MyTC>Voornaam</MyTC>
                                 <MyTC>Achternaam</MyTC>
+                                <MyTC>Regime</MyTC>
                                 <MyTC>Vaste Nacht?</MyTC>
                                 <MyTC style={{width: '150px'}}>Veranderingen</MyTC>
                             </TableRow>
