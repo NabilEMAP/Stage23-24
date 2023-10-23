@@ -45,7 +45,7 @@ namespace PlanningsTool.API.Controllers
 
         // GET api/Zorgkundigen/voornaam/{voornaam}
         [HttpGet("voornaam/{voornaam}")]
-        public async Task<IActionResult> GetZorgkundigeByVoornaam(string voornaam)
+        public async Task<IActionResult> GetZorgkundigenByVoornaam(string voornaam)
         {
             var zorgkundigen = await _zorgkundigenServices.GetZorgkundigenByVoornaam(voornaam);
             if (zorgkundigen == null) { return NotFound(); }
@@ -54,7 +54,7 @@ namespace PlanningsTool.API.Controllers
 
         // GET api/Zorgkundigen/achternaam/{achternaam}
         [HttpGet("achternaam/{achternaam}")]
-        public async Task<IActionResult> GetZorgkundigeByAchternaam(string achternaam)
+        public async Task<IActionResult> GetZorgkundigenByAchternaam(string achternaam)
         {
             var zorgkundigen = await _zorgkundigenServices.GetZorgkundigenByAchternaam(achternaam);
             if (zorgkundigen == null) { return NotFound(); }

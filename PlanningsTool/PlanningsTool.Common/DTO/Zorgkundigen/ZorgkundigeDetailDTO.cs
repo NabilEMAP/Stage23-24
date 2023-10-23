@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PlanningsTool.Common.DTO.RegimeTypes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,8 @@ namespace PlanningsTool.Common.DTO.Zorgkundigen
         public int Id { get; set; }
         public string Voornaam { get; set; }
         public string Achternaam { get; set; }
+        public int RegimeId { get; set; }
+        public RegimeTypeDTO RegimeType { get; set; }
         public bool IsVasteNacht { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using PlanningsTool.Common.DTO.RegimeTypes;
 using PlanningsTool.Common.DTO.Zorgkundigen;
 using PlanningsTool.DAL.Models;
 using System;
@@ -17,6 +18,8 @@ namespace PlanningsTool.BLL
             CreateMap<Zorgkundige, ZorgkundigeDetailDTO>().ReverseMap();
             CreateMap<Zorgkundige, CreateZorgkundigeDTO>().ReverseMap();
             CreateMap<Zorgkundige, UpdateZorgkundigeDTO>().ReverseMap();
+
+            CreateMap<RegimeType, RegimeTypeDTO>().ReverseMap();
         }
     }
 }

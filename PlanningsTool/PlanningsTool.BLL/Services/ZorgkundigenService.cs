@@ -44,13 +44,13 @@ namespace PlanningsTool.BLL.Services
 
         public async Task<IEnumerable<ZorgkundigeDTO>> GetAll()
         {
-            var zorgkundigen = await _uow.ZorgkundigenRepository.GetAllAsync();
+            var zorgkundigen = await _uow.ZorgkundigenRepository.GetAllZorgkundigenAsync();
             return _mapper.Map<IEnumerable<ZorgkundigeDTO>>(zorgkundigen);
         }
 
         public async Task<IEnumerable<ZorgkundigeDetailDTO>> GetAllDetails()
         {
-            var zorgkundigen = await _uow.ZorgkundigenRepository.GetAllAsync();
+            var zorgkundigen = await _uow.ZorgkundigenRepository.GetAllZorgkundigenAsync();
             return _mapper.Map<IEnumerable<ZorgkundigeDetailDTO>>(zorgkundigen);
         }
 
@@ -84,6 +84,7 @@ namespace PlanningsTool.BLL.Services
 
             zorgkundigeToUpdate.Voornaam = zorgkundigeFromRequest.Voornaam;
             zorgkundigeToUpdate.Achternaam = zorgkundigeFromRequest.Achternaam;
+            zorgkundigeToUpdate.RegimeId = zorgkundigeFromRequest.RegimeId;
             zorgkundigeToUpdate.IsVasteNacht = zorgkundigeFromRequest.IsVasteNacht;
 
             await _uow.ZorgkundigenRepository.Update(zorgkundigeToUpdate);

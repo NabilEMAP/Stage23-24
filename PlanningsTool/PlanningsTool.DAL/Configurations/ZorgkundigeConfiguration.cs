@@ -14,7 +14,7 @@ namespace PlanningsTool.DAL.Configurations
     {
         public void Configure(EntityTypeBuilder<Zorgkundige> builder)
         {
-            builder.ToTable("tblZorgkundigen", "Zorgkundige")
+            builder.ToTable("Zorgkundigen", "dbo")
                     .HasKey(p => p.Id);
             builder.HasIndex(p => p.Id)
                     .IsUnique();
@@ -29,6 +29,15 @@ namespace PlanningsTool.DAL.Configurations
             builder.Property(p => p.Achternaam)
                     .IsRequired()
                     .HasColumnType("varchar(100)");
+
+            builder.HasOne(p => p.RegimeType)
+                    .WithMany()
+                    .HasForeignKey(p => p.RegimeId);
+            // Check on OnDelete() Configurations
+
+            builder.Property(p => p.RegimeId)
+                    .IsRequired()
+                    .HasColumnType("int");
 
             builder.Property(p => p.IsVasteNacht)
                     .IsRequired()

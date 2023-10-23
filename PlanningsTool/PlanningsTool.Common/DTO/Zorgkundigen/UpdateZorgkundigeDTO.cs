@@ -10,6 +10,7 @@ namespace PlanningsTool.Common.DTO.Zorgkundigen
     {
         public string Voornaam { get; set; }
         public string Achternaam { get; set; }
+        public int RegimeId { get; set; }
         public bool IsVasteNacht { get; set; }
     }
 }

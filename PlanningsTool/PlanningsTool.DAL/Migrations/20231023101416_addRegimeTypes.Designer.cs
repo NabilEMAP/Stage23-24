@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PlanningsTool.DAL.Contexts;
 
@@ -10,9 +11,10 @@ using PlanningsTool.DAL.Contexts;
 namespace PlanningsTool.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231023101416_addRegimeTypes")]
+    partial class addRegimeTypes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -203,13 +205,13 @@ namespace PlanningsTool.DAL.Migrations
 
             modelBuilder.Entity("PlanningsTool.DAL.Models.Zorgkundige", b =>
                 {
-                    b.HasOne("PlanningsTool.DAL.Models.RegimeType", "RegimeType")
+                    b.HasOne("PlanningsTool.DAL.Models.RegimeType", "Regime")
                         .WithMany()
                         .HasForeignKey("RegimeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("RegimeType");
+                    b.Navigation("Regime");
                 });
 #pragma warning restore 612, 618
         }

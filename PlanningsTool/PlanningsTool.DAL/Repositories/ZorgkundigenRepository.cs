@@ -15,15 +15,22 @@ namespace PlanningsTool.DAL.Repositories
         {
         }
 
+        public async Task<IEnumerable<Zorgkundige>> GetAllZorgkundigenAsync()
+        {
+            return await _context.Zorgkundigen
+                .Include(r => r.RegimeType)
+                .ToListAsync();
+        }
+
         public async Task<IEnumerable<Zorgkundige>> GetZorgkundigenByAchternaam(string achternaam)
         {
-            string query = $"SELECT * FROM [Zorgkundige].[tblZorgkundigen] AS z WHERE z.Achternaam like '%{achternaam}%'";
+            string query = $"SELECT * FROM [dbo].[Zorgkundigen] AS z WHERE z.Achternaam like '%{achternaam}%'";
             return await _context.Zorgkundigen.FromSqlRaw(query).ToListAsync();
         }
 
         public async Task<IEnumerable<Zorgkundige>> GetZorgkundigenByVoornaam(string voornaam)
         {
-            string query = $"SELECT * FROM [Zorgkundige].[tblZorgkundigen] AS z WHERE z.Voornaam like '%{voornaam}%'";
+            string query = $"SELECT * FROM [dbo].[Zorgkundigen] AS z WHERE z.Voornaam like '%{voornaam}%'";
             return await _context.Zorgkundigen.FromSqlRaw(query).ToListAsync();
         }
     }

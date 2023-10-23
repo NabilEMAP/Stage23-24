@@ -15,6 +15,7 @@ namespace PlanningsTool.BLL.Extensions
         public static IServiceCollection RegisterServices(this IServiceCollection services)
         {
             services.AddScoped<IZorgkundigenService, ZorgkundigenService>();
+            services.AddScoped<IRegimeTypesService, RegimeTypesService>();
             return services;
         }
 

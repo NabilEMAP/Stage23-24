@@ -12,14 +12,21 @@ namespace PlanningsTool.DAL.UOW
     {
         public readonly ApplicationDbContext _context;
         public readonly IZorgkundigenRepository _zorgkundigenRepository;
+        public readonly IRegimeTypesRepository _regimeTypesRepository;
 
-        public UnitOfWork(ApplicationDbContext context, IZorgkundigenRepository zorgkundigenRepository)
+        public UnitOfWork(
+            ApplicationDbContext context,
+            IZorgkundigenRepository zorgkundigenRepository,
+            IRegimeTypesRepository regimeTypesRepository
+            )
         {
             _context = context;
             _zorgkundigenRepository = zorgkundigenRepository;
+            _regimeTypesRepository = regimeTypesRepository;
         }
 
         public IZorgkundigenRepository ZorgkundigenRepository { get { return _zorgkundigenRepository; } }
+        public IRegimeTypesRepository RegimeTypesRepository { get { return _regimeTypesRepository; } }
 
         public async Task Save()
         {

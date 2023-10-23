@@ -18,6 +18,7 @@ namespace PlanningsTool.DAL.Seeding
                     Id = 1,
                     Voornaam = "Amina",
                     Achternaam = "Woerahfa",
+                    RegimeId = 1,
                     IsVasteNacht = false,
                 },
                 new Zorgkundige()
@@ -25,6 +26,7 @@ namespace PlanningsTool.DAL.Seeding
                     Id = 2,
                     Voornaam = "Barbara",
                     Achternaam = "Tamara",
+                    RegimeId = 1,
                     IsVasteNacht = false,
                 },
                 new Zorgkundige()
@@ -32,6 +34,7 @@ namespace PlanningsTool.DAL.Seeding
                     Id = 3,
                     Voornaam = "Chaimae",
                     Achternaam = "Dhanitin",
+                    RegimeId = 1,
                     IsVasteNacht = false,
                 },
                 new Zorgkundige()
@@ -39,6 +42,7 @@ namespace PlanningsTool.DAL.Seeding
                     Id = 4,
                     Voornaam = "Dalila",
                     Achternaam = "Dhiyah",
+                    RegimeId = 1,
                     IsVasteNacht = false,
                 },
                 new Zorgkundige()
@@ -46,6 +50,7 @@ namespace PlanningsTool.DAL.Seeding
                     Id = 5,
                     Voornaam = "Fatima",
                     Achternaam = "Tsridh",
+                    RegimeId = 2,
                     IsVasteNacht = false,
                 },
                 new Zorgkundige()
@@ -53,6 +58,7 @@ namespace PlanningsTool.DAL.Seeding
                     Id = 6,
                     Voornaam = "Ghizlane",
                     Achternaam = "Mantazoedh",
+                    RegimeId = 2,
                     IsVasteNacht = false,
                 },
                 new Zorgkundige()
@@ -60,6 +66,7 @@ namespace PlanningsTool.DAL.Seeding
                     Id = 7,
                     Voornaam = "Halima",
                     Achternaam = "Hanatt",
+                    RegimeId = 2,
                     IsVasteNacht = false,
                 },
                 new Zorgkundige()
@@ -67,6 +74,7 @@ namespace PlanningsTool.DAL.Seeding
                     Id = 8,
                     Voornaam = "Imane",
                     Achternaam = "Azough",
+                    RegimeId = 3,
                     IsVasteNacht = false,
                 },
                 new Zorgkundige()
@@ -74,6 +82,7 @@ namespace PlanningsTool.DAL.Seeding
                     Id = 9,
                     Voornaam = "Karima",
                     Achternaam = "Adheswe",
+                    RegimeId = 3,
                     IsVasteNacht = false,
                 },
                 new Zorgkundige()
@@ -81,6 +90,7 @@ namespace PlanningsTool.DAL.Seeding
                     Id = 10,
                     Voornaam = "Latifa",
                     Achternaam = "Adhesha",
+                    RegimeId = 1,
                     IsVasteNacht = true,
                 },
                 new Zorgkundige()
@@ -88,6 +98,7 @@ namespace PlanningsTool.DAL.Seeding
                     Id = 11,
                     Voornaam = "Mariem",
                     Achternaam = "Sariedh",
+                    RegimeId = 1,
                     IsVasteNacht = true,
                 },
                 new Zorgkundige()
@@ -95,6 +106,7 @@ namespace PlanningsTool.DAL.Seeding
                     Id = 12,
                     Voornaam = "Nasira",
                     Achternaam = "Isira",
+                    RegimeId = 3,
                     IsVasteNacht = true,
                 }
             );

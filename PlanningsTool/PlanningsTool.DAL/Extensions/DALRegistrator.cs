@@ -31,6 +31,7 @@ namespace PlanningsTool.DAL.Extensions
         public static IServiceCollection RegisterRepositories(this IServiceCollection services)
         {
             services.AddScoped<IZorgkundigenRepository, ZorgkundigenRepository>();
+            services.AddScoped<IRegimeTypesRepository, RegimeTypesRepository>();
             return services;
         }
 

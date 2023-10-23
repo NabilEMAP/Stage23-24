@@ -19,13 +19,16 @@ namespace PlanningsTool.DAL.Contexts
         }
 
         public virtual DbSet<Zorgkundige> Zorgkundigen { get; set; }
+        public virtual DbSet<RegimeType> RegimeTypes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             //base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new ZorgkundigeConfiguration());
+            modelBuilder.ApplyConfiguration(new RegimeTypeConfiguration());
             modelBuilder.Entity<Zorgkundige>().Seed();
+            modelBuilder.Entity<RegimeType>().Seed();
         }
     }
 }

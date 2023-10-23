@@ -10,6 +10,7 @@ namespace PlanningsTool.DAL.UOW
     public interface IUnitOfWork
     {
         public IZorgkundigenRepository ZorgkundigenRepository { get; }
+        public IRegimeTypesRepository RegimeTypesRepository { get; }
         Task Save();
     }
 }
