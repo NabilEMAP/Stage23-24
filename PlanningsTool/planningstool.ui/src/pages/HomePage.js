@@ -1,5 +1,8 @@
 import React, { Fragment } from "react";
 import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
@@ -8,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { homecards } from "../constants";
 
 function Copyright() {
     return (
@@ -66,7 +70,30 @@ function HomePage() {
                     <Container sx={{ py: 8 }} maxWidth="md">
                         {/* End hero unit */}
                         <Grid container spacing={4}>
-                            {/* Cards */}
+                            {homecards.map((homecard, index) => (
+                                <Grid item key={homecard} xs={12} sm={6} md={4}>
+                                    <Card
+                                        sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
+                                    >
+                                        <CardMedia
+                                            component="div"
+                                            sx={{
+                                                // 16:9
+                                                pt: '56.25%',
+                                            }}
+                                            image={homecard.image}
+                                        />
+                                        <CardContent sx={{ flexGrow: 1 }}>
+                                            <Typography gutterBottom variant="h5" component="h2">
+                                                {homecard.heading}
+                                            </Typography>
+                                            <Typography>
+                                                {homecard.description}
+                                            </Typography>
+                                        </CardContent>
+                                    </Card>
+                                </Grid>
+                                        ))}
                         </Grid>
                     </Container>
                 </main>
