@@ -14,10 +14,12 @@ function AddZorgkundige() {
   const [regimeType, setRegimeType] = useState('');
   const [isVasteNacht, setIsVasteNacht] = useState(false);
   const [data, setData] = useState([]);
+  const [regimeTypeData, setRegimeTypeData] = useState([]);
 
   useEffect(() => {
     getData();
-  }, [data]);
+    getRegimeTypeData();
+  }, []);
 
   const getData = () => {
     const API = 'https://localhost:8000/api/Zorgkundigen/details'
@@ -30,12 +32,24 @@ function AddZorgkundige() {
       })
   }
 
+  const getRegimeTypeData = () => {
+    const API = 'https://localhost:8000/api/RegimeTypes'
+    axios.get(API)
+      .then((result) => {
+        setRegimeTypeData(result.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
   const handleCreate = () => {
     const API = 'https://localhost:8000/api/Zorgkundigen';
     const data =
     {
       "voornaam": voornaam,
       "achternaam": achternaam,
+      "regimeId": regimeType,
       "isVasteNacht": isVasteNacht
     }
     axios.post(API, data)
@@ -67,7 +81,7 @@ function AddZorgkundige() {
   }
 
   const renderRegimeType = () => {
-    return data.map((item) => (
+    return regimeTypeData.map((item) => (
       <MenuItem value={item.id}>{item.regime}</MenuItem>      
     ));
   }
