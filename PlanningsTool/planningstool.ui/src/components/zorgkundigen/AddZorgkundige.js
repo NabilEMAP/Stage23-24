@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Modal from 'react-bootstrap/Modal';
 import { toast } from 'react-toastify';
-import { Button, Checkbox, FormControlLabel, Stack, TextField } from "@mui/material";
+import { Button, Checkbox, FormControl, FormControlLabel, InputLabel, MenuItem, Select, Stack, TextField } from "@mui/material";
 
 function AddZorgkundige() {
   const [show, setShow] = useState(false);
@@ -11,6 +11,7 @@ function AddZorgkundige() {
   const handleShow = () => setShow(true);
   const [voornaam, setVoornaam] = useState('');
   const [achternaam, setAchternaam] = useState('');
+  const [regimeType, setRegimeType] = useState('');
   const [isVasteNacht, setIsVasteNacht] = useState(false);
   const [data, setData] = useState([]);
 
@@ -61,7 +62,14 @@ function AddZorgkundige() {
   const clear = () => {
     setVoornaam('');
     setAchternaam('');
+    setRegimeType('');
     setIsVasteNacht(false);
+  }
+
+  const renderRegimeType = () => {
+    return data.map((item) => (
+      <MenuItem value={item.id}>{item.regime}</MenuItem>      
+    ));
   }
 
   return (
@@ -102,6 +110,15 @@ function AddZorgkundige() {
               value={achternaam}
               onChange={(e) => setAchternaam(e.target.value)}
             />
+            <FormControl style={{ width: '75%' }}>
+              <InputLabel>Selecteer uw regime...</InputLabel>
+              <Select
+                value={regimeType}
+                onChange={(e) => setRegimeType(e.target.value)}
+              >
+                {renderRegimeType()}
+              </Select>
+            </FormControl>
             <FormControlLabel label="Vaste Nacht" control={
               <Checkbox
                 type="checkbox"
