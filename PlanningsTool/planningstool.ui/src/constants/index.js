@@ -8,25 +8,25 @@ import {
 const homecards = [
     {
         heading: "Zorgkundige",
-        description: "test",
+        description: "Lijst van zorgkundigen",
         url: "/zorgkundige",
         image: zorgkundige,
     },
     {
-        heading: "Verlofdag",
-        description: "test",
-        url: "/verlofdag",
+        heading: "Verlof",
+        description: "Lijst van verlofdagen",
+        url: "/verlof",
         image: verlof,
     },
     {
         heading: "Shift",
-        description: "test",
+        description: "Lijst van shifts",
         url: "/shift",
         image: shift,
     },
     {
         heading: "Zorgkundige Shift",
-        description: "test",
+        description: "Lijst van zorgkundigen met een shift",
         url: "/shift",
         image: zorgkundigeshift,
     },

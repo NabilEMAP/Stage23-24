@@ -71,7 +71,8 @@ function HomePage() {
                         {/* End hero unit */}
                         <Grid container spacing={4}>
                             {homecards.map((homecard, index) => (
-                                <Grid item key={homecard} xs={12} sm={6} md={4}>
+                                <Grid item key={homecard} xs={12} sm={6} md={3}>
+                                    <a href={homecard.url} style={{textDecoration: "none"}}>
                                     <Card
                                         sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
                                     >
@@ -87,11 +88,12 @@ function HomePage() {
                                             <Typography gutterBottom variant="h5" component="h2">
                                                 {homecard.heading}
                                             </Typography>
-                                            <Typography>
+                                            {/*<Typography>
                                                 {homecard.description}
-                                            </Typography>
+                                            </Typography>*/}
                                         </CardContent>
                                     </Card>
+                                    </a>
                                 </Grid>
                                         ))}
                         </Grid>
