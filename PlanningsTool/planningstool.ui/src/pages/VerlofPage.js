@@ -11,8 +11,11 @@ import { MyTC, MyTR } from "../components/MyTable";
 import AddVerlof from "../components/verloven/AddVerlof";
 import EditVerlof from "../components/verloven/EditVerlof";
 import DeleteVerlof from "../components/verloven/DeleteVerlof";
-import { Container, Typography, Tooltip } from "@mui/material";
+import { Container, Typography, Tooltip, IconButton } from "@mui/material";
 import { format } from 'date-fns';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+
 function VerlofPage() {
     const [data, setData] = useState([]);
 
@@ -31,19 +34,13 @@ function VerlofPage() {
             })
     }
 
-    const zorgkundigeNaam = (naam) => { 
+    const zorgkundigeNaam = (naam) => {
         return naam.zorgkundige.voornaam + ' ' + naam.zorgkundige.achternaam;
     }
 
     const renderTooltip = (item) => {
         return (
-            <p>
-                Zorgkundige: {zorgkundigeNaam(item)}<br />
-                Startdatum: {format(new Date(item.startdatum), 'dd/MM/yyyy')}<br />
-                Einddatum: {format(new Date(item.einddatum), 'dd/MM/yyyy')}<br />
-                Verlof: {item.verlofType.verlof}<br />
-                Reden: {item.reden}<br />
-            </p>
+            <p>Reden: {item.reden}</p>
         );
     }
 
@@ -53,16 +50,19 @@ function VerlofPage() {
                 <MyTR key={index}>
                     <MyTC>{item.id}</MyTC>
                     <MyTC>
-                        <Tooltip title={renderTooltip(item)} placement="right-end">
-                            {zorgkundigeNaam(item)}
+                        <Tooltip title={renderTooltip(item)} placement="left-end">
+                            <IconButton style={{marginRight:'6px'}} size="medium" color="inherit">
+                                <FontAwesomeIcon icon={faCircleInfo} />
+                            </IconButton>
                         </Tooltip>
+                        {zorgkundigeNaam(item)}
                     </MyTC>
                     <MyTC>{format(new Date(item.startdatum), 'dd/MM/yyyy')}</MyTC>
                     <MyTC>{format(new Date(item.einddatum), 'dd/MM/yyyy')}</MyTC>
                     <MyTC>{item.verlofType.verlof}</MyTC>
-                    <MyTC style={{ width: '150px' }}>
+                    <MyTC style={{ width: '175px' }}>
                         <EditVerlof id={item.id} />
-                        
+
                         <DeleteVerlof id={item.id} />
                     </MyTC>
                 </MyTR>
