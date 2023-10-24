@@ -42,7 +42,7 @@ function ZorgkundigePage() {
                     <MyTC>{item.achternaam}</MyTC>
                     <MyTC>{item.regimeType.regime}</MyTC>
                     <MyTC>
-                        {item.isVasteNacht ? <CheckCircleIcon color="success" /> : <CancelIcon color="error" />}
+                        {item.isVasteNacht ? <CheckCircleIcon fontSize="large" color="success" /> : <CancelIcon fontSize="large" color="error" />}
                     </MyTC>
                     <MyTC style={{ width: '150px' }}>
                         <EditZorgkundige id={item.id} />
