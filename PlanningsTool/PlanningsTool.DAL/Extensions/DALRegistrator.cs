@@ -34,6 +34,7 @@ namespace PlanningsTool.DAL.Extensions
             services.AddScoped<IRegimeTypesRepository, RegimeTypesRepository>();
             services.AddScoped<IVerlofTypesRepository, VerlofTypesRepository>();
             services.AddScoped<IShiftTypesRepository, ShiftTypesRepository>();
+            services.AddScoped<IVerlovenRepository, VerlovenRepository>();
             return services;
         }
 

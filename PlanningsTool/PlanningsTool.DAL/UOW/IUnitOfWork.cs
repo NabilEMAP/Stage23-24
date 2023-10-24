@@ -13,6 +13,7 @@ namespace PlanningsTool.DAL.UOW
         public IRegimeTypesRepository RegimeTypesRepository { get; }
         public IVerlofTypesRepository VerlofTypesRepository { get; }
         public IShiftTypesRepository ShiftTypesRepository { get; }
+        public IVerlovenRepository VerlovenRepository { get; }
         Task Save();
     }
 }

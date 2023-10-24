@@ -22,6 +22,7 @@ namespace PlanningsTool.DAL.Contexts
         public virtual DbSet<RegimeType> RegimeTypes { get; set; }
         public virtual DbSet<VerlofType> VerlofTypes { get; set; }
         public virtual DbSet<ShiftType> ShiftTypes { get; set; }
+        public virtual DbSet<Verlof> Verloven { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,10 +32,12 @@ namespace PlanningsTool.DAL.Contexts
             modelBuilder.ApplyConfiguration(new RegimeTypeConfiguration());
             modelBuilder.ApplyConfiguration(new VerlofTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ShiftTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new VerlofConfiguration());
             modelBuilder.Entity<Zorgkundige>().Seed();
             modelBuilder.Entity<RegimeType>().Seed();
             modelBuilder.Entity<VerlofType>().Seed();
             modelBuilder.Entity<ShiftType>().Seed();
+            modelBuilder.Entity<Verlof>().Seed();
         }
     }
 }

@@ -2,6 +2,7 @@
 using PlanningsTool.Common.DTO.RegimeTypes;
 using PlanningsTool.Common.DTO.ShiftTypes;
 using PlanningsTool.Common.DTO.VerlofTypes;
+using PlanningsTool.Common.DTO.Verloven;
 using PlanningsTool.Common.DTO.Zorgkundigen;
 using PlanningsTool.DAL.Models;
 using System;
@@ -20,6 +21,11 @@ namespace PlanningsTool.BLL
             CreateMap<Zorgkundige, ZorgkundigeDetailDTO>().ReverseMap();
             CreateMap<Zorgkundige, CreateZorgkundigeDTO>().ReverseMap();
             CreateMap<Zorgkundige, UpdateZorgkundigeDTO>().ReverseMap();
+
+            CreateMap<Verlof, VerlofDTO>().ReverseMap();
+            CreateMap<Verlof, VerlofDetailDTO>().ReverseMap();
+            CreateMap<Verlof, CreateVerlofDTO>().ReverseMap();
+            CreateMap<Verlof, UpdateVerlofDTO>().ReverseMap();
 
             CreateMap<RegimeType, RegimeTypeDTO>().ReverseMap();
             CreateMap<VerlofType, VerlofTypeDTO>().ReverseMap();

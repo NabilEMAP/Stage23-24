@@ -38,7 +38,7 @@ namespace PlanningsTool.BLL.Services
                 throw new KeyNotFoundException("This zorgkundige does not exist.");
             }
             _uow.ZorgkundigenRepository.Delete(toDeleteZorgkundige);
-            _uow.Save();
+            await _uow.Save();
             return 0;
         }
 

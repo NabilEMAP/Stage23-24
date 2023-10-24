@@ -18,6 +18,7 @@ namespace PlanningsTool.BLL.Extensions
             services.AddScoped<IRegimeTypesService, RegimeTypesService>();
             services.AddScoped<IVerlofTypesService, VerlofTypesService>();
             services.AddScoped<IShiftTypesService, ShiftTypesService>();
+            services.AddScoped<IVerlovenService, VerlovenService>();
             return services;
         }
 
