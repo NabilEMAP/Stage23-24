@@ -89,7 +89,7 @@ function AddVerlof() {
 
     const renderZorgkundige = () => {
         return zorgkundigeData.map((item) => (
-            <MenuItem value={item.id}>{item.voornaam}</MenuItem>
+            <MenuItem value={item.id}>{item.voornaam + ' ' + item.achternaam}</MenuItem>
         ));
     }
 
