@@ -32,7 +32,7 @@ namespace PlanningsTool.BLL.Services
 
         public async Task<int> Delete(int id)
         {
-            var toDeleteVerlof = await _uow.VerlovenRepository.GetByIdAsync(id);
+            var toDeleteVerlof = await _uow.VerlovenRepository.GetVerlofAsyncById(id);
             if (toDeleteVerlof == null)
             {
                 throw new KeyNotFoundException("This verlof does not exist.");
@@ -56,7 +56,7 @@ namespace PlanningsTool.BLL.Services
 
         public async Task<VerlofDetailDTO> GetById(int id)
         {
-            var verlof = await _uow.VerlovenRepository.GetByIdAsync(id);
+            var verlof = await _uow.VerlovenRepository.GetVerlofAsyncById(id);
             return _mapper.Map<VerlofDetailDTO>(verlof);
         }
 
@@ -81,7 +81,7 @@ namespace PlanningsTool.BLL.Services
         public async Task<VerlofDetailDTO> Update(int id, UpdateVerlofDTO entity)
         {
             var verlofFromRequest = _mapper.Map<Verlof>(entity);
-            var verlofToUpdate = await _uow.VerlovenRepository.GetByIdAsync(id);
+            var verlofToUpdate = await _uow.VerlovenRepository.GetVerlofAsyncById(id);
 
             if (verlofToUpdate == null)
             {

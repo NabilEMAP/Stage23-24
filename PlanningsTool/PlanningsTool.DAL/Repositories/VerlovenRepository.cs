@@ -23,24 +23,35 @@ namespace PlanningsTool.DAL.Repositories
                 .ToListAsync();
         }
 
+        public async Task<Verlof> GetVerlofAsyncById(int id)
+        {
+            return await _context.Verloven
+                .Include(v => v.VerlofType)
+                .Include(z => z.Zorgkundige)
+                .FirstOrDefaultAsync(z => z.Id == id);
+        }
+
         public async Task<IEnumerable<Verlof>> GetVerlovenByStartdatum(string startdatum)
         {
             string query = $"SELECT * FROM [dbo].[Verloven] AS z WHERE z.Startdatum like '%{startdatum}%'";
-            return await _context.Verloven.FromSqlRaw(query).ToListAsync();
+            return await _context.Verloven.FromSqlRaw(query).Include(v => v.VerlofType)
+                .Include(z => z.Zorgkundige).ToListAsync();
         }
 
         public async Task<IEnumerable<Verlof>> GetVerlovenByEinddatum(string einddatum)
         {
             string query = $"SELECT * FROM [dbo].[Verloven] AS z WHERE z.Einddatum like '%{einddatum}%'";
-            return await _context.Verloven.FromSqlRaw(query).ToListAsync();
+            return await _context.Verloven.FromSqlRaw(query).Include(v => v.VerlofType)
+                .Include(z => z.Zorgkundige).ToListAsync();
         }
 
         public async Task<IEnumerable<Verlof>> GetVerlovenByReden(string reden)
         {
             string query = $"SELECT * FROM [dbo].[Verloven] AS z WHERE z.Reden like '%{reden}%'";
-            return await _context.Verloven.FromSqlRaw(query).ToListAsync();
+            return await _context.Verloven.FromSqlRaw(query).Include(v => v.VerlofType)
+                .Include(z => z.Zorgkundige).ToListAsync();
         }
 
-        
+
     }
 }

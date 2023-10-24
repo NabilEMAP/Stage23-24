@@ -22,16 +22,23 @@ namespace PlanningsTool.DAL.Repositories
                 .ToListAsync();
         }
 
+        public async Task<Zorgkundige> GetZorgkundigenAsyncById(int id)
+        {
+            return await _context.Zorgkundigen
+                .Include(r => r.RegimeType)
+                .FirstOrDefaultAsync(z => z.Id == id);
+        }
+
         public async Task<IEnumerable<Zorgkundige>> GetZorgkundigenByAchternaam(string achternaam)
         {
             string query = $"SELECT * FROM [dbo].[Zorgkundigen] AS z WHERE z.Achternaam like '%{achternaam}%'";
-            return await _context.Zorgkundigen.FromSqlRaw(query).ToListAsync();
+            return await _context.Zorgkundigen.FromSqlRaw(query).Include(r => r.RegimeType).ToListAsync();
         }
 
         public async Task<IEnumerable<Zorgkundige>> GetZorgkundigenByVoornaam(string voornaam)
         {
             string query = $"SELECT * FROM [dbo].[Zorgkundigen] AS z WHERE z.Voornaam like '%{voornaam}%'";
-            return await _context.Zorgkundigen.FromSqlRaw(query).ToListAsync();
+            return await _context.Zorgkundigen.FromSqlRaw(query).Include(r => r.RegimeType).ToListAsync();
         }
     }
 }
