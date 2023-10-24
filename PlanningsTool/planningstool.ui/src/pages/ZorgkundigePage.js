@@ -66,7 +66,7 @@ function ZorgkundigePage() {
                     <Table sx={{ minWidth: 700 }} aria-label="customized table">
                         <TableHead>
                             <TableRow>
-                                <MyTC></MyTC>
+                                <MyTC>Id</MyTC>
                                 <MyTC>Voornaam</MyTC>
                                 <MyTC>Achternaam</MyTC>
                                 <MyTC>Regime</MyTC>
