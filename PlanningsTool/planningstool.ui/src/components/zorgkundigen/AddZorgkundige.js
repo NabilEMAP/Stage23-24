@@ -11,7 +11,7 @@ function AddZorgkundige() {
   const handleShow = () => setShow(true);
   const [voornaam, setVoornaam] = useState('');
   const [achternaam, setAchternaam] = useState('');
-  const [regimeType, setRegimeType] = useState('');
+  const [regimeTypeId, setRegimeTypeId] = useState('');
   const [isVasteNacht, setIsVasteNacht] = useState(false);
   const [data, setData] = useState([]);
   const [regimeTypeData, setRegimeTypeData] = useState([]);
@@ -49,7 +49,7 @@ function AddZorgkundige() {
     {
       "voornaam": voornaam,
       "achternaam": achternaam,
-      "regimeId": regimeType,
+      "regimeId": regimeTypeId,
       "isVasteNacht": isVasteNacht
     }
     axios.post(API, data)
@@ -76,7 +76,7 @@ function AddZorgkundige() {
   const clear = () => {
     setVoornaam('');
     setAchternaam('');
-    setRegimeType('');
+    setRegimeTypeId('');
     setIsVasteNacht(false);
   }
 
@@ -127,8 +127,8 @@ function AddZorgkundige() {
             <FormControl style={{ width: '75%' }}>
               <InputLabel>Selecteer uw regime...</InputLabel>
               <Select
-                value={regimeType}
-                onChange={(e) => setRegimeType(e.target.value)}
+                value={regimeTypeId}
+                onChange={(e) => setRegimeTypeId(e.target.value)}
               >
                 {renderRegimeType()}
               </Select>

@@ -14,7 +14,7 @@ function DeleteZorgkundige(props) {
   const [Id, editId] = useState('');
   const [voornaam, setVoornaam] = useState('');
   const [achternaam, setAchternaam] = useState('');
-  const [regimeType, setRegimeType] = useState('');
+  const [regimeTypeId, setRegimeTypeId] = useState('');
   const [isVasteNacht, setIsVasteNacht] = useState(false);
   const [data, setData] = useState([]);
   const [regimeTypeData, setRegimeTypeData] = useState([]);
@@ -54,7 +54,7 @@ function DeleteZorgkundige(props) {
         setVoornaam(result.data.voornaam);
         setAchternaam(result.data.achternaam);
         setIsVasteNacht(result.data.isVasteNacht);
-        setRegimeType(result.data.regimeId);
+        setRegimeTypeId(result.data.regimeId);
         editId(id);
       })
       .catch((error) => {
@@ -133,8 +133,8 @@ function DeleteZorgkundige(props) {
             <FormControl style={{ width: '75%' }} disabled>
               <InputLabel>Selecteer uw regime...</InputLabel>
               <Select
-                value={regimeType}
-                onChange={(e) => setRegimeType(e.target.value)}
+                value={regimeTypeId}
+                onChange={(e) => setRegimeTypeId(e.target.value)}
               >
                 {renderRegimeType()}
               </Select>
