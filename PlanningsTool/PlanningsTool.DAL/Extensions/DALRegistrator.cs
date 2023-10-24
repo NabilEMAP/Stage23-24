@@ -32,6 +32,8 @@ namespace PlanningsTool.DAL.Extensions
         {
             services.AddScoped<IZorgkundigenRepository, ZorgkundigenRepository>();
             services.AddScoped<IRegimeTypesRepository, RegimeTypesRepository>();
+            services.AddScoped<IVerlofTypesRepository, VerlofTypesRepository>();
+            services.AddScoped<IShiftTypesRepository, ShiftTypesRepository>();
             return services;
         }
 

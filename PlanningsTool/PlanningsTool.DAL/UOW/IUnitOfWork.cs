@@ -11,6 +11,8 @@ namespace PlanningsTool.DAL.UOW
     {
         public IZorgkundigenRepository ZorgkundigenRepository { get; }
         public IRegimeTypesRepository RegimeTypesRepository { get; }
+        public IVerlofTypesRepository VerlofTypesRepository { get; }
+        public IShiftTypesRepository ShiftTypesRepository { get; }
         Task Save();
     }
 }

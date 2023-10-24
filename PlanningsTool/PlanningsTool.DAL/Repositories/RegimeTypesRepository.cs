@@ -17,13 +17,13 @@ namespace PlanningsTool.DAL.Repositories
 
         public async Task<IEnumerable<RegimeType>> GetRegimeTypesByNaam(string naam)
         {
-            string query = $"SELECT * FROM [dbo].[tblRegimeTypes] AS z WHERE z.Regime like '%{naam}%'";
+            string query = $"SELECT * FROM [dbo].[RegimeTypes] AS z WHERE z.Regime like '%{naam}%'";
             return await _context.RegimeTypes.FromSqlRaw(query).ToListAsync();
         }
 
         public async Task<IEnumerable<RegimeType>> GetRegimeTypesByAantalUren(string aantalUren)
         {
-            string query = $"SELECT * FROM [dbo].[tblRegimeTypes] AS z WHERE z.AantalUren like '%{aantalUren}%'";
+            string query = $"SELECT * FROM [dbo].[RegimeTypes] AS z WHERE z.AantalUren like '%{aantalUren}%'";
             return await _context.RegimeTypes.FromSqlRaw(query).ToListAsync();
         }
     }

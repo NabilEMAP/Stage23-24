@@ -16,6 +16,8 @@ namespace PlanningsTool.BLL.Extensions
         {
             services.AddScoped<IZorgkundigenService, ZorgkundigenService>();
             services.AddScoped<IRegimeTypesService, RegimeTypesService>();
+            services.AddScoped<IVerlofTypesService, VerlofTypesService>();
+            services.AddScoped<IShiftTypesService, ShiftTypesService>();
             return services;
         }
 
