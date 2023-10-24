@@ -47,7 +47,7 @@ function HomePage() {
                             Planningstool <span style={{ color: "#d10202" }}>voor</span> Ziekenhuisdienst
                         </Typography>
                         <Typography variant="h5" align="center" color="text.secondary" paragraph>
-                            Een planningstool is een softwaretoepassing of digitale tool die is ontworpen om de zorgkundigen hun activiteiten in te plannen.
+                            Een planningstool is een softwaretoepassing of digitale tool die ontworpen is om de zorgkundigen hun activiteiten in te plannen.
                         </Typography>
                         <Stack
                             sx={{ pt: 4 }}
