@@ -109,7 +109,6 @@ function AddVerlof() {
           >
             Verlof toevoegen
           </Button>
-          <br />
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
               <Modal.Title>Verlof toevoegen</Modal.Title>

@@ -60,21 +60,6 @@ function EditVerlof(props) {
             })
     }
 
-    const handleCreate = () => {
-        const API = 'https://localhost:8000/api/Verloven';
-
-        axios.post(API, data)
-            .then(() => {
-                getData();
-                toast.success('Verlof is toegevoegd');
-                clear();
-                handleClose();
-            })
-            .catch((error) => {
-                toast.error(error);
-            })
-    }
-
     const handleEdit = (id) => {
         handleShow();
         const API = `https://localhost:8000/api/Verloven/${id}`;
@@ -143,7 +128,6 @@ function EditVerlof(props) {
             >
                 <FontAwesomeIcon icon={faPen} />
             </IconButton>
-            <br />
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Verlof wijzigen</Modal.Title>

@@ -96,7 +96,6 @@ function AddZorgkundige() {
       >
         Zorgkundige toevoegen
       </Button>
-      <br />
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Zorgkundige toevoegen</Modal.Title>
