@@ -82,7 +82,7 @@ function AddZorgkundige() {
 
   const renderRegimeType = () => {
     return regimeTypeData.map((item) => (
-      <MenuItem value={item.id}>{item.regime}</MenuItem>      
+      <MenuItem value={item.id}>{item.regime}</MenuItem>
     ));
   }
 
