@@ -60,7 +60,8 @@ function AddZorgkundige() {
         handleClose();
       })
       .catch((error) => {
-        toast.error(error);
+        toast.warning(`${error}`);
+        clear();
       })
   }
 

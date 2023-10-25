@@ -95,16 +95,8 @@ function EditVerlof(props) {
                 handleClose();
             })
             .catch((error) => {
-                toast.error(`${error}`);
+                toast.warning(`${error}`);
             })
-    }
-
-    const clear = () => {
-        setStartdatum('');
-        setEinddatum('');
-        setZorgkundigeId('');
-        setVerlofTypeId('');
-        setReden('');
     }
 
     const renderZorgkundige = () => {

@@ -71,7 +71,7 @@ function DeleteZorgkundige(props) {
         handleClose();
       })
       .catch((error) => {
-        toast.error(`${error}`);
+        toast.warning(`${error}`);
       })
 
   }

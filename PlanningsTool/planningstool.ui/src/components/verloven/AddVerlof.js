@@ -75,7 +75,9 @@ function AddVerlof() {
                 handleClose();
             })
             .catch((error) => {
-                toast.error(error);
+              toast.warning(`${error}`);
+                console.log(data);
+                clear();
             })
     }
 
