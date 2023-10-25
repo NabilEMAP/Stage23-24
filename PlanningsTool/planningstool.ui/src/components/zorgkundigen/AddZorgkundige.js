@@ -22,7 +22,7 @@ function AddZorgkundige() {
   }, []);
 
   const getData = () => {
-    const API = 'https://localhost:8000/api/Zorgkundigen/details'
+    const API = 'https://localhost:8000/api/Zorgkundigen'
     axios.get(API)
       .then((result) => {
         setData(result.data);
