@@ -81,7 +81,7 @@ function DeleteVerlof(props) {
         const API = `https://localhost:8000/api/Verloven/${Id}`;
         axios.delete(API)
             .then(() => {
-                toast.success('Verlof is verwijderd');
+                toast.error('Verlof is verwijderd');
                 getData();
                 handleClose();
             })

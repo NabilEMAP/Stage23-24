@@ -66,7 +66,7 @@ function DeleteZorgkundige(props) {
     const API = `https://localhost:8000/api/Zorgkundigen/${Id}`;
     axios.delete(API)
       .then(() => {
-        toast.success('Zorgkundige is verwijderd');
+        toast.error('Zorgkundige is verwijderd');
         getData();
         handleClose();
       })
