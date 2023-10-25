@@ -1,5 +1,5 @@
-import axios from "axios";
 import React, { Fragment, useEffect, useState } from "react";
+import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -21,7 +21,7 @@ function ZorgkundigePage() {
 
     useEffect(() => {
         getData();
-    }, [data]);
+    }, []);
 
     const getData = () => {
         const API = 'https://localhost:8000/api/Zorgkundigen';
@@ -45,15 +45,20 @@ function ZorgkundigePage() {
     const sortedData = [...data];
     if (sortConfig !== null) {
         sortedData.sort((a, b) => {
-            if (a[sortConfig.key] < b[sortConfig.key]) {
-                return sortConfig.direction === 'asc' ? -1 : 1;
+            if (sortConfig.key === null) return 0;
+            const keys = sortConfig.key.split('.');
+            let aValue = a;
+            let bValue = b;
+            for (const key of keys) {
+                aValue = aValue[key];
+                bValue = bValue[key];
             }
-            if (a[sortConfig.key] > b[sortConfig.key]) {
-                return sortConfig.direction === 'asc' ? 1 : -1;
-            }
+            if (aValue < bValue) return sortConfig.direction === 'asc' ? -1 : 1;
+            if (aValue > bValue) return sortConfig.direction === 'asc' ? 1 : -1;
             return 0;
         });
     }
+
 
     const renderTableData = () => {
         if (sortedData && sortedData.length > 0) {
