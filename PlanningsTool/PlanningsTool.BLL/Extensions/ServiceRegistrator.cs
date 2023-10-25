@@ -19,6 +19,7 @@ namespace PlanningsTool.BLL.Extensions
             services.AddScoped<IVerlofTypesService, VerlofTypesService>();
             services.AddScoped<IShiftTypesService, ShiftTypesService>();
             services.AddScoped<IVerlovenService, VerlovenService>();
+            services.AddScoped<IShiftsService, ShiftsService>();
             return services;
         }
 

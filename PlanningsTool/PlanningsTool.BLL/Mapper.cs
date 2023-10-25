@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using PlanningsTool.Common.DTO.RegimeTypes;
+using PlanningsTool.Common.DTO.Shifts;
 using PlanningsTool.Common.DTO.ShiftTypes;
 using PlanningsTool.Common.DTO.VerlofTypes;
 using PlanningsTool.Common.DTO.Verloven;
@@ -26,6 +27,10 @@ namespace PlanningsTool.BLL
             CreateMap<Verlof, VerlofDetailDTO>().ReverseMap();
             CreateMap<Verlof, CreateVerlofDTO>().ReverseMap();
             CreateMap<Verlof, UpdateVerlofDTO>().ReverseMap();
+
+            CreateMap<Shift, ShiftDTO>().ReverseMap();
+            CreateMap<Shift, CreateShiftDTO>().ReverseMap();
+            CreateMap<Shift, UpdateShiftDTO>().ReverseMap();
 
             CreateMap<RegimeType, RegimeTypeDTO>().ReverseMap();
             CreateMap<VerlofType, VerlofTypeDTO>().ReverseMap();

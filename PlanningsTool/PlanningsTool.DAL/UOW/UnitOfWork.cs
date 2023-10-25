@@ -16,6 +16,7 @@ namespace PlanningsTool.DAL.UOW
         public readonly IVerlofTypesRepository _verlofTypesRepository;
         public readonly IShiftTypesRepository _shiftTypesRepository;
         public readonly IVerlovenRepository _verlovenRepository;
+        public readonly IShiftsRepository _shiftsRepository;
 
         public UnitOfWork(
             ApplicationDbContext context,
@@ -23,7 +24,8 @@ namespace PlanningsTool.DAL.UOW
             IRegimeTypesRepository regimeTypesRepository,
             IVerlofTypesRepository verlofTypesRepository,
             IShiftTypesRepository shiftTypesRepository,
-            IVerlovenRepository verlovenRepository
+            IVerlovenRepository verlovenRepository,
+            IShiftsRepository shiftsRepository
             )
         {
             _context = context;
@@ -32,6 +34,7 @@ namespace PlanningsTool.DAL.UOW
             _verlofTypesRepository = verlofTypesRepository;
             _shiftTypesRepository = shiftTypesRepository;
             _verlovenRepository = verlovenRepository;
+            _shiftsRepository = shiftsRepository;
         }
 
         public IZorgkundigenRepository ZorgkundigenRepository { get { return _zorgkundigenRepository; } }
@@ -39,6 +42,7 @@ namespace PlanningsTool.DAL.UOW
         public IVerlofTypesRepository VerlofTypesRepository { get { return _verlofTypesRepository; } }
         public IShiftTypesRepository ShiftTypesRepository { get { return _shiftTypesRepository; } }
         public IVerlovenRepository VerlovenRepository { get { return _verlovenRepository; } }
+        public IShiftsRepository ShiftsRepository { get { return _shiftsRepository; } }
 
         public async Task Save()
         {
