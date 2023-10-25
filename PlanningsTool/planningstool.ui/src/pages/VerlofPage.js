@@ -46,12 +46,16 @@ function VerlofPage() {
     const sortedData = [...data];
     if (sortConfig !== null) {
         sortedData.sort((a, b) => {
-            if (a[sortConfig.key] < b[sortConfig.key]) {
-                return sortConfig.direction === 'asc' ? -1 : 1;
+            if (sortConfig.key === null) return 0;
+            const keys = sortConfig.key.split('.');
+            let aValue = a;
+            let bValue = b;
+            for (const key of keys) {
+                aValue = aValue[key];
+                bValue = bValue[key];
             }
-            if (a[sortConfig.key] > b[sortConfig.key]) {
-                return sortConfig.direction === 'asc' ? 1 : -1;
-            }
+            if (aValue < bValue) return sortConfig.direction === 'asc' ? -1 : 1;
+            if (aValue > bValue) return sortConfig.direction === 'asc' ? 1 : -1;
             return 0;
         });
     }
