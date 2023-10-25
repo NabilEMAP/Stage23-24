@@ -17,25 +17,47 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 function ZorgkundigePage() {
     const [data, setData] = useState([]);
+    const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
 
     useEffect(() => {
         getData();
     }, [data]);
 
     const getData = () => {
-        const API = 'https://localhost:8000/api/Zorgkundigen/details'
+        const API = 'https://localhost:8000/api/Zorgkundigen/details';
         axios.get(API)
             .then((result) => {
                 setData(result.data);
             })
             .catch((error) => {
                 console.log(error);
-            })
+            });
+    }
+
+    const requestSort = (key) => {
+        let direction = 'asc';
+        if (sortConfig && sortConfig.key === key && sortConfig.direction === 'asc') {
+            direction = 'desc';
+        }
+        setSortConfig({ key, direction });
+    }
+
+    const sortedData = [...data];
+    if (sortConfig !== null) {
+        sortedData.sort((a, b) => {
+            if (a[sortConfig.key] < b[sortConfig.key]) {
+                return sortConfig.direction === 'asc' ? -1 : 1;
+            }
+            if (a[sortConfig.key] > b[sortConfig.key]) {
+                return sortConfig.direction === 'asc' ? 1 : -1;
+            }
+            return 0;
+        });
     }
 
     const renderTableData = () => {
-        if (data && data.length > 0) {
-            return data.map((item, index) => (
+        if (sortedData && sortedData.length > 0) {
+            return sortedData.map((item, index) => (
                 <MyTR key={index}>
                     <MyTC>{item.id}</MyTC>
                     <MyTC>{item.voornaam}</MyTC>
@@ -66,11 +88,11 @@ function ZorgkundigePage() {
                     <Table sx={{ minWidth: 700 }} aria-label="customized table">
                         <TableHead>
                             <TableRow>
-                                <MyTC>Id</MyTC>
-                                <MyTC>Voornaam</MyTC>
-                                <MyTC>Achternaam</MyTC>
-                                <MyTC>Regime</MyTC>
-                                <MyTC>Vaste Nacht?</MyTC>
+                                <MyTC onClick={() => requestSort("id")}>Id</MyTC>
+                                <MyTC onClick={() => requestSort("voornaam")}>Voornaam</MyTC>
+                                <MyTC onClick={() => requestSort("achternaam")}>Achternaam</MyTC>
+                                <MyTC onClick={() => requestSort("regimeType.regime")}>Regime</MyTC>
+                                <MyTC onClick={() => requestSort("isVasteNacht")}>Vaste Nacht?</MyTC>
                                 <MyTC style={{ width: '150px' }}>Veranderingen</MyTC>
                             </TableRow>
                         </TableHead>
