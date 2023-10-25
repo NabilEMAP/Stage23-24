@@ -36,7 +36,7 @@ export const NavBar = () => {
                     <Button href='/teamplanning' color='inherit'>Teamplanning</Button>
                     <Button href='/zorgkundige' color='inherit'>Zorgkundige</Button>
                     <Button href='/zorgkundigeshift' color='inherit'>ZorgkundigeShift</Button>
-                    <Button href='/verlof' color='inherit'>Verlofdag</Button>
+                    <Button href='/verlof' color='inherit'>Verlof</Button>
                     <Button href='/shift' color='inherit'>Shift</Button>
                     <Button
                         color='inherit'

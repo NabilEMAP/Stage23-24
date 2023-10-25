@@ -18,6 +18,7 @@ import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 
 function VerlofPage() {
     const [data, setData] = useState([]);
+    const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
 
     useEffect(() => {
         getData();
@@ -34,6 +35,27 @@ function VerlofPage() {
             })
     }
 
+    const requestSort = (key) => {
+        let direction = 'asc';
+        if (sortConfig && sortConfig.key === key && sortConfig.direction === 'asc') {
+            direction = 'desc';
+        }
+        setSortConfig({ key, direction });
+    }
+
+    const sortedData = [...data];
+    if (sortConfig !== null) {
+        sortedData.sort((a, b) => {
+            if (a[sortConfig.key] < b[sortConfig.key]) {
+                return sortConfig.direction === 'asc' ? -1 : 1;
+            }
+            if (a[sortConfig.key] > b[sortConfig.key]) {
+                return sortConfig.direction === 'asc' ? 1 : -1;
+            }
+            return 0;
+        });
+    }
+
     const zorgkundigeNaam = (naam) => {
         return naam.zorgkundige.voornaam + ' ' + naam.zorgkundige.achternaam;
     }
@@ -45,11 +67,11 @@ function VerlofPage() {
     }
 
     const renderTableData = () => {
-        if (data && data.length > 0) {
-            return data.map((item, index) => (
+        if (sortedData && sortedData.length > 0) {
+            return sortedData.map((item, index) => (
                 <MyTR key={index}>
                     <MyTC>{item.id}</MyTC>
-                    <MyTC>
+                    <MyTC onClick={() => requestSort("zorgkundige.voornaam")}>
                         <Tooltip title={renderTooltip(item)} placement="left-end">
                             <IconButton style={{marginRight:'6px'}} size="medium" color="inherit">
                                 <FontAwesomeIcon icon={faCircleInfo} />
@@ -62,7 +84,6 @@ function VerlofPage() {
                     <MyTC>{item.verlofType.verlof}</MyTC>
                     <MyTC style={{ width: '175px' }}>
                         <EditVerlof id={item.id} />
-
                         <DeleteVerlof id={item.id} />
                     </MyTC>
                 </MyTR>
@@ -83,11 +104,11 @@ function VerlofPage() {
                     <Table sx={{ minWidth: 700 }} aria-label="customized table">
                         <TableHead>
                             <TableRow>
-                                <MyTC>Id</MyTC>
-                                <MyTC>Zorgkundige</MyTC>
-                                <MyTC>Startdatum</MyTC>
-                                <MyTC>Einddatum</MyTC>
-                                <MyTC>Verlof</MyTC>
+                                <MyTC onClick={() => requestSort("id")}>Id</MyTC>
+                                <MyTC onClick={() => requestSort("zorgkundige.voornaam")}>Zorgkundige</MyTC>
+                                <MyTC onClick={() => requestSort("startdatum")}>Startdatum</MyTC>
+                                <MyTC onClick={() => requestSort("einddatum")}>Einddatum</MyTC>
+                                <MyTC onClick={() => requestSort("verlofType.verlof")}>Verlof</MyTC>
                                 <MyTC style={{ width: '150px' }}>Veranderingen</MyTC>
                             </TableRow>
                         </TableHead>

@@ -15,6 +15,7 @@ import { Container, Typography } from "@mui/material";
 
 function ShiftPage() {
     const [data, setData] = useState([]);
+    const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
 
     useEffect(() => {
         getData();
@@ -31,9 +32,30 @@ function ShiftPage() {
             })
     }
 
+    const requestSort = (key) => {
+        let direction = 'asc';
+        if (sortConfig && sortConfig.key === key && sortConfig.direction === 'asc') {
+            direction = 'desc';
+        }
+        setSortConfig({ key, direction });
+    }
+
+    const sortedData = [...data];
+    if (sortConfig !== null) {
+        sortedData.sort((a, b) => {
+            if (a[sortConfig.key] < b[sortConfig.key]) {
+                return sortConfig.direction === 'asc' ? -1 : 1;
+            }
+            if (a[sortConfig.key] > b[sortConfig.key]) {
+                return sortConfig.direction === 'asc' ? 1 : -1;
+            }
+            return 0;
+        });
+    }
+
     const renderTableData = () => {
-        if (data && data.length > 0) {
-            return data.map((item, index) => (
+        if (sortedData && sortedData.length > 0) {
+            return sortedData.map((item, index) => (
                 <MyTR key={index}>
                     <MyTC>{item.id}</MyTC>
                     <MyTC>{item.shiftType.shift}</MyTC>
@@ -61,10 +83,10 @@ function ShiftPage() {
                     <Table sx={{ minWidth: 700 }} aria-label="customized table">
                         <TableHead>
                             <TableRow>
-                                <MyTC>Id</MyTC>
-                                <MyTC>Shift</MyTC>
-                                <MyTC>Starttijd</MyTC>
-                                <MyTC>Eindtijd</MyTC>                                
+                                <MyTC onClick={() => requestSort("id")}>Id</MyTC>
+                                <MyTC onClick={() => requestSort("shiftType.shift")}>Shift</MyTC>
+                                <MyTC onClick={() => requestSort("starttijd")}>Starttijd</MyTC>
+                                <MyTC onClick={() => requestSort("eindtijd")}>Eindtijd</MyTC>                                
                                 <MyTC style={{ width: '150px' }}>Veranderingen</MyTC>
                             </TableRow>
                         </TableHead>
