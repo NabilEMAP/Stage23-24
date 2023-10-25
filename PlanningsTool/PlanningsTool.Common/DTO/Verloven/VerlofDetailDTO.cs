@@ -15,7 +15,7 @@ namespace PlanningsTool.Common.DTO.Verloven
         public DateTime Einddatum { get; set; }
         public string Reden { get; set; }
         public int ZorgkundigeId { get; set; }
-        public ZorgkundigeDetailDTO Zorgkundige { get; set; }
+        public ZorgkundigeDTO Zorgkundige { get; set; }
         public int VerlofTypeId { get; set; }
         public VerlofTypeDTO VerlofType { get; set; }
     }

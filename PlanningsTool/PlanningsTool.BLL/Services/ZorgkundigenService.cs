@@ -22,12 +22,12 @@ namespace PlanningsTool.BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<ZorgkundigeDetailDTO> Add(CreateZorgkundigeDTO entity)
+        public async Task<ZorgkundigeDTO> Add(CreateZorgkundigeDTO entity)
         {
             var zorgkundige = _mapper.Map<Zorgkundige>(entity);
             await _uow.ZorgkundigenRepository.Add(zorgkundige);
             await _uow.Save();
-            return _mapper.Map<ZorgkundigeDetailDTO>(zorgkundige);
+            return _mapper.Map<ZorgkundigeDTO>(zorgkundige);
         }
 
         public async Task<int> Delete(int id)
@@ -48,31 +48,25 @@ namespace PlanningsTool.BLL.Services
             return _mapper.Map<IEnumerable<ZorgkundigeDTO>>(zorgkundigen);
         }
 
-        public async Task<IEnumerable<ZorgkundigeDetailDTO>> GetAllDetails()
-        {
-            var zorgkundigen = await _uow.ZorgkundigenRepository.GetAllZorgkundigenAsync();
-            return _mapper.Map<IEnumerable<ZorgkundigeDetailDTO>>(zorgkundigen);
-        }
-
-        public async Task<ZorgkundigeDetailDTO> GetById(int id)
+        public async Task<ZorgkundigeDTO> GetById(int id)
         {
             var zorgkundige = await _uow.ZorgkundigenRepository.GetZorgkundigenAsyncById(id);
-            return _mapper.Map<ZorgkundigeDetailDTO>(zorgkundige);
+            return _mapper.Map<ZorgkundigeDTO>(zorgkundige);
         }
 
-        public async Task<IEnumerable<ZorgkundigeDetailDTO>> GetZorgkundigenByAchternaam(string achternaam)
+        public async Task<IEnumerable<ZorgkundigeDTO>> GetZorgkundigenByAchternaam(string achternaam)
         {
             var zorgkundigen = await _uow.ZorgkundigenRepository.GetZorgkundigenByAchternaam(achternaam);
-            return _mapper.Map<IEnumerable<ZorgkundigeDetailDTO>>(zorgkundigen);
+            return _mapper.Map<IEnumerable<ZorgkundigeDTO>>(zorgkundigen);
         }
 
-        public async Task<IEnumerable<ZorgkundigeDetailDTO>> GetZorgkundigenByVoornaam(string voornaam)
+        public async Task<IEnumerable<ZorgkundigeDTO>> GetZorgkundigenByVoornaam(string voornaam)
         {
             var zorgkundigen = await _uow.ZorgkundigenRepository.GetZorgkundigenByVoornaam(voornaam);
-            return _mapper.Map<IEnumerable<ZorgkundigeDetailDTO>>(zorgkundigen);
+            return _mapper.Map<IEnumerable<ZorgkundigeDTO>>(zorgkundigen);
         }
 
-        public async Task<ZorgkundigeDetailDTO> Update(int id, UpdateZorgkundigeDTO entity)
+        public async Task<ZorgkundigeDTO> Update(int id, UpdateZorgkundigeDTO entity)
         {
             var zorgkundigeFromRequest = _mapper.Map<Zorgkundige>(entity);
             var zorgkundigeToUpdate = await _uow.ZorgkundigenRepository.GetZorgkundigenAsyncById(id);
@@ -89,7 +83,7 @@ namespace PlanningsTool.BLL.Services
 
             await _uow.ZorgkundigenRepository.Update(zorgkundigeToUpdate);
             await _uow.Save();
-            return _mapper.Map<ZorgkundigeDetailDTO>(zorgkundigeToUpdate);
+            return _mapper.Map<ZorgkundigeDTO>(zorgkundigeToUpdate);
         }
     }
 }

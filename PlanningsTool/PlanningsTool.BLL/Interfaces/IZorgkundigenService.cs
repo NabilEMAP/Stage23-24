@@ -10,12 +10,11 @@ namespace PlanningsTool.BLL.Interfaces
     public interface IZorgkundigenService
     {
         public Task<IEnumerable<ZorgkundigeDTO>> GetAll();
-        public Task<IEnumerable<ZorgkundigeDetailDTO>> GetAllDetails();
-        public Task<ZorgkundigeDetailDTO> GetById(int id);
-        public Task<IEnumerable<ZorgkundigeDetailDTO>> GetZorgkundigenByVoornaam(string voornaam);
-        public Task<IEnumerable<ZorgkundigeDetailDTO>> GetZorgkundigenByAchternaam(string achternaam);
-        public Task<ZorgkundigeDetailDTO> Add(CreateZorgkundigeDTO zorgkundige);
-        public Task<ZorgkundigeDetailDTO> Update(int id, UpdateZorgkundigeDTO zorgkundige);
+        public Task<ZorgkundigeDTO> GetById(int id);
+        public Task<IEnumerable<ZorgkundigeDTO>> GetZorgkundigenByVoornaam(string voornaam);
+        public Task<IEnumerable<ZorgkundigeDTO>> GetZorgkundigenByAchternaam(string achternaam);
+        public Task<ZorgkundigeDTO> Add(CreateZorgkundigeDTO zorgkundige);
+        public Task<ZorgkundigeDTO> Update(int id, UpdateZorgkundigeDTO zorgkundige);
         public Task<int> Delete(int id);
     }
 }

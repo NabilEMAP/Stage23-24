@@ -19,7 +19,6 @@ namespace PlanningsTool.BLL
         public Mapper()
         {
             CreateMap<Zorgkundige, ZorgkundigeDTO>().ReverseMap();
-            CreateMap<Zorgkundige, ZorgkundigeDetailDTO>().ReverseMap();
             CreateMap<Zorgkundige, CreateZorgkundigeDTO>().ReverseMap();
             CreateMap<Zorgkundige, UpdateZorgkundigeDTO>().ReverseMap();
 

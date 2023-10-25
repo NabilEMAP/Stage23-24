@@ -25,15 +25,6 @@ namespace PlanningsTool.API.Controllers
             return Ok(zorgkundigen);
         }
 
-        // GET api/Zorgkundigen/Details
-        [HttpGet("details")]
-        public async Task<IActionResult> GetAllDetails()
-        {
-            var zorgkundigen = await _zorgkundigenServices.GetAllDetails();
-            if (zorgkundigen == null) { return NotFound(); }
-            return Ok(zorgkundigen);
-        }
-
         // GET api/Zorgkundigen/{id}
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
