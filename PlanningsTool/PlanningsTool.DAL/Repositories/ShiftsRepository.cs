@@ -17,7 +17,9 @@ namespace PlanningsTool.DAL.Repositories
 
         public async Task<IEnumerable<Shift>> GetAllShiftsAsync()
         {
-            return await _context.Shifts.Include(s => s.ShiftType).ToListAsync();
+            return await _context.Shifts
+                .Include(s => s.ShiftType)
+                .ToListAsync();
         }
 
         public async Task<Shift> GetShiftAsyncById(int id)

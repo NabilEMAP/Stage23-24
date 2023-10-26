@@ -21,6 +21,8 @@ namespace PlanningsTool.DAL.Repositories
                 .Include(z => z.Zorgkundige)
                 .Include(s => s.Shift)
                 .Include(t => t.Teamplanning)
+                .Include(st => st.Shift.ShiftType)
+                .Include(st => st.Zorgkundige.RegimeType)
                 .ToListAsync();
         }
 
@@ -30,6 +32,8 @@ namespace PlanningsTool.DAL.Repositories
                 .Include(z => z.Zorgkundige)
                 .Include(s => s.Shift)
                 .Include(t => t.Teamplanning)
+                .Include(st => st.Shift.ShiftType)
+                .Include(st => st.Zorgkundige.RegimeType)
                 .FirstOrDefaultAsync(d => d.Id == id);
         }
 
@@ -41,6 +45,8 @@ namespace PlanningsTool.DAL.Repositories
                 .Include(z => z.Zorgkundige)
                 .Include(s => s.Shift)
                 .Include(t => t.Teamplanning)
+                .Include(st => st.Shift.ShiftType)
+                .Include(st => st.Zorgkundige.RegimeType)
                 .ToListAsync();
         }
     }

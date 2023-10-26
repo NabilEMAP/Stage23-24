@@ -27,7 +27,7 @@ const homecards = [
     {
         heading: "Zorgkundige Shift",
         description: "Lijst van zorgkundigen met een shift",
-        url: "/shift",
+        url: "/zorgkundigeshift",
         image: zorgkundigeshift,
     },
 ];
