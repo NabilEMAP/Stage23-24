@@ -36,6 +36,8 @@ namespace PlanningsTool.DAL.Extensions
             services.AddScoped<IShiftTypesRepository, ShiftTypesRepository>();
             services.AddScoped<IVerlovenRepository, VerlovenRepository>();
             services.AddScoped<IShiftsRepository, ShiftsRepository>();
+            services.AddScoped<IZorgkundigeShiftsRepository, ZorgkundigeShiftsRepository>();
+            services.AddScoped<ITeamplanningenRepository, TeamplanningenRepository>();
             return services;
         }
 

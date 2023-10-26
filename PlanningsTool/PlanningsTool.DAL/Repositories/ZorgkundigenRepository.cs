@@ -22,7 +22,7 @@ namespace PlanningsTool.DAL.Repositories
                 .ToListAsync();
         }
 
-        public async Task<Zorgkundige> GetZorgkundigenAsyncById(int id)
+        public async Task<Zorgkundige> GetZorgkundigeAsyncById(int id)
         {
             return await _context.Zorgkundigen
                 .Include(r => r.RegimeType)

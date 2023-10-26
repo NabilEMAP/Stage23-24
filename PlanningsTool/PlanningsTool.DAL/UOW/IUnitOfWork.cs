@@ -15,6 +15,8 @@ namespace PlanningsTool.DAL.UOW
         public IShiftTypesRepository ShiftTypesRepository { get; }
         public IVerlovenRepository VerlovenRepository { get; }
         public IShiftsRepository ShiftsRepository { get; }
+        public IZorgkundigeShiftsRepository ZorgkundigeShiftsRepository { get; }
+        public ITeamplanningenRepository TeamplanningenRepository { get; }
         Task Save();
     }
 }

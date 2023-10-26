@@ -17,6 +17,8 @@ namespace PlanningsTool.DAL.UOW
         public readonly IShiftTypesRepository _shiftTypesRepository;
         public readonly IVerlovenRepository _verlovenRepository;
         public readonly IShiftsRepository _shiftsRepository;
+        public readonly IZorgkundigeShiftsRepository _zorgkundigeShiftsRepository;
+        public readonly ITeamplanningenRepository _teamplanningenRepository;
 
         public UnitOfWork(
             ApplicationDbContext context,
@@ -25,7 +27,9 @@ namespace PlanningsTool.DAL.UOW
             IVerlofTypesRepository verlofTypesRepository,
             IShiftTypesRepository shiftTypesRepository,
             IVerlovenRepository verlovenRepository,
-            IShiftsRepository shiftsRepository
+            IShiftsRepository shiftsRepository,
+            IZorgkundigeShiftsRepository zorgkundigeShiftsRepository,
+            ITeamplanningenRepository teamplanningenRepository
             )
         {
             _context = context;
@@ -35,6 +39,8 @@ namespace PlanningsTool.DAL.UOW
             _shiftTypesRepository = shiftTypesRepository;
             _verlovenRepository = verlovenRepository;
             _shiftsRepository = shiftsRepository;
+            _zorgkundigeShiftsRepository = zorgkundigeShiftsRepository;
+            _teamplanningenRepository = teamplanningenRepository;
         }
 
         public IZorgkundigenRepository ZorgkundigenRepository { get { return _zorgkundigenRepository; } }
@@ -43,6 +49,8 @@ namespace PlanningsTool.DAL.UOW
         public IShiftTypesRepository ShiftTypesRepository { get { return _shiftTypesRepository; } }
         public IVerlovenRepository VerlovenRepository { get { return _verlovenRepository; } }
         public IShiftsRepository ShiftsRepository { get { return _shiftsRepository; } }
+        public IZorgkundigeShiftsRepository ZorgkundigeShiftsRepository { get { return _zorgkundigeShiftsRepository; } }
+        public ITeamplanningenRepository TeamplanningenRepository { get { return _teamplanningenRepository; } }
 
         public async Task Save()
         {

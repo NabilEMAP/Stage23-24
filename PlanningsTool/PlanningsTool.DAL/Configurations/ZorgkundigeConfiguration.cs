@@ -33,7 +33,6 @@ namespace PlanningsTool.DAL.Configurations
             builder.HasOne(p => p.RegimeType)
                     .WithMany()
                     .HasForeignKey(p => p.RegimeId);
-            // Check on OnDelete() Configurations
 
             builder.Property(p => p.RegimeId)
                     .IsRequired()

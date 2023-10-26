@@ -24,6 +24,8 @@ namespace PlanningsTool.DAL.Contexts
         public virtual DbSet<ShiftType> ShiftTypes { get; set; }
         public virtual DbSet<Verlof> Verloven { get; set; }
         public virtual DbSet<Shift> Shifts { get; set; }
+        public virtual DbSet<ZorgkundigeShift> ZorgkundigeShifts { get; set; }
+        public virtual DbSet<Teamplanning> Teamplanningen { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -35,12 +37,16 @@ namespace PlanningsTool.DAL.Contexts
             modelBuilder.ApplyConfiguration(new ShiftTypeConfiguration());
             modelBuilder.ApplyConfiguration(new VerlofConfiguration());
             modelBuilder.ApplyConfiguration(new ShiftConfiguration());
+            modelBuilder.ApplyConfiguration(new ZorgkundigeShiftConfiguration());
+            modelBuilder.ApplyConfiguration(new TeamplanningConfiguration());
             modelBuilder.Entity<Zorgkundige>().Seed();
             modelBuilder.Entity<RegimeType>().Seed();
             modelBuilder.Entity<VerlofType>().Seed();
             modelBuilder.Entity<ShiftType>().Seed();
             modelBuilder.Entity<Verlof>().Seed();
             modelBuilder.Entity<Shift>().Seed();
+            modelBuilder.Entity<ZorgkundigeShift>().Seed();
+            modelBuilder.Entity<Teamplanning>().Seed();
         }
     }
 }

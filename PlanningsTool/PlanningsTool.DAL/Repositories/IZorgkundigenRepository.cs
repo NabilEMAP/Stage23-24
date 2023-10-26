@@ -11,7 +11,7 @@ namespace PlanningsTool.DAL.Repositories
     public interface IZorgkundigenRepository : IGenericRepository<Zorgkundige>
     {
         Task<IEnumerable<Zorgkundige>> GetAllZorgkundigenAsync();
-        Task<Zorgkundige> GetZorgkundigenAsyncById(int id);
+        Task<Zorgkundige> GetZorgkundigeAsyncById(int id);
         Task<IEnumerable<Zorgkundige>> GetZorgkundigenByAchternaam(string achternaam);
         Task<IEnumerable<Zorgkundige>> GetZorgkundigenByVoornaam(string voornaam);
 

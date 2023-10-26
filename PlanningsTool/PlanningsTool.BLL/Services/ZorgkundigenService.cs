@@ -32,7 +32,7 @@ namespace PlanningsTool.BLL.Services
 
         public async Task<int> Delete(int id)
         {
-            var toDeleteZorgkundige = await _uow.ZorgkundigenRepository.GetZorgkundigenAsyncById(id);
+            var toDeleteZorgkundige = await _uow.ZorgkundigenRepository.GetZorgkundigeAsyncById(id);
             if (toDeleteZorgkundige == null)
             {
                 throw new KeyNotFoundException("This zorgkundige does not exist.");
@@ -50,7 +50,7 @@ namespace PlanningsTool.BLL.Services
 
         public async Task<ZorgkundigeDTO> GetById(int id)
         {
-            var zorgkundige = await _uow.ZorgkundigenRepository.GetZorgkundigenAsyncById(id);
+            var zorgkundige = await _uow.ZorgkundigenRepository.GetZorgkundigeAsyncById(id);
             return _mapper.Map<ZorgkundigeDTO>(zorgkundige);
         }
 
@@ -69,7 +69,7 @@ namespace PlanningsTool.BLL.Services
         public async Task<ZorgkundigeDTO> Update(int id, UpdateZorgkundigeDTO entity)
         {
             var zorgkundigeFromRequest = _mapper.Map<Zorgkundige>(entity);
-            var zorgkundigeToUpdate = await _uow.ZorgkundigenRepository.GetZorgkundigenAsyncById(id);
+            var zorgkundigeToUpdate = await _uow.ZorgkundigenRepository.GetZorgkundigeAsyncById(id);
 
             if (zorgkundigeToUpdate == null)
             {

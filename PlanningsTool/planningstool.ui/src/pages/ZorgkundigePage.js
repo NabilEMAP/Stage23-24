@@ -21,7 +21,7 @@ function ZorgkundigePage() {
 
     useEffect(() => {
         getData();
-    }, []);
+    }, [data]);
 
     const getData = () => {
         const API = 'https://localhost:8000/api/Zorgkundigen';
