@@ -39,7 +39,7 @@ function DeleteVerlof(props) {
     }
 
     const getZorgkundigeData = () => {
-        const API = 'https://localhost:8000/api/Zorgkundigen/details'
+        const API = 'https://localhost:8000/api/Zorgkundigen'
         axios.get(API)
             .then((result) => {
                 setZorgkundigeData(result.data);
