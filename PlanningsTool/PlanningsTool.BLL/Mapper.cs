@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using PlanningsTool.Common.DTO.Feestdagen;
 using PlanningsTool.Common.DTO.RegimeTypes;
 using PlanningsTool.Common.DTO.Shifts;
 using PlanningsTool.Common.DTO.ShiftTypes;
@@ -40,6 +41,9 @@ namespace PlanningsTool.BLL
             CreateMap<Teamplanning, TeamplanningDTO>().ReverseMap();
             CreateMap<Teamplanning, CreateTeamplanningDTO>().ReverseMap();
             CreateMap<Teamplanning, UpdateTeamplanningDTO>().ReverseMap();
+
+            CreateMap<Feestdag, FeestdagDTO>().ReverseMap();
+            CreateMap<Feestdag, CreateFeestdagDTO>().ReverseMap();
 
             CreateMap<RegimeType, RegimeTypeDTO>().ReverseMap();
             CreateMap<VerlofType, VerlofTypeDTO>().ReverseMap();

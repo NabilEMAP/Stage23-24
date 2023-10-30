@@ -17,6 +17,7 @@ namespace PlanningsTool.DAL.UOW
         public IShiftsRepository ShiftsRepository { get; }
         public IZorgkundigeShiftsRepository ZorgkundigeShiftsRepository { get; }
         public ITeamplanningenRepository TeamplanningenRepository { get; }
+        public IFeestdagenRepository FeestdagenRepository { get; }
         Task Save();
     }
 }

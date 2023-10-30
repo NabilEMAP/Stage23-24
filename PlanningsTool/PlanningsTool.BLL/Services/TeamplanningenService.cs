@@ -42,39 +42,39 @@ namespace PlanningsTool.BLL.Services
 
         public async Task<TeamplanningDTO> Add(CreateTeamplanningDTO entity)
         {
-            var zorgkundige = _mapper.Map<Teamplanning>(entity);
-            await _uow.TeamplanningenRepository.Add(zorgkundige);
+            var teamplanning = _mapper.Map<Teamplanning>(entity);
+            await _uow.TeamplanningenRepository.Add(teamplanning);
             await _uow.Save();
-            return _mapper.Map<TeamplanningDTO>(zorgkundige);
+            return _mapper.Map<TeamplanningDTO>(teamplanning);
         }
 
         public async Task<int> Delete(int id)
         {
-            var toDeleteZorgkundige = await _uow.TeamplanningenRepository.GetByIdAsync(id);
-            if (toDeleteZorgkundige == null)
+            var toDeleteTeamplanning = await _uow.TeamplanningenRepository.GetByIdAsync(id);
+            if (toDeleteTeamplanning == null)
             {
                 throw new KeyNotFoundException("This teamplanning does not exist.");
             }
-            _uow.TeamplanningenRepository.Delete(toDeleteZorgkundige);
+            _uow.TeamplanningenRepository.Delete(toDeleteTeamplanning);
             await _uow.Save();
             return 0;
         }
 
         public async Task<TeamplanningDTO> Update(int id, UpdateTeamplanningDTO entity)
         {
-            var zorgkundigeFromRequest = _mapper.Map<Teamplanning>(entity);
-            var zorgkundigeToUpdate = await _uow.TeamplanningenRepository.GetByIdAsync(id);
+            var teamplanningFromRequest = _mapper.Map<Teamplanning>(entity);
+            var teamplanningToUpdate = await _uow.TeamplanningenRepository.GetByIdAsync(id);
 
-            if (zorgkundigeToUpdate == null)
+            if (teamplanningToUpdate == null)
             {
                 throw new KeyNotFoundException("This teamplanning does not exist.");
             }
 
-            zorgkundigeToUpdate.Maand = zorgkundigeFromRequest.Maand;
+            teamplanningToUpdate.Maand = teamplanningFromRequest.Maand;
 
-            await _uow.TeamplanningenRepository.Update(zorgkundigeToUpdate);
+            await _uow.TeamplanningenRepository.Update(teamplanningToUpdate);
             await _uow.Save();
-            return _mapper.Map<TeamplanningDTO>(zorgkundigeToUpdate);
+            return _mapper.Map<TeamplanningDTO>(teamplanningToUpdate);
         }
     }
 }

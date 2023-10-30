@@ -26,6 +26,7 @@ namespace PlanningsTool.DAL.Contexts
         public virtual DbSet<Shift> Shifts { get; set; }
         public virtual DbSet<ZorgkundigeShift> ZorgkundigeShifts { get; set; }
         public virtual DbSet<Teamplanning> Teamplanningen { get; set; }
+        public virtual DbSet<Feestdag> Feestdagen { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -39,6 +40,7 @@ namespace PlanningsTool.DAL.Contexts
             modelBuilder.ApplyConfiguration(new ShiftConfiguration());
             modelBuilder.ApplyConfiguration(new ZorgkundigeShiftConfiguration());
             modelBuilder.ApplyConfiguration(new TeamplanningConfiguration());
+            modelBuilder.ApplyConfiguration(new FeestdagConfiguration());
             modelBuilder.Entity<Zorgkundige>().Seed();
             modelBuilder.Entity<RegimeType>().Seed();
             modelBuilder.Entity<VerlofType>().Seed();

@@ -19,6 +19,7 @@ namespace PlanningsTool.DAL.UOW
         public readonly IShiftsRepository _shiftsRepository;
         public readonly IZorgkundigeShiftsRepository _zorgkundigeShiftsRepository;
         public readonly ITeamplanningenRepository _teamplanningenRepository;
+        public readonly IFeestdagenRepository _feestdagenRepository;
 
         public UnitOfWork(
             ApplicationDbContext context,
@@ -29,7 +30,8 @@ namespace PlanningsTool.DAL.UOW
             IVerlovenRepository verlovenRepository,
             IShiftsRepository shiftsRepository,
             IZorgkundigeShiftsRepository zorgkundigeShiftsRepository,
-            ITeamplanningenRepository teamplanningenRepository
+            ITeamplanningenRepository teamplanningenRepository,
+            IFeestdagenRepository feestdagenRepository
             )
         {
             _context = context;
@@ -41,6 +43,7 @@ namespace PlanningsTool.DAL.UOW
             _shiftsRepository = shiftsRepository;
             _zorgkundigeShiftsRepository = zorgkundigeShiftsRepository;
             _teamplanningenRepository = teamplanningenRepository;
+            _feestdagenRepository = feestdagenRepository;
         }
 
         public IZorgkundigenRepository ZorgkundigenRepository { get { return _zorgkundigenRepository; } }
@@ -51,6 +54,7 @@ namespace PlanningsTool.DAL.UOW
         public IShiftsRepository ShiftsRepository { get { return _shiftsRepository; } }
         public IZorgkundigeShiftsRepository ZorgkundigeShiftsRepository { get { return _zorgkundigeShiftsRepository; } }
         public ITeamplanningenRepository TeamplanningenRepository { get { return _teamplanningenRepository; } }
+        public IFeestdagenRepository FeestdagenRepository { get { return _feestdagenRepository; } }
 
         public async Task Save()
         {

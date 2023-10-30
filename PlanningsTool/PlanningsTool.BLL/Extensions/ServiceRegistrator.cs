@@ -23,6 +23,7 @@ namespace PlanningsTool.BLL.Extensions
             services.AddScoped<IZorgkundigeShiftsService, ZorgkundigeShiftService>();
             services.AddScoped<ITeamplanningenService, TeamplanningenService>();
             services.AddScoped<IShiftsService, ShiftsService>();
+            services.AddScoped<IFeestdagenService, FeestdagenService>();
             return services;
         }
 
