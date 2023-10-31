@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PlanningsTool.BLL.Handler;
 using PlanningsTool.BLL.Interfaces;
 using PlanningsTool.Common.DTO.Feestdagen;
 
@@ -59,7 +60,7 @@ namespace PlanningsTool.API.Controllers
             {
                 if (await _feestdagenServices.CheckIfExist(jaar))
                 {
-                    return BadRequest();
+                    return BadRequest(new Error($"{jaar} bestaat al in de lijst", $"Probeer een ander jaartal in te geven dan {jaar}."));
                 }
                 await _feestdagenServices.Add(jaar);
             }

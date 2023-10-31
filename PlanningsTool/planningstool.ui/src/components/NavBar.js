@@ -68,6 +68,7 @@ export const NavBar = () => {
                     <MenuItem onClick={handleClose}><Button href='/regimetype' color='inherit'>Regime Type</Button></MenuItem>
                     <MenuItem onClick={handleClose}><Button href='/verloftype' color='inherit'>Verlof Type</Button></MenuItem>
                     <MenuItem onClick={handleClose}><Button href='/shifttype' color='inherit'>Shift Type</Button></MenuItem>
+                    <MenuItem onClick={handleClose}><Button href='/feestdag' color='inherit'>Feestdag</Button></MenuItem>
                 </Menu>
             </Toolbar>
         </AppBar>
