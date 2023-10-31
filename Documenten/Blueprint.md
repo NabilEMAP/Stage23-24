@@ -104,7 +104,7 @@ _Figuur 6 - TO-BE Activiteitendiagram_
 
 De scope omvat kort samengevat wat er binnen dit project wordt verwacht. In principe staat dit nog niet vast, aangezien er eventueel nog aanpassingen kunnen worden gemaakt. De regels worden gebruikt als validatiecriteria waaraan moet worden voldaan tijdens het genereren van de planning. De output is het uiteindelijke resultaat en wordt als een Excel-bestand verstrekt. De applicatie bestaat uit verschillende pagina's.
 
-![Tabel03](resources/blueprint/Tabel0.png "Tabel 3 - Scope tabel")
+![Tabel03](resources/blueprint/Tabel03.png "Tabel 3 - Scope tabel")
 
 _Tabel 3 - Scope tabel_
 
@@ -391,4 +391,4 @@ Het is belangrijk dat alles goed gedocumenteerd wordt. Het is essentieel dat de 
 
 # Bijlagen
 
-Backlog - [Nabil El Moussaoui v1.0.xlsx](resources\Backlog_-_Nabil_El_Moussaoui_v1.0.xlsx)
+Backlog - [Nabil El Moussaoui v1.0.xlsx](resources/Backlog_-_Nabil_El_Moussaoui_v1.0.xlsx)
