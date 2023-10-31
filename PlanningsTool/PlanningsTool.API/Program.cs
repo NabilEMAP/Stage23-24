@@ -1,5 +1,7 @@
 using PlanningsTool.DAL.Extensions;
 using PlanningsTool.BLL.Extensions;
+using PlanningsTool.BLL.Exceptions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -20,6 +22,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseExceptionHandler("/error");
     app.UseSwagger();
     app.UseSwaggerUI();
 }
@@ -35,6 +38,8 @@ app.UseCors(builder =>
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.MapControllers();
 

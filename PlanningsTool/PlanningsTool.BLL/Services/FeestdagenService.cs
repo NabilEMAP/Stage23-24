@@ -22,17 +22,20 @@ namespace PlanningsTool.BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<int> Add(int jaar)
+        public async Task<int> Generate(int jaar)
         {
-            await _uow.FeestdagenRepository.AddFeestdagenByYear(jaar);
+            if (await CheckIfExist(jaar))
+            {
+                throw new Exception($"Het jaar {jaar} bestaat al in de lijst");
+            }
+            await _uow.FeestdagenRepository.AddFeestdagenByJaar(jaar);
             await _uow.Save();
             return _mapper.Map<int>(jaar);
         }
 
         public async Task<bool> CheckIfExist(int jaar)
         {
-            string jaarToString = jaar.ToString();
-            var feestdagen = await _uow.FeestdagenRepository.GetFeestdagenByDatum(jaarToString);
+            var feestdagen = await _uow.FeestdagenRepository.GetFeestdagByJaar(jaar);
             return feestdagen.Any();
         }
 

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PlanningsTool.BLL.Handler;
+using PlanningsTool.BLL.Exceptions;
 using PlanningsTool.BLL.Interfaces;
 using PlanningsTool.Common.DTO.Feestdagen;
 
@@ -36,7 +36,7 @@ namespace PlanningsTool.API.Controllers
 
         // GET api/Feestdagen/datum/{datum}
         [HttpGet("datum/{datum}")]
-        public async Task<IActionResult> GetFeestdagenByEinddatum(string datum)
+        public async Task<IActionResult> GetFeestdagenByDatum(string datum)
         {
             var feestdagen = await _feestdagenServices.GetFeestdagenByDatum(datum);
             if (feestdagen == null) { return NotFound(); }
@@ -58,11 +58,7 @@ namespace PlanningsTool.API.Controllers
         {
             try
             {
-                if (await _feestdagenServices.CheckIfExist(jaar))
-                {
-                    return BadRequest(new Error($"{jaar} bestaat al in de lijst", $"Probeer een ander jaartal in te geven dan {jaar}."));
-                }
-                await _feestdagenServices.Add(jaar);
+                await _feestdagenServices.Generate(jaar);
             }
             catch (Exception ex)
             {

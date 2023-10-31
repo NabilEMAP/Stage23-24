@@ -9,8 +9,9 @@ namespace PlanningsTool.DAL.Repositories
 {
     public interface IFeestdagenRepository : IGenericRepository<Feestdag>
     {
-        Task AddFeestdagenByYear(int year);
+        Task AddFeestdagenByJaar(int jaar);
         Task<IEnumerable<Feestdag>> GetFeestdagenByNaam(string naam);
         Task<IEnumerable<Feestdag>> GetFeestdagenByDatum(string datum);
+        Task<IEnumerable<Feestdag>> GetFeestdagByJaar(int jaar);
     }
 }

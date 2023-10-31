@@ -23,7 +23,7 @@ function GenerateFeestdagen() {
         handleClose();
       })
       .catch((error) => {
-        toast.warning(`${error}`);
+        toast.warning(`${error.response.data}`);
         clear();
       })
   }

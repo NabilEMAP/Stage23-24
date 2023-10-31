@@ -13,7 +13,7 @@ namespace PlanningsTool.BLL.Interfaces
         public Task<FeestdagDTO> GetById(int id);
         public Task<IEnumerable<FeestdagDTO>> GetFeestdagenByNaam(string naam);
         public Task<IEnumerable<FeestdagDTO>> GetFeestdagenByDatum(string datum);
-        public Task<int> Add(int jaar);
+        public Task<int> Generate(int jaar);
         public Task<int> ClearAll();
         public Task<bool> CheckIfExist(int jaar);
     }

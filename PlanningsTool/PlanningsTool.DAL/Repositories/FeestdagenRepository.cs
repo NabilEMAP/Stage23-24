@@ -15,7 +15,7 @@ namespace PlanningsTool.DAL.Repositories
         {
         }
 
-        public async Task AddFeestdagenByYear(int jaar)
+        public async Task AddFeestdagenByJaar(int jaar)
         {
             List<Feestdag> feestdagen = new List<Feestdag>
             {
@@ -50,6 +50,13 @@ namespace PlanningsTool.DAL.Repositories
         {
             string query = $"SELECT * FROM [dbo].[Feestdagen] AS z WHERE z.Datum like '%{datum}%'";
             return await _context.Feestdagen.FromSqlRaw(query).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Feestdag>> GetFeestdagByJaar(int jaar)
+        {
+            string query = $"SELECT * FROM [dbo].[Feestdagen] AS z WHERE YEAR(z.Datum) like '{jaar}'";
+            return await _context.Feestdagen.FromSqlRaw(query).ToListAsync();
+            throw new NotImplementedException();
         }
     }
 }
