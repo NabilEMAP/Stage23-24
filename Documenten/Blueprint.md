@@ -2,13 +2,13 @@
 
 # Versiebeheer
 
-![Tabel01](resources\blueprint\Tabel01.png "Tabel 1 - Versiebeheer tabel")
+![Tabel01](resources/blueprint/Tabel01.png "Tabel 1 - Versiebeheer tabel")
 
 _Tabel 1 - Versiebeheer tabel_
 
 # Termen en Afkortingen
 
-![Tabel02](resources\blueprint\Tabel02.png "Tabel 2 - Termen en afkortingen tabel")
+![Tabel02](resources/blueprint/Tabel02.png "Tabel 2 - Termen en afkortingen tabel")
 
 _Tabel 1 - Versiebeheer tabel_
 
@@ -40,19 +40,19 @@ Op "Figuur 1 - AS-IS Activiteitendiagram" wordt de huidige aanpak tussen de zorg
 
 ### _Activiteitendiagram_
 
-![Figuur01](resources\blueprint\Figuur01.png "Figuur 1 - AS-IS Activiteitendiagram")
+![Figuur01](resources/blueprint/Figuur01.png "Figuur 1 - AS-IS Activiteitendiagram")
 
 _Figuur 1 - AS-IS Activiteitendiagram_
 
 ### _Toestandsdiagram_
 
-![Figuur02](resources\blueprint\Figuur02.png "Figuur 2 - AS-IS Toestandsdiagram")
+![Figuur02](resources/blueprint/Figuur02.png "Figuur 2 - AS-IS Toestandsdiagram")
 
 _Figuur 2 - AS-IS Toestandsdiagram_
 
 ### _Sequentiediagram_
 
-![Figuur03](resources\blueprint\Figuur03.png "Figuur 3 - AS-IS Sequentiediagram")
+![Figuur03](resources/blueprint/Figuur03.png "Figuur 3 - AS-IS Sequentiediagram")
 
 _Figuur 3 - AS-IS Sequentiediagram_
 
@@ -72,19 +72,19 @@ De belangrijkste regel voor deze doelstelling is dat er **minimaal 2 zorgkundige
 
 ### _ERD Schema_
 
-![Figuur04](resources\blueprint\Figuur04.png "Figuur 4 - TO-BE ERD Schema")
+![Figuur04](resources/blueprint/Figuur04.png "Figuur 4 - TO-BE ERD Schema")
 
 _Figuur 4 - TO-BE ERD Schema_
 
 ### _Use-case Diagram_
 
-![Figuur04](resources\blueprint\Figuur05.png "Figuur 5 - TO-BE Use-case Diagram")
+![Figuur04](resources/blueprint/Figuur05.png "Figuur 5 - TO-BE Use-case Diagram")
 
 _Figuur 5 - TO-BE Use-case Diagram_
 
 ### _Activiteitendiagram_
 
-![Figuur04](resources\blueprint\Figuur06.png "Figuur 6 - TO-BE Activiteitendiagram")
+![Figuur04](resources/blueprint/Figuur06.png "Figuur 6 - TO-BE Activiteitendiagram")
 
 _Figuur 6 - TO-BE Activiteitendiagram_
 
@@ -106,13 +106,13 @@ _Figuur 6 - TO-BE Activiteitendiagram_
 
 De scope omvat kort samengevat wat er binnen dit project wordt verwacht. In principe staat dit nog niet vast, aangezien er eventueel nog aanpassingen kunnen worden gemaakt. De regels worden gebruikt als validatiecriteria waaraan moet worden voldaan tijdens het genereren van de planning. De output is het uiteindelijke resultaat en wordt als een Excel-bestand verstrekt. De applicatie bestaat uit verschillende pagina's.
 
-![Tabel03](resources\blueprint\Tabel0.png "Tabel 3 - Scope tabel")
+![Tabel03](resources/blueprint/Tabel0.png "Tabel 3 - Scope tabel")
 
 _Tabel 3 - Scope tabel_
 
 De regel met betrekking tot de aanwezigheid van minimaal 2 zorgkundigen op de werkvloer ziet er als volgt uit. Als we kijken naar de overlappingen van 'Vroege' en 'Late' shifts, zien we in het eerste en tweede voorbeeld dat er nog steeds voldoende zorgkundigen aanwezig zijn. In het derde voorbeeld daarentegen zien we dat er gedurende 3 uur slechts één zorgkundige aanwezig is en dat mag niet het geval zijn. Deze tabel geeft een vereenvoudigd model weer van hoe deze regel werkt.
 
-![Figuur07](resources\blueprint\Figuur07.png "Figuur 7 - Minimale bezetting van 2 zorgkundigen op werkvloer")
+![Figuur07](resources/blueprint/Figuur07.png "Figuur 7 - Minimale bezetting van 2 zorgkundigen op werkvloer")
 
 _Figuur 7 - Minimale bezetting van 2 zorgkundigen op werkvloer_
 
@@ -141,13 +141,13 @@ In dit project zullen we volgens een agile aanpak werken om het risico op falen 
 
 ## Hoofdlijnen
 
-![Tabel04](resources\blueprint\Tabel04.png "Tabel 4 - Hoofdlijnen planning met deadlines")
+![Tabel04](resources/blueprint/Tabel04.png "Tabel 4 - Hoofdlijnen planning met deadlines")
 
 _Tabel 4 - Hoofdlijnen planning met deadlines_
 
 ## Detailplanning
 
-![Figuur08](resources\blueprint\Figuur08.png "Figuur 8 - Detailplanning")
+![Figuur08](resources/blueprint/Figuur08.png "Figuur 8 - Detailplanning")
 
 _Figuur 8 - Detailplanning_
 
@@ -171,93 +171,93 @@ Nadat de teamplanning is gemaakt, kunnen er mogelijk foutmeldingen en/of waarsch
 De wireframes in dit document zijn momenteel conceptuele voorstellingen die het idee geven hoe de applicatie eruit kan zien. Er wordt achteraf enkele mooie modellen en styling gebruikt om de grafische gebruikersomgeving te verfijnen.
 
 
-![Wireframe01](resources\blueprint\Wireframe01.png "Wireframe 1 - Zorgkundigelijst")
+![Wireframe01](resources/blueprint/Wireframe01.png "Wireframe 1 - Zorgkundigelijst")
 
 _Wireframe 1 - Zorgkundigelijst_
 
 Dit is de zorgkundigen lijstpagina waar je een overzicht kan krijgen van de verschillende zorgkundigen. Je kunt hun gegevens hier ook beheren.
 
-![Wireframe02](resources\blueprint\Wireframe02.png "Wireframe 2 - Zorgkundige aanmaken")
+![Wireframe02](resources/blueprint/Wireframe02.png "Wireframe 2 - Zorgkundige aanmaken")
 
 _Wireframe 2 - Zorgkundige aanmaken_
 
 Dit is het zorgkundige formulier waarmee je een zorgkundige kunt aanmaken. Na het invullen van uw voornaam en achternaam, kan je een regime type selecteren namelijk ‘Voltijds (38 uren)’, ’Deeltijds 4/5’ (30.4 uren), 'Deeltijds 3/4 (28.8 uren)' of 'Halftijds (19 uren)'.
 
-![Wireframe03](resources\blueprint\Wireframe03.png "Wireframe 3 - Zorgkundige wijzigen")
+![Wireframe03](resources/blueprint/Wireframe03.png "Wireframe 3 - Zorgkundige wijzigen")
 
-![Wireframe04](resources\blueprint\Wireframe04.png "Wireframe 4 - Zorgkundige verwijderen")
+![Wireframe04](resources/blueprint/Wireframe04.png "Wireframe 4 - Zorgkundige verwijderen")
 
 _Wireframe 3 & 4 - Zorgkundige wijzigen en verwijderen_
 
 Dit is de zorgkundige formulier waar je een zorgkundige kan aanpassen of verwijderen.
 
-![Wireframe05](resources\blueprint\Wireframe05.png "Wireframe 5 - Verlofdagenlijst")
+![Wireframe05](resources/blueprint/Wireframe05.png "Wireframe 5 - Verlofdagenlijst")
 
 _Wireframe 5 - Verlofdagenlijst_
 
 Dit is de verlofdagen lijstpagina waar je een overzicht kan krijgen van de verschillende zorgkundigen hun verlofdagen.
 
-![Wireframe06](resources\blueprint\Wireframe06.png "Wireframe 6 - Verlofdag maken")
+![Wireframe06](resources/blueprint/Wireframe06.png "Wireframe 6 - Verlofdag maken")
 
 _Wireframe 6 - Verlofdag maken_
 
 Dit is de verlofdag form waar de hoofdverpleegkundige een verlof instelt voor een zorgkundige van een dag of een aantal dagen aan de hand van de ‘Startdatum’ en de ‘Einddatum’. De ‘VerlofType’ bevat: ‘Verlof’, ‘Ziekte’, ‘Adv-dag’, ‘Wens’, ‘Feestdag’ en ‘Andere’. De ‘Reden’ is een optionele beschrijving van het verlof.
 
-![Wireframe07](resources\blueprint\Wireframe07.png "Wireframe 7 - Verlofdag wijzigen")
+![Wireframe07](resources/blueprint/Wireframe07.png "Wireframe 7 - Verlofdag wijzigen")
 
-![Wireframe08](resources\blueprint\Wireframe08.png "Wireframe 8 - Verlofdag verwijderen")
+![Wireframe08](resources/blueprint/Wireframe08.png "Wireframe 8 - Verlofdag verwijderen")
 
 _Wireframe 7 & 8 - Verlofdag wijzigen en verwijderen_
 
 Dit is de verlofdag form waar de hoofdverpleegkundige een verlof aanpast of verwijdert.
 
-![Wireframe09](resources\blueprint\Wireframe09.png "Wireframe 9 - Shiftslijst")
+![Wireframe09](resources/blueprint/Wireframe09.png "Wireframe 9 - Shiftslijst")
 
 _Wireframe 9 - Shiftslijst_
 
 Dit is de shifts lijstenpagina waar je een overzicht kan krijgen van de verschillende shifts van wanneer tot wanneer een ‘Vroege’, ‘Late’ en de ‘Nacht’ shifts kunnen starten en eindigen. 
 
-![Wireframe10](resources\blueprint\Wireframe10.png "Wireframe 10 - Shift aanmaken")
+![Wireframe10](resources/blueprint/Wireframe10.png "Wireframe 10 - Shift aanmaken")
 
 _Wireframe 10 - Shift aanmaken_
 
 Dit is de shift form waar de hoofdverpleegkundige de shifts instelt. De tijdinstellingen kunnen aan de hand van de ‘ShiftType’ veranderd worden. Als je 'Vroege' selecteert, worden de 'Starttijd' en 'Eindtijd' aangepast aan hun respectieve begin- en einduren. In dit geval kunnen de tijden bijvoorbeeld van 7:00 uur tot 15:00 uur zijn.
 
-![Wireframe11](resources\blueprint\Wireframe11.png "Wireframe 11 - Shift wijzigen")
+![Wireframe11](resources/blueprint/Wireframe11.png "Wireframe 11 - Shift wijzigen")
 
-![Wireframe12](resources\blueprint\Wireframe12.png "Wireframe 12 - Shift verwijderen")
+![Wireframe12](resources/blueprint/Wireframe12.png "Wireframe 12 - Shift verwijderen")
 
 _Wireframe 11 & 12 - Shift wijzigen en verwijderen_
 
 Dit is de shift form waar de hoofdverpleegkundige een shift aanpast of verwijdert.
 
-![Wireframe13](resources\blueprint\Wireframe13.png "Wireframe 13 - ZorgkundigeShifts lijst")
+![Wireframe13](resources/blueprint/Wireframe13.png "Wireframe 13 - ZorgkundigeShifts lijst")
 
 _Wireframe 13 - ZorgkundigeShifts lijst_
 
 Dit is de zorgkundige shifts lijstenpagina waar je een overzicht kan krijgen van de verschillende zorgkundigen hun shifts.
 
-![Wireframe14](resources\blueprint\Wireframe14.png "Wireframe 14 - ZorgkundigeShift aanmaken")
+![Wireframe14](resources/blueprint/Wireframe14.png "Wireframe 14 - ZorgkundigeShift aanmaken")
 
 _Wireframe 14 - ZorgkundigeShift aanmaken_
 
 Dit is het zorgkundige shift formulier waar een hoofdverpleegkundige een zorgkundige shift kan aanmaken. Dit formulier is optioneel als men een specifieke zorgkundige wil inplannen. Normaal gesproken moet dit automatisch worden gegenereerd op basis van de verlofdagen van de zorgkundigen en dan moet het systeem een planning maken.
 
-![Wireframe15](resources\blueprint\Wireframe15.png "Wireframe 15 - ZorgkundigeShift wijzigen")
+![Wireframe15](resources/blueprint/Wireframe15.png "Wireframe 15 - ZorgkundigeShift wijzigen")
 
-![Wireframe16](resources\blueprint\Wireframe16.png "Wireframe 16 - ZorgkundigeShift verwijderen")
+![Wireframe16](resources/blueprint/Wireframe16.png "Wireframe 16 - ZorgkundigeShift verwijderen")
 
 _Wireframe 15 & 16 - ZorgkundigeShift wijzigen en verwijderen_
 
 In deze zorgkundige shift form kan de hoofdverpleegkundige en zorgkundige shift van een zorgkundige wijzigen of verwijderen.
 
-![Wireframe17](resources\blueprint\Wireframe17.png "Wireframe 17 - Hoofdpagina")
+![Wireframe17](resources/blueprint/Wireframe17.png "Wireframe 17 - Hoofdpagina")
 
 _Wireframe 17 - Hoofdpagina_
 
 Dit is de hoofdpagina waar je kan navigeren naar de verschillende pagina’s van de planningstool.
 
-![Wireframe18](resources\blueprint\Wireframe18.png "Wireframe 18 - Teamplanning op een timeline")
+![Wireframe18](resources/blueprint/Wireframe18.png "Wireframe 18 - Teamplanning op een timeline")
 
 _Wireframe 18 - Teamplanning op een timeline_
 
@@ -265,25 +265,25 @@ De teamplanning pagina ziet er als volgt uit. Rechtsboven bevinden zich twee kno
 
 Op dit moment bevinden we ons op het tabblad 'Planning per zorgkundige'. Naast het tabblad staat een dropdownmenu waar een hoofdverpleegkundige de maand kan kiezen waarvoor de planning wordt gegenereerd. Dit dropdownmenu werkt op basis van de huidige datum. Bijvoorbeeld, als je momenteel in augustus 2022 bent, begint de dropdown in 'September - 2022' en eindigt met 'Augustus - 2023'. Dit zorgt ervoor dat we bijvoorbeeld geen planning genereren voor 'Augustus - 2022'.
 
-![Wireframe19a](resources\blueprint\Wireframe19a.png "Wireframe 19a - Foutmelding Modal")
+![Wireframe19a](resources/blueprint/Wireframe19a.png "Wireframe 19a - Foutmelding Modal")
 
-![Wireframe19b](resources\blueprint\Wireframe19b.png "Wireframe 19b - Foutmelding Modal")
+![Wireframe19b](resources/blueprint/Wireframe19b.png "Wireframe 19b - Foutmelding Modal")
 
 _Wireframe 19 - Foutmelding Modal_
 
 Als 'Genereer planning' niet werkt, verschijnt er een foutmeldingsvenster met de reden waarom het niet werkt.
 
-![Wireframe20a](resources\blueprint\Wireframe20a.png "Wireframe 20a - Waarschuwingsmelding Modal")
+![Wireframe20a](resources/blueprint/Wireframe20a.png "Wireframe 20a - Waarschuwingsmelding Modal")
 
-![Wireframe20b](resources\blueprint\Wireframe20b.png "Wireframe 20b - Waarschuwingsmelding Modal")
+![Wireframe20b](resources/blueprint/Wireframe20b.png "Wireframe 20b - Waarschuwingsmelding Modal")
 
 _Wireframe 20 - Waarschuwingsmelding Modal_
 
 Als 'Genereer planning' wel werkt, kan er ook een waarschuwing verschijnen met de reden waarom het niet van toepassing is. In dat geval kun je op de knop 'Verder' drukken als je toch de planning wilt genereren.
 
-![Wireframe21a](resources\blueprint\Wireframe21a.png "Wireframe 21a - Teamplanning op een kalender")
+![Wireframe21a](resources/blueprint/Wireframe21a.png "Wireframe 21a - Teamplanning op een kalender")
 
-![Wireframe21b](resources\blueprint\Wireframe21b.png "Wireframe 21b - Teamplanning op een kalender")
+![Wireframe21b](resources/blueprint/Wireframe21b.png "Wireframe 21b - Teamplanning op een kalender")
 
 _Wireframe 21 - Teamplanning op een kalender_
 
@@ -291,7 +291,7 @@ Bij overschakeling naar het volgende tabblad, genaamd 'Kalender', zie je de kale
 
 ## Output
 
-![Figuur09](resources\blueprint\Figuur09.png "Figuur 9 - Gegenereerde Excel")
+![Figuur09](resources/blueprint/Figuur09.png "Figuur 9 - Gegenereerde Excel")
 
 _Figuur 9 - Gegenereerde Excel_
 
@@ -305,7 +305,7 @@ Door de code in afzonderlijke lagen te verdelen, wordt het gemakkelijker om wijz
 
 We gebruiken een N-Laagse architectuur, die bestaat uit de volgende lagen: de Data Access Layer, de Business Logic/Service Layer, de API Layer en de Presentation Layer. In de Data Access Layer bevinden zich alle objecten en logica die te maken hebben met toegang tot de database en alle objecten en logica met betrekking tot EF Core bevinden zich in deze laag. De Business Logic/Service Layer bevat alle objecten en logica die verband houden met de business rules. De API Layer bevat alle objecten en logica die nodig zijn om informatie via HTTP naar de presentatie laag te sturen. Ten slotte bevinden alle objecten en logica die nodig zijn om de gebruikersinterface te ontwikkelen zich in de Presentation Layer.
 
-![Figuur10](resources\blueprint\.png "Figuur 10 - N-Laagse Architectuur")
+![Figuur10](resources/blueprint/.png "Figuur 10 - N-Laagse Architectuur")
 
 _Figuur 10 - N-Laagse Architectuur_
 
@@ -319,20 +319,20 @@ Dit diagram geeft de stroom van links naar rechts weer, waarbij we verzoeken van
 
 |  |  |
 | ---- | ---- |
-| ![Figuur11](resources\blueprint\Figuur11.png "Figuur 10 - N-Laagse Architectuur") _Figuur 11 - React Logo_ | De front-end-technologie wordt ontwikkeld in React. Er zal een webapplicatie gemaakt worden op dit gebied. React is een JavaScript-bibliotheek die gebruikt wordt voor het bouwen van gebruikersinterfaces. Bovendien wordt React veel keren gedownload volgens de trends van NPM (Node Package Manager). De grootste kracht van React zijn de herbruikbare componenten. Je bouwt kleine onderdelen, die je vervolgens kunt hergebruiken in je applicatie.  |
+| ![Figuur11](resources/blueprint/Figuur11.png "Figuur 10 - N-Laagse Architectuur") _Figuur 11 - React Logo_ | De front-end-technologie wordt ontwikkeld in React. Er zal een webapplicatie gemaakt worden op dit gebied. React is een JavaScript-bibliotheek die gebruikt wordt voor het bouwen van gebruikersinterfaces. Bovendien wordt React veel keren gedownload volgens de trends van NPM (Node Package Manager). De grootste kracht van React zijn de herbruikbare componenten. Je bouwt kleine onderdelen, die je vervolgens kunt hergebruiken in je applicatie.  |
 
 Net als andere JavaScript-bibliotheken maakt React gebruik van Single Page Applications (SPA's), wat inhoudt dat er slechts één html-bestand wordt gebruikt. Hierdoor is het niet nodig om bij het navigeren naar een andere pagina een nieuw html-bestand te laden. Bij het betreden van de site worden de JavaScript-bestanden geladen. Wanneer er wordt overgeschakeld naar andere pagina's, vindt er geen nieuwe serververbinding plaats om de pagina te laden. In plaats daarvan wordt alle benodigde inhoud in één keer geladen, wat eerder enige tijd kan kosten. Echter, nadat alles is geladen, resulteert dit in aanzienlijk snellere prestaties.
 
-![Figuur12](resources\blueprint\Figuur12.png "Figuur 12 - React Single Page Application")
+![Figuur12](resources/blueprint/Figuur12.png "Figuur 12 - React Single Page Application")
 
 _Figuur 12 - React Single Page Application_
 
 |  |  |
 | ---- | ---- |
-| ![Figuur13](resources\blueprint\Figuur13.png "Figuur 13 - .NET Core Logo") _Figuur 13 - .NET Core Logo_ | De front-end-technologie wordt ontwikkeld in React. Er zal een webapplicatie gemaakt worden op dit gebied. React is een JavaScript-bibliotheek die gebruikt wordt voor het bouwen van gebruikersinterfaces. Bovendien wordt React veel keren gedownload volgens de trends van NPM (Node Package Manager). De grootste kracht van React zijn de herbruikbare componenten. Je bouwt kleine onderdelen, die je vervolgens kunt hergebruiken in je applicatie.  |
-| ![Figuur14](resources\blueprint\Figuur14.png "Figuur 14 - Microsoft SQL Server Logo")  _Figuur 14 - Microsoft SQL Server Logo_ | De front-end-technologie wordt ontwikkeld in React. Er zal een webapplicatie gemaakt worden op dit gebied. React is een JavaScript-bibliotheek die gebruikt wordt voor het bouwen van gebruikersinterfaces. Bovendien wordt React veel keren gedownload volgens de trends van NPM (Node Package Manager). De grootste kracht van React zijn de herbruikbare componenten. Je bouwt kleine onderdelen, die je vervolgens kunt hergebruiken in je applicatie.  |
-| ![Figuur15](resources\blueprint\Figuur15.png "Figuur 15 - Azure SQL Database Logo")  _Figuur 15 - Azure SQL Database Logo_ | De front-end-technologie wordt ontwikkeld in React. Er zal een webapplicatie gemaakt worden op dit gebied. React is een JavaScript-bibliotheek die gebruikt wordt voor het bouwen van gebruikersinterfaces. Bovendien wordt React veel keren gedownload volgens de trends van NPM (Node Package Manager). De grootste kracht van React zijn de herbruikbare componenten. Je bouwt kleine onderdelen, die je vervolgens kunt hergebruiken in je applicatie.  |
-| ![Figuur16](resources\blueprint\Figuur16.png "Figuur 16 - Azure DevOps Logo")  _Figuur 16 - Azure DevOps Logo_ | De front-end-technologie wordt ontwikkeld in React. Er zal een webapplicatie gemaakt worden op dit gebied. React is een JavaScript-bibliotheek die gebruikt wordt voor het bouwen van gebruikersinterfaces. Bovendien wordt React veel keren gedownload volgens de trends van NPM (Node Package Manager). De grootste kracht van React zijn de herbruikbare componenten. Je bouwt kleine onderdelen, die je vervolgens kunt hergebruiken in je applicatie.  |
+| ![Figuur13](resources/blueprint/Figuur13.png "Figuur 13 - .NET Core Logo") _Figuur 13 - .NET Core Logo_ | De front-end-technologie wordt ontwikkeld in React. Er zal een webapplicatie gemaakt worden op dit gebied. React is een JavaScript-bibliotheek die gebruikt wordt voor het bouwen van gebruikersinterfaces. Bovendien wordt React veel keren gedownload volgens de trends van NPM (Node Package Manager). De grootste kracht van React zijn de herbruikbare componenten. Je bouwt kleine onderdelen, die je vervolgens kunt hergebruiken in je applicatie.  |
+| ![Figuur14](resources/blueprint/Figuur14.png "Figuur 14 - Microsoft SQL Server Logo")  _Figuur 14 - Microsoft SQL Server Logo_ | De front-end-technologie wordt ontwikkeld in React. Er zal een webapplicatie gemaakt worden op dit gebied. React is een JavaScript-bibliotheek die gebruikt wordt voor het bouwen van gebruikersinterfaces. Bovendien wordt React veel keren gedownload volgens de trends van NPM (Node Package Manager). De grootste kracht van React zijn de herbruikbare componenten. Je bouwt kleine onderdelen, die je vervolgens kunt hergebruiken in je applicatie.  |
+| ![Figuur15](resources/blueprint/Figuur15.png "Figuur 15 - Azure SQL Database Logo")  _Figuur 15 - Azure SQL Database Logo_ | De front-end-technologie wordt ontwikkeld in React. Er zal een webapplicatie gemaakt worden op dit gebied. React is een JavaScript-bibliotheek die gebruikt wordt voor het bouwen van gebruikersinterfaces. Bovendien wordt React veel keren gedownload volgens de trends van NPM (Node Package Manager). De grootste kracht van React zijn de herbruikbare componenten. Je bouwt kleine onderdelen, die je vervolgens kunt hergebruiken in je applicatie.  |
+| ![Figuur16](resources/blueprint/Figuur16.png "Figuur 16 - Azure DevOps Logo")  _Figuur 16 - Azure DevOps Logo_ | De front-end-technologie wordt ontwikkeld in React. Er zal een webapplicatie gemaakt worden op dit gebied. React is een JavaScript-bibliotheek die gebruikt wordt voor het bouwen van gebruikersinterfaces. Bovendien wordt React veel keren gedownload volgens de trends van NPM (Node Package Manager). De grootste kracht van React zijn de herbruikbare componenten. Je bouwt kleine onderdelen, die je vervolgens kunt hergebruiken in je applicatie.  |
 
 # Beschrijving van de mogelijke interfaces
 
@@ -350,7 +350,7 @@ De hoofdverpleegkundige kan eenvoudig hun werklaptop gebruiken om toegang te kri
 
 Het ontwikkelen van een gebruiksvriendelijke gebruikersinterface is belangrijk om ervoor te zorgen dat de hoofdverpleegkundige efficiënt met de applicatie kan werken.
 
-![Figuur17](resources\blueprint\Figuur17.png "Figuur 17 - Deployment diagram")
+![Figuur17](resources/blueprint/Figuur17.png "Figuur 17 - Deployment diagram")
 
 _Figuur 17 - Deployment diagram_
 
