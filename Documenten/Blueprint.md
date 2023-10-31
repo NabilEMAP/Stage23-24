@@ -10,9 +10,7 @@ _Tabel 1 - Versiebeheer tabel_
 
 ![Tabel02](resources/blueprint/Tabel02.png "Tabel 2 - Termen en afkortingen tabel")
 
-_Tabel 1 - Versiebeheer tabel_
-
-Tabel 2 - Termen en afkortingen tabel
+_Tabel 2 - Termen en afkortingen tabel_
 
 # Opdrachtgever
 
