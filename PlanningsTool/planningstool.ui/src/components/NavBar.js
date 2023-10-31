@@ -11,6 +11,7 @@ import {
 import EditCalendarIcon from '@mui/icons-material/EditCalendar';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import { useState } from 'react'
+import MyTitle from './MyTitle';
 
 export const NavBar = () => {
     const [anchorEl, setAnchorEl] = useState(null)
@@ -29,7 +30,7 @@ export const NavBar = () => {
                 </IconButton>
                 <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
                     <a href='/' style={{textDecoration: "none", color: "inherit"}}>
-                        Planningstool <span style={{ color: "#d10202" }}>voor</span> Ziekenhuisdienst
+                        <MyTitle />
                     </a>
                 </Typography>
                 <Stack direction='row' spacing={2}>
@@ -46,7 +47,7 @@ export const NavBar = () => {
                         aria-expanded={open ? 'true' : undefined}
                         endIcon={<KeyboardArrowDownIcon />}
                         onClick={handleClick}>
-                        Types
+                        Overige
                     </Button>
                 </Stack>
                 <Menu

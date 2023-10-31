@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import { homecards } from "../constants";
+import MyTitle from "../components/MyTitle";
 
 function Copyright() {
     return (
@@ -44,7 +45,7 @@ function HomePage() {
                             color="text.primary"
                             gutterBottom
                         >
-                            Planningstool <span style={{ color: "#d10202" }}>voor</span> Ziekenhuisdienst
+                            <MyTitle />
                         </Typography>
                         <Typography variant="h5" align="center" color="text.secondary" paragraph>
                             Een planningstool is een softwaretoepassing of digitale tool die ontworpen is om de zorgkundigen hun activiteiten in te plannen.
