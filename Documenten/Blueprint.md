@@ -303,7 +303,7 @@ Door de code in afzonderlijke lagen te verdelen, wordt het gemakkelijker om wijz
 
 We gebruiken een N-Laagse architectuur, die bestaat uit de volgende lagen: de Data Access Layer, de Business Logic/Service Layer, de API Layer en de Presentation Layer. In de Data Access Layer bevinden zich alle objecten en logica die te maken hebben met toegang tot de database en alle objecten en logica met betrekking tot EF Core bevinden zich in deze laag. De Business Logic/Service Layer bevat alle objecten en logica die verband houden met de business rules. De API Layer bevat alle objecten en logica die nodig zijn om informatie via HTTP naar de presentatie laag te sturen. Ten slotte bevinden alle objecten en logica die nodig zijn om de gebruikersinterface te ontwikkelen zich in de Presentation Layer.
 
-![Figuur10](resources/blueprint/.png "Figuur 10 - N-Laagse Architectuur")
+![Figuur10](resources/blueprint/Figuur10.png "Figuur 10 - N-Laagse Architectuur")
 
 _Figuur 10 - N-Laagse Architectuur_
 
