@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
+using FluentValidation.Results;
+using PlanningsTool.BLL.Exceptions;
 using PlanningsTool.BLL.Interfaces;
+using PlanningsTool.BLL.Validations;
 using PlanningsTool.Common.DTO.Zorgkundigen;
 using PlanningsTool.DAL.Models;
 using PlanningsTool.DAL.UOW;
@@ -13,17 +16,26 @@ namespace PlanningsTool.BLL.Services
 {
     public class ZorgkundigenService : IZorgkundigenService
     {
-        public readonly IUnitOfWork _uow;
-        public readonly IMapper _mapper;
+        private readonly IUnitOfWork _uow;
+        private readonly IMapper _mapper;
+        private readonly CreateZorgkundigeValidator _createValidator;
 
-        public ZorgkundigenService(IUnitOfWork uow, IMapper mapper)
+        public ZorgkundigenService(IUnitOfWork uow, IMapper mapper, CreateZorgkundigeValidator createValidator)
         {
             _uow = uow;
             _mapper = mapper;
+            _createValidator = createValidator;
         }
 
         public async Task<ZorgkundigeDTO> Add(CreateZorgkundigeDTO entity)
         {
+            ValidationResult validationResult = _createValidator.Validate(entity);
+
+            if(!validationResult.IsValid)
+            {
+                throw new ValidationException(validationResult.Errors);
+            }
+
             var zorgkundige = _mapper.Map<Zorgkundige>(entity);
             await _uow.ZorgkundigenRepository.Add(zorgkundige);
             await _uow.Save();

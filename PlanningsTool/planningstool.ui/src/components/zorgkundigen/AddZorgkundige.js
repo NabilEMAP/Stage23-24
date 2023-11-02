@@ -60,8 +60,15 @@ function AddZorgkundige() {
         handleClose();
       })
       .catch((error) => {
-        toast.warning(`${error}`);
-        clear();
+        if (error.response.data.status === 400) {
+          toast.warning("Regime mag niet leeg zijn");
+          console.log(JSON.stringify(error.response.data));
+          clear();
+        } else {
+          toast.warning(`${error.response.data}`);
+          clear();
+          console.log(JSON.stringify(error.response.data));
+        }
       })
   }
 
