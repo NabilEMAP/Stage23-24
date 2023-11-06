@@ -60,8 +60,8 @@ namespace PlanningsTool.API.Controllers
             return Ok(vacations);
         }
 
-        // GET api/Vacations/reden/{reden}
-        [HttpGet("reden/{reden}")]
+        // GET api/Vacations/reason/{reason}
+        [HttpGet("reason/{reason}")]
         public async Task<IActionResult> GetVacationsByReason(string reason)
         {
             var vacations = await _vacationsServices.GetVacationsByReason(reason);

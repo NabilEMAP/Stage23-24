@@ -33,13 +33,13 @@ namespace PlanningsTool.API.Controllers
             return Ok(nurseShift);
         }
 
-        // GET api/NurseShifts/datum/{datum}
-        [HttpGet("datum/{datum}")]
+        // GET api/NurseShifts/date/{date}
+        [HttpGet("date/{date}")]
         public async Task<IActionResult> GetNurseShiftsByDatum(string date)
         {
-            var zorgkundigen = await _nurseShiftsServices.GetNurseShiftsByDate(date);
-            if (zorgkundigen == null) { return NotFound(); }
-            return Ok(zorgkundigen);
+            var nurseShifts = await _nurseShiftsServices.GetNurseShiftsByDate(date);
+            if (nurseShifts == null) { return NotFound(); }
+            return Ok(nurseShifts);
         }
 
         // POST api/NurseShifts

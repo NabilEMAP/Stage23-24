@@ -37,9 +37,9 @@ namespace PlanningsTool.API.Controllers
         [HttpGet("date/{date}")]
         public async Task<IActionResult> GetTeamplansByMonth(string month)
         {
-            var zorgkundigen = await _teamplansServices.GetTeamplansByMonth(month);
-            if (zorgkundigen == null) { return NotFound(); }
-            return Ok(zorgkundigen);
+            var teamplans = await _teamplansServices.GetTeamplansByMonth(month);
+            if (teamplans == null) { return NotFound(); }
+            return Ok(teamplans);
         }
 
         // POST api/Teamplans
