@@ -35,7 +35,7 @@ namespace PlanningsTool.BLL.Exceptions
             context.Response.ContentType = MediaTypeNames.Application.Json;
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
-            var response = new CustomResponse(context.Response.StatusCode, ex.Message, "Internal Server Error");
+            var response = new CustomResponse(context.Response.StatusCode, ex.Message, "(Custom) Internal Server Error");
             var json = JsonSerializer.Serialize(response);
             await context.Response.WriteAsync(json);
         }

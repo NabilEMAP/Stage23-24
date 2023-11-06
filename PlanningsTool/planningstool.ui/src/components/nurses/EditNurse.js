@@ -69,7 +69,7 @@ function EditNurse(props) {
       "id": Id,
       "firstName": firstName,
       "lastName": lastName,
-      "regimeId": regimeTypeId,
+      "regimeTypeId": regimeTypeId,
       "isFixedNight": isFixedNight
     }
     axios.put(API, data)
@@ -79,7 +79,13 @@ function EditNurse(props) {
         handleClose();
       })
       .catch((error) => {
-        toast.warning(`${error}`);
+        if (error.response.data.status === 400) {
+          toast.warning("Regime mag niet leeg zijn (frontend)");
+          console.log(JSON.stringify(error.response.data));
+        } else {
+          toast.warning(`${error.response.data.Message}`);
+          console.log(JSON.stringify(error.response.data));
+        }
       })
   }
 

@@ -49,7 +49,7 @@ function AddNurse() {
     {
       "firstName": firstName,
       "lastName": lastName,
-      "regimeId": regimeTypeId,
+      "regimeTypeId": regimeTypeId,
       "isFixedNight": isFixedNight
     }
     axios.post(API, data)
@@ -61,11 +61,11 @@ function AddNurse() {
       })
       .catch((error) => {
         if (error.response.data.status === 400) {
-          toast.warning("Regime mag niet leeg zijn");
+          toast.warning("Regime mag niet leeg zijn (frontend)");
           console.log(JSON.stringify(error.response.data));
           clear();
         } else {
-          toast.warning(`${error.response.data}`);
+          toast.warning(`${error.response.data.Message}`);
           clear();
           console.log(JSON.stringify(error.response.data));
         }

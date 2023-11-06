@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using FluentValidation.Results;
 using PlanningsTool.BLL.Exceptions;
 using PlanningsTool.BLL.Interfaces;
@@ -14,12 +15,14 @@ namespace PlanningsTool.BLL.Services
         private readonly IUnitOfWork _uow;
         private readonly IMapper _mapper;
         private readonly CreateNurseValidator _createValidator;
+        private readonly UpdateNurseValidator _updateValidator;
 
-        public NursesService(IUnitOfWork uow, IMapper mapper, CreateNurseValidator createValidator)
+        public NursesService(IUnitOfWork uow, IMapper mapper, CreateNurseValidator createValidator, UpdateNurseValidator updateValidator)
         {
             _uow = uow;
             _mapper = mapper;
             _createValidator = createValidator;
+            _updateValidator = updateValidator;
         }
 
         public async Task<NurseDTO> Add(CreateNurseDTO entity)
@@ -28,7 +31,7 @@ namespace PlanningsTool.BLL.Services
 
             if(!validationResult.IsValid)
             {
-                throw new ValidationException(validationResult.Errors);
+                throw new CustomValidationException(validationResult.Errors);
             }
 
             var nurse = _mapper.Map<Nurse>(entity);
@@ -75,6 +78,13 @@ namespace PlanningsTool.BLL.Services
 
         public async Task<NurseDTO> Update(int id, UpdateNurseDTO entity)
         {
+            ValidationResult validationResult = _updateValidator.Validate(entity);
+
+            if (!validationResult.IsValid)
+            {
+                throw new CustomValidationException(validationResult.Errors);
+            }
+
             var nurseFromRequest = _mapper.Map<Nurse>(entity);
             var nurseToUpdate = await _uow.NursesRepository.GetNurseAsyncById(id);
 

@@ -4,26 +4,26 @@ using System.Runtime.Serialization;
 
 namespace PlanningsTool.BLL.Exceptions
 {
-    public class ValidationException : Exception
+    public class CustomValidationException : Exception
     {
         public IEnumerable<ValidationFailure> Errors { get; private set; }
 
-        public ValidationException(string message) : this(message, Enumerable.Empty<ValidationFailure>())
+        public CustomValidationException(string message) : this(message, Enumerable.Empty<ValidationFailure>())
         {        
         }
 
-        public ValidationException(string message, IEnumerable<ValidationFailure> errors) : base(message)
+        public CustomValidationException(string message, IEnumerable<ValidationFailure> errors) : base(message)
         {
             Errors = errors;
         }
 
-        public ValidationException(string message, IEnumerable<ValidationFailure> errors, bool appendDefaultMessage)
+        public CustomValidationException(string message, IEnumerable<ValidationFailure> errors, bool appendDefaultMessage)
             : base(appendDefaultMessage ? $"{message} {BuildErrorMessage(errors)}" : message)
         {
             Errors = errors;
         }
 
-        public ValidationException(IEnumerable<ValidationFailure> errors) : base(BuildErrorMessage(errors))
+        public CustomValidationException(IEnumerable<ValidationFailure> errors) : base(BuildErrorMessage(errors))
         {
             Errors = errors;
         }
@@ -34,7 +34,7 @@ namespace PlanningsTool.BLL.Exceptions
             return string.Join(string.Empty, arr);
         }
 
-        public ValidationException(SerializationInfo info, StreamingContext context) : base(info, context)
+        public CustomValidationException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
             Errors = info.GetValue("errors", typeof(IEnumerable<ValidationFailure>)) as IEnumerable<ValidationFailure>;
         }

@@ -20,7 +20,14 @@ namespace PlanningsTool.BLL.Extensions
             services.AddScoped<ITeamplansService, TeamplansService>();
             services.AddScoped<IShiftsService, ShiftsService>();
             services.AddScoped<IHolidaysService, HolidaysService>();
+            services.RegisterValidators();
+            return services;
+        }
+
+        public static IServiceCollection RegisterValidators(this IServiceCollection services)
+        {
             services.AddTransient<CreateNurseValidator>();
+            services.AddTransient<UpdateNurseValidator>();
             return services;
         }
 

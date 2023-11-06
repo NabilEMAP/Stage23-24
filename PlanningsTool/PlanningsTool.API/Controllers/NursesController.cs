@@ -55,14 +55,8 @@ namespace PlanningsTool.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateNurseDTO nurse)
         {
-            try
-            {
-                await _nursesServices.Add(nurse);
-            }
-            catch (Exception ex)
-            {
-                return NotFound(ex.Message);
-            }
+
+            await _nursesServices.Add(nurse);
             return Ok(nurse);
         }
 
