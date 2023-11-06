@@ -18,7 +18,7 @@ function VerlofTypePage() {
     }, [data]);
 
     const getData = () => {
-        const API = 'https://localhost:8000/api/VerlofTypes'
+        const API = 'https://localhost:8000/api/VacationTypes'
         axios.get(API)
             .then((result) => {
                 setData(result.data);
@@ -33,11 +33,11 @@ function VerlofTypePage() {
             return data.map((item, index) => (
                 <MyTR key={index}>
                     <MyTC>{item.id}</MyTC>
-                    <MyTC>{item.verlof}</MyTC>
+                    <MyTC>{item.name}</MyTC>
                 </MyTR>
             ));
         } else {
-            return <TableRow><MyTC colSpan={5}>No data found</MyTC></TableRow>;
+            return <TableRow><MyTC colSpan={5}>Geen data gevonden</MyTC></TableRow>;
         }
     }
 
@@ -45,7 +45,7 @@ function VerlofTypePage() {
         <Fragment>
             <Container>
                 <div style={{ margin: '24px 0px' }}>
-                    <Typography variant="h5" style={{ width: 'fit-content', verticalAlign: 'sub', display: 'inline-block' }} >Verlof Lijst</Typography>
+                    <Typography variant="h5" style={{ width: 'fit-content', verticalAlign: 'sub', display: 'inline-block' }}>Verlof Lijst</Typography>
                 </div>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 700 }} aria-label="customized table">

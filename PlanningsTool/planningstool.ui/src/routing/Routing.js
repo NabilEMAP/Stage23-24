@@ -1,29 +1,29 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import ZorgkundigePage from '../pages/ZorgkundigePage';
+import NursePage from '../pages/NursePage';
 import HomePage from '../pages/HomePage';
-import TeamplanningPage from '../pages/TeamplanningPage';
-import ZorgkundigeShiftPage from '../pages/ZorgkundigeShiftPage';
-import VerlofPage from '../pages/VerlofPage';
+import TeamplanPage from '../pages/TeamplanPage';
+import NurseShiftPage from '../pages/NurseShiftPage';
+import VacationPage from '../pages/VacationPage';
 import ShiftPage from '../pages/ShiftPage';
 import RegimeTypePage from '../pages/overige/RegimeTypePage';
-import VerlofTypePage from '../pages/overige/VerlofTypePage';
+import VacationTypePage from '../pages/overige/VerlofTypePage';
 import ShiftTypePage from '../pages/overige/ShiftTypePage';
-import FeestdagPage from '../pages/overige/FeestdagPage';
+import HolidayPage from '../pages/overige/HolidayPage';
 
 export default function Routing() {
     return (
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<HomePage />} />
-                <Route path="/teamplanning" element={<TeamplanningPage />} />
-                <Route path="/zorgkundige" element={<ZorgkundigePage />} />
-                <Route path="/zorgkundigeshift" element={<ZorgkundigeShiftPage/>} />
-                <Route path="/verlof" element={<VerlofPage />} />
+                <Route path="/teamplanning" element={<TeamplanPage />} />
+                <Route path="/zorgkundige" element={<NursePage />} />
+                <Route path="/zorgkundigeshift" element={<NurseShiftPage/>} />
+                <Route path="/verlof" element={<VacationPage />} />
                 <Route path="/shift" element={<ShiftPage />} />
                 <Route path="/regimetype" element={<RegimeTypePage/>} />
-                <Route path="/verloftype" element={<VerlofTypePage/>} />
+                <Route path="/verloftype" element={<VacationTypePage/>} />
                 <Route path="/shifttype" element={<ShiftTypePage/>} />
-                <Route path="/feestdag" element={<FeestdagPage/>} />
+                <Route path="/feestdag" element={<HolidayPage/>} />
             </Routes>
         </BrowserRouter>
     );

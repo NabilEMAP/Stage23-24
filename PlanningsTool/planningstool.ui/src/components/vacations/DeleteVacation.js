@@ -5,30 +5,30 @@ import Modal from 'react-bootstrap/Modal';
 import { toast } from 'react-toastify';
 import { Button, FormControl, InputLabel, MenuItem, Select, Stack, TextField, IconButton } from "@mui/material";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
-function EditVerlof(props) {
+function DeleteVacation(props) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [Id, editId] = useState('');
-    const [startdatum, setStartdatum] = useState('');
-    const [einddatum, setEinddatum] = useState('');
-    const [zorgkundigeId, setZorgkundigeId] = useState('');
-    const [verlofTypeId, setVerlofTypeId] = useState('');
-    const [reden, setReden] = useState('');
+    const [startdate, setStartdate] = useState('');
+    const [enddate, setEnddate] = useState('');
+    const [nurseId, setNurseId] = useState('');
+    const [vacationTypeId, setVacationTypeId] = useState('');
+    const [reason, setReason] = useState('');
     const [data, setData] = useState([]);
-    const [zorgkundigeData, setZorgkundigeData] = useState([]);
-    const [verlofTypeData, setVerlofTypeData] = useState([]);
+    const [nurseData, setNurseData] = useState([]);
+    const [vacationTypeData, setVacationTypeData] = useState([]);
 
     useEffect(() => {
         getData();
-        getZorgkundigeData();
-        getVerlofTypeData();
+        getNurseData();
+        getVacationTypeData();
     }, []);
 
     const getData = () => {
-        const API = 'https://localhost:8000/api/Verloven/details'
+        const API = 'https://localhost:8000/api/Vacations/details'
         axios.get(API)
             .then((result) => {
                 setData(result.data);
@@ -38,38 +38,38 @@ function EditVerlof(props) {
             })
     }
 
-    const getZorgkundigeData = () => {
-        const API = 'https://localhost:8000/api/Zorgkundigen/details'
+    const getNurseData = () => {
+        const API = 'https://localhost:8000/api/Nurses'
         axios.get(API)
             .then((result) => {
-                setZorgkundigeData(result.data);
+                setNurseData(result.data);
             })
             .catch((error) => {
                 console.log(error);
             })
     }
 
-    const getVerlofTypeData = () => {
-        const API = 'https://localhost:8000/api/VerlofTypes'
+    const getVacationTypeData = () => {
+        const API = 'https://localhost:8000/api/VacationTypes'
         axios.get(API)
             .then((result) => {
-                setVerlofTypeData(result.data);
+                setVacationTypeData(result.data);
             })
             .catch((error) => {
                 console.log(error);
             })
     }
 
-    const handleEdit = (id) => {
+    const handleDelete = (id) => {
         handleShow();
-        const API = `https://localhost:8000/api/Verloven/${id}`;
+        const API = `https://localhost:8000/api/Vacations/${id}`;
         axios.get(API)
             .then((result) => {
-                setStartdatum(result.data.startdatum);
-                setEinddatum(result.data.einddatum);
-                setZorgkundigeId(result.data.zorgkundigeId);
-                setVerlofTypeId(result.data.verlofTypeId);
-                setReden(result.data.reden);
+                setStartdate(result.data.startdate);
+                setEnddate(result.data.enddate);
+                setNurseId(result.data.nurseId);
+                setVacationTypeId(result.data.vacationTypeId);
+                setReason(result.data.reason);
                 editId(id);
             })
             .catch((error) => {
@@ -77,37 +77,29 @@ function EditVerlof(props) {
             })
     }
 
-    const handleUpdate = () => {
-        const API = `https://localhost:8000/api/Verloven/${Id}`;
-        const data =
-        {
-            "id": Id,
-            "startdatum": startdatum,
-            "einddatum": einddatum,
-            "zorgkundigeId": zorgkundigeId,
-            "verlofTypeId": verlofTypeId,
-            "reden": reden
-        }
-        axios.put(API, data)
-            .then((result) => {
-                toast.success('Verlof is gewijzigd');
+    const handlePostDelete = () => {
+        const API = `https://localhost:8000/api/Vacations/${Id}`;
+        axios.delete(API)
+            .then(() => {
+                toast.error('Verlof is verwijderd');
                 getData();
                 handleClose();
             })
             .catch((error) => {
                 toast.warning(`${error}`);
             })
+
     }
 
-    const renderZorgkundige = () => {
-        return zorgkundigeData.map((item) => (
-            <MenuItem value={item.id}>{item.voornaam + ' ' + item.achternaam}</MenuItem>
+    const renderNurse = () => {
+        return nurseData.map((item) => (
+            <MenuItem value={item.id}>{item.firstName + ' ' + item.lastName}</MenuItem>
         ));
     }
 
-    const renderVerlofType = () => {
-        return verlofTypeData.map((item) => (
-            <MenuItem value={item.id}>{item.verlof}</MenuItem>
+    const renderVacationsType = () => {
+        return vacationTypeData.map((item) => (
+            <MenuItem value={item.id}>{item.name}</MenuItem>
         ));
     }
 
@@ -115,14 +107,14 @@ function EditVerlof(props) {
         <>
             <IconButton
                 size="medium"
-                color="primary"
-                onClick={() => handleEdit(props.id)}
+                color="error"
+                onClick={() => handleDelete(props.id)}
             >
-                <FontAwesomeIcon icon={faPen} />
+                <FontAwesomeIcon icon={faTrash} />
             </IconButton>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Verlof wijzigen</Modal.Title>
+                    <Modal.Title>Verlof verwijderen</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Stack
@@ -131,36 +123,39 @@ function EditVerlof(props) {
                         alignItems="center"
                         spacing={4}
                     >
-                        <FormControl style={{ width: '75%' }}>
+                        <h6>Ben je zeker dat je dit verlof wilt verwijderen?</h6>
+                        <FormControl style={{ width: '75%' }} disabled>
                             <InputLabel>Zorgkundige</InputLabel>
                             <Select
-                                value={zorgkundigeId}
-                                onChange={(e) => setZorgkundigeId(e.target.value)}
+                                value={nurseId}
+                                onChange={(e) => setNurseId(e.target.value)}
                             >
-                                {renderZorgkundige()}
+                                {renderNurse()}
                             </Select>
                         </FormControl>
                         <TextField
                             style={{ width: '75%' }}
                             type="date"
                             className="form-control"
-                            value={startdatum}
-                            onChange={(e) => setStartdatum(e.target.value)}
+                            value={startdate}
+                            onChange={(e) => setStartdate(e.target.value)}
+                            disabled
                         />
                         <TextField
                             style={{ width: '75%' }}
                             type="date"
                             className="form-control"
-                            value={einddatum}
-                            onChange={(e) => setEinddatum(e.target.value)}
+                            value={enddate}
+                            onChange={(e) => setEnddate(e.target.value)}
+                            disabled
                         />
-                        <FormControl style={{ width: '75%' }}>
+                        <FormControl style={{ width: '75%' }} disabled>
                             <InputLabel>Verlof</InputLabel>
                             <Select
-                                value={verlofTypeId}
-                                onChange={(e) => setVerlofTypeId(e.target.value)}
+                                value={vacationTypeId}
+                                onChange={(e) => setVacationTypeId(e.target.value)}
                             >
-                                {renderVerlofType()}
+                                {renderVacationsType()}
                             </Select>
                         </FormControl>
                         <TextField
@@ -168,10 +163,11 @@ function EditVerlof(props) {
                             type="date"
                             className="form-control"
                             placeholder="Reden"
-                            value={reden}
+                            value={reason}
                             multiline={true}
                             minRows={6}
-                            onChange={(e) => setReden(e.target.value)}
+                            onChange={(e) => setReason(e.target.value)}
+                            disabled
                         />
                     </Stack>
                 </Modal.Body>
@@ -180,8 +176,8 @@ function EditVerlof(props) {
                         <Button variant="contained" color="inherit" onClick={handleClose}>
                             Terug
                         </Button>
-                        <Button variant="contained" color="primary" onClick={handleUpdate}>
-                            Wijzigen
+                        <Button variant="contained" color="error" onClick={handlePostDelete}>
+                            Verwijderen
                         </Button>
                     </Stack>
                 </Modal.Footer>
@@ -190,4 +186,4 @@ function EditVerlof(props) {
     );
 
 }
-export default EditVerlof;
+export default DeleteVacation;

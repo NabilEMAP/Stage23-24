@@ -5,17 +5,17 @@ import Modal from 'react-bootstrap/Modal';
 import { toast } from 'react-toastify';
 import { Button, FormControl, InputLabel, MenuItem, Select, Stack } from "@mui/material";
 
-function GenerateFeestdagen() {
+function GenerateHolidays() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [jaar, setJaar] = useState('');
+  const [year, setYear] = useState('');
 
   useEffect(() => {
   }, []);
 
   const handleCreate = () => {
-    const API = `https://localhost:8000/api/Feestdagen?jaar=${jaar}`;
+    const API = `https://localhost:8000/api/Holidays?year=${year}`;
     axios.post(API)
       .then(() => {
         toast.success('Feestdagen zijn gegenereerd');
@@ -29,19 +29,19 @@ function GenerateFeestdagen() {
   }
 
   const clear = () => {
-    setJaar('');
+    setYear('');
   }
 
-  const renderJaren = () => {
-    const jaren = Array.from({ length: 100 }, (_, index) => 2000 + index);
+  const renderYears = () => {
+    const years = Array.from({ length: 100 }, (_, index) => 2000 + index);
     return (
       <>
         <Select
-          value={jaar}
-          onChange={(e) => setJaar(e.target.value)}
+          value={year}
+          onChange={(e) => setYear(e.target.value)}
         >
-          {jaren.map((jaar) => (
-            <MenuItem value={jaar}>{jaar}</MenuItem>
+          {years.map((year) => (
+            <MenuItem value={year}>{year}</MenuItem>
           ))}
         </Select>
 
@@ -71,7 +71,7 @@ function GenerateFeestdagen() {
           >
             <FormControl style={{ width: '75%' }}>
               <InputLabel>Jaar</InputLabel>
-              {renderJaren()}
+              {renderYears()}
             </FormControl>
           </Stack>
         </Modal.Body>
@@ -90,4 +90,4 @@ function GenerateFeestdagen() {
   );
 
 }
-export default GenerateFeestdagen;
+export default GenerateHolidays;

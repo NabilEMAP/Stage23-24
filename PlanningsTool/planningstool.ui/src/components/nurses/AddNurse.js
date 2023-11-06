@@ -3,19 +3,16 @@ import React, { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Modal from 'react-bootstrap/Modal';
 import { toast } from 'react-toastify';
-import { Button, Checkbox, FormControl, FormControlLabel, IconButton, InputLabel, MenuItem, Select, Stack, TextField } from "@mui/material";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { Button, Checkbox, FormControl, FormControlLabel, InputLabel, MenuItem, Select, Stack, TextField } from "@mui/material";
 
-function DeleteZorgkundige(props) {
+function AddNurse() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [Id, editId] = useState('');
-  const [voornaam, setVoornaam] = useState('');
-  const [achternaam, setAchternaam] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [regimeTypeId, setRegimeTypeId] = useState('');
-  const [isVasteNacht, setIsVasteNacht] = useState(false);
+  const [isFixedNight, setIsFixedNight] = useState(false);
   const [data, setData] = useState([]);
   const [regimeTypeData, setRegimeTypeData] = useState([]);
 
@@ -25,7 +22,7 @@ function DeleteZorgkundige(props) {
   }, []);
 
   const getData = () => {
-    const API = 'https://localhost:8000/api/Zorgkundigen'
+    const API = 'https://localhost:8000/api/Nurses'
     axios.get(API)
       .then((result) => {
         setData(result.data);
@@ -46,63 +43,70 @@ function DeleteZorgkundige(props) {
       })
   }
 
-  const handleDelete = (id) => {
-    handleShow();
-    const API = `https://localhost:8000/api/Zorgkundigen/${id}`;
-    axios.get(API)
-      .then((result) => {
-        setVoornaam(result.data.voornaam);
-        setAchternaam(result.data.achternaam);
-        setIsVasteNacht(result.data.isVasteNacht);
-        setRegimeTypeId(result.data.regimeId);
-        editId(id);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-  }
-
-  const handlePostDelete = () => {
-    const API = `https://localhost:8000/api/Zorgkundigen/${Id}`;
-    axios.delete(API)
+  const handleCreate = () => {
+    const API = 'https://localhost:8000/api/Nurses';
+    const data =
+    {
+      "firstName": firstName,
+      "lastName": lastName,
+      "regimeId": regimeTypeId,
+      "isFixedNight": isFixedNight
+    }
+    axios.post(API, data)
       .then(() => {
-        toast.error('Zorgkundige is verwijderd');
         getData();
+        toast.success('Zorgkundige is toegevoegd');
+        clear();
         handleClose();
       })
       .catch((error) => {
-        toast.warning(`${error}`);
+        if (error.response.data.status === 400) {
+          toast.warning("Regime mag niet leeg zijn");
+          console.log(JSON.stringify(error.response.data));
+          clear();
+        } else {
+          toast.warning(`${error.response.data}`);
+          clear();
+          console.log(JSON.stringify(error.response.data));
+        }
       })
-
   }
 
-  const handleEditActiveChange = (e) => {
+  const handleActiveChange = (e) => {
     if (e.target.checked) {
-      setIsVasteNacht(true);
+      setIsFixedNight(true);
     }
     else {
-      setIsVasteNacht(false);
+      setIsFixedNight(false);
     }
+  }
+
+  const clear = () => {
+    setFirstName('');
+    setLastName('');
+    setRegimeTypeId('');
+    setIsFixedNight(false);
   }
 
   const renderRegimeType = () => {
     return regimeTypeData.map((item) => (
-      <MenuItem value={item.id}>{item.regime}</MenuItem>      
+      <MenuItem value={item.id}>{item.name}</MenuItem>
     ));
   }
 
   return (
     <>
-      <IconButton
-        size="medium"
-        color="error"
-        onClick={() => handleDelete(props.id)}
+      <Button
+        variant="contained"
+        style={{ float: 'right' }}
+        color="success"
+        onClick={() => handleShow()}
       >
-        <FontAwesomeIcon icon={faTrash} />
-      </IconButton>
+        Zorgkundige toevoegen
+      </Button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Zorgkundige verwijderen</Modal.Title>
+          <Modal.Title>Zorgkundige toevoegen</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Stack
@@ -111,26 +115,23 @@ function DeleteZorgkundige(props) {
             alignItems="center"
             spacing={4}
           >
-            <h6>Ben je zeker dat je deze zorgkundige wilt verwijderen?</h6>
             <TextField
               style={{ width: '75%' }}
               type="text"
               className="form-control"
-              placeholder="Vul uw voornaam..."
-              value={voornaam}
-              onChange={(e) => setVoornaam(e.target.value)}
-              disabled
+              placeholder="Voornaam"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
             />
             <TextField
               style={{ width: '75%' }}
               type="text"
               className="form-control"
-              placeholder="Vul uw achternaam..."
-              value={achternaam}
-              onChange={(e) => setAchternaam(e.target.value)}
-              disabled
+              placeholder="Achternaam"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
             />
-            <FormControl style={{ width: '75%' }} disabled>
+            <FormControl style={{ width: '75%' }}>
               <InputLabel>Selecteer uw regime...</InputLabel>
               <Select
                 value={regimeTypeId}
@@ -140,11 +141,11 @@ function DeleteZorgkundige(props) {
               </Select>
             </FormControl>
             <FormControlLabel label="Vaste Nacht" control={
-              <Checkbox type="checkbox"
-                checked={isVasteNacht === true ? true : false}
-                value={isVasteNacht}
-                onChange={(e) => handleEditActiveChange(e)}
-                disabled
+              <Checkbox
+                type="checkbox"
+                checked={isFixedNight === true ? true : false}
+                value={isFixedNight}
+                onChange={(e) => handleActiveChange(e)}
               />
             } />
           </Stack>
@@ -154,8 +155,8 @@ function DeleteZorgkundige(props) {
             <Button variant="contained" color="inherit" onClick={handleClose}>
               Terug
             </Button>
-            <Button variant="contained" color="error" onClick={handlePostDelete}>
-              Verwijderen
+            <Button variant="contained" color="success" onClick={handleCreate}>
+              Toevoegen
             </Button>
           </Stack>
         </Modal.Footer>
@@ -164,4 +165,4 @@ function DeleteZorgkundige(props) {
   );
 }
 
-export default DeleteZorgkundige;
+export default AddNurse;

@@ -62,9 +62,9 @@ function ShiftPage() {
             return sortedData.map((item, index) => (
                 <MyTR key={index}>
                     <MyTC>{item.id}</MyTC>
-                    <MyTC>{item.shiftType.shift}</MyTC>
-                    <MyTC>{item.starttijd}</MyTC>
-                    <MyTC>{item.eindtijd}</MyTC>
+                    <MyTC>{item.shiftType.name}</MyTC>
+                    <MyTC>{item.starttime}</MyTC>
+                    <MyTC>{item.endtime}</MyTC>
                     <MyTC style={{ width: '175px' }}>
                         <EditShift id={item.id} />
                         <DeleteShift id={item.id} />
@@ -72,7 +72,7 @@ function ShiftPage() {
                 </MyTR>
             ));
         } else {
-            return <TableRow><MyTC colSpan={5}>No data found</MyTC></TableRow>;
+            return <TableRow><MyTC colSpan={5}>Geen data gevonden</MyTC></TableRow>;
         }
     }
 
@@ -80,7 +80,7 @@ function ShiftPage() {
         <Fragment>
             <Container>
                 <div style={{ margin: '24px 0px' }}>
-                    <Typography variant="h5" style={{ width: 'fit-content', verticalAlign: 'sub', display: 'inline-block' }} >Shift Lijst</Typography>
+                    <Typography variant="h5" style={{ width: 'fit-content', verticalAlign: 'sub', display: 'inline-block' }}>Shift Lijst</Typography>
                     <AddShift />
                 </div>
                 <TableContainer component={Paper}>

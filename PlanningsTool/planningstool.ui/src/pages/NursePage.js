@@ -8,15 +8,14 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { MyTC, MyTR } from "../components/MyTable";
-import AddZorgkundigeShift from "../components/zorgkundigeShifts/AddZorgkundigeShift";
-import EditZorgkundigeShift from "../components/zorgkundigeShifts/EditZorgkundigeShift";
-import DeleteZorgkundigeShift from "../components/zorgkundigeShifts/DeleteZorgkundigeShift";
+import AddNurse from "../components/nurses/AddNurse";
+import EditNurse from "../components/nurses/EditNurse";
+import DeleteNurse from "../components/nurses/DeleteNurse";
 import { Container, Typography } from "@mui/material";
 import CancelIcon from '@mui/icons-material/Cancel';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import { format } from 'date-fns';
 
-function ZorgkundigeShiftPage() {
+function NursePage() {
     const [data, setData] = useState([]);
     const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
 
@@ -25,7 +24,7 @@ function ZorgkundigeShiftPage() {
     }, [data]);
 
     const getData = () => {
-        const API = 'https://localhost:8000/api/ZorgkundigeShifts';
+        const API = 'https://localhost:8000/api/Nurses';
         axios.get(API)
             .then((result) => {
                 setData(result.data);
@@ -66,23 +65,20 @@ function ZorgkundigeShiftPage() {
             return sortedData.map((item, index) => (
                 <MyTR key={index}>
                     <MyTC>{item.id}</MyTC>
-                    <MyTC>{item.zorgkundige.voornaam + ' ' + item.zorgkundige.achternaam}</MyTC>
-                    <MyTC>{item.zorgkundige.regimeType.regime}</MyTC>
-                    <MyTC>{
-                        item.shift.shiftType.shift + ' - ' +
-                        item.shift.starttijd + ' - ' +
-                        item.shift.eindtijd
-                    }
+                    <MyTC>{item.firstName}</MyTC>
+                    <MyTC>{item.lastName}</MyTC>
+                    <MyTC>{item.regimeType.name}</MyTC>
+                    <MyTC>
+                        {item.isFixedNight ? <CheckCircleIcon fontSize="large" color="success" /> : <CancelIcon fontSize="large" color="error" />}
                     </MyTC>
-                    <MyTC>{format(new Date(item.datum), 'dd/MM/yyyy')}</MyTC>
                     <MyTC style={{ width: '150px' }}>
-                        <EditZorgkundigeShift id={item.id} />
-                        <DeleteZorgkundigeShift id={item.id} />
+                        <EditNurse id={item.id} />
+                        <DeleteNurse id={item.id} />
                     </MyTC>
                 </MyTR>
             ));
         } else {
-            return <TableRow><MyTC colSpan={5}>No data found</MyTC></TableRow>;
+            return <TableRow><MyTC colSpan={5}>Geen data gevonden</MyTC></TableRow>;
         }
     }
 
@@ -90,18 +86,18 @@ function ZorgkundigeShiftPage() {
         <Fragment>
             <Container>
                 <div style={{ margin: '24px 0px' }}>
-                    <Typography variant="h5" style={{ width: 'fit-content', verticalAlign: 'sub', display: 'inline-block' }} >Zorgkundige Shift Lijst</Typography>
-                    <AddZorgkundigeShift />
+                    <Typography variant="h5" style={{ width: 'fit-content', verticalAlign: 'sub', display: 'inline-block' }}>Zorgkundige Lijst</Typography>
+                    <AddNurse />
                 </div>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 700 }} aria-label="customized table">
                         <TableHead>
                             <TableRow>
                                 <MyTC onClick={() => requestSort("id")}>Id</MyTC>
-                                <MyTC onClick={() => requestSort("zorgkundige.voornaam")}>Zorgkundige</MyTC>
-                                <MyTC onClick={() => requestSort("zorgkundige.regimeType.regime")}>Regime</MyTC>
-                                <MyTC onClick={() => requestSort("shift.shiftType.shift")}>Shift</MyTC>
-                                <MyTC onClick={() => requestSort("datum")}>Datum</MyTC>
+                                <MyTC onClick={() => requestSort("firstName")}>Voornaam</MyTC>
+                                <MyTC onClick={() => requestSort("lastName")}>Achternaam</MyTC>
+                                <MyTC onClick={() => requestSort("regimeType.name")}>Regime</MyTC>
+                                <MyTC onClick={() => requestSort("isFixedNight")}>Vaste Nacht?</MyTC>
                                 <MyTC style={{ width: '150px' }}>Veranderingen</MyTC>
                             </TableRow>
                         </TableHead>
@@ -115,4 +111,4 @@ function ZorgkundigeShiftPage() {
     );
 }
 
-export default ZorgkundigeShiftPage;
+export default NursePage;

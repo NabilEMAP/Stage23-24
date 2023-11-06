@@ -9,11 +9,11 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { MyTC, MyTR } from "../../components/MyTable";
 import { Container, Stack, Typography } from "@mui/material";
-import ClearFeestdagList from "../../components/feestdagen/ClearFeestdagList";
-import GenerateFeestdagen from "../../components/feestdagen/GenerateFeestdagen";
+import ClearHolidayList from "../../components/holidays/ClearHolidayList";
+import GenerateHolidays from "../../components/holidays/GenerateHolidays";
 import { format } from 'date-fns';
 
-function FeestdagPage() {
+function HolidayPage() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -21,7 +21,7 @@ function FeestdagPage() {
     }, [data]);
 
     const getData = () => {
-        const API = 'https://localhost:8000/api/Feestdagen'
+        const API = 'https://localhost:8000/api/Holidays'
         axios.get(API)
             .then((result) => {
                 setData(result.data);
@@ -36,12 +36,12 @@ function FeestdagPage() {
             return data.map((item, index) => (
                 <MyTR key={index}>
                     <MyTC>{item.id}</MyTC>
-                    <MyTC>{item.naam}</MyTC>
-                    <MyTC>{format(new Date(item.datum), 'dd/MM/yyyy')}</MyTC>
+                    <MyTC>{item.name}</MyTC>
+                    <MyTC>{format(new Date(item.date), 'dd/MM/yyyy')}</MyTC>
                 </MyTR>
             ));
         } else {
-            return <TableRow><MyTC colSpan={5}>No data found</MyTC></TableRow>;
+            return <TableRow><MyTC colSpan={5}>Geen data gevonden</MyTC></TableRow>;
         }
     }
 
@@ -49,14 +49,14 @@ function FeestdagPage() {
         <Fragment>
             <Container>
                 <div style={{ margin: '24px 0px' }}>
-                    <Typography variant="h5" style={{ width: 'fit-content', verticalAlign: 'sub', display: 'inline-block' }} >Feestdag Lijst</Typography>
+                    <Typography variant="h5" style={{ width: 'fit-content', verticalAlign: 'sub', display: 'inline-block' }}>Feestdag Lijst</Typography>
                     <Stack
                         direction="row"
                         spacing={2}
                         style={{ float: 'right' }}
                     >
-                        <ClearFeestdagList />
-                        <GenerateFeestdagen />
+                        <ClearHolidayList />
+                        <GenerateHolidays />
                     </Stack>
                 </div>
                 <TableContainer component={Paper}>
@@ -78,4 +78,4 @@ function FeestdagPage() {
     );
 }
 
-export default FeestdagPage;
+export default HolidayPage;

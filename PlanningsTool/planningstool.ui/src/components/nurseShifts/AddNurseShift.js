@@ -3,27 +3,27 @@ import React, { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Modal from 'react-bootstrap/Modal';
 import { toast } from 'react-toastify';
-import { Button, Checkbox, FormControl, FormControlLabel, InputLabel, MenuItem, Select, Stack, TextField } from "@mui/material";
+import { Button, FormControl, InputLabel, MenuItem, Select, Stack, TextField } from "@mui/material";
 
-function AddZorgkundigeShift() {
+function AddNurseShift() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [datum, setDatum] = useState('');
-  const [zorgkundigeId, setZorgkundigeId] = useState('');
+  const [date, setDate] = useState('');
+  const [nurseId, setNurseId] = useState('');
   const [shiftId, setShiftId] = useState('');
   const [data, setData] = useState([]);
-  const [zorgkundigeData, setZorgkundigeData] = useState([]);
+  const [nurseData, setNurseData] = useState([]);
   const [shiftData, setShiftData] = useState([]);
 
   useEffect(() => {
     getData();
-    getZorgkundigeData();
+    getNurseData();
     getShiftData();
   }, []);
 
   const getData = () => {
-    const API = 'https://localhost:8000/api/ZorgkundigeShifts'
+    const API = 'https://localhost:8000/api/NurseShifts'
     axios.get(API)
       .then((result) => {
         setData(result.data);
@@ -33,11 +33,11 @@ function AddZorgkundigeShift() {
       })
   }
 
-  const getZorgkundigeData = () => {
-    const API = 'https://localhost:8000/api/Zorgkundigen'
+  const getNurseData = () => {
+    const API = 'https://localhost:8000/api/Nurses'
     axios.get(API)
       .then((result) => {
-        setZorgkundigeData(result.data);
+        setNurseData(result.data);
       })
       .catch((error) => {
         console.log(error);
@@ -56,18 +56,18 @@ function AddZorgkundigeShift() {
   }
 
   const handleCreate = () => {
-    const API = 'https://localhost:8000/api/ZorgkundigeShifts';
+    const API = 'https://localhost:8000/api/NurseShifts';
     const data =
     {
-      "datum": datum,
-      "zorgkundigeId": zorgkundigeId,
+      "date": date,
+      "nurseId": nurseId,
       "shiftId": shiftId,
-      "teamplanningId": 1 //ik ga die even op 1 houden (hardcoded)
+      "teamplanId": 1 //ik ga die even op 1 houden (hardcoded)
     }
     axios.post(API, data)
       .then(() => {
         getData();
-        toast.success('Zorgkundige shift is toegevoegd');
+        toast.success('Nurse shift is toegevoegd');
         clear();
         handleClose();
         console.log(data);
@@ -80,17 +80,17 @@ function AddZorgkundigeShift() {
   }
 
   const clear = () => {
-    setDatum('');
-    setZorgkundigeId('');
+    setDate('');
+    setNurseId('');
     setShiftId('');
   }
 
-  const renderZorgkundige = () => {
-    return zorgkundigeData.map((item) => (
+  const renderNurse = () => {
+    return nurseData.map((item) => (
       <MenuItem value={item.id}>{
-        item.voornaam + ' ' +
-        item.achternaam + ' (' +
-        item.regimeType.regime + ')'
+        item.firstName + ' ' +
+        item.lastName + ' (' +
+        item.regimeType.name + ')'
       }</MenuItem>
     ));
   }
@@ -98,9 +98,9 @@ function AddZorgkundigeShift() {
   const renderShift = () => {
     return shiftData.map((item) => (
       <MenuItem value={item.id}>{
-        item.shiftType.shift + ' - ' +
-        item.starttijd + ' - ' +
-        item.eindtijd
+        item.shiftType.name + ' - ' +
+        item.starttime + ' - ' +
+        item.endtime
       }</MenuItem>
     ));
   }
@@ -129,10 +129,10 @@ function AddZorgkundigeShift() {
             <FormControl style={{ width: '75%' }}>
               <InputLabel>Selecteer een zorgkundige...</InputLabel>
               <Select
-                value={zorgkundigeId}
-                onChange={(e) => setZorgkundigeId(e.target.value)}
+                value={nurseId}
+                onChange={(e) => setNurseId(e.target.value)}
               >
-                {renderZorgkundige()}
+                {renderNurse()}
               </Select>
             </FormControl>
             <FormControl style={{ width: '75%' }}>
@@ -148,8 +148,8 @@ function AddZorgkundigeShift() {
               style={{ width: '75%' }}
               type="date"
               className="form-control"
-              value={datum}
-              onChange={(e) => setDatum(e.target.value)}
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
             />
           </Stack>
         </Modal.Body>
@@ -168,4 +168,4 @@ function AddZorgkundigeShift() {
   );
 }
 
-export default AddZorgkundigeShift;
+export default AddNurseShift;

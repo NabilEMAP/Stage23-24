@@ -5,30 +5,30 @@ import Modal from 'react-bootstrap/Modal';
 import { toast } from 'react-toastify';
 import { Button, FormControl, InputLabel, MenuItem, Select, Stack, TextField, IconButton } from "@mui/material";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faPen } from "@fortawesome/free-solid-svg-icons";
 
-function DeleteVerlof(props) {
+function EditVacation(props) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [Id, editId] = useState('');
-    const [startdatum, setStartdatum] = useState('');
-    const [einddatum, setEinddatum] = useState('');
-    const [zorgkundigeId, setZorgkundigeId] = useState('');
-    const [verlofTypeId, setVerlofTypeId] = useState('');
-    const [reden, setReden] = useState('');
+    const [startdate, setStartdate] = useState('');
+    const [enddate, setEnddate] = useState('');
+    const [nurseId, setNurseId] = useState('');
+    const [vacationTypeId, setVacationTypeId] = useState('');
+    const [reason, setReason] = useState('');
     const [data, setData] = useState([]);
-    const [zorgkundigeData, setZorgkundigeData] = useState([]);
-    const [verlofTypeData, setVerlofTypeData] = useState([]);
+    const [nurseData, setNurseData] = useState([]);
+    const [vacationTypeData, setVacationTypeData] = useState([]);
 
     useEffect(() => {
         getData();
-        getZorgkundigeData();
-        getVerlofTypeData();
+        getNurseData();
+        getVacationTypeData();
     }, []);
 
     const getData = () => {
-        const API = 'https://localhost:8000/api/Verloven/details'
+        const API = 'https://localhost:8000/api/Vacations/details'
         axios.get(API)
             .then((result) => {
                 setData(result.data);
@@ -38,38 +38,38 @@ function DeleteVerlof(props) {
             })
     }
 
-    const getZorgkundigeData = () => {
-        const API = 'https://localhost:8000/api/Zorgkundigen'
+    const getNurseData = () => {
+        const API = 'https://localhost:8000/api/Nurses'
         axios.get(API)
             .then((result) => {
-                setZorgkundigeData(result.data);
+                setNurseData(result.data);
             })
             .catch((error) => {
                 console.log(error);
             })
     }
 
-    const getVerlofTypeData = () => {
-        const API = 'https://localhost:8000/api/VerlofTypes'
+    const getVacationTypeData = () => {
+        const API = 'https://localhost:8000/api/VacationTypes'
         axios.get(API)
             .then((result) => {
-                setVerlofTypeData(result.data);
+                setVacationTypeData(result.data);
             })
             .catch((error) => {
                 console.log(error);
             })
     }
 
-    const handleDelete = (id) => {
+    const handleEdit = (id) => {
         handleShow();
-        const API = `https://localhost:8000/api/Verloven/${id}`;
+        const API = `https://localhost:8000/api/Vacations/${id}`;
         axios.get(API)
             .then((result) => {
-                setStartdatum(result.data.startdatum);
-                setEinddatum(result.data.einddatum);
-                setZorgkundigeId(result.data.zorgkundigeId);
-                setVerlofTypeId(result.data.verlofTypeId);
-                setReden(result.data.reden);
+                setStartdate(result.data.startdate);
+                setEnddate(result.data.enddate);
+                setNurseId(result.data.nurseId);
+                setVacationTypeId(result.data.vacationTypeId);
+                setReason(result.data.reason);
                 editId(id);
             })
             .catch((error) => {
@@ -77,29 +77,37 @@ function DeleteVerlof(props) {
             })
     }
 
-    const handlePostDelete = () => {
+    const handleUpdate = () => {
         const API = `https://localhost:8000/api/Verloven/${Id}`;
-        axios.delete(API)
+        const data =
+        {
+            "id": Id,
+            "startdate": startdate,
+            "enddate": enddate,
+            "nurseId": nurseId,
+            "vacationTypeId": vacationTypeId,
+            "reason": reason
+        }
+        axios.put(API, data)
             .then(() => {
-                toast.error('Verlof is verwijderd');
+                toast.success('Verlof is gewijzigd');
                 getData();
                 handleClose();
             })
             .catch((error) => {
                 toast.warning(`${error}`);
             })
-
     }
 
-    const renderZorgkundige = () => {
-        return zorgkundigeData.map((item) => (
-            <MenuItem value={item.id}>{item.voornaam + ' ' + item.achternaam}</MenuItem>
+    const renderNurse = () => {
+        return nurseData.map((item) => (
+            <MenuItem value={item.id}>{item.firstName + ' ' + item.lastName}</MenuItem>
         ));
     }
 
-    const renderVerlofType = () => {
-        return verlofTypeData.map((item) => (
-            <MenuItem value={item.id}>{item.verlof}</MenuItem>
+    const renderVacationsType = () => {
+        return vacationTypeData.map((item) => (
+            <MenuItem value={item.id}>{item.name}</MenuItem>
         ));
     }
 
@@ -107,14 +115,14 @@ function DeleteVerlof(props) {
         <>
             <IconButton
                 size="medium"
-                color="error"
-                onClick={() => handleDelete(props.id)}
+                color="primary"
+                onClick={() => handleEdit(props.id)}
             >
-                <FontAwesomeIcon icon={faTrash} />
+                <FontAwesomeIcon icon={faPen} />
             </IconButton>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Verlof verwijderen</Modal.Title>
+                    <Modal.Title>Verlof wijzigen</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Stack
@@ -123,39 +131,36 @@ function DeleteVerlof(props) {
                         alignItems="center"
                         spacing={4}
                     >
-                        <h6>Ben je zeker dat je dit verlof wilt verwijderen?</h6>
-                        <FormControl style={{ width: '75%' }} disabled>
+                        <FormControl style={{ width: '75%' }}>
                             <InputLabel>Zorgkundige</InputLabel>
                             <Select
-                                value={zorgkundigeId}
-                                onChange={(e) => setZorgkundigeId(e.target.value)}
+                                value={nurseId}
+                                onChange={(e) => setNurseId(e.target.value)}
                             >
-                                {renderZorgkundige()}
+                                {renderNurse()}
                             </Select>
                         </FormControl>
                         <TextField
                             style={{ width: '75%' }}
                             type="date"
                             className="form-control"
-                            value={startdatum}
-                            onChange={(e) => setStartdatum(e.target.value)}
-                            disabled
+                            value={startdate}
+                            onChange={(e) => setStartdate(e.target.value)}
                         />
                         <TextField
                             style={{ width: '75%' }}
                             type="date"
                             className="form-control"
-                            value={einddatum}
-                            onChange={(e) => setEinddatum(e.target.value)}
-                            disabled
+                            value={enddate}
+                            onChange={(e) => setEnddate(e.target.value)}
                         />
-                        <FormControl style={{ width: '75%' }} disabled>
+                        <FormControl style={{ width: '75%' }}>
                             <InputLabel>Verlof</InputLabel>
                             <Select
-                                value={verlofTypeId}
-                                onChange={(e) => setVerlofTypeId(e.target.value)}
+                                value={vacationTypeId}
+                                onChange={(e) => setVacationTypeId(e.target.value)}
                             >
-                                {renderVerlofType()}
+                                {renderVacationsType()}
                             </Select>
                         </FormControl>
                         <TextField
@@ -163,11 +168,10 @@ function DeleteVerlof(props) {
                             type="date"
                             className="form-control"
                             placeholder="Reden"
-                            value={reden}
+                            value={reason}
                             multiline={true}
                             minRows={6}
-                            onChange={(e) => setReden(e.target.value)}
-                            disabled
+                            onChange={(e) => setReason(e.target.value)}
                         />
                     </Stack>
                 </Modal.Body>
@@ -176,8 +180,8 @@ function DeleteVerlof(props) {
                         <Button variant="contained" color="inherit" onClick={handleClose}>
                             Terug
                         </Button>
-                        <Button variant="contained" color="error" onClick={handlePostDelete}>
-                            Verwijderen
+                        <Button variant="contained" color="primary" onClick={handleUpdate}>
+                            Wijzigen
                         </Button>
                     </Stack>
                 </Modal.Footer>
@@ -186,4 +190,4 @@ function DeleteVerlof(props) {
     );
 
 }
-export default DeleteVerlof;
+export default EditVacation;

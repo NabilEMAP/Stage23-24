@@ -5,17 +5,17 @@ import Modal from 'react-bootstrap/Modal';
 import { toast } from 'react-toastify';
 import { Button, Checkbox, FormControl, FormControlLabel, IconButton, InputLabel, MenuItem, Select, Stack, TextField } from "@mui/material";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
-function EditZorgkundige(props) {
+function DeleteNurse(props) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [Id, editId] = useState('');
-  const [voornaam, setVoornaam] = useState('');
-  const [achternaam, setAchternaam] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [regimeTypeId, setRegimeTypeId] = useState('');
-  const [isVasteNacht, setIsVasteNacht] = useState(false);
+  const [isFixedNight, setIsFixedNight] = useState(false);
   const [data, setData] = useState([]);
   const [regimeTypeData, setRegimeTypeData] = useState([]);
 
@@ -25,7 +25,7 @@ function EditZorgkundige(props) {
   }, []);
 
   const getData = () => {
-    const API = 'https://localhost:8000/api/Zorgkundigen'
+    const API = 'https://localhost:8000/api/Nurses'
     axios.get(API)
       .then((result) => {
         setData(result.data);
@@ -46,15 +46,15 @@ function EditZorgkundige(props) {
       })
   }
 
-  const handleEdit = (id) => {
+  const handleDelete = (id) => {
     handleShow();
-    const API = `https://localhost:8000/api/Zorgkundigen/${id}`;
+    const API = `https://localhost:8000/api/Nurses/${id}`;
     axios.get(API)
       .then((result) => {
-        setVoornaam(result.data.voornaam);
-        setAchternaam(result.data.achternaam);
-        setIsVasteNacht(result.data.isVasteNacht);
-        setRegimeTypeId(result.data.regimeId);
+        setFirstName(result.data.firstName);
+        setLastName(result.data.lastName);
+        setRegimeTypeId(result.data.regimeTypeId);        
+        setIsFixedNight(result.data.isVasteNacht);
         editId(id);
       })
       .catch((error) => {
@@ -62,39 +62,32 @@ function EditZorgkundige(props) {
       })
   }
 
-  const handleUpdate = () => {
-    const API = `https://localhost:8000/api/Zorgkundigen/${Id}`;
-    const data =
-    {
-      "id": Id,
-      "voornaam": voornaam,
-      "achternaam": achternaam,
-      "regimeId": regimeTypeId,
-      "isVasteNacht": isVasteNacht
-    }
-    axios.put(API, data)
-      .then((result) => {
-        toast.success('Zorgkundige is gewijzigd');
+  const handlePostDelete = () => {
+    const API = `https://localhost:8000/api/Nurses/${Id}`;
+    axios.delete(API)
+      .then(() => {
+        toast.error('Zorgkundige is verwijderd');
         getData();
         handleClose();
       })
       .catch((error) => {
         toast.warning(`${error}`);
       })
+
   }
 
   const handleEditActiveChange = (e) => {
     if (e.target.checked) {
-      setIsVasteNacht(true);
+      setIsFixedNight(true);
     }
     else {
-      setIsVasteNacht(false);
+      setIsFixedNight(false);
     }
   }
 
   const renderRegimeType = () => {
     return regimeTypeData.map((item) => (
-      <MenuItem value={item.id}>{item.regime}</MenuItem>      
+      <MenuItem value={item.id}>{item.name}</MenuItem>      
     ));
   }
 
@@ -102,14 +95,14 @@ function EditZorgkundige(props) {
     <>
       <IconButton
         size="medium"
-        color="primary"
-        onClick={() => handleEdit(props.id)}
+        color="error"
+        onClick={() => handleDelete(props.id)}
       >
-        <FontAwesomeIcon icon={faPen} />
+        <FontAwesomeIcon icon={faTrash} />
       </IconButton>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Zorgkundige wijzigen</Modal.Title>
+          <Modal.Title>Zorgkundige verwijderen</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Stack
@@ -118,23 +111,26 @@ function EditZorgkundige(props) {
             alignItems="center"
             spacing={4}
           >
+            <h6>Ben je zeker dat je deze zorgkundige wilt verwijderen?</h6>
             <TextField
               style={{ width: '75%' }}
               type="text"
               className="form-control"
-              placeholder="Vul uw voornaam..."
-              value={voornaam}
-              onChange={(e) => setVoornaam(e.target.value)}
+              placeholder="Voornaam"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              disabled
             />
             <TextField
               style={{ width: '75%' }}
               type="text"
               className="form-control"
-              placeholder="Vul uw achternaam..."
-              value={achternaam}
-              onChange={(e) => setAchternaam(e.target.value)}
+              placeholder="Achternaam"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              disabled
             />
-            <FormControl style={{ width: '75%' }}>
+            <FormControl style={{ width: '75%' }} disabled>
               <InputLabel>Selecteer uw regime...</InputLabel>
               <Select
                 value={regimeTypeId}
@@ -145,9 +141,10 @@ function EditZorgkundige(props) {
             </FormControl>
             <FormControlLabel label="Vaste Nacht" control={
               <Checkbox type="checkbox"
-                checked={isVasteNacht === true ? true : false}
-                value={isVasteNacht}
+                checked={isFixedNight === true ? true : false}
+                value={isFixedNight}
                 onChange={(e) => handleEditActiveChange(e)}
+                disabled
               />
             } />
           </Stack>
@@ -157,8 +154,8 @@ function EditZorgkundige(props) {
             <Button variant="contained" color="inherit" onClick={handleClose}>
               Terug
             </Button>
-            <Button variant="contained" color="primary" onClick={handleUpdate}>
-              Wijzigen
+            <Button variant="contained" color="error" onClick={handlePostDelete}>
+              Verwijderen
             </Button>
           </Stack>
         </Modal.Footer>
@@ -167,4 +164,4 @@ function EditZorgkundige(props) {
   );
 }
 
-export default EditZorgkundige;
+export default DeleteNurse;

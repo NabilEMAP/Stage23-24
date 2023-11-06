@@ -8,15 +8,15 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { MyTC, MyTR } from "../components/MyTable";
-import AddVerlof from "../components/verloven/AddVerlof";
-import EditVerlof from "../components/verloven/EditVerlof";
-import DeleteVerlof from "../components/verloven/DeleteVerlof";
+import AddVacation from "../components/vacations/AddVacation";
+import EditVacation from "../components/vacations/EditVacation";
+import DeleteVacation from "../components/vacations/DeleteVacation";
 import { Container, Typography, Tooltip, IconButton } from "@mui/material";
 import { format } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 
-function VerlofPage() {
+function VacationPage() {
     const [data, setData] = useState([]);
     const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
 
@@ -25,7 +25,7 @@ function VerlofPage() {
     }, [data]);
 
     const getData = () => {
-        const API = 'https://localhost:8000/api/Verloven/details'
+        const API = 'https://localhost:8000/api/Vacations/details'
         axios.get(API)
             .then((result) => {
                 setData(result.data);
@@ -60,13 +60,13 @@ function VerlofPage() {
         });
     }
 
-    const zorgkundigeNaam = (naam) => {
-        return naam.zorgkundige.voornaam + ' ' + naam.zorgkundige.achternaam;
+    const nurseFullname = (name) => {
+        return name.nurse.firstName + ' ' + name.nurse.lastName;
     }
 
     const renderTooltip = (item) => {
         return (
-            <p>Reden: {item.reden}</p>
+            <p>Reden: {item.reason}</p>
         );
     }
 
@@ -75,25 +75,25 @@ function VerlofPage() {
             return sortedData.map((item, index) => (
                 <MyTR key={index}>
                     <MyTC>{item.id}</MyTC>
-                    <MyTC onClick={() => requestSort("zorgkundige.voornaam")}>
+                    <MyTC onClick={() => requestSort("nurse.firstName")}>
                         <Tooltip title={renderTooltip(item)} placement="left-end">
                             <IconButton style={{marginRight:'6px'}} size="medium" color="inherit">
                                 <FontAwesomeIcon icon={faCircleInfo} />
                             </IconButton>
                         </Tooltip>
-                        {zorgkundigeNaam(item)}
+                        {nurseFullname(item)}
                     </MyTC>
-                    <MyTC>{format(new Date(item.startdatum), 'dd/MM/yyyy')}</MyTC>
-                    <MyTC>{format(new Date(item.einddatum), 'dd/MM/yyyy')}</MyTC>
-                    <MyTC>{item.verlofType.verlof}</MyTC>
+                    <MyTC>{format(new Date(item.startdate), 'dd/MM/yyyy')}</MyTC>
+                    <MyTC>{format(new Date(item.enddate), 'dd/MM/yyyy')}</MyTC>
+                    <MyTC>{item.vacationType.name}</MyTC>
                     <MyTC style={{ width: '175px' }}>
-                        <EditVerlof id={item.id} />
-                        <DeleteVerlof id={item.id} />
+                        <EditVacation id={item.id} />
+                        <DeleteVacation id={item.id} />
                     </MyTC>
                 </MyTR>
             ));
         } else {
-            return <TableRow><MyTC colSpan={5}>No data found</MyTC></TableRow>;
+            return <TableRow><MyTC colSpan={5}>Geen data gevonden</MyTC></TableRow>;
         }
     }
 
@@ -101,18 +101,18 @@ function VerlofPage() {
         <Fragment>
             <Container>
                 <div style={{ margin: '24px 0px' }}>
-                    <Typography variant="h5" style={{ width: 'fit-content', verticalAlign: 'sub', display: 'inline-block' }} >Verlof Lijst</Typography>
-                    <AddVerlof />
+                    <Typography variant="h5" style={{ width: 'fit-content', verticalAlign: 'sub', display: 'inline-block' }}>Verlof Lijst</Typography>
+                    <AddVacation />
                 </div>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 700 }} aria-label="customized table">
                         <TableHead>
                             <TableRow>
                                 <MyTC onClick={() => requestSort("id")}>Id</MyTC>
-                                <MyTC onClick={() => requestSort("zorgkundige.voornaam")}>Zorgkundige</MyTC>
-                                <MyTC onClick={() => requestSort("startdatum")}>Startdatum</MyTC>
-                                <MyTC onClick={() => requestSort("einddatum")}>Einddatum</MyTC>
-                                <MyTC onClick={() => requestSort("verlofType.verlof")}>Verlof</MyTC>
+                                <MyTC onClick={() => requestSort("nurse.firstName")}>Zorgkundige</MyTC>
+                                <MyTC onClick={() => requestSort("starddate")}>Startdatum</MyTC>
+                                <MyTC onClick={() => requestSort("enddate")}>Einddatum</MyTC>
+                                <MyTC onClick={() => requestSort("vacationType.name")}>Verlof</MyTC>
                                 <MyTC style={{ width: '150px' }}>Veranderingen</MyTC>
                             </TableRow>
                         </TableHead>
@@ -126,4 +126,4 @@ function VerlofPage() {
     );
 }
 
-export default VerlofPage;
+export default VacationPage;

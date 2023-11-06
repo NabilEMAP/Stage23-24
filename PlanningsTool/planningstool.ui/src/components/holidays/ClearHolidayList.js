@@ -5,7 +5,7 @@ import Modal from 'react-bootstrap/Modal';
 import { toast } from 'react-toastify';
 import { Button, Stack } from "@mui/material";
 
-function ClearFeestdagList(props) {
+function ClearHolidayList() {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -14,7 +14,7 @@ function ClearFeestdagList(props) {
     }, []);
 
     const handlePostClear = () => {
-        const API = `https://localhost:8000/api/Feestdagen`;
+        const API = `https://localhost:8000/api/Holidays`;
         axios.delete(API)
             .then(() => {
                 toast.error('Feestdag lijst is verwijderd');
@@ -63,4 +63,4 @@ function ClearFeestdagList(props) {
     );
 
 }
-export default ClearFeestdagList;
+export default ClearHolidayList;
