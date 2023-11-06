@@ -1,19 +1,14 @@
 ﻿using AutoMapper;
-using PlanningsTool.Common.DTO.Feestdagen;
+using PlanningsTool.Common.DTO.Holidays;
 using PlanningsTool.Common.DTO.RegimeTypes;
 using PlanningsTool.Common.DTO.Shifts;
 using PlanningsTool.Common.DTO.ShiftTypes;
-using PlanningsTool.Common.DTO.Teamplanningen;
-using PlanningsTool.Common.DTO.VerlofTypes;
-using PlanningsTool.Common.DTO.Verloven;
-using PlanningsTool.Common.DTO.Zorgkundigen;
-using PlanningsTool.Common.DTO.ZorgkundigeShifts;
+using PlanningsTool.Common.DTO.Teamplans;
+using PlanningsTool.Common.DTO.VacationTypes;
+using PlanningsTool.Common.DTO.Vacations;
+using PlanningsTool.Common.DTO.Nurses;
+using PlanningsTool.Common.DTO.NurseShifts;
 using PlanningsTool.DAL.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PlanningsTool.BLL
 {
@@ -21,32 +16,32 @@ namespace PlanningsTool.BLL
     {
         public Mapper()
         {
-            CreateMap<Zorgkundige, ZorgkundigeDTO>().ReverseMap();
-            CreateMap<Zorgkundige, CreateZorgkundigeDTO>().ReverseMap();
-            CreateMap<Zorgkundige, UpdateZorgkundigeDTO>().ReverseMap();
+            CreateMap<Nurse, NurseDTO>().ReverseMap();
+            CreateMap<Nurse, CreateNurseDTO>().ReverseMap();
+            CreateMap<Nurse, UpdateNurseDTO>().ReverseMap();
 
-            CreateMap<Verlof, VerlofDTO>().ReverseMap();
-            CreateMap<Verlof, VerlofDetailDTO>().ReverseMap();
-            CreateMap<Verlof, CreateVerlofDTO>().ReverseMap();
-            CreateMap<Verlof, UpdateVerlofDTO>().ReverseMap();
+            CreateMap<Vacation, VacationDTO>().ReverseMap();
+            CreateMap<Vacation, VacationDetailDTO>().ReverseMap();
+            CreateMap<Vacation, CreateVacationDTO>().ReverseMap();
+            CreateMap<Vacation, UpdateVacationDTO>().ReverseMap();
 
             CreateMap<Shift, ShiftDTO>().ReverseMap();
             CreateMap<Shift, CreateShiftDTO>().ReverseMap();
             CreateMap<Shift, UpdateShiftDTO>().ReverseMap();
 
-            CreateMap<ZorgkundigeShift, ZorgkundigeShiftDTO>().ReverseMap();
-            CreateMap<ZorgkundigeShift, CreateZorgkundigeShiftDTO>().ReverseMap();
-            CreateMap<ZorgkundigeShift, UpdateZorgkundigeShiftDTO>().ReverseMap();
+            CreateMap<NurseShift, NurseShiftDTO>().ReverseMap();
+            CreateMap<NurseShift, CreateNurseShiftDTO>().ReverseMap();
+            CreateMap<NurseShift, UpdateNurseShiftDTO>().ReverseMap();
 
-            CreateMap<Teamplanning, TeamplanningDTO>().ReverseMap();
-            CreateMap<Teamplanning, CreateTeamplanningDTO>().ReverseMap();
-            CreateMap<Teamplanning, UpdateTeamplanningDTO>().ReverseMap();
+            CreateMap<Teamplan, TeamplanDTO>().ReverseMap();
+            CreateMap<Teamplan, CreateTeamplanDTO>().ReverseMap();
+            CreateMap<Teamplan, UpdateTeamplanDTO>().ReverseMap();
 
-            CreateMap<Feestdag, FeestdagDTO>().ReverseMap();
-            CreateMap<Feestdag, CreateFeestdagDTO>().ReverseMap();
+            CreateMap<Holiday, HolidayDTO>().ReverseMap();
+            CreateMap<Holiday, CreateHolidayDTO>().ReverseMap();
 
             CreateMap<RegimeType, RegimeTypeDTO>().ReverseMap();
-            CreateMap<VerlofType, VerlofTypeDTO>().ReverseMap();
+            CreateMap<VacationType, VacationTypeDTO>().ReverseMap();
             CreateMap<ShiftType, ShiftTypeDTO>().ReverseMap();
         }
     }

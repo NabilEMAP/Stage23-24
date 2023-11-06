@@ -1,9 +1,4 @@
 ﻿using PlanningsTool.Common.DTO.ShiftTypes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PlanningsTool.BLL.Interfaces
 {
@@ -11,6 +6,6 @@ namespace PlanningsTool.BLL.Interfaces
     {
         public Task<IEnumerable<ShiftTypeDTO>> GetAll();
         public Task<ShiftTypeDTO> GetById(int id);
-        public Task<IEnumerable<ShiftTypeDTO>> GetShiftTypesByNaam(string naam);
+        public Task<IEnumerable<ShiftTypeDTO>> GetShiftTypesByName(string name);
     }
 }

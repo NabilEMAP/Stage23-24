@@ -1,13 +1,7 @@
 ﻿using AutoMapper;
 using PlanningsTool.BLL.Interfaces;
 using PlanningsTool.Common.DTO.RegimeTypes;
-using PlanningsTool.DAL.Models;
 using PlanningsTool.DAL.UOW;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PlanningsTool.BLL.Services
 {
@@ -34,15 +28,15 @@ namespace PlanningsTool.BLL.Services
             return _mapper.Map<RegimeTypeDTO>(regimeType);
         }
 
-        public async Task<IEnumerable<RegimeTypeDTO>> GetRegimeTypesByNaam(string naam)
+        public async Task<IEnumerable<RegimeTypeDTO>> GetRegimeTypesByName(string name)
         {
-            var regimeTypes = await _uow.RegimeTypesRepository.GetRegimeTypesByNaam(naam);
+            var regimeTypes = await _uow.RegimeTypesRepository.GetRegimeTypesByName(name);
             return _mapper.Map<IEnumerable<RegimeTypeDTO>>(regimeTypes);
         }
 
-        public async Task<IEnumerable<RegimeTypeDTO>> GetRegimeTypesByAantalUren(string aantalUren)
+        public async Task<IEnumerable<RegimeTypeDTO>> GetRegimeTypesByCountHours(string countHours)
         {
-            var regimeTypes = await _uow.RegimeTypesRepository.GetRegimeTypesByAantalUren(aantalUren);
+            var regimeTypes = await _uow.RegimeTypesRepository.GetRegimeTypesByCountHours(countHours);
             return _mapper.Map<IEnumerable<RegimeTypeDTO>>(regimeTypes);
         }
     }

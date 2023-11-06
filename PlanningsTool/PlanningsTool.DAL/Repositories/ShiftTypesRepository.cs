@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PlanningsTool.DAL.Contexts;
 using PlanningsTool.DAL.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PlanningsTool.DAL.Repositories
 {
@@ -15,9 +10,9 @@ namespace PlanningsTool.DAL.Repositories
         {
         }
 
-        public async Task<IEnumerable<ShiftType>> GetShiftTypesByNaam(string naam)
+        public async Task<IEnumerable<ShiftType>> GetShiftTypesByName(string name)
         {
-            string query = $"SELECT * FROM [dbo].[ShiftTypes] AS z WHERE z.Shift like '%{naam}%'";
+            string query = $"SELECT * FROM [dbo].[ShiftTypes] AS z WHERE z.Name like '%{name}%'";
             return await _context.ShiftTypes.FromSqlRaw(query).ToListAsync();
         }
     }

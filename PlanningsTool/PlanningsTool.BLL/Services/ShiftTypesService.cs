@@ -2,11 +2,6 @@
 using PlanningsTool.BLL.Interfaces;
 using PlanningsTool.Common.DTO.ShiftTypes;
 using PlanningsTool.DAL.UOW;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PlanningsTool.BLL.Services
 {
@@ -33,9 +28,9 @@ namespace PlanningsTool.BLL.Services
             return _mapper.Map<ShiftTypeDTO>(shiftType);
         }
 
-        public async Task<IEnumerable<ShiftTypeDTO>> GetShiftTypesByNaam(string naam)
+        public async Task<IEnumerable<ShiftTypeDTO>> GetShiftTypesByName(string name)
         {
-            var shiftTypes = await _uow.ShiftTypesRepository.GetShiftTypesByNaam(naam);
+            var shiftTypes = await _uow.ShiftTypesRepository.GetShiftTypesByName(name);
             return _mapper.Map<IEnumerable<ShiftTypeDTO>>(shiftTypes);
         }
     }

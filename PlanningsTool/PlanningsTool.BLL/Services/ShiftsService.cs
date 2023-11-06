@@ -1,14 +1,8 @@
 ﻿using AutoMapper;
 using PlanningsTool.BLL.Interfaces;
 using PlanningsTool.Common.DTO.Shifts;
-using PlanningsTool.Common.DTO.Shifts;
 using PlanningsTool.DAL.Models;
 using PlanningsTool.DAL.UOW;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PlanningsTool.BLL.Services
 {
@@ -36,7 +30,7 @@ namespace PlanningsTool.BLL.Services
             var toDeleteShift = await _uow.ShiftsRepository.GetShiftAsyncById(id);
             if (toDeleteShift == null)
             {
-                throw new KeyNotFoundException("This shift does not exist.");
+                throw new KeyNotFoundException("Deze shift bestaat niet.");
             }
             _uow.ShiftsRepository.Delete(toDeleteShift);
             await _uow.Save();
@@ -61,15 +55,15 @@ namespace PlanningsTool.BLL.Services
             return _mapper.Map<ShiftDTO>(shift);
         }
 
-        public async Task<IEnumerable<ShiftDTO>> GetShiftsByStarttijd(string starttijd)
+        public async Task<IEnumerable<ShiftDTO>> GetShiftsByStarttime(string starttime)
         {
-            var shifts = await _uow.ShiftsRepository.GetShiftsByStarttijd(starttijd);
+            var shifts = await _uow.ShiftsRepository.GetShiftsByStarttime(starttime);
             return _mapper.Map<IEnumerable<ShiftDTO>>(shifts);
         }
 
-        public async Task<IEnumerable<ShiftDTO>> GetShiftsByEindtijd(string eindtijd)
+        public async Task<IEnumerable<ShiftDTO>> GetShiftsByEndtime(string endtime)
         {
-            var shifts = await _uow.ShiftsRepository.GetShiftsByEindtijd(eindtijd);
+            var shifts = await _uow.ShiftsRepository.GetShiftsByEndtime(endtime);
             return _mapper.Map<IEnumerable<ShiftDTO>>(shifts);
         }
 
@@ -80,11 +74,11 @@ namespace PlanningsTool.BLL.Services
 
             if (shiftToUpdate == null)
             {
-                throw new KeyNotFoundException("This shift does not exist.");
+                throw new KeyNotFoundException("Deze shift bestaat niet.");
             }
 
-            shiftToUpdate.Starttijd = shiftFromRequest.Starttijd;
-            shiftToUpdate.Eindtijd = shiftFromRequest.Eindtijd;
+            shiftToUpdate.Starttime = shiftFromRequest.Starttime;
+            shiftToUpdate.Endtime = shiftFromRequest.Endtime;
             shiftToUpdate.ShiftTypeId = shiftFromRequest.ShiftTypeId;
 
             await _uow.ShiftsRepository.Update(shiftToUpdate);

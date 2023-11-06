@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PlanningsTool.DAL.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PlanningsTool.DAL.Seeding
 {
@@ -16,17 +11,17 @@ namespace PlanningsTool.DAL.Seeding
                 new ShiftType()
                 {
                     Id = 1,
-                    Shift = "Vroege",
+                    Name = "Vroege",
                 },
                 new ShiftType()
                 {
                     Id = 2,
-                    Shift = "Late",
+                    Name = "Late",
                 },
                 new ShiftType()
                 {
                     Id = 3,
-                    Shift = "Nacht",
+                    Name = "Nacht",
                 }
             );
         }

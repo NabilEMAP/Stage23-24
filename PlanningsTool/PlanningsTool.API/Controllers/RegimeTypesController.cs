@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PlanningsTool.BLL.Interfaces;
-using PlanningsTool.BLL.Services;
-using PlanningsTool.Common.DTO.RegimeTypes;
 
 namespace PlanningsTool.API.Controllers
 {
@@ -34,20 +32,20 @@ namespace PlanningsTool.API.Controllers
             return Ok(regimeType);
         }
 
-        // GET api/RegimeTypes/naam/{naam}
-        [HttpGet("naam/{naam}")]
-        public async Task<IActionResult> GetRegimeTypesByNaam(string naam)
+        // GET api/RegimeTypes/name/{name}
+        [HttpGet("name/{name}")]
+        public async Task<IActionResult> GetRegimeTypesByName(string name)
         {
-            var regimeTypes = await _regimeTypesServices.GetRegimeTypesByNaam(naam);
+            var regimeTypes = await _regimeTypesServices.GetRegimeTypesByName(name);
             if (regimeTypes == null) { return NotFound(); }
             return Ok(regimeTypes);
         }
 
-        // GET api/RegimeTypes/aantalUren/{aantalUrens}
-        [HttpGet("aantalUren/{aantalUren}")]
-        public async Task<IActionResult> GetRegimeTypesByAantalUren(string aantalUren)
+        // GET api/RegimeTypes/countHours/{countHours}
+        [HttpGet("countHours/{countHours}")]
+        public async Task<IActionResult> GetRegimeTypesByCountHours(string countHours)
         {
-            var regimeTypes = await _regimeTypesServices.GetRegimeTypesByAantalUren(aantalUren);
+            var regimeTypes = await _regimeTypesServices.GetRegimeTypesByCountHours(countHours);
             if (regimeTypes == null) { return NotFound(); }
             return Ok(regimeTypes);
         }

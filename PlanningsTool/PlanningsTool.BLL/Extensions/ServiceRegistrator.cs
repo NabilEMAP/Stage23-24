@@ -2,12 +2,7 @@
 using PlanningsTool.BLL.Interfaces;
 using PlanningsTool.BLL.Services;
 using PlanningsTool.BLL.Validations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PlanningsTool.BLL.Extensions
 {
@@ -15,17 +10,17 @@ namespace PlanningsTool.BLL.Extensions
     {
         public static IServiceCollection RegisterServices(this IServiceCollection services)
         {
-            services.AddScoped<IZorgkundigenService, ZorgkundigenService>();
+            services.AddScoped<INursesService, NursesService>();
             services.AddScoped<IRegimeTypesService, RegimeTypesService>();
-            services.AddScoped<IVerlofTypesService, VerlofTypesService>();
+            services.AddScoped<IVacationTypesService, VacationTypesService>();
             services.AddScoped<IShiftTypesService, ShiftTypesService>();
-            services.AddScoped<IVerlovenService, VerlovenService>();
+            services.AddScoped<IVacationsService, VacationsService>();
             services.AddScoped<IShiftsService, ShiftsService>();
-            services.AddScoped<IZorgkundigeShiftsService, ZorgkundigeShiftService>();
-            services.AddScoped<ITeamplanningenService, TeamplanningenService>();
+            services.AddScoped<INurseShiftsService, NurseShiftService>();
+            services.AddScoped<ITeamplansService, TeamplansService>();
             services.AddScoped<IShiftsService, ShiftsService>();
-            services.AddScoped<IFeestdagenService, FeestdagenService>();
-            services.AddTransient<CreateZorgkundigeValidator>();
+            services.AddScoped<IHolidaysService, HolidaysService>();
+            services.AddTransient<CreateNurseValidator>();
             return services;
         }
 

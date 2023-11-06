@@ -1,23 +1,18 @@
 ﻿using PlanningsTool.DAL.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PlanningsTool.DAL.UOW
 {
     public interface IUnitOfWork
     {
-        public IZorgkundigenRepository ZorgkundigenRepository { get; }
+        public INursesRepository NursesRepository { get; }
         public IRegimeTypesRepository RegimeTypesRepository { get; }
-        public IVerlofTypesRepository VerlofTypesRepository { get; }
+        public IVacationTypesRepository VacationTypesRepository { get; }
         public IShiftTypesRepository ShiftTypesRepository { get; }
-        public IVerlovenRepository VerlovenRepository { get; }
+        public IVacationsRepository VacationsRepository { get; }
         public IShiftsRepository ShiftsRepository { get; }
-        public IZorgkundigeShiftsRepository ZorgkundigeShiftsRepository { get; }
-        public ITeamplanningenRepository TeamplanningenRepository { get; }
-        public IFeestdagenRepository FeestdagenRepository { get; }
+        public INurseShiftsRepository NurseShiftsRepository { get; }
+        public ITeamplansRepository TeamplansRepository { get; }
+        public IHolidaysRepository HolidaysRepository { get; }
         Task Save();
     }
 }

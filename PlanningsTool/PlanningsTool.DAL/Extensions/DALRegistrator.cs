@@ -4,11 +4,6 @@ using Microsoft.Extensions.Logging;
 using PlanningsTool.DAL.Contexts;
 using PlanningsTool.DAL.Repositories;
 using PlanningsTool.DAL.UOW;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PlanningsTool.DAL.Extensions
 {
@@ -30,15 +25,15 @@ namespace PlanningsTool.DAL.Extensions
 
         public static IServiceCollection RegisterRepositories(this IServiceCollection services)
         {
-            services.AddScoped<IZorgkundigenRepository, ZorgkundigenRepository>();
+            services.AddScoped<INursesRepository, NursesRepository>();
             services.AddScoped<IRegimeTypesRepository, RegimeTypesRepository>();
-            services.AddScoped<IVerlofTypesRepository, VerlofTypesRepository>();
+            services.AddScoped<IVacationTypesRepository, VacationTypesRepository>();
             services.AddScoped<IShiftTypesRepository, ShiftTypesRepository>();
-            services.AddScoped<IVerlovenRepository, VerlovenRepository>();
+            services.AddScoped<IVacationsRepository, VacationsRepository>();
             services.AddScoped<IShiftsRepository, ShiftsRepository>();
-            services.AddScoped<IZorgkundigeShiftsRepository, ZorgkundigeShiftsRepository>();
-            services.AddScoped<ITeamplanningenRepository, TeamplanningenRepository>();
-            services.AddScoped<IFeestdagenRepository, FeestdagenRepository>();
+            services.AddScoped<INurseShiftsRepository, NurseShiftsRepository>();
+            services.AddScoped<ITeamplansRepository, TeamplansRepository>();
+            services.AddScoped<IHolidaysRepository, HolidaysRepository>();
             return services;
         }
 

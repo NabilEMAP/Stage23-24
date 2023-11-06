@@ -2,12 +2,7 @@
 using PlanningsTool.DAL.Configurations;
 using PlanningsTool.DAL.Models;
 using PlanningsTool.DAL.Seeding;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PlanningsTool.DAL.Contexts
 {
@@ -18,37 +13,37 @@ namespace PlanningsTool.DAL.Contexts
 
         }
 
-        public virtual DbSet<Zorgkundige> Zorgkundigen { get; set; }
+        public virtual DbSet<Nurse> Nurses { get; set; }
         public virtual DbSet<RegimeType> RegimeTypes { get; set; }
-        public virtual DbSet<VerlofType> VerlofTypes { get; set; }
+        public virtual DbSet<VacationType> VacationTypes { get; set; }
         public virtual DbSet<ShiftType> ShiftTypes { get; set; }
-        public virtual DbSet<Verlof> Verloven { get; set; }
+        public virtual DbSet<Vacation> Vacations { get; set; }
         public virtual DbSet<Shift> Shifts { get; set; }
-        public virtual DbSet<ZorgkundigeShift> ZorgkundigeShifts { get; set; }
-        public virtual DbSet<Teamplanning> Teamplanningen { get; set; }
-        public virtual DbSet<Feestdag> Feestdagen { get; set; }
+        public virtual DbSet<NurseShift> NurseShifts { get; set; }
+        public virtual DbSet<Teamplan> Teamplans { get; set; }
+        public virtual DbSet<Holiday> Holidays { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             //base.OnModelCreating(modelBuilder);
-            modelBuilder.ApplyConfiguration(new ZorgkundigeConfiguration());
+            modelBuilder.ApplyConfiguration(new NurseConfiguration());
             modelBuilder.ApplyConfiguration(new RegimeTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new VerlofTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new VacationTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ShiftTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new VerlofConfiguration());
+            modelBuilder.ApplyConfiguration(new VacationConfiguration());
             modelBuilder.ApplyConfiguration(new ShiftConfiguration());
-            modelBuilder.ApplyConfiguration(new ZorgkundigeShiftConfiguration());
-            modelBuilder.ApplyConfiguration(new TeamplanningConfiguration());
-            modelBuilder.ApplyConfiguration(new FeestdagConfiguration());
-            modelBuilder.Entity<Zorgkundige>().Seed();
+            modelBuilder.ApplyConfiguration(new NurseShiftConfiguration());
+            modelBuilder.ApplyConfiguration(new TeamplanConfiguration());
+            modelBuilder.ApplyConfiguration(new HolidayConfiguration());
+            modelBuilder.Entity<Nurse>().Seed();
             modelBuilder.Entity<RegimeType>().Seed();
-            modelBuilder.Entity<VerlofType>().Seed();
+            modelBuilder.Entity<VacationType>().Seed();
             modelBuilder.Entity<ShiftType>().Seed();
-            modelBuilder.Entity<Verlof>().Seed();
+            modelBuilder.Entity<Vacation>().Seed();
             modelBuilder.Entity<Shift>().Seed();
-            modelBuilder.Entity<ZorgkundigeShift>().Seed();
-            modelBuilder.Entity<Teamplanning>().Seed();
+            modelBuilder.Entity<NurseShift>().Seed();
+            modelBuilder.Entity<Teamplan>().Seed();
         }
     }
 }

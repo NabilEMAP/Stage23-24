@@ -1,60 +1,55 @@
 ﻿using PlanningsTool.DAL.Contexts;
 using PlanningsTool.DAL.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PlanningsTool.DAL.UOW
 {
     public class UnitOfWork : IUnitOfWork
     {
         public readonly ApplicationDbContext _context;
-        public readonly IZorgkundigenRepository _zorgkundigenRepository;
+        public readonly INursesRepository _nursesRepository;
         public readonly IRegimeTypesRepository _regimeTypesRepository;
-        public readonly IVerlofTypesRepository _verlofTypesRepository;
+        public readonly IVacationTypesRepository _vacationTypesRepository;
         public readonly IShiftTypesRepository _shiftTypesRepository;
-        public readonly IVerlovenRepository _verlovenRepository;
+        public readonly IVacationsRepository _vacationsRepository;
         public readonly IShiftsRepository _shiftsRepository;
-        public readonly IZorgkundigeShiftsRepository _zorgkundigeShiftsRepository;
-        public readonly ITeamplanningenRepository _teamplanningenRepository;
-        public readonly IFeestdagenRepository _feestdagenRepository;
+        public readonly INurseShiftsRepository _nurseShiftsRepository;
+        public readonly ITeamplansRepository _teamplansRepository;
+        public readonly IHolidaysRepository _holidaysRepository;
 
         public UnitOfWork(
             ApplicationDbContext context,
-            IZorgkundigenRepository zorgkundigenRepository,
+            INursesRepository nursesRepository,
             IRegimeTypesRepository regimeTypesRepository,
-            IVerlofTypesRepository verlofTypesRepository,
+            IVacationTypesRepository vacationTypesRepository,
             IShiftTypesRepository shiftTypesRepository,
-            IVerlovenRepository verlovenRepository,
+            IVacationsRepository vacationsRepository,
             IShiftsRepository shiftsRepository,
-            IZorgkundigeShiftsRepository zorgkundigeShiftsRepository,
-            ITeamplanningenRepository teamplanningenRepository,
-            IFeestdagenRepository feestdagenRepository
+            INurseShiftsRepository nurseShiftsRepository,
+            ITeamplansRepository teamplansRepository,
+            IHolidaysRepository holidaysRepository
             )
         {
             _context = context;
-            _zorgkundigenRepository = zorgkundigenRepository;
+            _nursesRepository = nursesRepository;
             _regimeTypesRepository = regimeTypesRepository;
-            _verlofTypesRepository = verlofTypesRepository;
+            _vacationTypesRepository = vacationTypesRepository;
             _shiftTypesRepository = shiftTypesRepository;
-            _verlovenRepository = verlovenRepository;
+            _vacationsRepository = vacationsRepository;
             _shiftsRepository = shiftsRepository;
-            _zorgkundigeShiftsRepository = zorgkundigeShiftsRepository;
-            _teamplanningenRepository = teamplanningenRepository;
-            _feestdagenRepository = feestdagenRepository;
+            _nurseShiftsRepository = nurseShiftsRepository;
+            _teamplansRepository = teamplansRepository;
+            _holidaysRepository = holidaysRepository;
         }
 
-        public IZorgkundigenRepository ZorgkundigenRepository { get { return _zorgkundigenRepository; } }
+        public INursesRepository NursesRepository { get { return _nursesRepository; } }
         public IRegimeTypesRepository RegimeTypesRepository { get { return _regimeTypesRepository; } }
-        public IVerlofTypesRepository VerlofTypesRepository { get { return _verlofTypesRepository; } }
+        public IVacationTypesRepository VacationTypesRepository { get { return _vacationTypesRepository; } }
         public IShiftTypesRepository ShiftTypesRepository { get { return _shiftTypesRepository; } }
-        public IVerlovenRepository VerlovenRepository { get { return _verlovenRepository; } }
+        public IVacationsRepository VacationsRepository { get { return _vacationsRepository; } }
         public IShiftsRepository ShiftsRepository { get { return _shiftsRepository; } }
-        public IZorgkundigeShiftsRepository ZorgkundigeShiftsRepository { get { return _zorgkundigeShiftsRepository; } }
-        public ITeamplanningenRepository TeamplanningenRepository { get { return _teamplanningenRepository; } }
-        public IFeestdagenRepository FeestdagenRepository { get { return _feestdagenRepository; } }
+        public INurseShiftsRepository NurseShiftsRepository { get { return _nurseShiftsRepository; } }
+        public ITeamplansRepository TeamplansRepository { get { return _teamplansRepository; } }
+        public IHolidaysRepository HolidaysRepository { get { return _holidaysRepository; } }
 
         public async Task Save()
         {

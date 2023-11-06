@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 using PlanningsTool.DAL.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PlanningsTool.DAL.Configurations
 {
@@ -21,11 +16,11 @@ namespace PlanningsTool.DAL.Configurations
             builder.Property(p => p.Id)
                    .HasColumnType("int");
 
-            builder.Property(p => p.Starttijd)
+            builder.Property(p => p.Starttime)
                     .IsRequired()
                     .HasColumnType("time");
 
-            builder.Property(p => p.Eindtijd)
+            builder.Property(p => p.Endtime)
                     .IsRequired()
                     .HasColumnType("time");
 

@@ -22,7 +22,7 @@ namespace PlanningsTool.DAL.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("PlanningsTool.DAL.Models.Feestdag", b =>
+            modelBuilder.Entity("PlanningsTool.DAL.Models.Holiday", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -30,10 +30,10 @@ namespace PlanningsTool.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("Datum")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("date");
 
-                    b.Property<string>("Naam")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("varchar(100)");
 
@@ -42,7 +42,198 @@ namespace PlanningsTool.DAL.Migrations
                     b.HasIndex("Id")
                         .IsUnique();
 
-                    b.ToTable("Feestdagen", "dbo");
+                    b.ToTable("Holidays", "dbo");
+                });
+
+            modelBuilder.Entity("PlanningsTool.DAL.Models.Nurse", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("IsFixedNight")
+                        .IsRequired()
+                        .HasColumnType("char(1)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<int>("RegimeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Id")
+                        .IsUnique();
+
+                    b.HasIndex("RegimeId");
+
+                    b.ToTable("Nurses", "dbo");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            FirstName = "Amina",
+                            IsFixedNight = "0",
+                            LastName = "Woerahfa",
+                            RegimeId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            FirstName = "Barbara",
+                            IsFixedNight = "0",
+                            LastName = "Tamara",
+                            RegimeId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            FirstName = "Chaimae",
+                            IsFixedNight = "0",
+                            LastName = "Dhanitin",
+                            RegimeId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            FirstName = "Dalila",
+                            IsFixedNight = "0",
+                            LastName = "Dhiyah",
+                            RegimeId = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            FirstName = "Fatima",
+                            IsFixedNight = "0",
+                            LastName = "Tsridh",
+                            RegimeId = 2
+                        },
+                        new
+                        {
+                            Id = 6,
+                            FirstName = "Ghizlane",
+                            IsFixedNight = "0",
+                            LastName = "Mantazoedh",
+                            RegimeId = 2
+                        },
+                        new
+                        {
+                            Id = 7,
+                            FirstName = "Halima",
+                            IsFixedNight = "0",
+                            LastName = "Hanatt",
+                            RegimeId = 2
+                        },
+                        new
+                        {
+                            Id = 8,
+                            FirstName = "Imane",
+                            IsFixedNight = "0",
+                            LastName = "Azough",
+                            RegimeId = 3
+                        },
+                        new
+                        {
+                            Id = 9,
+                            FirstName = "Karima",
+                            IsFixedNight = "0",
+                            LastName = "Adheswe",
+                            RegimeId = 3
+                        },
+                        new
+                        {
+                            Id = 10,
+                            FirstName = "Latifa",
+                            IsFixedNight = "1",
+                            LastName = "Adhesha",
+                            RegimeId = 1
+                        },
+                        new
+                        {
+                            Id = 11,
+                            FirstName = "Mariem",
+                            IsFixedNight = "1",
+                            LastName = "Sariedh",
+                            RegimeId = 1
+                        },
+                        new
+                        {
+                            Id = 12,
+                            FirstName = "Nasira",
+                            IsFixedNight = "1",
+                            LastName = "Isira",
+                            RegimeId = 3
+                        });
+                });
+
+            modelBuilder.Entity("PlanningsTool.DAL.Models.NurseShift", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("date");
+
+                    b.Property<int>("NurseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ShiftId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeamplanId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Id")
+                        .IsUnique();
+
+                    b.HasIndex("NurseId");
+
+                    b.HasIndex("ShiftId");
+
+                    b.HasIndex("TeamplanId");
+
+                    b.ToTable("NurseShifts", "dbo");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Date = new DateTime(2024, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NurseId = 1,
+                            ShiftId = 1,
+                            TeamplanId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Date = new DateTime(2024, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NurseId = 2,
+                            ShiftId = 4,
+                            TeamplanId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Date = new DateTime(2024, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NurseId = 3,
+                            ShiftId = 7,
+                            TeamplanId = 1
+                        });
                 });
 
             modelBuilder.Entity("PlanningsTool.DAL.Models.RegimeType", b =>
@@ -53,10 +244,10 @@ namespace PlanningsTool.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<decimal>("AantalUren")
+                    b.Property<decimal>("CountHours")
                         .HasColumnType("decimal(3,1)");
 
-                    b.Property<string>("Regime")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("varchar(100)");
 
@@ -71,26 +262,26 @@ namespace PlanningsTool.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            AantalUren = 38.0m,
-                            Regime = "Voltijds"
+                            CountHours = 38.0m,
+                            Name = "Voltijds"
                         },
                         new
                         {
                             Id = 2,
-                            AantalUren = 30.4m,
-                            Regime = "Deeltijds 4/5"
+                            CountHours = 30.4m,
+                            Name = "Deeltijds 4/5"
                         },
                         new
                         {
                             Id = 3,
-                            AantalUren = 28.8m,
-                            Regime = "Deeltijds 3/4"
+                            CountHours = 28.8m,
+                            Name = "Deeltijds 3/4"
                         },
                         new
                         {
                             Id = 4,
-                            AantalUren = 19.0m,
-                            Regime = "Halftijds"
+                            CountHours = 19.0m,
+                            Name = "Halftijds"
                         });
                 });
 
@@ -102,13 +293,13 @@ namespace PlanningsTool.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<TimeSpan>("Eindtijd")
+                    b.Property<TimeSpan>("Endtime")
                         .HasColumnType("time");
 
                     b.Property<int>("ShiftTypeId")
                         .HasColumnType("int");
 
-                    b.Property<TimeSpan>("Starttijd")
+                    b.Property<TimeSpan>("Starttime")
                         .HasColumnType("time");
 
                     b.HasKey("Id");
@@ -124,51 +315,51 @@ namespace PlanningsTool.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            Eindtijd = new TimeSpan(0, 15, 0, 0, 0),
+                            Endtime = new TimeSpan(0, 15, 0, 0, 0),
                             ShiftTypeId = 1,
-                            Starttijd = new TimeSpan(0, 7, 0, 0, 0)
+                            Starttime = new TimeSpan(0, 7, 0, 0, 0)
                         },
                         new
                         {
                             Id = 2,
-                            Eindtijd = new TimeSpan(0, 13, 30, 0, 0),
+                            Endtime = new TimeSpan(0, 13, 30, 0, 0),
                             ShiftTypeId = 1,
-                            Starttijd = new TimeSpan(0, 7, 0, 0, 0)
+                            Starttime = new TimeSpan(0, 7, 0, 0, 0)
                         },
                         new
                         {
                             Id = 3,
-                            Eindtijd = new TimeSpan(0, 11, 0, 0, 0),
+                            Endtime = new TimeSpan(0, 11, 0, 0, 0),
                             ShiftTypeId = 1,
-                            Starttijd = new TimeSpan(0, 7, 0, 0, 0)
+                            Starttime = new TimeSpan(0, 7, 0, 0, 0)
                         },
                         new
                         {
                             Id = 4,
-                            Eindtijd = new TimeSpan(0, 20, 30, 0, 0),
+                            Endtime = new TimeSpan(0, 20, 30, 0, 0),
                             ShiftTypeId = 2,
-                            Starttijd = new TimeSpan(0, 12, 30, 0, 0)
+                            Starttime = new TimeSpan(0, 12, 30, 0, 0)
                         },
                         new
                         {
                             Id = 5,
-                            Eindtijd = new TimeSpan(0, 20, 30, 0, 0),
+                            Endtime = new TimeSpan(0, 20, 30, 0, 0),
                             ShiftTypeId = 2,
-                            Starttijd = new TimeSpan(0, 14, 0, 0, 0)
+                            Starttime = new TimeSpan(0, 14, 0, 0, 0)
                         },
                         new
                         {
                             Id = 6,
-                            Eindtijd = new TimeSpan(0, 20, 0, 0, 0),
+                            Endtime = new TimeSpan(0, 20, 0, 0, 0),
                             ShiftTypeId = 2,
-                            Starttijd = new TimeSpan(0, 16, 0, 0, 0)
+                            Starttime = new TimeSpan(0, 16, 0, 0, 0)
                         },
                         new
                         {
                             Id = 7,
-                            Eindtijd = new TimeSpan(0, 7, 15, 0, 0),
+                            Endtime = new TimeSpan(0, 7, 15, 0, 0),
                             ShiftTypeId = 3,
-                            Starttijd = new TimeSpan(0, 20, 15, 0, 0)
+                            Starttime = new TimeSpan(0, 20, 15, 0, 0)
                         });
                 });
 
@@ -180,7 +371,7 @@ namespace PlanningsTool.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Shift")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("varchar(100)");
 
@@ -195,21 +386,21 @@ namespace PlanningsTool.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            Shift = "Vroege"
+                            Name = "Vroege"
                         },
                         new
                         {
                             Id = 2,
-                            Shift = "Late"
+                            Name = "Late"
                         },
                         new
                         {
                             Id = 3,
-                            Shift = "Nacht"
+                            Name = "Nacht"
                         });
                 });
 
-            modelBuilder.Entity("PlanningsTool.DAL.Models.Teamplanning", b =>
+            modelBuilder.Entity("PlanningsTool.DAL.Models.Teamplan", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -217,7 +408,7 @@ namespace PlanningsTool.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("Maand")
+                    b.Property<int>("Month")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -225,72 +416,72 @@ namespace PlanningsTool.DAL.Migrations
                     b.HasIndex("Id")
                         .IsUnique();
 
-                    b.ToTable("Teamplanningen", "dbo");
+                    b.ToTable("Teamplans", "dbo");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            Maand = 1
+                            Month = 1
                         },
                         new
                         {
                             Id = 2,
-                            Maand = 2
+                            Month = 2
                         },
                         new
                         {
                             Id = 3,
-                            Maand = 3
+                            Month = 3
                         },
                         new
                         {
                             Id = 4,
-                            Maand = 4
+                            Month = 4
                         },
                         new
                         {
                             Id = 5,
-                            Maand = 5
+                            Month = 5
                         },
                         new
                         {
                             Id = 6,
-                            Maand = 6
+                            Month = 6
                         },
                         new
                         {
                             Id = 7,
-                            Maand = 7
+                            Month = 7
                         },
                         new
                         {
                             Id = 8,
-                            Maand = 8
+                            Month = 8
                         },
                         new
                         {
                             Id = 9,
-                            Maand = 9
+                            Month = 9
                         },
                         new
                         {
                             Id = 10,
-                            Maand = 10
+                            Month = 10
                         },
                         new
                         {
                             Id = 11,
-                            Maand = 11
+                            Month = 11
                         },
                         new
                         {
                             Id = 12,
-                            Maand = 12
+                            Month = 12
                         });
                 });
 
-            modelBuilder.Entity("PlanningsTool.DAL.Models.Verlof", b =>
+            modelBuilder.Entity("PlanningsTool.DAL.Models.Vacation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -298,20 +489,20 @@ namespace PlanningsTool.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("Einddatum")
+                    b.Property<DateTime>("Enddate")
                         .HasColumnType("date");
 
-                    b.Property<string>("Reden")
+                    b.Property<int>("NurseId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Reason")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Startdatum")
+                    b.Property<DateTime>("Startdate")
                         .HasColumnType("date");
 
-                    b.Property<int>("VerlofTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ZorgkundigeId")
+                    b.Property<int>("VacationTypeId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -319,81 +510,52 @@ namespace PlanningsTool.DAL.Migrations
                     b.HasIndex("Id")
                         .IsUnique();
 
-                    b.HasIndex("VerlofTypeId");
+                    b.HasIndex("NurseId");
 
-                    b.HasIndex("ZorgkundigeId");
+                    b.HasIndex("VacationTypeId");
 
-                    b.ToTable("Verloven", "dbo");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Einddatum = new DateTime(2023, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Reden = "Verlofdagje op vrijdag.",
-                            Startdatum = new DateTime(2023, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            VerlofTypeId = 1,
-                            ZorgkundigeId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Einddatum = new DateTime(2023, 9, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Reden = "Heel de week ziek geweest.",
-                            Startdatum = new DateTime(2023, 9, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            VerlofTypeId = 2,
-                            ZorgkundigeId = 2
-                        });
-                });
-
-            modelBuilder.Entity("PlanningsTool.DAL.Models.VerlofType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Verlof")
-                        .IsRequired()
-                        .HasColumnType("varchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Id")
-                        .IsUnique();
-
-                    b.ToTable("VerlofTypes", "dbo");
+                    b.ToTable("Vacations", "dbo");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            Verlof = "Verlof"
+                            Enddate = new DateTime(2023, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NurseId = 1,
+                            Reason = "Verlofdagje op vrijdag.",
+                            Startdate = new DateTime(2023, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            VacationTypeId = 1
                         },
                         new
                         {
                             Id = 2,
-                            Verlof = "Ziekte"
+                            Enddate = new DateTime(2023, 9, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NurseId = 2,
+                            Reason = "Heel de week ziek geweest.",
+                            Startdate = new DateTime(2023, 9, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            VacationTypeId = 2
                         },
                         new
                         {
                             Id = 3,
-                            Verlof = "Arbeidsduurverkorting"
+                            Enddate = new DateTime(2023, 9, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NurseId = 3,
+                            Reason = "Ik ga eens terug in de tijd :D, eens zien of ik een error kan geven.",
+                            Startdate = new DateTime(2023, 9, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            VacationTypeId = 5
                         },
                         new
                         {
                             Id = 4,
-                            Verlof = "Wens"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Verlof = "Andere"
+                            Enddate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NurseId = 4,
+                            Reason = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse fringilla nibh eu justo ullamcorper iaculis. Quisque at tellus at ex faucibus tempus ac eu nisi. In sapien sapien, pellentesque eu velit a, sodales faucibus urna. Ut est eros, efficitur eu suscipit quis, vulputate a metus. Vestibulum non ullamcorper lectus. Ut aliquam nunc sed arcu laoreet eleifend. Nam venenatis purus ipsum, ut condimentum quam vulputate id. Mauris id orci vel purus convallis volutpat ac sed nibh. Donec vitae dolor in tortor mollis consectetur. Nunc in ante tortor. Mauris sit amet semper lacus. Vivamus lacus neque, sodales id dolor vel, iaculis dictum tellus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Proin eu dui vel risus aliquam elementum eget id ligula.",
+                            Startdate = new DateTime(2023, 9, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            VacationTypeId = 5
                         });
                 });
 
-            modelBuilder.Entity("PlanningsTool.DAL.Models.Zorgkundige", b =>
+            modelBuilder.Entity("PlanningsTool.DAL.Models.VacationType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -401,18 +563,7 @@ namespace PlanningsTool.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Achternaam")
-                        .IsRequired()
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<string>("IsVasteNacht")
-                        .IsRequired()
-                        .HasColumnType("char(1)");
-
-                    b.Property<int>("RegimeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Voornaam")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("varchar(100)");
 
@@ -421,167 +572,72 @@ namespace PlanningsTool.DAL.Migrations
                     b.HasIndex("Id")
                         .IsUnique();
 
-                    b.HasIndex("RegimeId");
-
-                    b.ToTable("Zorgkundigen", "dbo");
+                    b.ToTable("VacationTypes", "dbo");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            Achternaam = "Woerahfa",
-                            IsVasteNacht = "0",
-                            RegimeId = 1,
-                            Voornaam = "Amina"
+                            Name = "Verlof"
                         },
                         new
                         {
                             Id = 2,
-                            Achternaam = "Tamara",
-                            IsVasteNacht = "0",
-                            RegimeId = 1,
-                            Voornaam = "Barbara"
+                            Name = "Ziekte"
                         },
                         new
                         {
                             Id = 3,
-                            Achternaam = "Dhanitin",
-                            IsVasteNacht = "0",
-                            RegimeId = 1,
-                            Voornaam = "Chaimae"
+                            Name = "Arbeidsduurverkorting"
                         },
                         new
                         {
                             Id = 4,
-                            Achternaam = "Dhiyah",
-                            IsVasteNacht = "0",
-                            RegimeId = 1,
-                            Voornaam = "Dalila"
+                            Name = "Wens"
                         },
                         new
                         {
                             Id = 5,
-                            Achternaam = "Tsridh",
-                            IsVasteNacht = "0",
-                            RegimeId = 2,
-                            Voornaam = "Fatima"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Achternaam = "Mantazoedh",
-                            IsVasteNacht = "0",
-                            RegimeId = 2,
-                            Voornaam = "Ghizlane"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Achternaam = "Hanatt",
-                            IsVasteNacht = "0",
-                            RegimeId = 2,
-                            Voornaam = "Halima"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Achternaam = "Azough",
-                            IsVasteNacht = "0",
-                            RegimeId = 3,
-                            Voornaam = "Imane"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Achternaam = "Adheswe",
-                            IsVasteNacht = "0",
-                            RegimeId = 3,
-                            Voornaam = "Karima"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Achternaam = "Adhesha",
-                            IsVasteNacht = "1",
-                            RegimeId = 1,
-                            Voornaam = "Latifa"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Achternaam = "Sariedh",
-                            IsVasteNacht = "1",
-                            RegimeId = 1,
-                            Voornaam = "Mariem"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Achternaam = "Isira",
-                            IsVasteNacht = "1",
-                            RegimeId = 3,
-                            Voornaam = "Nasira"
+                            Name = "Andere"
                         });
                 });
 
-            modelBuilder.Entity("PlanningsTool.DAL.Models.ZorgkundigeShift", b =>
+            modelBuilder.Entity("PlanningsTool.DAL.Models.Nurse", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.HasOne("PlanningsTool.DAL.Models.RegimeType", "RegimeType")
+                        .WithMany()
+                        .HasForeignKey("RegimeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    b.Navigation("RegimeType");
+                });
 
-                    b.Property<DateTime>("Datum")
-                        .HasColumnType("date");
+            modelBuilder.Entity("PlanningsTool.DAL.Models.NurseShift", b =>
+                {
+                    b.HasOne("PlanningsTool.DAL.Models.Nurse", "Nurse")
+                        .WithMany()
+                        .HasForeignKey("NurseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<int>("ShiftId")
-                        .HasColumnType("int");
+                    b.HasOne("PlanningsTool.DAL.Models.Shift", "Shift")
+                        .WithMany()
+                        .HasForeignKey("ShiftId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<int>("TeamplanningId")
-                        .HasColumnType("int");
+                    b.HasOne("PlanningsTool.DAL.Models.Teamplan", "Teamplan")
+                        .WithMany()
+                        .HasForeignKey("TeamplanId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<int>("ZorgkundigeId")
-                        .HasColumnType("int");
+                    b.Navigation("Nurse");
 
-                    b.HasKey("Id");
+                    b.Navigation("Shift");
 
-                    b.HasIndex("Id")
-                        .IsUnique();
-
-                    b.HasIndex("ShiftId");
-
-                    b.HasIndex("TeamplanningId");
-
-                    b.HasIndex("ZorgkundigeId");
-
-                    b.ToTable("ZorgkundigeShifts", "dbo");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Datum = new DateTime(2024, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ShiftId = 1,
-                            TeamplanningId = 1,
-                            ZorgkundigeId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Datum = new DateTime(2024, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ShiftId = 4,
-                            TeamplanningId = 1,
-                            ZorgkundigeId = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Datum = new DateTime(2024, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ShiftId = 7,
-                            TeamplanningId = 1,
-                            ZorgkundigeId = 3
-                        });
+                    b.Navigation("Teamplan");
                 });
 
             modelBuilder.Entity("PlanningsTool.DAL.Models.Shift", b =>
@@ -595,61 +651,23 @@ namespace PlanningsTool.DAL.Migrations
                     b.Navigation("ShiftType");
                 });
 
-            modelBuilder.Entity("PlanningsTool.DAL.Models.Verlof", b =>
+            modelBuilder.Entity("PlanningsTool.DAL.Models.Vacation", b =>
                 {
-                    b.HasOne("PlanningsTool.DAL.Models.VerlofType", "VerlofType")
+                    b.HasOne("PlanningsTool.DAL.Models.Nurse", "Nurse")
                         .WithMany()
-                        .HasForeignKey("VerlofTypeId")
+                        .HasForeignKey("NurseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PlanningsTool.DAL.Models.Zorgkundige", "Zorgkundige")
+                    b.HasOne("PlanningsTool.DAL.Models.VacationType", "VacationType")
                         .WithMany()
-                        .HasForeignKey("ZorgkundigeId")
+                        .HasForeignKey("VacationTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("VerlofType");
+                    b.Navigation("Nurse");
 
-                    b.Navigation("Zorgkundige");
-                });
-
-            modelBuilder.Entity("PlanningsTool.DAL.Models.Zorgkundige", b =>
-                {
-                    b.HasOne("PlanningsTool.DAL.Models.RegimeType", "RegimeType")
-                        .WithMany()
-                        .HasForeignKey("RegimeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("RegimeType");
-                });
-
-            modelBuilder.Entity("PlanningsTool.DAL.Models.ZorgkundigeShift", b =>
-                {
-                    b.HasOne("PlanningsTool.DAL.Models.Shift", "Shift")
-                        .WithMany()
-                        .HasForeignKey("ShiftId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PlanningsTool.DAL.Models.Teamplanning", "Teamplanning")
-                        .WithMany()
-                        .HasForeignKey("TeamplanningId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PlanningsTool.DAL.Models.Zorgkundige", "Zorgkundige")
-                        .WithMany()
-                        .HasForeignKey("ZorgkundigeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Shift");
-
-                    b.Navigation("Teamplanning");
-
-                    b.Navigation("Zorgkundige");
+                    b.Navigation("VacationType");
                 });
 #pragma warning restore 612, 618
         }

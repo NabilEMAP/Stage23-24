@@ -1,12 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore;
 using PlanningsTool.DAL.Models;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.Metrics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PlanningsTool.DAL.Configurations
 {
@@ -22,11 +16,11 @@ namespace PlanningsTool.DAL.Configurations
             builder.Property(p => p.Id)
                    .HasColumnType("int");
 
-            builder.Property(p => p.Regime)
+            builder.Property(p => p.Name)
                     .IsRequired()
                     .HasColumnType("varchar(100)");
 
-            builder.Property(p => p.AantalUren)
+            builder.Property(p => p.CountHours)
                     .IsRequired()
                     .HasColumnType("decimal(3,1)");
         }

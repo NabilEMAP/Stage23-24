@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PlanningsTool.BLL.Interfaces;
-using PlanningsTool.BLL.Services;
-using PlanningsTool.Common.DTO.ShiftTypes;
 
 namespace PlanningsTool.API.Controllers
 {
@@ -34,11 +32,11 @@ namespace PlanningsTool.API.Controllers
             return Ok(shiftType);
         }
 
-        // GET api/ShiftTypes/naam/{naam}
-        [HttpGet("naam/{naam}")]
-        public async Task<IActionResult> GetShiftTypesByNaam(string naam)
+        // GET api/ShiftTypes/name/{name}
+        [HttpGet("name/{name}")]
+        public async Task<IActionResult> GetShiftTypesByNaam(string name)
         {
-            var shiftTypes = await _shiftTypesServices.GetShiftTypesByNaam(naam);
+            var shiftTypes = await _shiftTypesServices.GetShiftTypesByName(name);
             if (shiftTypes == null) { return NotFound(); }
             return Ok(shiftTypes);
         }

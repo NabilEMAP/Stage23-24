@@ -33,20 +33,20 @@ namespace PlanningsTool.API.Controllers
             return Ok(shift);
         }
 
-        // GET api/Shifts/starttijd/{starttijd}
-        [HttpGet("starttijd/{starttijd}")]
-        public async Task<IActionResult> GetShiftsByStarttijd(string starttijd)
+        // GET api/Shifts/starttime/{starttime}
+        [HttpGet("starttime/{starttime}")]
+        public async Task<IActionResult> GetShiftsByStarttime(string starttime)
         {
-            var shifts = await _shiftsServices.GetShiftsByStarttijd(starttijd);
+            var shifts = await _shiftsServices.GetShiftsByStarttime(starttime);
             if (shifts == null) { return NotFound(); }
             return Ok(shifts);
         }
 
-        // GET api/Shifts/eindtijd/{eindtijd}
-        [HttpGet("eindtijd/{eindtijd}")]
-        public async Task<IActionResult> GetShiftsByEindtijd(string eindtijd)
+        // GET api/Shifts/endtime/{endtime}
+        [HttpGet("endtime/{endtime}")]
+        public async Task<IActionResult> GetShiftsByEndtime(string endtime)
         {
-            var shifts = await _shiftsServices.GetShiftsByEindtijd(eindtijd);
+            var shifts = await _shiftsServices.GetShiftsByEndtime(endtime);
             if (shifts == null) { return NotFound(); }
             return Ok(shifts);
         }

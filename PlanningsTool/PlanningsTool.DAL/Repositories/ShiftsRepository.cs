@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PlanningsTool.DAL.Contexts;
 using PlanningsTool.DAL.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PlanningsTool.DAL.Repositories
 {
@@ -29,15 +24,15 @@ namespace PlanningsTool.DAL.Repositories
                 .FirstOrDefaultAsync(z => z.Id == id);
         }
 
-        public async Task<IEnumerable<Shift>> GetShiftsByEindtijd(string eindtijd)
+        public async Task<IEnumerable<Shift>> GetShiftsByEndtime(string endtime)
         {
-            string query = $"SELECT * FROM [dbo].[Shifts] AS z WHERE z.Eindtijd like '%{eindtijd}%'";
+            string query = $"SELECT * FROM [dbo].[Shifts] AS z WHERE z.Endtime like '%{endtime}%'";
             return await _context.Shifts.FromSqlRaw(query).Include(s => s.ShiftType).ToListAsync();
         }
 
-        public async Task<IEnumerable<Shift>> GetShiftsByStarttijd(string starttijd)
+        public async Task<IEnumerable<Shift>> GetShiftsByStarttime(string starttime)
         {
-            string query = $"SELECT * FROM [dbo].[Shifts] AS z WHERE z.Starttijd like '%{starttijd}%'";
+            string query = $"SELECT * FROM [dbo].[Shifts] AS z WHERE z.Starttime like '%{starttime}%'";
             return await _context.Shifts.FromSqlRaw(query).Include(s => s.ShiftType).ToListAsync();
         }
     }
