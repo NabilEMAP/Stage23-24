@@ -26,9 +26,9 @@ namespace PlanningsTool.DAL.Configurations
 
             builder.HasOne(p => p.RegimeType)
                     .WithMany()
-                    .HasForeignKey(p => p.RegimeId);
+                    .HasForeignKey(p => p.RegimeTypeId);
 
-            builder.Property(p => p.RegimeId)
+            builder.Property(p => p.RegimeTypeId)
                     .IsRequired()
                     .HasColumnType("int");
 

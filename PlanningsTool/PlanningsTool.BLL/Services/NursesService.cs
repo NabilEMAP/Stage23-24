@@ -85,7 +85,7 @@ namespace PlanningsTool.BLL.Services
 
             nurseToUpdate.FirstName = nurseFromRequest.FirstName;
             nurseToUpdate.LastName = nurseFromRequest.LastName;
-            nurseToUpdate.RegimeId = nurseFromRequest.RegimeId;
+            nurseToUpdate.RegimeTypeId = nurseFromRequest.RegimeTypeId;
             nurseToUpdate.IsFixedNight = nurseFromRequest.IsFixedNight;
 
             await _uow.NursesRepository.Update(nurseToUpdate);
