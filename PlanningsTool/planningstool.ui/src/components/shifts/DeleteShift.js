@@ -12,8 +12,8 @@ function DeleteShift(props) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [Id, editId] = useState('');
-    const [starttijd, setStarttijd] = useState('');
-    const [eindtijd, setEindtijd] = useState('');
+    const [starttime, setStarttime] = useState('');
+    const [endtime, setEndtime] = useState('');
     const [shiftTypeId, setShiftTypeId] = useState('');
     const [data, setData] = useState([]);
     const [shiftTypeData, setShiftTypeData] = useState([]);
@@ -50,8 +50,8 @@ function DeleteShift(props) {
         const API = `https://localhost:8000/api/Shifts/${id}`;
         axios.get(API)
             .then((result) => {
-                setStarttijd(result.data.starttijd);
-                setEindtijd(result.data.eindtijd);
+                setStarttime(result.data.starttime);
+                setEndtime(result.data.endtime);
                 setShiftTypeId(result.data.shiftTypeId);
                 editId(id);
             })
@@ -76,7 +76,7 @@ function DeleteShift(props) {
 
     const renderShiftType = () => {
         return shiftTypeData.map((item) => (
-            <MenuItem value={item.id}>{item.shift}</MenuItem>
+            <MenuItem value={item.id}>{item.name}</MenuItem>
         ));
     }
 
@@ -114,16 +114,16 @@ function DeleteShift(props) {
                             style={{ width: '75%' }}
                             type="time"
                             className="form-control"
-                            value={starttijd}
-                            onChange={(e) => setStarttijd(e.target.value)}
+                            value={starttime}
+                            onChange={(e) => setStarttime(e.target.value)}
                             disabled
                         />
                         <TextField
                             style={{ width: '75%' }}
                             type="time"
                             className="form-control"
-                            value={eindtijd}
-                            onChange={(e) => setEindtijd(e.target.value)}
+                            value={endtime}
+                            onChange={(e) => setEndtime(e.target.value)}
                             disabled
                         />
                     </Stack>

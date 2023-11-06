@@ -12,8 +12,8 @@ function EditShift(props) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [Id, editId] = useState('');
-    const [starttijd, setStarttijd] = useState('');
-    const [eindtijd, setEindtijd] = useState('');
+    const [starttime, setStarttime] = useState('');
+    const [endtime, setEndtime] = useState('');
     const [shiftTypeId, setShiftTypeId] = useState('');
     const [data, setData] = useState([]);
     const [shiftTypeData, setShiftTypeData] = useState([]);
@@ -50,8 +50,8 @@ function EditShift(props) {
         const API = `https://localhost:8000/api/Shifts/${id}`;
         axios.get(API)
             .then((result) => {
-                setStarttijd(result.data.starttijd);
-                setEindtijd(result.data.eindtijd);
+                setStarttime(result.data.starttime);
+                setEndtime(result.data.endtime);
                 setShiftTypeId(result.data.shiftTypeId);
                 editId(id);
             })
@@ -65,12 +65,12 @@ function EditShift(props) {
         const data =
         {
             "id": Id,
-            "starttijd": starttijd+":00",
-            "eindtijd": eindtijd+":00",
+            "starttime": starttime+":00",
+            "endtime": endtime+":00",
             "shiftTypeId": shiftTypeId
         }
         axios.put(API, data)
-            .then((result) => {
+            .then(() => {
                 toast.success('Shift is gewijzigd');
                 getData();
                 handleClose();
@@ -83,7 +83,7 @@ function EditShift(props) {
 
     const renderShiftType = () => {
         return shiftTypeData.map((item) => (
-            <MenuItem value={item.id}>{item.shift}</MenuItem>
+            <MenuItem value={item.id}>{item.name}</MenuItem>
         ));
     }
 
@@ -120,15 +120,15 @@ function EditShift(props) {
                             style={{ width: '75%' }}
                             type="time"
                             className="form-control"
-                            value={starttijd}
-                            onChange={(e) => setStarttijd(e.target.value)}
+                            value={starttime}
+                            onChange={(e) => setStarttime(e.target.value)}
                         />
                         <TextField
                             style={{ width: '75%' }}
                             type="time"
                             className="form-control"
-                            value={eindtijd}
-                            onChange={(e) => setEindtijd(e.target.value)}
+                            value={endtime}
+                            onChange={(e) => setEndtime(e.target.value)}
                         />
                     </Stack>
                 </Modal.Body>

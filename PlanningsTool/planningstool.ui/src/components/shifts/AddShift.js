@@ -9,8 +9,8 @@ function AddShift() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [starttijd, setStarttijd] = useState('');
-  const [eindtijd, setEindtijd] = useState('');
+  const [starttime, setStarttime] = useState('');
+  const [endtime, setEndtime] = useState('');
   const [shiftTypeId, setShiftTypeId] = useState('');
   const [data, setData] = useState([]);
   const [shiftTypeData, setShiftTypeData] = useState([]);
@@ -46,8 +46,8 @@ function AddShift() {
     const API = 'https://localhost:8000/api/Shifts';
     const data =
     {
-      "starttijd": starttijd + ":00",
-      "eindtijd": eindtijd + ":00",
+      "starttime": starttime + ":00",
+      "endtime": endtime + ":00",
       "shiftTypeId": shiftTypeId
     }
     axios.post(API, data)
@@ -64,14 +64,14 @@ function AddShift() {
   }
 
   const clear = () => {
-    setStarttijd('');
-    setEindtijd('');
+    setStarttime('');
+    setEndtime('');
     setShiftTypeId('');
   }
 
   const renderShiftType = () => {
     return shiftTypeData.map((item) => (
-      <MenuItem value={item.id}>{item.shift}</MenuItem>
+      <MenuItem value={item.id}>{item.name}</MenuItem>
     ));
   }
 
@@ -109,15 +109,15 @@ function AddShift() {
               style={{ width: '75%' }}
               type="time"
               className="form-control"
-              value={starttijd}
-              onChange={(e) => setStarttijd(e.target.value)}
+              value={starttime}
+              onChange={(e) => setStarttime(e.target.value)}
             />
             <TextField
               style={{ width: '75%' }}
               type="time"
               className="form-control"
-              value={eindtijd}
-              onChange={(e) => setEindtijd(e.target.value)}
+              value={endtime}
+              onChange={(e) => setEndtime(e.target.value)}
             />
           </Stack>
         </Modal.Body>
