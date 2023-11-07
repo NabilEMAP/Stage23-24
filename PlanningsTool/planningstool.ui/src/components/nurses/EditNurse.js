@@ -63,10 +63,18 @@ function EditNurse(props) {
   }
 
   const handleUpdate = () => {
-    if (!firstName) { toast.warning('Voornaam mag niet leeg zijn'); return; }
-    if (!lastName) { toast.warning('Achternaam mag niet leeg zijn'); return; }
-    if (!regimeTypeId) { toast.warning('Regime mag niet leeg zijn'); return; }
-    
+    const errorMessages = [];
+
+    if (!firstName) errorMessages.push('Voornaam mag niet leeg zijn');
+    if (!lastName) errorMessages.push('Achternaam mag niet leeg zijn');
+    if (!regimeTypeId) errorMessages.push('Regime mag niet leeg zijn');
+
+    if (errorMessages.length > 0) {
+      const errorMessage = errorMessages.join('\n');
+      toast.warning(errorMessage);
+      return;
+    }
+
     const API = `https://localhost:8000/api/Nurses/${Id}`;
     const data =
     {

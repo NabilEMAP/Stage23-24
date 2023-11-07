@@ -78,10 +78,18 @@ function EditVacation(props) {
     }
 
     const handleUpdate = () => {
-        if (!startdate) { toast.warning('Startdatum mag niet leeg zijn'); return; }
-        if (!enddate) { toast.warning('Einddatum mag niet leeg zijn'); return; }
-        if (!nurseId) { toast.warning('Zorgkundige mag niet leeg zijn'); return; }
-        if (!vacationTypeId) { toast.warning('Verlof mag niet leeg zijn'); return; }
+        const errorMessages = [];
+
+        if (!startdate) errorMessages.push('Startdatum mag niet leeg zijn');
+        if (!enddate) errorMessages.push('Einddatum mag niet leeg zijn');
+        if (!nurseId) errorMessages.push('Zorgkundige mag niet leeg zijn');
+        if (!vacationTypeId) errorMessages.push('Verlof mag niet leeg zijn');
+
+        if (errorMessages.length > 0) {
+            const errorMessage = errorMessages.join('\n');
+            toast.warning(errorMessage);
+            return;
+        }
 
         const API = `https://localhost:8000/api/Vacations/${Id}`;
         const data =
