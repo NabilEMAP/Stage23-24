@@ -30,6 +30,7 @@ namespace PlanningsTool.DAL.Configurations
 
             builder.Property(p => p.RegimeTypeId)
                     .IsRequired()
+                    .HasDefaultValue(1)
                     .HasColumnType("int");
 
             builder.Property(p => p.IsFixedNight)
