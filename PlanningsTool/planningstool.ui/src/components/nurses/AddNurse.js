@@ -61,9 +61,9 @@ function AddNurse() {
         handleClose();
       })
       .catch((error) => {
-          toast.warning(`${error.response.data.Message}`);
-          clear();
-          console.log(JSON.stringify(error.response.data));
+        toast.warning(`${error.response.data.Message}`);
+        clear();
+        console.log(JSON.stringify(error.response.data));
       })
   }
 
@@ -110,23 +110,26 @@ function AddNurse() {
             spacing={4}
           >
             <TextField
+              required
+              id="outlined-required"
+              label="Voornaam"
               style={{ width: '75%' }}
               type="text"
               className="form-control"
-              placeholder="Voornaam"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
             />
             <TextField
+              required
+              id="outlined-required"
+              label="Achternaam"
               style={{ width: '75%' }}
               type="text"
               className="form-control"
-              placeholder="Achternaam"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
             />
             <FormControl style={{ width: '75%' }}>
-              <InputLabel>Selecteer uw regime...</InputLabel>
               <Select
                 value={regimeTypeId}
                 onChange={(e) => setRegimeTypeId(e.target.value)}

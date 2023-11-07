@@ -79,8 +79,8 @@ function EditNurse(props) {
         handleClose();
       })
       .catch((error) => {
-          toast.warning(`${error.response.data.Message}`);
-          console.log(JSON.stringify(error.response.data));
+        toast.warning(`${error.response.data.Message}`);
+        console.log(JSON.stringify(error.response.data));
       })
   }
 
@@ -95,7 +95,7 @@ function EditNurse(props) {
 
   const renderRegimeType = () => {
     return regimeTypeData.map((item) => (
-      <MenuItem value={item.id}>{item.name}</MenuItem>      
+      <MenuItem value={item.id}>{item.name}</MenuItem>
     ));
   }
 
@@ -120,6 +120,9 @@ function EditNurse(props) {
             spacing={4}
           >
             <TextField
+              required
+              id="outlined-required"
+              label="Voornaam"
               style={{ width: '75%' }}
               type="text"
               className="form-control"
@@ -128,10 +131,12 @@ function EditNurse(props) {
               onChange={(e) => setFirstName(e.target.value)}
             />
             <TextField
+              required
+              id="outlined-required"
+              label="Achternaam"
               style={{ width: '75%' }}
               type="text"
               className="form-control"
-              placeholder="Achternaam"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
             />
