@@ -37,7 +37,7 @@ function AddNurse() {
     axios.get(API)
       .then((result) => {
         setRegimeTypeData(result.data);
-        setRegimeTypeId('1'); //default value
+        //setRegimeTypeId('1'); //default value
       })
       .catch((error) => {
         console.log(error);
@@ -45,6 +45,10 @@ function AddNurse() {
   }
 
   const handleCreate = () => {
+    if (!firstName) { toast.warning('Voornaam mag niet leeg zijn'); return; }
+    if (!lastName) { toast.warning('Achternaam mag niet leeg zijn'); return; }
+    if (!regimeTypeId) { toast.warning('Regime mag niet leeg zijn'); return; }
+
     const API = 'https://localhost:8000/api/Nurses';
     const data =
     {

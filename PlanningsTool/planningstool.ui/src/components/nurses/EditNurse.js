@@ -63,6 +63,10 @@ function EditNurse(props) {
   }
 
   const handleUpdate = () => {
+    if (!firstName) { toast.warning('Voornaam mag niet leeg zijn'); return; }
+    if (!lastName) { toast.warning('Achternaam mag niet leeg zijn'); return; }
+    if (!regimeTypeId) { toast.warning('Regime mag niet leeg zijn'); return; }
+    
     const API = `https://localhost:8000/api/Nurses/${Id}`;
     const data =
     {

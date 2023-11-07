@@ -26,7 +26,7 @@ function EditVacation(props) {
         getNurseData();
         getVacationTypeData();
     }, []);
-    
+
     const getData = () => {
         const API = 'https://localhost:8000/api/Vacations/details'
         axios.get(API)
@@ -78,6 +78,11 @@ function EditVacation(props) {
     }
 
     const handleUpdate = () => {
+        if (!startdate) { toast.warning('Startdatum mag niet leeg zijn'); return; }
+        if (!enddate) { toast.warning('Einddatum mag niet leeg zijn'); return; }
+        if (!nurseId) { toast.warning('Zorgkundige mag niet leeg zijn'); return; }
+        if (!vacationTypeId) { toast.warning('Verlof mag niet leeg zijn'); return; }
+
         const API = `https://localhost:8000/api/Vacations/${Id}`;
         const data =
         {
