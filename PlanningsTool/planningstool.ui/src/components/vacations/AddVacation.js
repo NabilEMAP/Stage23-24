@@ -58,12 +58,11 @@ function AddVacation() {
   }
 
   const handleCreate = () => {
-    
     if (!startdate) { toast.warning('Startdatum mag niet leeg zijn'); return; }
     if (!enddate) { toast.warning('Einddatum mag niet leeg zijn'); return; }
     if (!nurseId) { toast.warning('Zorgkundige mag niet leeg zijn'); return; }
     if (!vacationTypeId) { toast.warning('Verlof mag niet leeg zijn'); return; }
-    
+
     const API = 'https://localhost:8000/api/Vacations';
     const data =
     {
@@ -81,17 +80,14 @@ function AddVacation() {
         handleClose();
       })
       .catch((error) => {
-        if (error.response.status === 400) {
+        if (error.response) {
           toast.warning('Zie dat de gegevens correct ingevuld zijn');
-          console.log(data);
-          console.log(JSON.stringify(error));
-          clear();
         } else {
           toast.warning(`${error.response.data.Message}`);
-          console.log(data);
-          console.log(JSON.stringify(error));
-          clear();
         }
+        console.log(data);
+        console.log(JSON.stringify(error));
+        clear();
       })
   }
 

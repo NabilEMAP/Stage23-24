@@ -100,15 +100,13 @@ function EditVacation(props) {
                 handleClose();
             })
             .catch((error) => {
-                if (error.response.status === 404) {
+                if (error.response) {
                     toast.warning('Zie dat de gegevens correct ingevuld zijn');
-                    console.log(data);
-                    console.log(JSON.stringify(error));
                 } else {
                     toast.warning(`${error.response.data.Message}`);
-                    console.log(data);
-                    console.log(JSON.stringify(error));
                 }
+                console.log(data);
+                console.log(JSON.stringify(error));
             })
     }
 
