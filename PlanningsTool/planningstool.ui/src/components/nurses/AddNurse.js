@@ -37,6 +37,7 @@ function AddNurse() {
     axios.get(API)
       .then((result) => {
         setRegimeTypeData(result.data);
+        setRegimeTypeId('1'); //default value
       })
       .catch((error) => {
         console.log(error);
@@ -60,15 +61,9 @@ function AddNurse() {
         handleClose();
       })
       .catch((error) => {
-        if (error.response.data.status === 400) {
-          toast.warning("Regime mag niet leeg zijn (frontend)");
-          console.log(JSON.stringify(error.response.data));
-          clear();
-        } else {
           toast.warning(`${error.response.data.Message}`);
           clear();
           console.log(JSON.stringify(error.response.data));
-        }
       })
   }
 
@@ -84,7 +79,6 @@ function AddNurse() {
   const clear = () => {
     setFirstName('');
     setLastName('');
-    setRegimeTypeId('');
     setIsFixedNight(false);
   }
 

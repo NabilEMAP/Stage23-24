@@ -17,11 +17,6 @@ namespace PlanningsTool.BLL.Validations
                 .NotNull()
                 .NotEmpty()
                 .WithMessage("Achternaam mag niet leeg zijn");
-
-            RuleFor(z => z.RegimeTypeId)
-                .NotNull()
-                .Must(regimeTypeId => Regex.IsMatch(regimeTypeId.ToString(), "^(1|2|3|4)$"))
-                .WithMessage("Regime mag niet leeg zijn");
         }
     }
 }
