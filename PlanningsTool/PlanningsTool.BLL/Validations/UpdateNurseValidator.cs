@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using PlanningsTool.Common.DTO.Nurses;
-using System.Text.RegularExpressions;
 
 namespace PlanningsTool.BLL.Validations
 {

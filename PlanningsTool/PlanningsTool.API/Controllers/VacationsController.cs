@@ -73,14 +73,7 @@ namespace PlanningsTool.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateVacationDTO vacation)
         {
-            try
-            {
-                await _vacationsServices.Add(vacation);
-            }
-            catch (Exception ex)
-            {
-                return NotFound(ex.Message);
-            }
+            await _vacationsServices.Add(vacation);
             return Ok(vacation);
         }
 

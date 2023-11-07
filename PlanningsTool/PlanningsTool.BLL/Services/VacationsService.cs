@@ -1,5 +1,9 @@
 ﻿using AutoMapper;
+using FluentValidation;
+using FluentValidation.Results;
+using PlanningsTool.BLL.Exceptions;
 using PlanningsTool.BLL.Interfaces;
+using PlanningsTool.BLL.Validations;
 using PlanningsTool.Common.DTO.Vacations;
 using PlanningsTool.DAL.Models;
 using PlanningsTool.DAL.UOW;
@@ -8,17 +12,28 @@ namespace PlanningsTool.BLL.Services
 {
     public class VacationsService : IVacationsService
     {
-        public readonly IUnitOfWork _uow;
-        public readonly IMapper _mapper;
+        private readonly IUnitOfWork _uow;
+        private readonly IMapper _mapper;
+        private readonly CreateVacationValidator _createValidator;
+        private readonly UpdateVacationValidator _updateValidator;
 
-        public VacationsService(IUnitOfWork uow, IMapper mapper)
+        public VacationsService(IUnitOfWork uow, IMapper mapper, CreateVacationValidator createValidator, UpdateVacationValidator updateValidator)
         {
             _uow = uow;
             _mapper = mapper;
+            _createValidator = createValidator;
+            _updateValidator = updateValidator;
         }
 
         public async Task<VacationDetailDTO> Add(CreateVacationDTO entity)
         {
+            ValidationResult validationResult = _createValidator.Validate(entity);
+
+            if (!validationResult.IsValid)
+            {
+                throw new CustomValidationException(validationResult.Errors);
+            }
+
             var vacation = _mapper.Map<Vacation>(entity);
             await _uow.VacationsRepository.Add(vacation);
             await _uow.Save();
@@ -75,6 +90,13 @@ namespace PlanningsTool.BLL.Services
 
         public async Task<VacationDetailDTO> Update(int id, UpdateVacationDTO entity)
         {
+            ValidationResult validationResult = _updateValidator.Validate(entity);
+
+            if (!validationResult.IsValid)
+            {
+                throw new CustomValidationException(validationResult.Errors);
+            }
+
             var vacationFromRequest = _mapper.Map<Vacation>(entity);
             var vacationToUpdate = await _uow.VacationsRepository.GetVacationAsyncById(id);
 

@@ -26,7 +26,7 @@ function EditVacation(props) {
         getNurseData();
         getVacationTypeData();
     }, []);
-
+    
     const getData = () => {
         const API = 'https://localhost:8000/api/Vacations/details'
         axios.get(API)
@@ -78,7 +78,7 @@ function EditVacation(props) {
     }
 
     const handleUpdate = () => {
-        const API = `https://localhost:8000/api/Verloven/${Id}`;
+        const API = `https://localhost:8000/api/Vacations/${Id}`;
         const data =
         {
             "id": Id,
@@ -95,7 +95,15 @@ function EditVacation(props) {
                 handleClose();
             })
             .catch((error) => {
-                toast.warning(`${error}`);
+                if (error.response.status === 404) {
+                    toast.warning('Zie dat de gegevens correct ingevuld zijn');
+                    console.log(data);
+                    console.log(JSON.stringify(error));
+                } else {
+                    toast.warning(`${error.response.data.Message}`);
+                    console.log(data);
+                    console.log(JSON.stringify(error));
+                }
             })
     }
 
@@ -132,8 +140,10 @@ function EditVacation(props) {
                         spacing={4}
                     >
                         <FormControl style={{ width: '75%' }}>
-                            <InputLabel>Zorgkundige</InputLabel>
+                            <InputLabel>Zorgkundige *</InputLabel>
                             <Select
+                                required
+                                label="Zorgkundige"
                                 value={nurseId}
                                 onChange={(e) => setNurseId(e.target.value)}
                             >
@@ -141,6 +151,8 @@ function EditVacation(props) {
                             </Select>
                         </FormControl>
                         <TextField
+                            required
+                            label="Startdatum"
                             style={{ width: '75%' }}
                             type="date"
                             className="form-control"
@@ -148,6 +160,8 @@ function EditVacation(props) {
                             onChange={(e) => setStartdate(e.target.value)}
                         />
                         <TextField
+                            required
+                            label="Einddatum"
                             style={{ width: '75%' }}
                             type="date"
                             className="form-control"
@@ -155,8 +169,10 @@ function EditVacation(props) {
                             onChange={(e) => setEnddate(e.target.value)}
                         />
                         <FormControl style={{ width: '75%' }}>
-                            <InputLabel>Verlof</InputLabel>
+                            <InputLabel>Verlof *</InputLabel>
                             <Select
+                                required
+                                label="Verlof"
                                 value={vacationTypeId}
                                 onChange={(e) => setVacationTypeId(e.target.value)}
                             >
@@ -164,10 +180,10 @@ function EditVacation(props) {
                             </Select>
                         </FormControl>
                         <TextField
+                            label="Reden"
                             style={{ width: '75%' }}
-                            type="date"
+                            type="text"
                             className="form-control"
-                            placeholder="Reden"
                             value={reason}
                             multiline={true}
                             minRows={6}
