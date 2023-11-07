@@ -51,6 +51,7 @@ function AddVacation() {
     axios.get(API)
       .then((result) => {
         setVacationTypeData(result.data);
+        //setVacationTypeId(2); //default value
       })
       .catch((error) => {
         console.log(error);
@@ -70,7 +71,7 @@ function AddVacation() {
       toast.warning(errorMessage);
       return;
     }
-    
+
     const API = 'https://localhost:8000/api/Vacations';
     const data =
     {
