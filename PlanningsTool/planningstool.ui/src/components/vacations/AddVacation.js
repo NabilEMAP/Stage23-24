@@ -4,8 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Modal from 'react-bootstrap/Modal';
 import { toast } from 'react-toastify';
 import { Button, FormControl, InputLabel, MenuItem, Select, Stack, TextField } from "@mui/material";
+import { DatePicker } from "@mui/x-date-pickers";
 
-function AddVacation() {
+function AddVacation({dataChanged}) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -17,6 +18,7 @@ function AddVacation() {
   const [data, setData] = useState([]);
   const [nurseData, setNurseData] = useState([]);
   const [vacationTypeData, setVacationTypeData] = useState([]);
+  
 
   useEffect(() => {
     getData();
@@ -89,15 +91,16 @@ function AddVacation() {
         handleClose();
       })
       .catch((error) => {
-        if (error.response) {
+        if (error.response.status === 400) {
           toast.warning('Zie dat de gegevens correct ingevuld zijn');
         } else {
           toast.warning(`${error.response.data.Message}`);
         }
         console.log(data);
         console.log(JSON.stringify(error));
-        clear();
+        clear();        
       })
+      dataChanged(true);
   }
 
   const clear = () => {
@@ -152,20 +155,23 @@ function AddVacation() {
                 {renderNurse()}
               </Select>
             </FormControl>
-            <TextField
-              style={{ width: '75%' }}
-              type="date"
-              className="form-control"
+            <FormControl style={{ width: '75%' }}>
+            <DatePicker slotProps={{ textField: { error: false }}}
+              label="Startdate"
               value={startdate}
-              onChange={(e) => setStartdate(e.target.value)}
+              onChange={(e) => setStartdate(e)}
+              format="DD/MM/YYYY"
             />
-            <TextField
-              style={{ width: '75%' }}
-              type="date"
+            </FormControl>
+            <FormControl style={{ width: '75%' }}>
+            <DatePicker slotProps={{ textField: { error: false }}}
+              label="Startdate"
               className="form-control"
               value={enddate}
-              onChange={(e) => setEnddate(e.target.value)}
+              onChange={(e) => setEnddate(e)}
+              format="DD/MM/YYYY"
             />
+            </FormControl>
             <FormControl style={{ width: '75%' }}>
               <InputLabel>Verlof *</InputLabel>
               <Select

@@ -116,6 +116,7 @@ function EditVacation(props) {
                 console.log(data);
                 console.log(JSON.stringify(error));
             })
+            props.dataChanged(true);
     }
 
     const renderNurse = () => {

@@ -88,7 +88,7 @@ function DeleteVacation(props) {
             .catch((error) => {
                 toast.warning(`${error}`);
             })
-
+            props.dataChanged(true);
     }
 
     const renderNurse = () => {

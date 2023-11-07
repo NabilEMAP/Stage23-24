@@ -19,10 +19,15 @@ import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 function VacationPage() {
     const [data, setData] = useState([]);
     const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
+    const [dataChanged, setDataChanged] = useState(false);
 
     useEffect(() => {
+        if(dataChanged){
+            getData();
+            setDataChanged(false);
+        }
         getData();
-    }, [data]);
+    }, [dataChanged]);
 
     const getData = () => {
         const API = 'https://localhost:8000/api/Vacations/details'
@@ -33,6 +38,10 @@ function VacationPage() {
             .catch((error) => {
                 console.log(error);
             })
+    }
+
+    const hasDataChanged = (change) => { 
+        setDataChanged(change);
     }
 
     const requestSort = (key) => {
@@ -87,8 +96,8 @@ function VacationPage() {
                     <MyTC>{format(new Date(item.enddate), 'dd/MM/yyyy')}</MyTC>
                     <MyTC>{item.vacationType.name}</MyTC>
                     <MyTC style={{ width: '175px' }}>
-                        <EditVacation id={item.id} />
-                        <DeleteVacation id={item.id} />
+                        <EditVacation id={item.id} dataChanged={hasDataChanged}/>
+                        <DeleteVacation id={item.id} dataChanged={hasDataChanged}/>
                     </MyTC>
                 </MyTR>
             ));
@@ -97,12 +106,14 @@ function VacationPage() {
         }
     }
 
+    
+
     return (
         <Fragment>
             <Container>
                 <div style={{ margin: '24px 0px' }}>
                     <Typography variant="h5" style={{ width: 'fit-content', verticalAlign: 'sub', display: 'inline-block' }}>Verlof Lijst</Typography>
-                    <AddVacation />
+                    <AddVacation dataChanged={hasDataChanged}/>
                 </div>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 700 }} aria-label="customized table">
