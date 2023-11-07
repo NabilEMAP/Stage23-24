@@ -111,7 +111,6 @@ function AddNurse() {
           >
             <TextField
               required
-              id="outlined-required"
               label="Voornaam"
               style={{ width: '75%' }}
               type="text"
@@ -121,7 +120,6 @@ function AddNurse() {
             />
             <TextField
               required
-              id="outlined-required"
               label="Achternaam"
               style={{ width: '75%' }}
               type="text"
@@ -130,7 +128,10 @@ function AddNurse() {
               onChange={(e) => setLastName(e.target.value)}
             />
             <FormControl style={{ width: '75%' }}>
+              <InputLabel>Regime *</InputLabel>
               <Select
+                required
+                label="Regime"
                 value={regimeTypeId}
                 onChange={(e) => setRegimeTypeId(e.target.value)}
               >

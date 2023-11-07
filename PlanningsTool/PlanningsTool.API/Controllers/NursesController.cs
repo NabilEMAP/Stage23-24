@@ -55,7 +55,6 @@ namespace PlanningsTool.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateNurseDTO nurse)
         {
-
             await _nursesServices.Add(nurse);
             return Ok(nurse);
         }

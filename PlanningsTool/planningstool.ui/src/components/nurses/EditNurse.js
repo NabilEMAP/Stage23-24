@@ -121,18 +121,15 @@ function EditNurse(props) {
           >
             <TextField
               required
-              id="outlined-required"
               label="Voornaam"
               style={{ width: '75%' }}
               type="text"
               className="form-control"
-              placeholder="Voornaam"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
             />
             <TextField
               required
-              id="outlined-required"
               label="Achternaam"
               style={{ width: '75%' }}
               type="text"
@@ -141,8 +138,10 @@ function EditNurse(props) {
               onChange={(e) => setLastName(e.target.value)}
             />
             <FormControl style={{ width: '75%' }}>
-              <InputLabel>Selecteer uw regime...</InputLabel>
+              <InputLabel>Regime *</InputLabel>
               <Select
+                required
+                label="Regime"
                 value={regimeTypeId}
                 onChange={(e) => setRegimeTypeId(e.target.value)}
               >
