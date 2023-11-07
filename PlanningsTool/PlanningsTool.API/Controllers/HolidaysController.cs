@@ -52,17 +52,17 @@ namespace PlanningsTool.API.Controllers
 
         // POST api/Holidays
         [HttpPost]
-        public async Task<IActionResult> Post(int jaar)
+        public async Task<IActionResult> Post(int year)
         {
             try
             {
-                await _holidaysServices.Generate(jaar);
+                await _holidaysServices.Generate(year);
             }
             catch (Exception ex)
             {
                 return NotFound(ex.Message);
             }
-            return Ok(jaar);
+            return Ok(year);
         }
 
         // DELETE api/Holidays
