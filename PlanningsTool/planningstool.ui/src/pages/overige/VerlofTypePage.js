@@ -9,6 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { MyTC, MyTR } from "../../components/MyTable";
 import { Container, Typography } from "@mui/material";
+import { API_BASE_URL } from "../../config";
 
 function VerlofTypePage() {
     const [data, setData] = useState([]);
@@ -18,7 +19,7 @@ function VerlofTypePage() {
     }, [data]);
 
     const getData = () => {
-        const API = 'https://localhost:8000/api/VacationTypes'
+        const API = `${API_BASE_URL}/VacationTypes`;
         axios.get(API)
             .then((result) => {
                 setData(result.data);

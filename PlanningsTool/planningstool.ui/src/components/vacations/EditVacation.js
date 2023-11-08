@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { DatePicker } from "@mui/x-date-pickers";
 import dayjs from 'dayjs';
+import { API_BASE_URL } from "../../config";
 
 function EditVacation(props) {
     const [show, setShow] = useState(false);
@@ -30,7 +31,7 @@ function EditVacation(props) {
     }, []);
 
     const getData = () => {
-        const API = 'https://localhost:8000/api/Vacations/details'
+        const API = `${API_BASE_URL}/Vacations/details`;
         axios.get(API)
             .then((result) => {
                 setData(result.data);
@@ -41,7 +42,7 @@ function EditVacation(props) {
     }
 
     const getNurseData = () => {
-        const API = 'https://localhost:8000/api/Nurses'
+        const API = `${API_BASE_URL}/Nurses`;
         axios.get(API)
             .then((result) => {
                 setNurseData(result.data);
@@ -52,7 +53,7 @@ function EditVacation(props) {
     }
 
     const getVacationTypeData = () => {
-        const API = 'https://localhost:8000/api/VacationTypes'
+        const API = `${API_BASE_URL}/VacationTypes`;
         axios.get(API)
             .then((result) => {
                 setVacationTypeData(result.data);
@@ -64,7 +65,7 @@ function EditVacation(props) {
 
     const handleEdit = (id) => {
         handleShow();
-        const API = `https://localhost:8000/api/Vacations/${id}`;
+        const API = `${API_BASE_URL}/Vacations/${id}`;
         axios.get(API)
             .then((result) => {
                 setStartdate(result.data.startdate);
@@ -93,7 +94,7 @@ function EditVacation(props) {
             return;
         }
 
-        const API = `https://localhost:8000/api/Vacations/${Id}`;
+        const API = `${API_BASE_URL}/Vacations/${Id}`;
         const data =
         {
             "id": Id,

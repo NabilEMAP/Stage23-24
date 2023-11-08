@@ -15,7 +15,7 @@ function GenerateHolidays() {
   }, []);
 
   const handleCreate = () => {
-    const API = `https://localhost:8000/api/Holidays?year=${year}`;
+    const API = `${API_BASE_URL}/Holidays?year=${year}`;
     axios.post(API)
       .then(() => {
         toast.success('Feestdagen zijn gegenereerd');

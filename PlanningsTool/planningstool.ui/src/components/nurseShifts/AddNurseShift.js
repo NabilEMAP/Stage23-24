@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { Button, FormControl, InputLabel, MenuItem, Select, Stack, TextField } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import dayjs from 'dayjs';
+import { API_BASE_URL } from "../../config";
 
 function AddNurseShift() {
   const [show, setShow] = useState(false);
@@ -25,7 +26,7 @@ function AddNurseShift() {
   }, []);
 
   const getData = () => {
-    const API = 'https://localhost:8000/api/NurseShifts'
+    const API = `${API_BASE_URL}/NurseShifts`;
     axios.get(API)
       .then((result) => {
         setData(result.data);
@@ -36,7 +37,7 @@ function AddNurseShift() {
   }
 
   const getNurseData = () => {
-    const API = 'https://localhost:8000/api/Nurses'
+    const API = `${API_BASE_URL}/Nurses`;
     axios.get(API)
       .then((result) => {
         setNurseData(result.data);
@@ -47,7 +48,7 @@ function AddNurseShift() {
   }
 
   const getShiftData = () => {
-    const API = 'https://localhost:8000/api/Shifts'
+    const API = `${API_BASE_URL}/Shifts`;
     axios.get(API)
       .then((result) => {
         setShiftData(result.data);
@@ -58,7 +59,7 @@ function AddNurseShift() {
   }
 
   const handleCreate = () => {
-    const API = 'https://localhost:8000/api/NurseShifts';
+    const API = `${API_BASE_URL}/NurseShifts`;
     const data =
     {
       "date": date,

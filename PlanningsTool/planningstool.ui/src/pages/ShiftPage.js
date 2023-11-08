@@ -12,6 +12,7 @@ import AddShift from "../components/shifts/AddShift";
 import EditShift from "../components/shifts/EditShift";
 import DeleteShift from "../components/shifts/DeleteShift";
 import { Container, Typography } from "@mui/material";
+import { API_BASE_URL } from "../config";
 
 function ShiftPage() {
     const [data, setData] = useState([]);
@@ -22,7 +23,7 @@ function ShiftPage() {
     }, [data]);
 
     const getData = () => {
-        const API = 'https://localhost:8000/api/Shifts'
+        const API = `${API_BASE_URL}/Shifts`;
         axios.get(API)
             .then((result) => {
                 setData(result.data);

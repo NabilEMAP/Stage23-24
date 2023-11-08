@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { Button, Checkbox, FormControl, FormControlLabel, IconButton, InputLabel, MenuItem, Select, Stack, TextField } from "@mui/material";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { API_BASE_URL } from "../../config";
 
 function DeleteNurse(props) {
   const [show, setShow] = useState(false);
@@ -25,7 +26,7 @@ function DeleteNurse(props) {
   }, []);
 
   const getData = () => {
-    const API = 'https://localhost:8000/api/Nurses'
+    const API = `${API_BASE_URL}/Nurses`;
     axios.get(API)
       .then((result) => {
         setData(result.data);
@@ -36,7 +37,7 @@ function DeleteNurse(props) {
   }
 
   const getRegimeTypeData = () => {
-    const API = 'https://localhost:8000/api/RegimeTypes'
+    const API = `${API_BASE_URL}/RegimeTypes`;
     axios.get(API)
       .then((result) => {
         setRegimeTypeData(result.data);
@@ -48,7 +49,7 @@ function DeleteNurse(props) {
 
   const handleDelete = (id) => {
     handleShow();
-    const API = `https://localhost:8000/api/Nurses/${id}`;
+    const API = `${API_BASE_URL}/Nurses/${id}`;
     axios.get(API)
       .then((result) => {
         setFirstName(result.data.firstName);
@@ -63,7 +64,7 @@ function DeleteNurse(props) {
   }
 
   const handlePostDelete = () => {
-    const API = `https://localhost:8000/api/Nurses/${Id}`;
+    const API = `${API_BASE_URL}/Nurses/${Id}`;
     axios.delete(API)
       .then(() => {
         toast.error('Zorgkundige is verwijderd');

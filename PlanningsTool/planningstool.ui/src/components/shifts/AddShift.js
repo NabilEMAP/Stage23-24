@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { Button, FormControl, InputLabel, MenuItem, Select, Stack } from "@mui/material";
 import { TimePicker } from "@mui/x-date-pickers";
 import dayjs from 'dayjs';
+import { API_BASE_URL } from "../../config";
 
 function AddShift() {
   const [show, setShow] = useState(false);
@@ -23,7 +24,7 @@ function AddShift() {
   }, []);
 
   const getData = () => {
-    const API = 'https://localhost:8000/api/Shifts'
+    const API = `${API_BASE_URL}/Shifts`;
     axios.get(API)
       .then((result) => {
         setData(result.data);
@@ -34,7 +35,7 @@ function AddShift() {
   }
 
   const getShiftTypeData = () => {
-    const API = 'https://localhost:8000/api/ShiftTypes'
+    const API = `${API_BASE_URL}/ShiftTypes`;
     axios.get(API)
       .then((result) => {
         setShiftTypeData(result.data);
@@ -45,7 +46,7 @@ function AddShift() {
   }
 
   const handleCreate = () => {
-    const API = 'https://localhost:8000/api/Shifts';
+    const API = `${API_BASE_URL}/Shifts`;
     const data =
     {
       "starttime": starttime,

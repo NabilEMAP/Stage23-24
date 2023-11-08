@@ -26,7 +26,7 @@ function EditShift(props) {
     }, []);
 
     const getData = () => {
-        const API = 'https://localhost:8000/api/Shifts'
+        const API = `${API_BASE_URL}/Shifts`;
         axios.get(API)
             .then((result) => {
                 setData(result.data);
@@ -37,7 +37,7 @@ function EditShift(props) {
     }
 
     const getShiftTypeData = () => {
-        const API = 'https://localhost:8000/api/ShiftTypes'
+        const API = `${API_BASE_URL}/ShiftTypes`;
         axios.get(API)
             .then((result) => {
                 setShiftTypeData(result.data);
@@ -49,7 +49,7 @@ function EditShift(props) {
 
     const handleEdit = (id) => {
         handleShow();
-        const API = `https://localhost:8000/api/Shifts/${id}`;
+        const API = `${API_BASE_URL}/Shifts/${id}`;
         axios.get(API)
             .then((result) => {
                 setStarttime(result.data.starttime);
@@ -64,7 +64,7 @@ function EditShift(props) {
     }
 
     const handleUpdate = () => {
-        const API = `https://localhost:8000/api/Shifts/${Id}`;
+        const API = `${API_BASE_URL}/Shifts/${Id}`;
         const data =
         {
             "id": Id,

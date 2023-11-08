@@ -12,6 +12,7 @@ import { Container, Stack, Typography } from "@mui/material";
 import ClearHolidayList from "../../components/holidays/ClearHolidayList";
 import GenerateHolidays from "../../components/holidays/GenerateHolidays";
 import { format } from 'date-fns';
+import { API_BASE_URL } from "../../config";
 
 function HolidayPage() {
     const [data, setData] = useState([]);
@@ -21,7 +22,7 @@ function HolidayPage() {
     }, [data]);
 
     const getData = () => {
-        const API = 'https://localhost:8000/api/Holidays'
+        const API = `${API_BASE_URL}/Holidays`;
         axios.get(API)
             .then((result) => {
                 setData(result.data);

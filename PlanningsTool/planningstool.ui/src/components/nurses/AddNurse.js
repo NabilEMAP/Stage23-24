@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Modal from 'react-bootstrap/Modal';
 import { toast } from 'react-toastify';
 import { Button, Checkbox, FormControl, FormControlLabel, InputLabel, MenuItem, Select, Stack, TextField } from "@mui/material";
+import { API_BASE_URL } from "../../config";
 
 function AddNurse() {
   const [show, setShow] = useState(false);
@@ -22,7 +23,7 @@ function AddNurse() {
   }, []);
 
   const getData = () => {
-    const API = 'https://localhost:8000/api/Nurses'
+    const API = `${API_BASE_URL}/Nurses`;
     axios.get(API)
       .then((result) => {
         setData(result.data);
@@ -33,7 +34,7 @@ function AddNurse() {
   }
 
   const getRegimeTypeData = () => {
-    const API = 'https://localhost:8000/api/RegimeTypes'
+    const API = `${API_BASE_URL}/RegimeTypes`;
     axios.get(API)
       .then((result) => {
         setRegimeTypeData(result.data);
@@ -57,7 +58,7 @@ function AddNurse() {
       return;
     }
 
-    const API = 'https://localhost:8000/api/Nurses';
+    const API = `${API_BASE_URL}/Nurses`;
     const data =
     {
       "firstName": firstName,

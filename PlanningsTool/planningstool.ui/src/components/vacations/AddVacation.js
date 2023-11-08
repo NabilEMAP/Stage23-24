@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { Button, FormControl, InputLabel, MenuItem, Select, Stack, TextField } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import dayjs from 'dayjs';
+import { API_BASE_URL } from "../../config";
 
 function AddVacation({ dataChanged }) {
   const [show, setShow] = useState(false);
@@ -28,7 +29,7 @@ function AddVacation({ dataChanged }) {
   }, []);
 
   const getData = () => {
-    const API = 'https://localhost:8000/api/Vacations/details'
+    const API = `${API_BASE_URL}/Vacations/details`;
     axios.get(API)
       .then((result) => {
         setData(result.data);
@@ -39,7 +40,7 @@ function AddVacation({ dataChanged }) {
   }
 
   const getNurseData = () => {
-    const API = 'https://localhost:8000/api/Nurses'
+    const API = `${API_BASE_URL}/Nurses`;
     axios.get(API)
       .then((result) => {
         setNurseData(result.data);
@@ -50,7 +51,7 @@ function AddVacation({ dataChanged }) {
   }
 
   const getVacationTypeData = () => {
-    const API = 'https://localhost:8000/api/VacationTypes'
+    const API = `${API_BASE_URL}/VacationTypes`;
     axios.get(API)
       .then((result) => {
         setVacationTypeData(result.data);
@@ -75,7 +76,7 @@ function AddVacation({ dataChanged }) {
       return;
     }
 
-    const API = 'https://localhost:8000/api/Vacations';
+    const API = `${API_BASE_URL}/Vacations`;
     const data =
     {
       "startdate": startdate,

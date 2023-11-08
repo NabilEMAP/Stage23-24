@@ -9,6 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { MyTC, MyTR } from "../../components/MyTable";
 import { Container, Typography } from "@mui/material";
+import { API_BASE_URL } from "../../config";
 
 function RegimeTypePage() {
     const [data, setData] = useState([]);
@@ -18,7 +19,7 @@ function RegimeTypePage() {
     }, [data]);
 
     const getData = () => {
-        const API = 'https://localhost:8000/api/RegimeTypes'
+        const API = `${API_BASE_URL}/RegimeTypes`;
         axios.get(API)
             .then((result) => {
                 setData(result.data);

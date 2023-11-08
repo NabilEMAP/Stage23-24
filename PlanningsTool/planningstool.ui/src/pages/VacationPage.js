@@ -15,6 +15,8 @@ import { Container, Typography, Tooltip, IconButton } from "@mui/material";
 import { format } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import { API_BASE_URL } from "../config";
+
 
 function VacationPage() {
     const [data, setData] = useState([]);
@@ -30,7 +32,7 @@ function VacationPage() {
     }, [dataChanged]);
 
     const getData = () => {
-        const API = 'https://localhost:8000/api/Vacations/details'
+        const API = `${API_BASE_URL}/Vacations/details`;
         axios.get(API)
             .then((result) => {
                 setData(result.data);

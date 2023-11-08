@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { DatePicker } from "@mui/x-date-pickers";
 import dayjs from 'dayjs';
+import { API_BASE_URL } from "../../config";
 
 function EditNurseShift(props) {
   const [show, setShow] = useState(false);
@@ -28,7 +29,7 @@ function EditNurseShift(props) {
   }, []);
 
   const getData = () => {
-    const API = 'https://localhost:8000/api/NurseShifts'
+    const API = `${API_BASE_URL}/NurseShifts`;
     axios.get(API)
       .then((result) => {
         setData(result.data);
@@ -39,7 +40,7 @@ function EditNurseShift(props) {
   }
 
   const getNurseData = () => {
-    const API = 'https://localhost:8000/api/Nurses'
+    const API = `${API_BASE_URL}/Nurses`;
     axios.get(API)
       .then((result) => {
         setNurseData(result.data);
@@ -50,7 +51,7 @@ function EditNurseShift(props) {
   }
 
   const getShiftData = () => {
-    const API = 'https://localhost:8000/api/Shifts'
+    const API = `${API_BASE_URL}/Shifts`;
     axios.get(API)
       .then((result) => {
         setShiftData(result.data);
@@ -62,7 +63,7 @@ function EditNurseShift(props) {
 
   const handleEdit = (id) => {
     handleShow();
-    const API = `https://localhost:8000/api/NurseShifts/${id}`;
+    const API = `${API_BASE_URL}/NurseShifts/${id}`;
     axios.get(API)
       .then((result) => {
         setDate(result.data.date);
@@ -76,7 +77,7 @@ function EditNurseShift(props) {
   }
 
   const handleUpdate = () => {
-    const API = `https://localhost:8000/api/NurseShifts/${Id}`;
+    const API = `${API_BASE_URL}/NurseShifts/${Id}`;
     const data =
     {
       "id": Id,

@@ -13,6 +13,7 @@ import EditNurseShift from "../components/nurseShifts/EditNurseShift";
 import DeleteNurseShift from "../components/nurseShifts/DeleteNurseShift";
 import { Container, Typography } from "@mui/material";
 import { format } from 'date-fns';
+import { API_BASE_URL } from "../config";
 
 function NurseShiftPage() {
     const [data, setData] = useState([]);
@@ -23,7 +24,7 @@ function NurseShiftPage() {
     }, [data]);
 
     const getData = () => {
-        const API = 'https://localhost:8000/api/NurseShifts';
+        const API = `${API_BASE_URL}/NurseShifts`;
         axios.get(API)
             .then((result) => {
                 setData(result.data);

@@ -14,6 +14,7 @@ import DeleteNurse from "../components/nurses/DeleteNurse";
 import { Container, Typography } from "@mui/material";
 import CancelIcon from '@mui/icons-material/Cancel';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { API_BASE_URL } from "../config";
 
 function NursePage() {
     const [data, setData] = useState([]);
@@ -24,7 +25,7 @@ function NursePage() {
     }, [data]);
 
     const getData = () => {
-        const API = 'https://localhost:8000/api/Nurses';
+        const API = `${API_BASE_URL}/Nurses`;
         axios.get(API)
             .then((result) => {
                 setData(result.data);

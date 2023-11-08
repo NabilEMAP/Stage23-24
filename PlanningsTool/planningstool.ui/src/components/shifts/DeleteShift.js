@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { TimePicker } from "@mui/x-date-pickers";
 import dayjs from 'dayjs';
+import { API_BASE_URL } from "../../config";
 
 function DeleteShift(props) {
     const [show, setShow] = useState(false);
@@ -26,7 +27,7 @@ function DeleteShift(props) {
     }, []);
 
     const getData = () => {
-        const API = 'https://localhost:8000/api/Shifts'
+        const API = `${API_BASE_URL}/Shifts`;
         axios.get(API)
             .then((result) => {
                 setData(result.data);
@@ -37,7 +38,7 @@ function DeleteShift(props) {
     }
 
     const getShiftTypeData = () => {
-        const API = 'https://localhost:8000/api/ShiftTypes'
+        const API = `${API_BASE_URL}/ShiftTypes`;
         axios.get(API)
             .then((result) => {
                 setShiftTypeData(result.data);
@@ -49,7 +50,7 @@ function DeleteShift(props) {
 
     const handleDelete = (id) => {
         handleShow();
-        const API = `https://localhost:8000/api/Shifts/${id}`;
+        const API = `${API_BASE_URL}/Shifts/${id}`;
         axios.get(API)
             .then((result) => {
                 setStarttime(result.data.starttime);
@@ -63,7 +64,7 @@ function DeleteShift(props) {
     }
 
     const handlePostDelete = () => {
-        const API = `https://localhost:8000/api/Shifts/${Id}`;
+        const API = `${API_BASE_URL}/Shifts/${Id}`;
         axios.delete(API)
             .then(() => {
                 toast.error('Shift is verwijderd');
