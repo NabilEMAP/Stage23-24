@@ -4,12 +4,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Modal from 'react-bootstrap/Modal';
 import { toast } from 'react-toastify';
 import { Button, Stack } from "@mui/material";
+import { API_BASE_URL } from "../../config";
 
 function ClearHolidayList() {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
+    
     useEffect(() => {
     }, []);
 

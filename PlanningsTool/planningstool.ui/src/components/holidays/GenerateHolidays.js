@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Modal from 'react-bootstrap/Modal';
 import { toast } from 'react-toastify';
 import { Button, FormControl, InputLabel, MenuItem, Select, Stack } from "@mui/material";
+import { API_BASE_URL } from "../../config";
 
 function GenerateHolidays() {
   const [show, setShow] = useState(false);
