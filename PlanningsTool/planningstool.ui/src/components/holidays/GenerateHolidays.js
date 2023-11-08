@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { Button, FormControl, InputLabel, MenuItem, Select, Stack } from "@mui/material";
 import { API_BASE_URL } from "../../config";
 
-function GenerateHolidays() {
+function GenerateHolidays({ dataChanged }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -27,6 +27,7 @@ function GenerateHolidays() {
         toast.warning(`${error.response.data}`);
         clear();
       })
+      dataChanged(true);
   }
 
   const clear = () => {

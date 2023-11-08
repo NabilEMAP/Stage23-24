@@ -8,7 +8,7 @@ import { DatePicker } from "@mui/x-date-pickers";
 import dayjs from 'dayjs';
 import { API_BASE_URL } from "../../config";
 
-function AddNurseShift() {
+function AddNurseShift({ dataChanged }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -80,6 +80,7 @@ function AddNurseShift() {
         console.log(data);
         clear();
       })
+    dataChanged(true);
   }
 
   const clear = () => {

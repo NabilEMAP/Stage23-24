@@ -8,7 +8,7 @@ import { TimePicker } from "@mui/x-date-pickers";
 import dayjs from 'dayjs';
 import { API_BASE_URL } from "../../config";
 
-function AddShift() {
+function AddShift({ dataChanged }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -65,6 +65,7 @@ function AddShift() {
         clear();
       })
     console.log(data);
+    dataChanged(true);
   }
 
   const clear = () => {

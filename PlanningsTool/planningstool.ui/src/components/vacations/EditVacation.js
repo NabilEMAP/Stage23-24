@@ -28,7 +28,7 @@ function EditVacation(props) {
         getData();
         getNurseData();
         getVacationTypeData();
-    }, []);
+    }, [props.dataChanged]); //Do I have to add this?
 
     const getData = () => {
         const API = `${API_BASE_URL}/Vacations/details`;

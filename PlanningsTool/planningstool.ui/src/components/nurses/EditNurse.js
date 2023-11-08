@@ -95,6 +95,7 @@ function EditNurse(props) {
         toast.warning(`${error.response.data.Message}`);
         console.log(JSON.stringify(error.response.data));
       })
+    props.dataChanged(true);
   }
 
   const handleEditActiveChange = (e) => {

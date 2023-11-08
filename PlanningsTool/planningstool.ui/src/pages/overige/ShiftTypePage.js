@@ -16,7 +16,7 @@ function ShiftTypePage() {
 
     useEffect(() => {
         getData();
-    }, [data]);
+    }, []);
 
     const getData = () => {
         const API = `${API_BASE_URL}/ShiftTypes`;

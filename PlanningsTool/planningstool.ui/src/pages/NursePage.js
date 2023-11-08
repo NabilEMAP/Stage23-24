@@ -19,10 +19,15 @@ import { API_BASE_URL } from "../config";
 function NursePage() {
     const [data, setData] = useState([]);
     const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
+    const [dataChanged, setDataChanged] = useState(false);
 
     useEffect(() => {
+        if (dataChanged) {
+            getData();
+            setDataChanged(false);
+        }
         getData();
-    }, [data]);
+    }, [dataChanged]);
 
     const getData = () => {
         const API = `${API_BASE_URL}/Nurses`;
@@ -34,6 +39,10 @@ function NursePage() {
                 console.log(error);
             });
     }
+
+    const hasDataChanged = (change) => {
+        setDataChanged(change);
+    };
 
     const requestSort = (key) => {
         let direction = 'asc';
@@ -73,8 +82,8 @@ function NursePage() {
                         {item.isFixedNight ? <CheckCircleIcon fontSize="large" color="success" /> : <CancelIcon fontSize="large" color="error" />}
                     </MyTC>
                     <MyTC style={{ width: '150px' }}>
-                        <EditNurse id={item.id} />
-                        <DeleteNurse id={item.id} />
+                        <EditNurse id={item.id} dataChanged={hasDataChanged} />
+                        <DeleteNurse id={item.id} dataChanged={hasDataChanged} />
                     </MyTC>
                 </MyTR>
             ));
@@ -88,7 +97,7 @@ function NursePage() {
             <Container>
                 <div style={{ margin: '24px 0px' }}>
                     <Typography variant="h5" style={{ width: 'fit-content', verticalAlign: 'sub', display: 'inline-block' }}>Zorgkundige Lijst</Typography>
-                    <AddNurse />
+                    <AddNurse dataChanged={hasDataChanged} />
                 </div>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 700 }} aria-label="customized table">

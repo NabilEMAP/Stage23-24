@@ -17,10 +17,15 @@ import { API_BASE_URL } from "../config";
 function ShiftPage() {
     const [data, setData] = useState([]);
     const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
+    const [dataChanged, setDataChanged] = useState(false);
 
     useEffect(() => {
+        if (dataChanged) {
+            getData();
+            setDataChanged(false);
+        }
         getData();
-    }, [data]);
+    }, [dataChanged]);
 
     const getData = () => {
         const API = `${API_BASE_URL}/Shifts`;
@@ -32,6 +37,10 @@ function ShiftPage() {
                 console.log(error);
             })
     }
+
+    const hasDataChanged = (change) => {
+        setDataChanged(change);
+    };
 
     const requestSort = (key) => {
         let direction = 'asc';
@@ -67,8 +76,8 @@ function ShiftPage() {
                     <MyTC>{item.starttime}</MyTC>
                     <MyTC>{item.endtime}</MyTC>
                     <MyTC style={{ width: '175px' }}>
-                        <EditShift id={item.id} />
-                        <DeleteShift id={item.id} />
+                        <EditShift id={item.id} dataChanged={hasDataChanged} />
+                        <DeleteShift id={item.id} dataChanged={hasDataChanged} />
                     </MyTC>
                 </MyTR>
             ));
@@ -82,7 +91,7 @@ function ShiftPage() {
             <Container>
                 <div style={{ margin: '24px 0px' }}>
                     <Typography variant="h5" style={{ width: 'fit-content', verticalAlign: 'sub', display: 'inline-block' }}>Shift Lijst</Typography>
-                    <AddShift />
+                    <AddShift dataChanged={hasDataChanged} />
                 </div>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -91,7 +100,7 @@ function ShiftPage() {
                                 <MyTC onClick={() => requestSort("id")}>Id</MyTC>
                                 <MyTC onClick={() => requestSort("shiftType.shift")}>Shift</MyTC>
                                 <MyTC onClick={() => requestSort("starttijd")}>Starttijd</MyTC>
-                                <MyTC onClick={() => requestSort("eindtijd")}>Eindtijd</MyTC>                                
+                                <MyTC onClick={() => requestSort("eindtijd")}>Eindtijd</MyTC>
                                 <MyTC style={{ width: '150px' }}>Veranderingen</MyTC>
                             </TableRow>
                         </TableHead>

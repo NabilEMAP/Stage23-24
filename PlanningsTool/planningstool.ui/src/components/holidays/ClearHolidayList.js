@@ -6,11 +6,11 @@ import { toast } from 'react-toastify';
 import { Button, Stack } from "@mui/material";
 import { API_BASE_URL } from "../../config";
 
-function ClearHolidayList() {
+function ClearHolidayList(props) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    
+
     useEffect(() => {
     }, []);
 
@@ -24,6 +24,7 @@ function ClearHolidayList() {
             .catch((error) => {
                 toast.warning(`${error}`);
             })
+        props.dataChanged(true);
     }
 
     return (

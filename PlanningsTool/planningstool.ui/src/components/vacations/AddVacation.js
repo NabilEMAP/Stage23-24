@@ -26,7 +26,7 @@ function AddVacation({ dataChanged }) {
     getData();
     getNurseData();
     getVacationTypeData();
-  }, []);
+  }, [dataChanged]); //Do I have to add this?  
 
   const getData = () => {
     const API = `${API_BASE_URL}/Vacations/details`;

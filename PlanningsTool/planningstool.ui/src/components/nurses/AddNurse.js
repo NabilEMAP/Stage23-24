@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { Button, Checkbox, FormControl, FormControlLabel, InputLabel, MenuItem, Select, Stack, TextField } from "@mui/material";
 import { API_BASE_URL } from "../../config";
 
-function AddNurse() {
+function AddNurse({ dataChanged }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -49,8 +49,8 @@ function AddNurse() {
     const errorMessages = [];
 
     if (!firstName) errorMessages.push('Voornaam mag niet leeg zijn');
-    if (!lastName) errorMessages.push('Achternaam mag niet leeg zijn'); 
-    if (!regimeTypeId) errorMessages.push('Regime mag niet leeg zijn'); 
+    if (!lastName) errorMessages.push('Achternaam mag niet leeg zijn');
+    if (!regimeTypeId) errorMessages.push('Regime mag niet leeg zijn');
 
     if (errorMessages.length > 0) {
       const errorMessage = errorMessages.join('\n');
@@ -78,6 +78,7 @@ function AddNurse() {
         clear();
         console.log(JSON.stringify(error.response.data));
       })
+    dataChanged(true);
   }
 
   const handleActiveChange = (e) => {

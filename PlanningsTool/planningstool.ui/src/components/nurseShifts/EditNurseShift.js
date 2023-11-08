@@ -97,6 +97,7 @@ function EditNurseShift(props) {
         toast.warning(`${error}`);
         console.log(data);
       })
+    props.dataChanged(true);
   }
 
   const renderNurse = () => {

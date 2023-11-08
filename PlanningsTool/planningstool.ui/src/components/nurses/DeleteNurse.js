@@ -74,7 +74,7 @@ function DeleteNurse(props) {
       .catch((error) => {
         toast.warning(`${error}`);
       })
-
+    props.dataChanged(true);
   }
 
   const handleEditActiveChange = (e) => {

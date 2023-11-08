@@ -84,15 +84,16 @@ function EditShift(props) {
                 console.log(error);
             })
         console.log(data);
+        props.dataChanged(true);
     }
 
     const renderShiftType = () => {
         return shiftTypeData.map((item) => (
-          <MenuItem key={item.id} value={item.id}>
-            {item.name}
-          </MenuItem>
+            <MenuItem key={item.id} value={item.id}>
+                {item.name}
+            </MenuItem>
         ));
-      }
+    }
 
     return (
         <>
