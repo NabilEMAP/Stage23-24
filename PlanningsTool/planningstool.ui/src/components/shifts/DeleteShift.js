@@ -78,9 +78,11 @@ function DeleteShift(props) {
 
     const renderShiftType = () => {
         return shiftTypeData.map((item) => (
-            <MenuItem value={item.id}>{item.name}</MenuItem>
+          <MenuItem key={item.id} value={item.id}>
+            {item.name}
+          </MenuItem>
         ));
-    }
+      }
 
     return (
         <>

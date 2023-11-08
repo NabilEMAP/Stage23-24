@@ -89,7 +89,7 @@ function AddNurseShift() {
 
   const renderNurse = () => {
     return nurseData.map((item) => (
-      <MenuItem value={item.id}>{
+      <MenuItem key={item.id} value={item.id}>{
         item.firstName + ' ' +
         item.lastName + ' (' +
         item.regimeType.name + ')'
@@ -99,7 +99,7 @@ function AddNurseShift() {
 
   const renderShift = () => {
     return shiftData.map((item) => (
-      <MenuItem value={item.id}>{
+      <MenuItem key={item.id} value={item.id}>{
         item.shiftType.name + ' - ' +
         item.starttime + ' - ' +
         item.endtime

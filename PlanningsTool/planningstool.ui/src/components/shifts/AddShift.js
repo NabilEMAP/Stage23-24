@@ -63,7 +63,7 @@ function AddShift() {
         toast.warning(`${error}`);
         clear();
       })
-      console.log(data);
+    console.log(data);
   }
 
   const clear = () => {
@@ -74,7 +74,9 @@ function AddShift() {
 
   const renderShiftType = () => {
     return shiftTypeData.map((item) => (
-      <MenuItem value={item.id}>{item.name}</MenuItem>
+      <MenuItem key={item.id} value={item.id}>
+        {item.name}
+      </MenuItem>
     ));
   }
 

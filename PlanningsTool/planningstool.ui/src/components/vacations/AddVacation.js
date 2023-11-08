@@ -114,15 +114,20 @@ function AddVacation({ dataChanged }) {
 
   const renderNurse = () => {
     return nurseData.map((item) => (
-      <MenuItem value={item.id}>{item.firstName + ' ' + item.lastName}</MenuItem>
+      <MenuItem key={item.id} value={item.id}>
+        {item.firstName + ' ' + item.lastName}
+      </MenuItem>
     ));
   }
 
   const renderVacationsType = () => {
     return vacationTypeData.map((item) => (
-      <MenuItem value={item.id}>{item.name}</MenuItem>
+      <MenuItem key={item.id} value={item.id}>
+        {item.name}
+      </MenuItem>
     ));
   }
+
 
   return (
     <>

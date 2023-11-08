@@ -41,7 +41,7 @@ function GenerateHolidays() {
           onChange={(e) => setYear(e.target.value)}
         >
           {years.map((year) => (
-            <MenuItem value={year}>{year}</MenuItem>
+            <MenuItem key={year} value={year}>{year}</MenuItem>
           ))}
         </Select>
 

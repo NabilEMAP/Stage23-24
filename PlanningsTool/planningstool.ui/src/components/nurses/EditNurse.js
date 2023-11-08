@@ -107,7 +107,9 @@ function EditNurse(props) {
 
   const renderRegimeType = () => {
     return regimeTypeData.map((item) => (
-      <MenuItem value={item.id}>{item.name}</MenuItem>
+      <MenuItem key={item.id} value={item.id}>
+        {item.name}
+      </MenuItem>
     ));
   }
 

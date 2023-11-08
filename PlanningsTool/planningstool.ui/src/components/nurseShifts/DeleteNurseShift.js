@@ -91,7 +91,7 @@ function DeleteNurseShift(props) {
 
   const renderNurse = () => {
     return nurseData.map((item) => (
-      <MenuItem value={item.id}>{
+      <MenuItem key={item.id} value={item.id}>{
         item.firstName + ' ' +
         item.lastName + ' (' +
         item.regimeType.name + ')'
@@ -101,7 +101,7 @@ function DeleteNurseShift(props) {
 
   const renderShift = () => {
     return shiftData.map((item) => (
-      <MenuItem value={item.id}>{
+      <MenuItem key={item.id} value={item.id}>{
         item.shiftType.name + ' - ' +
         item.starttime + ' - ' +
         item.endtime
