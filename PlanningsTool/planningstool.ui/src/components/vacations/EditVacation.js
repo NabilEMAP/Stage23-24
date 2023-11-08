@@ -6,6 +6,8 @@ import { toast } from 'react-toastify';
 import { Button, FormControl, InputLabel, MenuItem, Select, Stack, TextField, IconButton } from "@mui/material";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { DatePicker } from "@mui/x-date-pickers";
+import dayjs from 'dayjs';
 
 function EditVacation(props) {
     const [show, setShow] = useState(false);
@@ -108,7 +110,7 @@ function EditVacation(props) {
                 handleClose();
             })
             .catch((error) => {
-                if (error.response) {
+                if (error.response.status === 400) {
                     toast.warning('Zie dat de gegevens correct ingevuld zijn');
                 } else {
                     toast.warning(`${error.response.data.Message}`);
@@ -116,7 +118,7 @@ function EditVacation(props) {
                 console.log(data);
                 console.log(JSON.stringify(error));
             })
-            props.dataChanged(true);
+        props.dataChanged(true);
     }
 
     const renderNurse = () => {
@@ -162,24 +164,22 @@ function EditVacation(props) {
                                 {renderNurse()}
                             </Select>
                         </FormControl>
-                        <TextField
-                            required
-                            label="Startdatum"
-                            style={{ width: '75%' }}
-                            type="date"
-                            className="form-control"
-                            value={startdate}
-                            onChange={(e) => setStartdate(e.target.value)}
-                        />
-                        <TextField
-                            required
-                            label="Einddatum"
-                            style={{ width: '75%' }}
-                            type="date"
-                            className="form-control"
-                            value={enddate}
-                            onChange={(e) => setEnddate(e.target.value)}
-                        />
+                        <FormControl style={{ width: '75%' }}>
+                            <DatePicker slotProps={{ textField: { error: false } }}
+                                required
+                                label="Startdatum *"
+                                value={dayjs(startdate)}
+                                onChange={(e) => setStartdate(dayjs(e).format('YYYY-MM-DD'))}
+                            />
+                        </FormControl>
+                        <FormControl style={{ width: '75%' }}>
+                            <DatePicker slotProps={{ textField: { error: false } }}
+                                required
+                                label="Einddatum *"
+                                value={dayjs(enddate)}
+                                onChange={(e) => setEnddate(dayjs(e).format('YYYY-MM-DD'))}
+                            />
+                        </FormControl>
                         <FormControl style={{ width: '75%' }}>
                             <InputLabel>Verlof *</InputLabel>
                             <Select

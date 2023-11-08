@@ -6,6 +6,8 @@ import { toast } from 'react-toastify';
 import { Button, FormControl, InputLabel, MenuItem, Select, Stack, TextField, IconButton } from "@mui/material";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { DatePicker } from "@mui/x-date-pickers";
+import dayjs from 'dayjs';
 
 function DeleteVacation(props) {
     const [show, setShow] = useState(false);
@@ -88,7 +90,7 @@ function DeleteVacation(props) {
             .catch((error) => {
                 toast.warning(`${error}`);
             })
-            props.dataChanged(true);
+        props.dataChanged(true);
     }
 
     const renderNurse = () => {
@@ -125,33 +127,39 @@ function DeleteVacation(props) {
                     >
                         <h6>Ben je zeker dat je dit verlof wilt verwijderen?</h6>
                         <FormControl style={{ width: '75%' }} disabled>
-                            <InputLabel>Zorgkundige</InputLabel>
+                            <InputLabel>Zorgkundige *</InputLabel>
                             <Select
+                                required
+                                label="Zorgkundige"
                                 value={nurseId}
                                 onChange={(e) => setNurseId(e.target.value)}
                             >
                                 {renderNurse()}
                             </Select>
                         </FormControl>
-                        <TextField
-                            style={{ width: '75%' }}
-                            type="date"
-                            className="form-control"
-                            value={startdate}
-                            onChange={(e) => setStartdate(e.target.value)}
-                            disabled
-                        />
-                        <TextField
-                            style={{ width: '75%' }}
-                            type="date"
-                            className="form-control"
-                            value={enddate}
-                            onChange={(e) => setEnddate(e.target.value)}
-                            disabled
-                        />
+                        <FormControl style={{ width: '75%' }}>
+                            <DatePicker slotProps={{ textField: { error: false } }}
+                                required
+                                label="Startdatum *"
+                                value={dayjs(startdate)}
+                                onChange={(e) => setStartdate(dayjs(e).format('YYYY-MM-DD'))}
+                                disabled
+                            />
+                        </FormControl>
+                        <FormControl style={{ width: '75%' }}>
+                            <DatePicker slotProps={{ textField: { error: false } }}
+                                required
+                                label="Einddatum *"
+                                value={dayjs(enddate)}
+                                onChange={(e) => setEnddate(dayjs(e).format('YYYY-MM-DD'))}
+                                disabled
+                            />
+                        </FormControl>
                         <FormControl style={{ width: '75%' }} disabled>
-                            <InputLabel>Verlof</InputLabel>
+                            <InputLabel>Verlof *</InputLabel>
                             <Select
+                                required
+                                label="Verlof"
                                 value={vacationTypeId}
                                 onChange={(e) => setVacationTypeId(e.target.value)}
                             >
@@ -159,10 +167,10 @@ function DeleteVacation(props) {
                             </Select>
                         </FormControl>
                         <TextField
+                            label="Reden"
                             style={{ width: '75%' }}
                             type="date"
                             className="form-control"
-                            placeholder="Reden"
                             value={reason}
                             multiline={true}
                             minRows={6}

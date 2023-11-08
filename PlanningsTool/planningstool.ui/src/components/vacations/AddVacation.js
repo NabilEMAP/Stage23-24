@@ -5,8 +5,9 @@ import Modal from 'react-bootstrap/Modal';
 import { toast } from 'react-toastify';
 import { Button, FormControl, InputLabel, MenuItem, Select, Stack, TextField } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
+import dayjs from 'dayjs';
 
-function AddVacation({dataChanged}) {
+function AddVacation({ dataChanged }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -18,7 +19,7 @@ function AddVacation({dataChanged}) {
   const [data, setData] = useState([]);
   const [nurseData, setNurseData] = useState([]);
   const [vacationTypeData, setVacationTypeData] = useState([]);
-  
+
 
   useEffect(() => {
     getData();
@@ -96,11 +97,11 @@ function AddVacation({dataChanged}) {
         } else {
           toast.warning(`${error.response.data.Message}`);
         }
-        console.log(data);
         console.log(JSON.stringify(error));
-        clear();        
+        clear();
       })
-      dataChanged(true);
+    console.log(data);
+    dataChanged(true);
   }
 
   const clear = () => {
@@ -156,21 +157,20 @@ function AddVacation({dataChanged}) {
               </Select>
             </FormControl>
             <FormControl style={{ width: '75%' }}>
-            <DatePicker slotProps={{ textField: { error: false }}}
-              label="Startdate"
-              value={startdate}
-              onChange={(e) => setStartdate(e)}
-              format="DD/MM/YYYY"
-            />
+              <DatePicker slotProps={{ textField: { error: false } }}
+                required
+                label="Startdatum *"
+                value={dayjs(startdate)}
+                onChange={(e) => setStartdate(dayjs(e).format('YYYY-MM-DD'))}
+              />
             </FormControl>
             <FormControl style={{ width: '75%' }}>
-            <DatePicker slotProps={{ textField: { error: false }}}
-              label="Startdate"
-              className="form-control"
-              value={enddate}
-              onChange={(e) => setEnddate(e)}
-              format="DD/MM/YYYY"
-            />
+              <DatePicker slotProps={{ textField: { error: false } }}
+                required
+                label="Einddatum *"
+                value={dayjs(enddate)}
+                onChange={(e) => setEnddate(dayjs(e).format('YYYY-MM-DD'))}
+              />
             </FormControl>
             <FormControl style={{ width: '75%' }}>
               <InputLabel>Verlof *</InputLabel>
