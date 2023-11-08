@@ -6,6 +6,8 @@ import { toast } from 'react-toastify';
 import { Button, FormControl, IconButton, InputLabel, MenuItem, Select, Stack, TextField } from "@mui/material";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { DatePicker } from "@mui/x-date-pickers";
+import dayjs from 'dayjs';
 
 function EditNurseShift(props) {
   const [show, setShow] = useState(false);
@@ -137,8 +139,10 @@ function EditNurseShift(props) {
             spacing={4}
           >
             <FormControl style={{ width: '75%' }}>
-              <InputLabel>Selecteer een zorgkundige...</InputLabel>
+              <InputLabel>Zorgkundige *</InputLabel>
               <Select
+                required
+                label="Zorgkundige"
                 value={nurseId}
                 onChange={(e) => setNurseId(e.target.value)}
               >
@@ -146,21 +150,24 @@ function EditNurseShift(props) {
               </Select>
             </FormControl>
             <FormControl style={{ width: '75%' }}>
-              <InputLabel>Selecteer een shift...</InputLabel>
+              <InputLabel>Shift *</InputLabel>
               <Select
+                required
+                label="Shift"
                 value={shiftId}
                 onChange={(e) => setShiftId(e.target.value)}
               >
                 {renderShift()}
               </Select>
             </FormControl>
-            <TextField
-              style={{ width: '75%' }}
-              type="date"
-              className="form-control"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-            />
+            <FormControl style={{ width: '75%' }}>
+              <DatePicker slotProps={{ textField: { error: false } }}
+                required
+                label="Datum *"
+                value={dayjs(date)}
+                onChange={(e) => setDate(dayjs(e).format('YYYY-MM-DD'))}
+              />
+            </FormControl>
           </Stack>
         </Modal.Body>
         <Modal.Footer>

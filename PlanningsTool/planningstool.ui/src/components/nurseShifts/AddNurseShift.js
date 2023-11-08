@@ -4,6 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Modal from 'react-bootstrap/Modal';
 import { toast } from 'react-toastify';
 import { Button, FormControl, InputLabel, MenuItem, Select, Stack, TextField } from "@mui/material";
+import { DatePicker } from "@mui/x-date-pickers";
+import dayjs from 'dayjs';
 
 function AddNurseShift() {
   const [show, setShow] = useState(false);
@@ -127,8 +129,10 @@ function AddNurseShift() {
             spacing={4}
           >
             <FormControl style={{ width: '75%' }}>
-              <InputLabel>Selecteer een zorgkundige...</InputLabel>
+              <InputLabel>Zorgkundige *</InputLabel>
               <Select
+                required
+                label="Zorgkundige"
                 value={nurseId}
                 onChange={(e) => setNurseId(e.target.value)}
               >
@@ -136,21 +140,23 @@ function AddNurseShift() {
               </Select>
             </FormControl>
             <FormControl style={{ width: '75%' }}>
-              <InputLabel>Selecteer een shift...</InputLabel>
+              <InputLabel>Shift *</InputLabel>
               <Select
+                required
+                label="Shift"
                 value={shiftId}
                 onChange={(e) => setShiftId(e.target.value)}
               >
                 {renderShift()}
               </Select>
             </FormControl>
-            <TextField
-              style={{ width: '75%' }}
-              type="date"
-              className="form-control"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-            />
+            <FormControl style={{ width: '75%' }}>
+              <DatePicker slotProps={{ textField: { error: false } }}
+                required
+                label="Datum *"
+                onChange={(e) => setDate(dayjs(e).format('YYYY-MM-DD'))}
+              />
+            </FormControl>
           </Stack>
         </Modal.Body>
         <Modal.Footer>

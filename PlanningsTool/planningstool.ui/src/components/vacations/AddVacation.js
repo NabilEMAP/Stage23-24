@@ -160,7 +160,6 @@ function AddVacation({ dataChanged }) {
               <DatePicker slotProps={{ textField: { error: false } }}
                 required
                 label="Startdatum *"
-                value={dayjs(startdate)}
                 onChange={(e) => setStartdate(dayjs(e).format('YYYY-MM-DD'))}
               />
             </FormControl>
@@ -168,7 +167,6 @@ function AddVacation({ dataChanged }) {
               <DatePicker slotProps={{ textField: { error: false } }}
                 required
                 label="Einddatum *"
-                value={dayjs(enddate)}
                 onChange={(e) => setEnddate(dayjs(e).format('YYYY-MM-DD'))}
               />
             </FormControl>

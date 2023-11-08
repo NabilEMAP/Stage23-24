@@ -53,7 +53,7 @@ function DeleteNurse(props) {
       .then((result) => {
         setFirstName(result.data.firstName);
         setLastName(result.data.lastName);
-        setRegimeTypeId(result.data.regimeTypeId);        
+        setRegimeTypeId(result.data.regimeTypeId);
         setIsFixedNight(result.data.isVasteNacht);
         editId(id);
       })
@@ -87,7 +87,7 @@ function DeleteNurse(props) {
 
   const renderRegimeType = () => {
     return regimeTypeData.map((item) => (
-      <MenuItem value={item.id}>{item.name}</MenuItem>      
+      <MenuItem value={item.id}>{item.name}</MenuItem>
     ));
   }
 
@@ -114,25 +114,29 @@ function DeleteNurse(props) {
             <h6>Ben je zeker dat je deze zorgkundige wilt verwijderen?</h6>
             <TextField
               style={{ width: '75%' }}
+              required
+              label="Voornaam"
               type="text"
               className="form-control"
-              placeholder="Voornaam"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               disabled
             />
             <TextField
               style={{ width: '75%' }}
+              required
+              label="Voornaam"
               type="text"
               className="form-control"
-              placeholder="Achternaam"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
               disabled
             />
             <FormControl style={{ width: '75%' }} disabled>
-              <InputLabel>Selecteer uw regime...</InputLabel>
+              <InputLabel>Regime *</InputLabel>
               <Select
+                required
+                label="Regime"
                 value={regimeTypeId}
                 onChange={(e) => setRegimeTypeId(e.target.value)}
               >

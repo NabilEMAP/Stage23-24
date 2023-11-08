@@ -3,7 +3,9 @@ import React, { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Modal from 'react-bootstrap/Modal';
 import { toast } from 'react-toastify';
-import { Button, FormControl, InputLabel, MenuItem, Select, Stack, TextField } from "@mui/material";
+import { Button, FormControl, InputLabel, MenuItem, Select, Stack } from "@mui/material";
+import { TimePicker } from "@mui/x-date-pickers";
+import dayjs from 'dayjs';
 
 function AddShift() {
   const [show, setShow] = useState(false);
@@ -46,8 +48,8 @@ function AddShift() {
     const API = 'https://localhost:8000/api/Shifts';
     const data =
     {
-      "starttime": starttime + ":00",
-      "endtime": endtime + ":00",
+      "starttime": starttime,
+      "endtime": endtime,
       "shiftTypeId": shiftTypeId
     }
     axios.post(API, data)
@@ -61,6 +63,7 @@ function AddShift() {
         toast.warning(`${error}`);
         clear();
       })
+      console.log(data);
   }
 
   const clear = () => {
@@ -97,28 +100,32 @@ function AddShift() {
             spacing={4}
           >
             <FormControl style={{ width: '75%' }}>
-              <InputLabel>Shift</InputLabel>
+              <InputLabel>Shift *</InputLabel>
               <Select
+                required
+                label="Shift"
                 value={shiftTypeId}
                 onChange={(e) => setShiftTypeId(e.target.value)}
               >
                 {renderShiftType()}
               </Select>
             </FormControl>
-            <TextField
-              style={{ width: '75%' }}
-              type="time"
-              className="form-control"
-              value={starttime}
-              onChange={(e) => setStarttime(e.target.value)}
-            />
-            <TextField
-              style={{ width: '75%' }}
-              type="time"
-              className="form-control"
-              value={endtime}
-              onChange={(e) => setEndtime(e.target.value)}
-            />
+            <FormControl style={{ width: '75%' }}>
+              <TimePicker slotProps={{ textField: { error: false } }}
+                required
+                label="Starttijd *"
+                ampm={false}
+                onChange={(e) => setStarttime(dayjs(e).format('HH:mm:ss'))}
+              />
+            </FormControl>
+            <FormControl style={{ width: '75%' }}>
+              <TimePicker slotProps={{ textField: { error: false } }}
+                required
+                label="Eindtijd *"
+                ampm={false}
+                onChange={(e) => setEndtime(dayjs(e).format('HH:mm:ss'))}
+              />
+            </FormControl>
           </Stack>
         </Modal.Body>
         <Modal.Footer>

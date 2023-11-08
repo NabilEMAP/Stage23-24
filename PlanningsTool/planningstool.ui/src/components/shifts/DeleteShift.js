@@ -3,9 +3,11 @@ import React, { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Modal from 'react-bootstrap/Modal';
 import { toast } from 'react-toastify';
-import { Button, FormControl, InputLabel, MenuItem, Select, Stack, TextField, IconButton } from "@mui/material";
+import { Button, FormControl, InputLabel, MenuItem, Select, Stack, IconButton } from "@mui/material";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { TimePicker } from "@mui/x-date-pickers";
+import dayjs from 'dayjs';
 
 function DeleteShift(props) {
     const [show, setShow] = useState(false);
@@ -102,30 +104,34 @@ function DeleteShift(props) {
                     >
                         <h6>Ben je zeker dat je dit shift wilt verwijderen?</h6>
                         <FormControl style={{ width: '75%' }} disabled>
-                            <InputLabel>Shift</InputLabel>
+                            <InputLabel>Shift *</InputLabel>
                             <Select
+                                required
+                                label="Shift"
                                 value={shiftTypeId}
                                 onChange={(e) => setShiftTypeId(e.target.value)}
                             >
                                 {renderShiftType()}
                             </Select>
                         </FormControl>
-                        <TextField
-                            style={{ width: '75%' }}
-                            type="time"
-                            className="form-control"
-                            value={starttime}
-                            onChange={(e) => setStarttime(e.target.value)}
-                            disabled
-                        />
-                        <TextField
-                            style={{ width: '75%' }}
-                            type="time"
-                            className="form-control"
-                            value={endtime}
-                            onChange={(e) => setEndtime(e.target.value)}
-                            disabled
-                        />
+                        <FormControl style={{ width: '75%' }}>
+                            <TimePicker slotProps={{ textField: { error: false } }}
+                                required
+                                label="Starttijd *"
+                                value={dayjs(starttime, 'HH:mm:ss').toDate()}
+                                onChange={(e) => setStarttime(dayjs(e).format('HH:mm:ss'))}
+                                disabled
+                            />
+                        </FormControl>
+                        <FormControl style={{ width: '75%' }}>
+                            <TimePicker slotProps={{ textField: { error: false } }}
+                                required
+                                label="Eindtijd *"
+                                value={dayjs(endtime, 'HH:mm:ss').toDate()}
+                                onChange={(e) => setEndtime(dayjs(e).format('HH:mm:ss'))}
+                                disabled
+                            />
+                        </FormControl>
                     </Stack>
                 </Modal.Body>
                 <Modal.Footer>

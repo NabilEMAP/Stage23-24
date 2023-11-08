@@ -3,9 +3,11 @@ import React, { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Modal from 'react-bootstrap/Modal';
 import { toast } from 'react-toastify';
-import { Button, Checkbox, FormControl, FormControlLabel, IconButton, InputLabel, MenuItem, Select, Stack, TextField } from "@mui/material";
+import { Button, FormControl, IconButton, InputLabel, MenuItem, Select, Stack } from "@mui/material";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { DatePicker } from "@mui/x-date-pickers";
+import dayjs from 'dayjs';
 
 function DeleteNurseShift(props) {
   const [show, setShow] = useState(false);
@@ -129,8 +131,10 @@ function DeleteNurseShift(props) {
           >
             <h6>Ben je zeker dat je deze zorgkundige shift wilt verwijderen?</h6>
             <FormControl style={{ width: '75%' }} disabled>
-              <InputLabel>Selecteer een zorgkundige...</InputLabel>
+              <InputLabel>Zorgkundige *</InputLabel>
               <Select
+                required
+                label="Zorgkundige"
                 value={nurseId}
                 onChange={(e) => setNurseId(e.target.value)}
               >
@@ -138,22 +142,25 @@ function DeleteNurseShift(props) {
               </Select>
             </FormControl>
             <FormControl style={{ width: '75%' }} disabled>
-              <InputLabel>Selecteer een shift...</InputLabel>
+              <InputLabel>Shift *</InputLabel>
               <Select
+                required
+                label="Shift"
                 value={shiftId}
                 onChange={(e) => setShiftId(e.target.value)}
               >
                 {renderShift()}
               </Select>
             </FormControl>
-            <TextField
-              style={{ width: '75%' }}
-              type="date"
-              className="form-control"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              disabled
-            />
+            <FormControl style={{ width: '75%' }} >
+              <DatePicker slotProps={{ textField: { error: false } }}
+                required
+                label="Datum *"
+                value={dayjs(date)}
+                onChange={(e) => setDate(dayjs(e).format('YYYY-MM-DD'))}
+                disabled
+              />
+            </FormControl>
           </Stack>
         </Modal.Body>
         <Modal.Footer>
