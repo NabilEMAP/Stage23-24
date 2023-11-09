@@ -106,8 +106,8 @@ function AddVacation({ dataChanged }) {
   }
 
   const clear = () => {
-    setStartdate('');
-    setEnddate('');
+    //setStartdate('');
+    //setEnddate('');
     setNurseId('');
     setVacationTypeId('');
     setReason('');

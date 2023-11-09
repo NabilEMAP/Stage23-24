@@ -69,8 +69,8 @@ function AddShift({ dataChanged }) {
   }
 
   const clear = () => {
-    setStarttime('');
-    setEndtime('');
+    //setStarttime('');
+    //setEndtime('');
     setShiftTypeId('');
   }
 

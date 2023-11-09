@@ -84,7 +84,7 @@ function AddNurseShift({ dataChanged }) {
   }
 
   const clear = () => {
-    setDate('');
+    //setDate('');
     setNurseId('');
     setShiftId('');
   }
