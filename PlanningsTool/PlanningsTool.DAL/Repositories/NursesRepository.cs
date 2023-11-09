@@ -35,5 +35,13 @@ namespace PlanningsTool.DAL.Repositories
             string query = $"SELECT * FROM [dbo].[Nurses] AS z WHERE z.FirstName like '%{firstName}%'";
             return await _context.Nurses.FromSqlRaw(query).Include(r => r.RegimeType).ToListAsync();
         }
+
+        public async Task<IEnumerable<Nurse>> GetNursesByFullName(string fullName)
+        {
+            string query = $"SELECT * FROM [dbo].[Nurses] AS z WHERE CONCAT(z.FirstName, z.LastName) = '{fullName}'";
+            return await _context.Nurses.FromSqlRaw(query).Include(r => r.RegimeType).ToListAsync();
+        }
+
+        
     }
 }

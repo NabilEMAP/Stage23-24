@@ -9,6 +9,7 @@ namespace PlanningsTool.DAL.Repositories
         Task<Nurse> GetNurseAsyncById(int id);
         Task<IEnumerable<Nurse>> GetNursesByLastName(string lastName);
         Task<IEnumerable<Nurse>> GetNursesByFirstName(string firstName);
+        Task<IEnumerable<Nurse>> GetNursesByFullName(string fullName);
 
     }
 }

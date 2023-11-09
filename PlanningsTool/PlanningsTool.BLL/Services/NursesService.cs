@@ -34,10 +34,21 @@ namespace PlanningsTool.BLL.Services
                 throw new CustomValidationException(validationResult.Errors);
             }
 
+            if (await CheckIfExist(entity.FirstName+entity.LastName))
+            {
+                throw new Exception($"De zorgkundige bestaat al");
+            }
+
             var nurse = _mapper.Map<Nurse>(entity);
             await _uow.NursesRepository.Add(nurse);
             await _uow.Save();
             return _mapper.Map<NurseDTO>(nurse);
+        }
+
+        public async Task<bool> CheckIfExist(string fullName)
+        {
+            var checkFullName = await _uow.NursesRepository.GetNursesByFullName(fullName);
+            return checkFullName.Any();
         }
 
         public async Task<int> Delete(int id)
