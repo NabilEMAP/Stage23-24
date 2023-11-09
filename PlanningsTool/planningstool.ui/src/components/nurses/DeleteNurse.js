@@ -23,7 +23,7 @@ function DeleteNurse(props) {
   useEffect(() => {
     getData();
     getRegimeTypeData();
-  }, []);
+  }, [props.dataChanged]);
 
   const getData = () => {
     const API = `${API_BASE_URL}/Nurses`;

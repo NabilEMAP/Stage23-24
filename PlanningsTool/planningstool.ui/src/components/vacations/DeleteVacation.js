@@ -28,7 +28,7 @@ function DeleteVacation(props) {
         getData();
         getNurseData();
         getVacationTypeData();
-    }, [props.dataChanged]); //Do I have to add this?
+    }, [props.dataChanged]);
 
     const getData = () => {
         const API = `${API_BASE_URL}/Vacations/details`;
@@ -96,19 +96,19 @@ function DeleteVacation(props) {
 
     const renderNurse = () => {
         return nurseData.map((item) => (
-          <MenuItem key={item.id} value={item.id}>
-            {item.firstName + ' ' + item.lastName}
-          </MenuItem>
+            <MenuItem key={item.id} value={item.id}>
+                {item.firstName + ' ' + item.lastName}
+            </MenuItem>
         ));
-      }
-    
-      const renderVacationsType = () => {
+    }
+
+    const renderVacationsType = () => {
         return vacationTypeData.map((item) => (
-          <MenuItem key={item.id} value={item.id}>
-            {item.name}
-          </MenuItem>
+            <MenuItem key={item.id} value={item.id}>
+                {item.name}
+            </MenuItem>
         ));
-      }
+    }
 
     return (
         <>

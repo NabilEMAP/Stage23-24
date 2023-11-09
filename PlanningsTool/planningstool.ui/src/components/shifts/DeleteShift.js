@@ -24,7 +24,7 @@ function DeleteShift(props) {
     useEffect(() => {
         getData();
         getShiftTypeData();
-    }, []);
+    }, [props.dataChanged]);
 
     const getData = () => {
         const API = `${API_BASE_URL}/Shifts`;

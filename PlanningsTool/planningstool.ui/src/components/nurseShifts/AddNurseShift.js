@@ -23,7 +23,7 @@ function AddNurseShift({ dataChanged }) {
     getData();
     getNurseData();
     getShiftData();
-  }, []);
+  }, [dataChanged]);
 
   const getData = () => {
     const API = `${API_BASE_URL}/NurseShifts`;

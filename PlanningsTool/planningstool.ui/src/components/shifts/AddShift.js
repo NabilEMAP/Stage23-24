@@ -21,7 +21,7 @@ function AddShift({ dataChanged }) {
   useEffect(() => {
     getData();
     getShiftTypeData();
-  }, []);
+  }, [dataChanged]);
 
   const getData = () => {
     const API = `${API_BASE_URL}/Shifts`;

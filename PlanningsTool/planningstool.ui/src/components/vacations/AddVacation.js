@@ -26,7 +26,7 @@ function AddVacation({ dataChanged }) {
     getData();
     getNurseData();
     getVacationTypeData();
-  }, [dataChanged]); //Do I have to add this?  
+  }, [dataChanged]);
 
   const getData = () => {
     const API = `${API_BASE_URL}/Vacations/details`;
@@ -97,12 +97,11 @@ function AddVacation({ dataChanged }) {
           toast.warning('Zie dat de gegevens correct ingevuld zijn');
         } else {
           toast.warning(`${error.response.data.Message}`);
-        }
-        console.log(data);
-        console.log(JSON.stringify(error));
+        }        
         clear();
       })
-    console.log(data);
+      console.log(data);
+      console.log(JSON.stringify(error));
     dataChanged(true);
   }
 

@@ -26,7 +26,7 @@ function DeleteNurseShift(props) {
     getData();
     getNurseData();
     getShiftData();
-  }, []);
+  }, [props.dataChanged]);
 
   const getData = () => {
     const API = `${API_BASE_URL}/NurseShifts`;

@@ -20,7 +20,7 @@ function AddNurse({ dataChanged }) {
   useEffect(() => {
     getData();
     getRegimeTypeData();
-  }, []);
+  }, [dataChanged]);
 
   const getData = () => {
     const API = `${API_BASE_URL}/Nurses`;
