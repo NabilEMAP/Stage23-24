@@ -65,11 +65,10 @@ function AddShift({ dataChanged }) {
           toast.warning('Zie dat de gegevens correct ingevuld zijn');
         } else {
           toast.warning(`${error.response.data.Message}`);
-        }        
+        }
+        console.log(JSON.stringify(error));
         clear();
       })
-      console.log(data);
-      console.log(JSON.stringify(error));
     console.log(data);
     dataChanged(true);
   }

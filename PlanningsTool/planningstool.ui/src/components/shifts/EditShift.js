@@ -85,9 +85,9 @@ function EditShift(props) {
                 } else {
                     toast.warning(`${error.response.data.Message}`);
                 }
+                console.log(JSON.stringify(error));
             })
         console.log(data);
-        console.log(JSON.stringify(error));
         props.dataChanged(true);
     }
 
