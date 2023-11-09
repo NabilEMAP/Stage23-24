@@ -46,14 +46,7 @@ namespace PlanningsTool.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateNurseShiftDTO nurseShift)
         {
-            try
-            {
-                await _nurseShiftsServices.Add(nurseShift);
-            }
-            catch (Exception ex)
-            {
-                return NotFound(ex.Message);
-            }
+            await _nurseShiftsServices.Add(nurseShift);
             return Ok(nurseShift);
         }
 

@@ -55,14 +55,7 @@ namespace PlanningsTool.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateShiftDTO shift)
         {
-            try
-            {
-                await _shiftsServices.Add(shift);
-            }
-            catch (Exception ex)
-            {
-                return NotFound(ex.Message);
-            }
+            await _shiftsServices.Add(shift);
             return Ok(shift);
         }
 
