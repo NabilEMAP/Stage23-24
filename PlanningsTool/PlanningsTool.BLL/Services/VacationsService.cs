@@ -34,10 +34,31 @@ namespace PlanningsTool.BLL.Services
                 throw new CustomValidationException(validationResult.Errors);
             }
 
+            if (await CheckIfExist(entity.NurseId,entity.Startdate,entity.Enddate))
+            {
+                throw new Exception($"Het verlof bestaat al voor deze zorgkundige");
+            }
+
             var vacation = _mapper.Map<Vacation>(entity);
             await _uow.VacationsRepository.Add(vacation);
             await _uow.Save();
             return _mapper.Map<VacationDetailDTO>(vacation);
+        }
+
+        public async Task<bool> CheckIfExist(int nurseId, DateTime startDate, DateTime endDate)
+        {
+            foreach (var item in await _uow.VacationsRepository.GetAllVacationsAsync())
+            {
+                if (
+                    item.NurseId == nurseId &&
+                    item.Startdate == startDate &&
+                    item.Enddate == endDate
+                )
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public async Task<int> Delete(int id)
@@ -45,7 +66,7 @@ namespace PlanningsTool.BLL.Services
             var toDeleteVerlof = await _uow.VacationsRepository.GetVacationAsyncById(id);
             if (toDeleteVerlof == null)
             {
-                throw new KeyNotFoundException("This vacation does not exist.");
+                throw new KeyNotFoundException("Het verlof bestaat niet");
             }
             _uow.VacationsRepository.Delete(toDeleteVerlof);
             await _uow.Save();
@@ -97,12 +118,17 @@ namespace PlanningsTool.BLL.Services
                 throw new CustomValidationException(validationResult.Errors);
             }
 
+            if (await CheckIfExist(entity.NurseId, entity.Startdate, entity.Enddate))
+            {
+                throw new Exception($"Het verlof bestaat al voor deze zorgkundige");
+            }
+
             var vacationFromRequest = _mapper.Map<Vacation>(entity);
             var vacationToUpdate = await _uow.VacationsRepository.GetVacationAsyncById(id);
 
             if (vacationToUpdate == null)
             {
-                throw new KeyNotFoundException("Dit vacation bestaat niet.");
+                throw new KeyNotFoundException("Het verlof bestaat niet");
             }
 
             vacationToUpdate.Startdate = vacationFromRequest.Startdate;

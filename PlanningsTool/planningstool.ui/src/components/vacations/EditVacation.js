@@ -116,27 +116,27 @@ function EditVacation(props) {
                 } else {
                     toast.warning(`${error.response.data.Message}`);
                 }
-                console.log(data);
-                console.log(JSON.stringify(error));
             })
+        console.log(data);
+        console.log(JSON.stringify(error));
         props.dataChanged(true);
     }
 
     const renderNurse = () => {
         return nurseData.map((item) => (
-          <MenuItem key={item.id} value={item.id}>
-            {item.firstName + ' ' + item.lastName}
-          </MenuItem>
+            <MenuItem key={item.id} value={item.id}>
+                {item.firstName + ' ' + item.lastName}
+            </MenuItem>
         ));
-      }
-    
-      const renderVacationsType = () => {
+    }
+
+    const renderVacationsType = () => {
         return vacationTypeData.map((item) => (
-          <MenuItem key={item.id} value={item.id}>
-            {item.name}
-          </MenuItem>
+            <MenuItem key={item.id} value={item.id}>
+                {item.name}
+            </MenuItem>
         ));
-      }
+    }
 
     return (
         <>

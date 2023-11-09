@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
+using FluentValidation.Results;
+using PlanningsTool.BLL.Exceptions;
 using PlanningsTool.BLL.Interfaces;
+using PlanningsTool.BLL.Validations;
 using PlanningsTool.Common.DTO.NurseShifts;
 using PlanningsTool.DAL.Models;
 using PlanningsTool.DAL.UOW;
@@ -8,21 +11,53 @@ namespace PlanningsTool.BLL.Services
 {
     public class NurseShiftService : INurseShiftsService
     {
-        public readonly IUnitOfWork _uow;
-        public readonly IMapper _mapper;
+        private readonly IUnitOfWork _uow;
+        private readonly IMapper _mapper;
+        private readonly CreateNurseShiftValidator _createValidator;
+        private readonly UpdateNurseShiftValidator _updateValidator;
 
-        public NurseShiftService(IUnitOfWork uow, IMapper mapper)
+        public NurseShiftService(IUnitOfWork uow, IMapper mapper, CreateNurseShiftValidator createValidator, UpdateNurseShiftValidator updateValidator)
         {
             _uow = uow;
             _mapper = mapper;
+            _createValidator = createValidator;
+            _updateValidator = updateValidator;
         }
 
         public async Task<NurseShiftDTO> Add(CreateNurseShiftDTO entity)
         {
+            ValidationResult validationResult = _createValidator.Validate(entity);
+
+            if (!validationResult.IsValid)
+            {
+                throw new CustomValidationException(validationResult.Errors);
+            }
+
+            if (await CheckIfExist(entity.NurseId, entity.ShiftId, entity.Date))
+            {
+                throw new Exception($"De zorgkundige shift bestaat al");
+            }
+
             var nurse = _mapper.Map<NurseShift>(entity);
             await _uow.NurseShiftsRepository.Add(nurse);
             await _uow.Save();
             return _mapper.Map<NurseShiftDTO>(nurse);
+        }
+
+        public async Task<bool> CheckIfExist(int nurseId, int shiftId, DateTime date)
+        {
+            foreach (var item in await _uow.NurseShiftsRepository.GetAllNurseShiftsAsync())
+            {
+                if(
+                    item.NurseId == nurseId &&
+                    item.ShiftId == shiftId &&
+                    item.Date == date
+                )
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public async Task<int> Delete(int id)
@@ -30,7 +65,7 @@ namespace PlanningsTool.BLL.Services
             var toDeleteZorgkundige = await _uow.NurseShiftsRepository.GetNurseShiftAsyncById(id);
             if (toDeleteZorgkundige == null)
             {
-                throw new KeyNotFoundException("This nurse shift does not exist.");
+                throw new KeyNotFoundException("Deze zorgkundige shift bestaat niet");
             }
             _uow.NurseShiftsRepository.Delete(toDeleteZorgkundige);
             await _uow.Save();
@@ -57,12 +92,24 @@ namespace PlanningsTool.BLL.Services
 
         public async Task<NurseShiftDTO> Update(int id, UpdateNurseShiftDTO entity)
         {
+            ValidationResult validationResult = _updateValidator.Validate(entity);
+
+            if (!validationResult.IsValid)
+            {
+                throw new CustomValidationException(validationResult.Errors);
+            }
+
+            if (await CheckIfExist(entity.NurseId, entity.ShiftId, entity.Date))
+            {
+                throw new Exception($"De zorgkundige shift bestaat al");
+            }
+
             var nurseFromRequest = _mapper.Map<NurseShift>(entity);
             var nurseToUpdate = await _uow.NurseShiftsRepository.GetNurseShiftAsyncById(id);
 
             if (nurseToUpdate == null)
             {
-                throw new KeyNotFoundException("Deze nurse shift bestaat niet.");
+                throw new KeyNotFoundException("Deze zorgkundige shift bestaat niet");
             }
 
             nurseToUpdate.Date = nurseFromRequest.Date;

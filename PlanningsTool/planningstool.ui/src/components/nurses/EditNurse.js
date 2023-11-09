@@ -92,9 +92,14 @@ function EditNurse(props) {
         handleClose();
       })
       .catch((error) => {
-        toast.warning(`${error.response.data.Message}`);
-        console.log(JSON.stringify(error.response.data));
+        if (error.response.status === 400) {
+          toast.warning('Zie dat de gegevens correct ingevuld zijn');
+        } else {
+          toast.warning(`${error.response.data.Message}`);
+        }
       })
+    console.log(data);
+    console.log(JSON.stringify(error));
     props.dataChanged(true);
   }
 

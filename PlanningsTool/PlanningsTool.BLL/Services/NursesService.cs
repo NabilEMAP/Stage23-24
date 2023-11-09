@@ -34,7 +34,7 @@ namespace PlanningsTool.BLL.Services
                 throw new CustomValidationException(validationResult.Errors);
             }
 
-            if (await CheckIfExist(entity.FirstName+entity.LastName))
+            if (await CheckIfExist(entity.FirstName, entity.LastName))
             {
                 throw new Exception($"De zorgkundige bestaat al");
             }
@@ -45,10 +45,16 @@ namespace PlanningsTool.BLL.Services
             return _mapper.Map<NurseDTO>(nurse);
         }
 
-        public async Task<bool> CheckIfExist(string fullName)
+        public async Task<bool> CheckIfExist(string firstName, string lastName)
         {
-            var checkFullName = await _uow.NursesRepository.GetNursesByFullName(fullName);
-            return checkFullName.Any();
+            foreach (var item in await _uow.NursesRepository.GetAllNursesAsync())
+            {
+                if(item.FirstName == firstName && item.LastName == lastName)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public async Task<int> Delete(int id)
@@ -56,7 +62,7 @@ namespace PlanningsTool.BLL.Services
             var toDeleteNurse = await _uow.NursesRepository.GetNurseAsyncById(id);
             if (toDeleteNurse == null)
             {
-                throw new KeyNotFoundException("Deze zorgkundige bestaat niet.");
+                throw new KeyNotFoundException("Deze zorgkundige bestaat niet");
             }
             _uow.NursesRepository.Delete(toDeleteNurse);
             await _uow.Save();
@@ -96,12 +102,17 @@ namespace PlanningsTool.BLL.Services
                 throw new CustomValidationException(validationResult.Errors);
             }
 
+            if (await CheckIfExist(entity.FirstName, entity.LastName))
+            {
+                throw new Exception($"De zorgkundige bestaat al");
+            }
+
             var nurseFromRequest = _mapper.Map<Nurse>(entity);
             var nurseToUpdate = await _uow.NursesRepository.GetNurseAsyncById(id);
 
             if (nurseToUpdate == null)
             {
-                throw new KeyNotFoundException("Deze zorgkundige bestaat niet.");
+                throw new KeyNotFoundException("Deze zorgkundige bestaat niet");
             }
 
             nurseToUpdate.FirstName = nurseFromRequest.FirstName;

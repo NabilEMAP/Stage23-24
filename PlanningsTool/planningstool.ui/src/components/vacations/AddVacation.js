@@ -98,6 +98,7 @@ function AddVacation({ dataChanged }) {
         } else {
           toast.warning(`${error.response.data.Message}`);
         }
+        console.log(data);
         console.log(JSON.stringify(error));
         clear();
       })
