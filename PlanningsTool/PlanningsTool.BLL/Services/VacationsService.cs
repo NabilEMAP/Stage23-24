@@ -34,9 +34,14 @@ namespace PlanningsTool.BLL.Services
                 throw new CustomValidationException(validationResult.Errors);
             }
 
-            if (await CheckIfExist(entity.NurseId,entity.Startdate,entity.Enddate))
+            if (await CheckIfExist(entity.NurseId, entity.Startdate,entity.Enddate))
             {
                 throw new Exception($"Het verlof bestaat al voor deze zorgkundige");
+            }
+
+            if (await CheckIfDatesOverlap(entity.NurseId, entity.Startdate, entity.Enddate))
+            {
+                throw new Exception($"Het verlof wordt overlapt met een bestaande verlof voor deze zorgkundige");
             }
 
             var vacation = _mapper.Map<Vacation>(entity);
@@ -54,6 +59,18 @@ namespace PlanningsTool.BLL.Services
                     item.Startdate == startDate &&
                     item.Enddate == endDate
                 )
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public async Task<bool> CheckIfDatesOverlap(int nurseId, DateTime startDate, DateTime endDate)
+        {
+            foreach (var item in await _uow.VacationsRepository.GetAllVacationsAsync())
+            {
+                if(item.NurseId == nurseId && item.Startdate <= endDate && item.Enddate >= startDate) 
                 {
                     return true;
                 }
@@ -121,6 +138,11 @@ namespace PlanningsTool.BLL.Services
             if (await CheckIfExist(entity.NurseId, entity.Startdate, entity.Enddate))
             {
                 throw new Exception($"Het verlof bestaat al voor deze zorgkundige");
+            }
+
+            if (await CheckIfDatesOverlap(entity.NurseId, entity.Startdate, entity.Enddate))
+            {
+                throw new Exception($"Het verlof wordt overlapt met een bestaande verlof voor deze zorgkundige");
             }
 
             var vacationFromRequest = _mapper.Map<Vacation>(entity);
