@@ -17,26 +17,6 @@ namespace PlanningsTool.BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<ShiftDTO> Add(CreateShiftDTO entity)
-        {
-            var shift = _mapper.Map<Shift>(entity);
-            await _uow.ShiftsRepository.Add(shift);
-            await _uow.Save();
-            return _mapper.Map<ShiftDTO>(shift);
-        }
-
-        public async Task<int> Delete(int id)
-        {
-            var toDeleteShift = await _uow.ShiftsRepository.GetShiftAsyncById(id);
-            if (toDeleteShift == null)
-            {
-                throw new KeyNotFoundException("Deze shift bestaat niet.");
-            }
-            _uow.ShiftsRepository.Delete(toDeleteShift);
-            await _uow.Save();
-            return 0;
-        }
-
         public async Task<IEnumerable<ShiftDTO>> GetAll()
         {
             var shifts = await _uow.ShiftsRepository.GetAllShiftsAsync();
@@ -65,25 +45,6 @@ namespace PlanningsTool.BLL.Services
         {
             var shifts = await _uow.ShiftsRepository.GetShiftsByEndtime(endtime);
             return _mapper.Map<IEnumerable<ShiftDTO>>(shifts);
-        }
-
-        public async Task<ShiftDTO> Update(int id, UpdateShiftDTO entity)
-        {
-            var shiftFromRequest = _mapper.Map<Shift>(entity);
-            var shiftToUpdate = await _uow.ShiftsRepository.GetShiftAsyncById(id);
-
-            if (shiftToUpdate == null)
-            {
-                throw new KeyNotFoundException("Deze shift bestaat niet.");
-            }
-
-            shiftToUpdate.Starttime = shiftFromRequest.Starttime;
-            shiftToUpdate.Endtime = shiftFromRequest.Endtime;
-            shiftToUpdate.ShiftTypeId = shiftFromRequest.ShiftTypeId;
-
-            await _uow.ShiftsRepository.Update(shiftToUpdate);
-            await _uow.Save();
-            return _mapper.Map<ShiftDTO>(shiftToUpdate);
         }
     }
 }

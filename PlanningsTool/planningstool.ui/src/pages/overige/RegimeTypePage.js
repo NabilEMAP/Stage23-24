@@ -13,7 +13,7 @@ import { API_BASE_URL } from "../../config";
 
 function RegimeTypePage() {
     const [data, setData] = useState([]);
-    c
+    const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
 
     useEffect(() => {
         getData();

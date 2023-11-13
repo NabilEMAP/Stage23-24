@@ -50,38 +50,5 @@ namespace PlanningsTool.API.Controllers
             if (shifts == null) { return NotFound(); }
             return Ok(shifts);
         }
-
-        // POST api/Shifts
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody] CreateShiftDTO shift)
-        {
-            await _shiftsServices.Add(shift);
-            return Ok(shift);
-        }
-
-        // PUT api/Shifts
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, UpdateShiftDTO shift)
-        {
-            if (shift == null)
-            {
-                return NotFound();
-            }
-            await _shiftsServices.Update(id, shift);
-            return Ok(shift);
-        }
-
-        // DELETE api/Shifts
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            var shift = await _shiftsServices.GetById(id);
-            if (shift == null)
-            {
-                return NotFound();
-            }
-            await _shiftsServices.Delete(id);
-            return NoContent();
-        }
     }
 }

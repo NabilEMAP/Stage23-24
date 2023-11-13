@@ -26,8 +26,6 @@ namespace PlanningsTool.BLL
             CreateMap<Vacation, UpdateVacationDTO>().ReverseMap();
 
             CreateMap<Shift, ShiftDTO>().ReverseMap();
-            CreateMap<Shift, CreateShiftDTO>().ReverseMap();
-            CreateMap<Shift, UpdateShiftDTO>().ReverseMap();
 
             CreateMap<NurseShift, NurseShiftDTO>().ReverseMap();
             CreateMap<NurseShift, CreateNurseShiftDTO>().ReverseMap();
