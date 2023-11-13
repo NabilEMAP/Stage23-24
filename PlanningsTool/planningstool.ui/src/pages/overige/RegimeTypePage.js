@@ -13,6 +13,7 @@ import { API_BASE_URL } from "../../config";
 
 function RegimeTypePage() {
     const [data, setData] = useState([]);
+    c
 
     useEffect(() => {
         getData();
@@ -29,9 +30,34 @@ function RegimeTypePage() {
             })
     }
 
+    const requestSort = (key) => {
+        let direction = 'asc';
+        if (sortConfig && sortConfig.key === key && sortConfig.direction === 'asc') {
+            direction = 'desc';
+        }
+        setSortConfig({ key, direction });
+    }
+
+    const sortedData = [...data];
+    if (sortConfig !== null) {
+        sortedData.sort((a, b) => {
+            if (sortConfig.key === null) return 0;
+            const keys = sortConfig.key.split('.');
+            let aValue = a;
+            let bValue = b;
+            for (const key of keys) {
+                aValue = aValue[key];
+                bValue = bValue[key];
+            }
+            if (aValue < bValue) return sortConfig.direction === 'asc' ? -1 : 1;
+            if (aValue > bValue) return sortConfig.direction === 'asc' ? 1 : -1;
+            return 0;
+        });
+    }
+
     const renderTableData = () => {
-        if (data && data.length > 0) {
-            return data.map((item, index) => (
+        if (sortedData && sortedData.length > 0) {
+            return sortedData.map((item, index) => (
                 <MyTR key={index}>
                     <MyTC>{item.id}</MyTC>
                     <MyTC>{item.name}</MyTC>
@@ -53,9 +79,9 @@ function RegimeTypePage() {
                     <Table sx={{ minWidth: 700 }} aria-label="customized table">
                         <TableHead>
                             <TableRow>
-                                <MyTC>Id</MyTC>
-                                <MyTC>Regime</MyTC>
-                                <MyTC>Aantal Uren</MyTC>
+                                <MyTC onClick={() => requestSort("id")}>Id</MyTC>
+                                <MyTC onClick={() => requestSort("name")}>Regime</MyTC>
+                                <MyTC onClick={() => requestSort("countHours")}>Aantal Uren</MyTC>
                             </TableRow>
                         </TableHead>
                         <TableBody>
