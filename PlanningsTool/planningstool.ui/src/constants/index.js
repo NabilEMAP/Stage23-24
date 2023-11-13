@@ -1,7 +1,6 @@
 import {
     zorgkundige,
     verlof,
-    shift,
     zorgkundigeshift,
 } from "../assets"
 
@@ -17,12 +16,6 @@ const homecards = [
         description: "Lijst van verlofdagen",
         url: "/verlof",
         image: verlof,
-    },
-    {
-        heading: "Shift",
-        description: "Lijst van shifts",
-        url: "/shift",
-        image: shift,
     },
     {
         heading: "Zorgkundige Shift",

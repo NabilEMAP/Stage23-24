@@ -10,6 +10,7 @@ import {
 } from '@mui/material'
 import EditCalendarIcon from '@mui/icons-material/EditCalendar';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
+import SettingsIcon from '@mui/icons-material/Settings';
 import { useState } from 'react'
 import MyTitle from './MyTitle';
 
@@ -29,16 +30,15 @@ export const NavBar = () => {
                     <EditCalendarIcon style={{ color: "#d10202" }} />
                 </IconButton>
                 <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
-                    <a href='/' style={{textDecoration: "none", color: "inherit"}}>
+                    <a href='/' style={{ textDecoration: "none", color: "inherit" }}>
                         <MyTitle />
                     </a>
                 </Typography>
                 <Stack direction='row' spacing={2}>
                     <Button href='/teamplanning' color='inherit'>Teamplanning</Button>
                     <Button href='/zorgkundige' color='inherit'>Zorgkundige</Button>
-                    <Button href='/zorgkundigeshift' color='inherit'>ZorgkundigeShift</Button>
                     <Button href='/verlof' color='inherit'>Verlof</Button>
-                    <Button href='/shift' color='inherit'>Shift</Button>
+                    <Button href='/zorgkundigeshift' color='inherit'>Zorgkundige Shift</Button>
                     <Button
                         color='inherit'
                         id='types-button'
@@ -47,7 +47,7 @@ export const NavBar = () => {
                         aria-expanded={open ? 'true' : undefined}
                         endIcon={<KeyboardArrowDownIcon />}
                         onClick={handleClick}>
-                        Overige
+                        <SettingsIcon/>
                     </Button>
                 </Stack>
                 <Menu
@@ -66,6 +66,7 @@ export const NavBar = () => {
                     MenuListProps={{
                         'aria-labelledby': 'types-button'
                     }}>
+                    <MenuItem onClick={handleClose}><Button href='/shift' color='inherit'>Shift</Button></MenuItem>
                     <MenuItem onClick={handleClose}><Button href='/regimetype' color='inherit'>Regime Type</Button></MenuItem>
                     <MenuItem onClick={handleClose}><Button href='/verloftype' color='inherit'>Verlof Type</Button></MenuItem>
                     <MenuItem onClick={handleClose}><Button href='/shifttype' color='inherit'>Shift Type</Button></MenuItem>
