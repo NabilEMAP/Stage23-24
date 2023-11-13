@@ -10,6 +10,7 @@ import Paper from '@mui/material/Paper';
 import { MyTC, MyTR } from "../../components/MyTable";
 import { Container, Typography } from "@mui/material";
 import { API_BASE_URL } from "../../config";
+import ShiftPage from "../ShiftPage";
 
 function ShiftTypePage() {
     const [data, setData] = useState([]);
@@ -72,7 +73,7 @@ function ShiftTypePage() {
         <Fragment>
             <Container>
                 <div style={{ margin: '24px 0px' }}>
-                    <Typography variant="h5" style={{ width: 'fit-content', verticalAlign: 'sub', display: 'inline-block' }}>Shift Lijst</Typography>
+                    <Typography variant="h5" style={{ width: 'fit-content', verticalAlign: 'sub', display: 'inline-block' }}>ShiftType Lijst</Typography>
                 </div>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -87,6 +88,7 @@ function ShiftTypePage() {
                         </TableBody>
                     </Table>
                 </TableContainer>
+                <ShiftPage />
             </Container>
         </Fragment>
     );

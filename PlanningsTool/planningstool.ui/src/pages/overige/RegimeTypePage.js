@@ -73,7 +73,7 @@ function RegimeTypePage() {
         <Fragment>
             <Container>
                 <div style={{ margin: '24px 0px' }}>
-                    <Typography variant="h5" style={{ width: 'fit-content', verticalAlign: 'sub', display: 'inline-block' }}>Regime Lijst</Typography>
+                    <Typography variant="h5" style={{ width: 'fit-content', verticalAlign: 'sub', display: 'inline-block' }}>RegimeType Lijst</Typography>
                 </div>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 700 }} aria-label="customized table">

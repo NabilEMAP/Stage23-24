@@ -18,9 +18,9 @@ const homecards = [
         image: verlof,
     },
     {
-        heading: "Zorgkundige Shift",
-        description: "Lijst van zorgkundigen met een shift",
-        url: "/zorgkundigeshift",
+        heading: "Shift",
+        description: "Lijst van shifts",
+        url: "/shift",
         image: zorgkundigeshift,
     },
 ];

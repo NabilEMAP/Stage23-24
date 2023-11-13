@@ -38,7 +38,7 @@ export const NavBar = () => {
                     <Button href='/teamplanning' color='inherit'>Teamplanning</Button>
                     <Button href='/zorgkundige' color='inherit'>Zorgkundige</Button>
                     <Button href='/verlof' color='inherit'>Verlof</Button>
-                    <Button href='/zorgkundigeshift' color='inherit'>Zorgkundige Shift</Button>
+                    <Button href='/shift' color='inherit'>Shift</Button>
                     <Button
                         color='inherit'
                         id='types-button'
@@ -66,7 +66,6 @@ export const NavBar = () => {
                     MenuListProps={{
                         'aria-labelledby': 'types-button'
                     }}>
-                    <MenuItem onClick={handleClose}><Button href='/shift' color='inherit'>Shift</Button></MenuItem>
                     <MenuItem onClick={handleClose}><Button href='/regimetype' color='inherit'>Regime Type</Button></MenuItem>
                     <MenuItem onClick={handleClose}><Button href='/verloftype' color='inherit'>Verlof Type</Button></MenuItem>
                     <MenuItem onClick={handleClose}><Button href='/shifttype' color='inherit'>Shift Type</Button></MenuItem>

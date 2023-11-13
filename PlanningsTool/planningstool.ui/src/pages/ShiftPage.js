@@ -71,28 +71,26 @@ function ShiftPage() {
     }
 
     return (
-        <Fragment>
-            <Container>
-                <div style={{ margin: '24px 0px' }}>
-                    <Typography variant="h5" style={{ width: 'fit-content', verticalAlign: 'sub', display: 'inline-block' }}>Shift Lijst</Typography>
-                </div>
-                <TableContainer component={Paper}>
-                    <Table sx={{ minWidth: 700 }} aria-label="customized table">
-                        <TableHead>
-                            <TableRow>
-                                <MyTC onClick={() => requestSort("id")}>Id</MyTC>
-                                <MyTC onClick={() => requestSort("shiftType.name")}>Shift</MyTC>
-                                <MyTC onClick={() => requestSort("starttime")}>Starttijd</MyTC>
-                                <MyTC onClick={() => requestSort("endtime")}>Eindtijd</MyTC>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {renderTableData()}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            </Container>
-        </Fragment>
+        <>
+            <div style={{ margin: '24px 0px' }}>
+                <Typography variant="h5" style={{ width: 'fit-content', verticalAlign: 'sub', display: 'inline-block' }}>Vaste Shift Lijst</Typography>
+            </div>
+            <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                    <TableHead>
+                        <TableRow>
+                            <MyTC onClick={() => requestSort("id")}>Id</MyTC>
+                            <MyTC onClick={() => requestSort("shiftType.name")}>Shift</MyTC>
+                            <MyTC onClick={() => requestSort("starttime")}>Starttijd</MyTC>
+                            <MyTC onClick={() => requestSort("endtime")}>Eindtijd</MyTC>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {renderTableData()}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </>
     );
 }
 
