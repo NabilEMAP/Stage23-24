@@ -107,7 +107,7 @@ function NursePage() {
                                 <MyTC onClick={() => requestSort("firstName")}>Voornaam</MyTC>
                                 <MyTC onClick={() => requestSort("lastName")}>Achternaam</MyTC>
                                 <MyTC onClick={() => requestSort("regimeType.name")}>Regime</MyTC>
-                                <MyTC onClick={() => requestSort("isFixedNight")}>Vaste Nacht?</MyTC>
+                                <MyTC onClick={() => requestSort("isFixedNight")}>Vaste Nacht</MyTC>
                                 <MyTC style={{ width: '150px' }}>Veranderingen</MyTC>
                             </TableRow>
                         </TableHead>
