@@ -16,7 +16,7 @@ namespace PlanningsTool.DAL.Extensions
                 options.UseSqlServer("name=ConnectionStrings:Stage2324");
 
                 // Set up a logger factory that doesn't log anything
-                options.UseLoggerFactory(LoggerFactory.Create(builder => builder.AddFilter((category, level) => false)));
+                // options.UseLoggerFactory(LoggerFactory.Create(builder => builder.AddFilter((category, level) => false)));
             });
 
             return services;
