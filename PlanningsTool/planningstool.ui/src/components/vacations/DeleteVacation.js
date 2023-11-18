@@ -28,7 +28,7 @@ function DeleteVacation(props) {
         getData();
         getNurseData();
         getVacationTypeData();
-    }, [props.dataChanged]);
+    }, []);
 
     const getData = () => {
         const API = `${API_BASE_URL}/Vacations/details`;
@@ -85,13 +85,12 @@ function DeleteVacation(props) {
         axios.delete(API)
             .then(() => {
                 toast.error('Verlof is verwijderd');
-                getData();
                 handleClose();
+                props.onUpdate();
             })
             .catch((error) => {
                 toast.warning(`${error}`);
             })
-        props.dataChanged(true);
     }
 
     const renderNurse = () => {

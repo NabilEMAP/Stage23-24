@@ -28,7 +28,7 @@ function EditVacation(props) {
         getData();
         getNurseData();
         getVacationTypeData();
-    }, [props.dataChanged]);
+    }, []);
 
     const getData = () => {
         const API = `${API_BASE_URL}/Vacations/details`;
@@ -107,8 +107,8 @@ function EditVacation(props) {
         axios.put(API, data)
             .then(() => {
                 toast.success('Verlof is gewijzigd');
-                getData();
                 handleClose();
+                props.onUpdate();
             })
             .catch((error) => {
                 if (error.response.status === 400) {
@@ -118,8 +118,7 @@ function EditVacation(props) {
                 }
                 console.log(JSON.stringify(error));
             })
-        console.log(data);        
-        props.dataChanged(true);
+        console.log(data);
     }
 
     const renderNurse = () => {

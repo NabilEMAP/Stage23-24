@@ -8,7 +8,7 @@ import { DatePicker } from "@mui/x-date-pickers";
 import dayjs from 'dayjs';
 import { API_BASE_URL } from "../../config";
 
-function AddVacation({ dataChanged }) {
+function AddVacation(props) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -26,7 +26,7 @@ function AddVacation({ dataChanged }) {
     getData();
     getNurseData();
     getVacationTypeData();
-  }, [dataChanged]);
+  }, []);
 
   const getData = () => {
     const API = `${API_BASE_URL}/Vacations/details`;
@@ -86,11 +86,11 @@ function AddVacation({ dataChanged }) {
       "reason": reason
     }
     axios.post(API, data)
-      .then(() => {
-        getData();
+      .then(() => {        
         toast.success('Verlof is toegevoegd');
         clear();
         handleClose();
+        props.onUpdate();
       })
       .catch((error) => {
         if (error.response.status === 400) {
@@ -101,7 +101,6 @@ function AddVacation({ dataChanged }) {
         console.log(JSON.stringify(error));
       })
       console.log(data);
-    dataChanged(true);
   }
 
   const clear = () => {

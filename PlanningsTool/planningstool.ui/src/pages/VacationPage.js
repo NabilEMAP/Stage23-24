@@ -21,15 +21,14 @@ import { API_BASE_URL } from "../config";
 function VacationPage() {
     const [data, setData] = useState([]);
     const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
-    const [dataChanged, setDataChanged] = useState(false);
 
     useEffect(() => {
-        if(dataChanged){
-            getData();
-            setDataChanged(false);
-        }
         getData();
-    }, [dataChanged]);
+    }, []);
+
+    const handleUpdate = () => {
+        getData();
+      };
 
     const getData = () => {
         const API = `${API_BASE_URL}/Vacations/details`;
@@ -40,10 +39,6 @@ function VacationPage() {
             .catch((error) => {
                 console.log(error);
             })
-    }
-
-    const hasDataChanged = (change) => { 
-        setDataChanged(change);
     }
 
     const requestSort = (key) => {
@@ -98,8 +93,8 @@ function VacationPage() {
                     <MyTC>{format(new Date(item.enddate), 'dd/MM/yyyy')}</MyTC>
                     <MyTC>{item.vacationType.name}</MyTC>
                     <MyTC style={{ width: '175px' }}>
-                        <EditVacation id={item.id} dataChanged={hasDataChanged}/>
-                        <DeleteVacation id={item.id} dataChanged={hasDataChanged}/>
+                        <EditVacation id={item.id} onUpdate={handleUpdate}/>
+                        <DeleteVacation id={item.id} onUpdate={handleUpdate}/>
                     </MyTC>
                 </MyTR>
             ));
@@ -115,7 +110,7 @@ function VacationPage() {
             <Container>
                 <div style={{ margin: '24px 0px' }}>
                     <Typography variant="h5" style={{ width: 'fit-content', verticalAlign: 'sub', display: 'inline-block' }}>Verlof Lijst</Typography>
-                    <AddVacation dataChanged={hasDataChanged}/>
+                    <AddVacation onUpdate={handleUpdate}/>
                 </div>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 700 }} aria-label="customized table">
