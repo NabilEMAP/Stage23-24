@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+/* DataGrid Styles */
+.MuiDataGrid-columnHeaders {
+  background-color: black;
+  color: white;
+}
+
+.css-ptiqhd-MuiSvgIcon-root {
+  color: white;
+}
