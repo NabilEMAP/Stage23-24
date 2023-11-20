@@ -26,7 +26,7 @@ function EditNurseShift(props) {
     getData();
     getNurseData();
     getShiftData();
-  }, [props.dataChanged]);
+  }, []);
 
   const getData = () => {
     const API = `${API_BASE_URL}/NurseShifts`;
@@ -89,7 +89,7 @@ function EditNurseShift(props) {
     axios.put(API, data)
       .then(() => {
         toast.success('Zorgkundige is gewijzigd');
-        getData();
+        props.onUpdate();
         handleClose();
         console.log(data);
       })
@@ -102,7 +102,6 @@ function EditNurseShift(props) {
         console.log(JSON.stringify(error));
       })
     console.log(data);
-    props.dataChanged(true);
   }
 
   const renderNurse = () => {

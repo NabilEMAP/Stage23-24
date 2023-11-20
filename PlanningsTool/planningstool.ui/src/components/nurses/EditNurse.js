@@ -23,7 +23,7 @@ function EditNurse(props) {
   useEffect(() => {
     getData();
     getRegimeTypeData();
-  }, [props.dataChanged]);
+  }, []);
 
   const getData = () => {
     const API = `${API_BASE_URL}/Nurses`;
@@ -88,7 +88,7 @@ function EditNurse(props) {
     axios.put(API, data)
       .then(() => {
         toast.success('Zorgkundige is gewijzigd');
-        getData();
+        props.onUpdate();
         handleClose();
       })
       .catch((error) => {
@@ -100,7 +100,6 @@ function EditNurse(props) {
         console.log(JSON.stringify(error));
       })
     console.log(data);
-    props.dataChanged(true);
   }
 
   const handleEditActiveChange = (e) => {

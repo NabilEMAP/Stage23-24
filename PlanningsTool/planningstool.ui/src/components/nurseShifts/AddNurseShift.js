@@ -8,7 +8,7 @@ import { DatePicker } from "@mui/x-date-pickers";
 import dayjs from 'dayjs';
 import { API_BASE_URL } from "../../config";
 
-function AddNurseShift({ dataChanged }) {
+function AddNurseShift(props) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -23,7 +23,7 @@ function AddNurseShift({ dataChanged }) {
     getData();
     getNurseData();
     getShiftData();
-  }, [dataChanged]);
+  }, []);
 
   const getData = () => {
     const API = `${API_BASE_URL}/NurseShifts`;
@@ -69,7 +69,7 @@ function AddNurseShift({ dataChanged }) {
     }
     axios.post(API, data)
       .then(() => {
-        getData();
+        props.onUpdate();
         toast.success('Nurse shift is toegevoegd');
         clear();
         handleClose();
@@ -85,7 +85,6 @@ function AddNurseShift({ dataChanged }) {
         clear();
       })
       console.log(data);
-    dataChanged(true);
   }
 
   const clear = () => {

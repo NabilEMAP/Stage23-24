@@ -19,15 +19,14 @@ import { API_BASE_URL } from "../config";
 function NursePage() {
     const [data, setData] = useState([]);
     const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
-    const [dataChanged, setDataChanged] = useState(false);
 
     useEffect(() => {
-        if (dataChanged) {
-            getData();
-            setDataChanged(false);
-        }
         getData();
-    }, [dataChanged]);
+    }, []);
+
+    const handleUpdate = () => {
+        getData();
+    };
 
     const getData = () => {
         const API = `${API_BASE_URL}/Nurses`;
@@ -39,10 +38,6 @@ function NursePage() {
                 console.log(error);
             });
     }
-
-    const hasDataChanged = (change) => {
-        setDataChanged(change);
-    };
 
     const requestSort = (key) => {
         let direction = 'asc';
@@ -69,7 +64,6 @@ function NursePage() {
         });
     }
 
-
     const renderTableData = () => {
         if (sortedData && sortedData.length > 0) {
             return sortedData.map((item, index) => (
@@ -82,8 +76,8 @@ function NursePage() {
                         {item.isFixedNight ? <CheckCircleIcon fontSize="large" color="success" /> : <CancelIcon fontSize="large" color="error" />}
                     </MyTC>
                     <MyTC style={{ width: '150px' }}>
-                        <EditNurse id={item.id} dataChanged={hasDataChanged} />
-                        <DeleteNurse id={item.id} dataChanged={hasDataChanged} />
+                        <EditNurse id={item.id} onUpdate={handleUpdate} />
+                        <DeleteNurse id={item.id} onUpdate={handleUpdate} />
                     </MyTC>
                 </MyTR>
             ));
@@ -97,7 +91,7 @@ function NursePage() {
             <Container>
                 <div style={{ margin: '24px 0px' }}>
                     <Typography variant="h5" style={{ width: 'fit-content', verticalAlign: 'sub', display: 'inline-block' }}>Zorgkundige Lijst</Typography>
-                    <AddNurse dataChanged={hasDataChanged} />
+                    <AddNurse onUpdate={handleUpdate} />
                 </div>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 700 }} aria-label="customized table">

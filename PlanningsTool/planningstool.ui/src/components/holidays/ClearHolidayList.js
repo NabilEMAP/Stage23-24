@@ -20,11 +20,11 @@ function ClearHolidayList(props) {
             .then(() => {
                 toast.error('Feestdag lijst is verwijderd');
                 handleClose();
+                props.onUpdate();
             })
             .catch((error) => {
                 toast.warning(`${error}`);
             })
-        props.dataChanged(true);
     }
 
     return (

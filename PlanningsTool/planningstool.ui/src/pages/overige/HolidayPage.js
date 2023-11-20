@@ -16,15 +16,14 @@ import { API_BASE_URL } from "../../config";
 
 function HolidayPage() {
     const [data, setData] = useState([]);
-    const [dataChanged, setDataChanged] = useState(false);
-
+    
     useEffect(() => {
-        if (dataChanged) {
-            getData();
-            setDataChanged(false);
-        }
         getData();
-    }, [dataChanged]);
+    }, []);
+
+    const handleUpdate = () => {
+        getData();
+    };
 
     const getData = () => {
         const API = `${API_BASE_URL}/Holidays`;
@@ -36,10 +35,6 @@ function HolidayPage() {
                 console.log(error);
             })
     }
-
-    const hasDataChanged = (change) => {
-        setDataChanged(change);
-    };
 
     const renderTableData = () => {
         if (data && data.length > 0) {
@@ -65,8 +60,8 @@ function HolidayPage() {
                         spacing={2}
                         style={{ float: 'right' }}
                     >
-                        <ClearHolidayList dataChanged={hasDataChanged} />
-                        <GenerateHolidays dataChanged={hasDataChanged} />
+                        <ClearHolidayList onUpdate={handleUpdate} />
+                        <GenerateHolidays onUpdate={handleUpdate} />
                     </Stack>
                 </div>
                 <TableContainer component={Paper}>

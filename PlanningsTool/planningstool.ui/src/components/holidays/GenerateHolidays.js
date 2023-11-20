@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { Button, FormControl, InputLabel, MenuItem, Select, Stack } from "@mui/material";
 import { API_BASE_URL } from "../../config";
 
-function GenerateHolidays({ dataChanged }) {
+function GenerateHolidays(props) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -19,6 +19,7 @@ function GenerateHolidays({ dataChanged }) {
     const API = `${API_BASE_URL}/Holidays?year=${year}`;
     axios.post(API)
       .then(() => {
+        props.onUpdate();
         toast.success('Feestdagen zijn gegenereerd');
         clear();
         handleClose();
@@ -27,7 +28,6 @@ function GenerateHolidays({ dataChanged }) {
         toast.warning(`${error.response.data}`);
         clear();
       })
-      dataChanged(true);
   }
 
   const clear = () => {

@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { Button, Checkbox, FormControl, FormControlLabel, InputLabel, MenuItem, Select, Stack, TextField } from "@mui/material";
 import { API_BASE_URL } from "../../config";
 
-function AddNurse({ dataChanged }) {
+function AddNurse(props) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -20,7 +20,7 @@ function AddNurse({ dataChanged }) {
   useEffect(() => {
     getData();
     getRegimeTypeData();
-  }, [dataChanged]);
+  }, []);
 
   const getData = () => {
     const API = `${API_BASE_URL}/Nurses`;
@@ -68,7 +68,7 @@ function AddNurse({ dataChanged }) {
     }
     axios.post(API, data)
       .then(() => {
-        getData();
+        props.onUpdate();
         toast.success('Zorgkundige is toegevoegd');
         clear();
         handleClose();
@@ -83,7 +83,6 @@ function AddNurse({ dataChanged }) {
         clear();
       })
       console.log(data);
-    dataChanged(true);
   }
 
   const handleActiveChange = (e) => {

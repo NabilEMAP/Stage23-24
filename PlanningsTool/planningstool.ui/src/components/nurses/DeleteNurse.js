@@ -23,7 +23,7 @@ function DeleteNurse(props) {
   useEffect(() => {
     getData();
     getRegimeTypeData();
-  }, [props.dataChanged]);
+  }, []);
 
   const getData = () => {
     const API = `${API_BASE_URL}/Nurses`;
@@ -68,13 +68,12 @@ function DeleteNurse(props) {
     axios.delete(API)
       .then(() => {
         toast.error('Zorgkundige is verwijderd');
-        getData();
+        props.onUpdate();
         handleClose();
       })
       .catch((error) => {
         toast.warning(`${error}`);
       })
-    props.dataChanged(true);
   }
 
   const handleEditActiveChange = (e) => {

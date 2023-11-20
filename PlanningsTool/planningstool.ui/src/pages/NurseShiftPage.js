@@ -18,15 +18,14 @@ import { API_BASE_URL } from "../config";
 function NurseShiftPage() {
     const [data, setData] = useState([]);
     const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
-    const [dataChanged, setDataChanged] = useState(false);
 
     useEffect(() => {
-        if (dataChanged) {
-            getData();
-            setDataChanged(false);
-        }
         getData();
-    }, [dataChanged]);
+    }, []);
+
+    const handleUpdate = () => {
+        getData();
+    };
 
     const getData = () => {
         const API = `${API_BASE_URL}/NurseShifts`;
@@ -38,10 +37,6 @@ function NurseShiftPage() {
                 console.log(error);
             });
     }
-
-    const hasDataChanged = (change) => {
-        setDataChanged(change);
-    };
 
     const requestSort = (key) => {
         let direction = 'asc';
@@ -84,8 +79,8 @@ function NurseShiftPage() {
                     </MyTC>
                     <MyTC>{format(new Date(item.date), 'dd/MM/yyyy')}</MyTC>
                     <MyTC style={{ width: '150px' }}>
-                        <EditNurseShift id={item.id} dataChanged={hasDataChanged} />
-                        <DeleteNurseShift id={item.id} dataChanged={hasDataChanged} />
+                        <EditNurseShift id={item.id} onUpdate={handleUpdate} />
+                        <DeleteNurseShift id={item.id} onUpdate={handleUpdate} />
                     </MyTC>
                 </MyTR>
             ));
@@ -99,7 +94,7 @@ function NurseShiftPage() {
             <Container>
                 <div style={{ margin: '24px 0px' }}>
                     <Typography variant="h5" style={{ width: 'fit-content', verticalAlign: 'sub', display: 'inline-block' }}>Zorgkundige Shift Lijst</Typography>
-                    <AddNurseShift dataChanged={hasDataChanged} />
+                    <AddNurseShift onUpdate={handleUpdate} />
                 </div>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 700 }} aria-label="customized table">
