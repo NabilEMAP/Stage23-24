@@ -45,14 +45,16 @@ function VacationPage() {
     };
 
 
-    const renderTooltip = (params) => (
-        <Tooltip title={showReason(params.row)} placement="left-end">
+    const renderTooltip = (item) => {
+        return (
+        <Tooltip title={showReason(item.row)} placement="left-end">
             <IconButton style={{ marginRight: '6px' }} size="medium" color="inherit">
                 <FontAwesomeIcon icon={faCircleInfo} />
             </IconButton>
-            {params.value}
+            {item.value}
         </Tooltip>
-    );
+        );
+    };
 
     const renderChanges = (item) => (
         <>
@@ -63,15 +65,15 @@ function VacationPage() {
 
 
     const columns = [
-        { field: 'id', headerName: 'Id', width: 70 },
-        { field: 'nurseFullname', headerName: 'Zorgkundige', width: 250, renderCell: renderTooltip },
-        { field: 'startdate', headerName: 'Startdatum', width: 130, valueGetter: (params) => format(new Date(params.row.startdate), 'dd/MM/yyyy') },
-        { field: 'enddate', headerName: 'Einddatum', width: 130, valueGetter: (params) => format(new Date(params.row.enddate), 'dd/MM/yyyy') },
-        { field: 'vacationType', headerName: 'Verlof', width: 130, valueGetter: (params) => params.row.vacationType.name },
+        { field: 'id', headerName: 'Id', flex: 0.5 },
+        { field: 'nurseFullname', headerName: 'Zorgkundige', flex: 1.5, renderCell: renderTooltip ,},
+        { field: 'startdate', headerName: 'Startdatum', flex: 1, valueGetter: (params) => format(new Date(params.row.startdate), 'dd/MM/yyyy') },
+        { field: 'enddate', headerName: 'Einddatum', flex: 1, valueGetter: (params) => format(new Date(params.row.enddate), 'dd/MM/yyyy') },
+        { field: 'vacationType', headerName: 'Verlof', flex: 1, valueGetter: (params) => params.row.vacationType.name },
         {
             field: 'actions',
             headerName: 'Veranderingen',
-            width: 150,
+            flex: 1,
             renderCell: (params) => renderChanges(params.row),
         },
     ];

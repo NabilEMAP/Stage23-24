@@ -1,13 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import { MyTC, MyTR } from "../components/MyTable";
 import AddNurse from "../components/nurses/AddNurse";
 import EditNurse from "../components/nurses/EditNurse";
 import DeleteNurse from "../components/nurses/DeleteNurse";
@@ -15,10 +8,11 @@ import { Container, Typography } from "@mui/material";
 import CancelIcon from '@mui/icons-material/Cancel';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { API_BASE_URL } from "../config";
+import { DataGrid } from '@mui/x-data-grid';
+import '../App.css';
 
 function NursePage() {
     const [data, setData] = useState([]);
-    const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
 
     useEffect(() => {
         getData();
@@ -39,52 +33,51 @@ function NursePage() {
             });
     }
 
-    const requestSort = (key) => {
-        let direction = 'asc';
-        if (sortConfig && sortConfig.key === key && sortConfig.direction === 'asc') {
-            direction = 'desc';
-        }
-        setSortConfig({ key, direction });
-    }
+    const showIsFixedNight = (params) => {
+        return params.value ? (
+            <CheckCircleIcon fontSize="large" color="success" />
+        ) : (
+            <CancelIcon fontSize="large" color="error" />
+        );
+    };
 
-    const sortedData = [...data];
-    if (sortConfig !== null) {
-        sortedData.sort((a, b) => {
-            if (sortConfig.key === null) return 0;
-            const keys = sortConfig.key.split('.');
-            let aValue = a;
-            let bValue = b;
-            for (const key of keys) {
-                aValue = aValue[key];
-                bValue = bValue[key];
-            }
-            if (aValue < bValue) return sortConfig.direction === 'asc' ? -1 : 1;
-            if (aValue > bValue) return sortConfig.direction === 'asc' ? 1 : -1;
-            return 0;
-        });
-    }
+    const renderChanges = (item) => (
+        <div style={{ width: '150px' }}>
+            <EditNurse id={item.id} onUpdate={handleUpdate} />
+            <DeleteNurse id={item.id} onUpdate={handleUpdate} />
+        </div>
+    );
 
-    const renderTableData = () => {
-        if (sortedData && sortedData.length > 0) {
-            return sortedData.map((item, index) => (
-                <MyTR key={index}>
-                    <MyTC>{item.id}</MyTC>
-                    <MyTC>{item.firstName}</MyTC>
-                    <MyTC>{item.lastName}</MyTC>
-                    <MyTC>{item.regimeType.name}</MyTC>
-                    <MyTC>
-                        {item.isFixedNight ? <CheckCircleIcon fontSize="large" color="success" /> : <CancelIcon fontSize="large" color="error" />}
-                    </MyTC>
-                    <MyTC style={{ width: '150px' }}>
-                        <EditNurse id={item.id} onUpdate={handleUpdate} />
-                        <DeleteNurse id={item.id} onUpdate={handleUpdate} />
-                    </MyTC>
-                </MyTR>
-            ));
-        } else {
-            return <TableRow><MyTC colSpan={5}>Geen data gevonden</MyTC></TableRow>;
-        }
-    }
+    const columns = [
+        { field: 'id', headerName: 'Id', flex: 0.5 },
+        { field: 'firstName', headerName: 'Voornaam', flex: 1 },
+        { field: 'lastName', headerName: 'Achternaam', flex: 1 },
+        {
+            field: 'regimeType',
+            headerName: 'Regime',
+            flex: 1,
+        },
+        {
+            field: 'isFixedNight',
+            headerName: 'Vaste Nacht',
+            flex: 1,
+            renderCell: showIsFixedNight,
+        },
+        {
+            field: 'actions',
+            headerName: 'Veranderingen',
+            flex: 1,
+            renderCell: (params) => renderChanges(params)
+        },
+    ];
+    
+    const rows = data.map((item) => ({
+        id: item.id,
+        firstName: item.firstName,
+        lastName: item.lastName,
+        regimeType: item.regimeType.name,
+        isFixedNight: item.isFixedNight,
+    }));
 
     return (
         <Fragment>
@@ -93,23 +86,15 @@ function NursePage() {
                     <Typography variant="h5" style={{ width: 'fit-content', verticalAlign: 'sub', display: 'inline-block' }}>Zorgkundige Lijst</Typography>
                     <AddNurse onUpdate={handleUpdate} />
                 </div>
-                <TableContainer component={Paper}>
-                    <Table sx={{ minWidth: 700 }} aria-label="customized table">
-                        <TableHead>
-                            <TableRow>
-                                <MyTC onClick={() => requestSort("id")}>Id</MyTC>
-                                <MyTC onClick={() => requestSort("firstName")}>Voornaam</MyTC>
-                                <MyTC onClick={() => requestSort("lastName")}>Achternaam</MyTC>
-                                <MyTC onClick={() => requestSort("regimeType.name")}>Regime</MyTC>
-                                <MyTC onClick={() => requestSort("isFixedNight")}>Vaste Nacht</MyTC>
-                                <MyTC style={{ width: '150px' }}>Veranderingen</MyTC>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {renderTableData()}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+                <div>
+                    <DataGrid
+                        rows={rows}
+                        columns={columns}
+                        pageSize={5}
+                        rowSelection={false}
+                        rowHeight={69}
+                    />
+                </div>
             </Container>
         </Fragment>
     );
