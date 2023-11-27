@@ -1,19 +1,11 @@
 import axios from "axios";
 import React, { Fragment, useEffect, useState } from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import { MyTC, MyTR } from "../components/MyTable";
+import { DataGrid } from '@mui/x-data-grid';
 import { Container, Typography } from "@mui/material";
 import { API_BASE_URL } from "../config";
 
 function ShiftPage() {
     const [data, setData] = useState([]);
-    const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
 
     useEffect(() => {
         getData();
@@ -27,70 +19,38 @@ function ShiftPage() {
             })
             .catch((error) => {
                 console.log(error);
-            })
+            });
     }
 
-    const requestSort = (key) => {
-        let direction = 'asc';
-        if (sortConfig && sortConfig.key === key && sortConfig.direction === 'asc') {
-            direction = 'desc';
-        }
-        setSortConfig({ key, direction });
-    }
-
-    const sortedData = [...data];
-    if (sortConfig !== null) {
-        sortedData.sort((a, b) => {
-            if (sortConfig.key === null) return 0;
-            const keys = sortConfig.key.split('.');
-            let aValue = a;
-            let bValue = b;
-            for (const key of keys) {
-                aValue = aValue[key];
-                bValue = bValue[key];
-            }
-            if (aValue < bValue) return sortConfig.direction === 'asc' ? -1 : 1;
-            if (aValue > bValue) return sortConfig.direction === 'asc' ? 1 : -1;
-            return 0;
-        });
-    }
-
-    const renderTableData = () => {
-        if (sortedData && sortedData.length > 0) {
-            return sortedData.map((item, index) => (
-                <MyTR key={index}>
-                    <MyTC>{item.id}</MyTC>
-                    <MyTC>{item.shiftType.name}</MyTC>
-                    <MyTC>{item.starttime}</MyTC>
-                    <MyTC>{item.endtime}</MyTC>
-                </MyTR>
-            ));
-        } else {
-            return <TableRow><MyTC colSpan={5}>Geen data gevonden</MyTC></TableRow>;
-        }
-    }
+    const columns = [
+        { field: 'id', headerName: 'Id', flex: 1 },
+        { field: 'shiftType', headerName: 'Shift', flex: 1, valueGetter: (params) => params.row.shiftType.name },
+        { field: 'starttime', headerName: 'Starttijd', flex: 1, valueFormatter: (params) => formatTime(params.value) },
+        { field: 'endtime', headerName: 'Eindtijd', flex: 1, valueFormatter: (params) => formatTime(params.value) },
+    ];
+    
+    const formatTime = (timeString) => {
+        const date = new Date(`2000-01-01T${timeString}`);
+        return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    };
 
     return (
-        <>
-            <div style={{ margin: '24px 0px' }}>
-                <Typography variant="h5" style={{ width: 'fit-content', verticalAlign: 'sub', display: 'inline-block' }}>Vaste Shift Lijst</Typography>
-            </div>
-            <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 700 }} aria-label="customized table">
-                    <TableHead>
-                        <TableRow>
-                            <MyTC onClick={() => requestSort("id")}>Id</MyTC>
-                            <MyTC onClick={() => requestSort("shiftType.name")}>Shift</MyTC>
-                            <MyTC onClick={() => requestSort("starttime")}>Starttijd</MyTC>
-                            <MyTC onClick={() => requestSort("endtime")}>Eindtijd</MyTC>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {renderTableData()}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-        </>
+        <Fragment>
+            <Container>
+                <div style={{ margin: '24px 0px' }}>
+                    <Typography variant="h5" style={{ width: 'fit-content', verticalAlign: 'sub', display: 'inline-block' }}>Vaste Shift Lijst</Typography>
+                </div>
+                <div>
+                    <DataGrid
+                        rows={data}
+                        columns={columns}
+                        pageSize={5}
+                        rowSelection={false}
+                        rowHeight={69}
+                    />
+                </div>
+            </Container>
+        </Fragment>
     );
 }
 

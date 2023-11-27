@@ -1,22 +1,17 @@
 import axios from "axios";
 import React, { Fragment, useEffect, useState } from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import { MyTC, MyTR } from "../../components/MyTable";
+import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { Container, Stack, Typography } from "@mui/material";
 import ClearHolidayList from "../../components/holidays/ClearHolidayList";
 import GenerateHolidays from "../../components/holidays/GenerateHolidays";
 import { format } from 'date-fns';
+import nlBE from "date-fns/locale/nl-BE";
 import { API_BASE_URL } from "../../config";
+
 
 function HolidayPage() {
     const [data, setData] = useState([]);
-    
+
     useEffect(() => {
         getData();
     }, []);
@@ -33,22 +28,19 @@ function HolidayPage() {
             })
             .catch((error) => {
                 console.log(error);
-            })
+            });
     }
 
-    const renderTableData = () => {
-        if (data && data.length > 0) {
-            return data.map((item, index) => (
-                <MyTR key={index}>
-                    <MyTC>{item.id}</MyTC>
-                    <MyTC>{item.name}</MyTC>
-                    <MyTC>{format(new Date(item.date), 'dd/MM/yyyy')}</MyTC>
-                </MyTR>
-            ));
-        } else {
-            return <TableRow><MyTC colSpan={5}>Geen data gevonden</MyTC></TableRow>;
-        }
-    }
+    const columns = [
+        { field: 'id', headerName: 'Id', flex: 1 },
+        { field: 'name', headerName: 'Feestdag', flex: 1 },
+        {
+            field: 'date',
+            headerName: 'Datum',
+            flex: 1,
+            valueGetter: (params) => format(new Date(params.row.date), 'dd MMMM yyyy', { locale: nlBE }),
+        },
+    ];
 
     return (
         <Fragment>
@@ -64,20 +56,15 @@ function HolidayPage() {
                         <GenerateHolidays onUpdate={handleUpdate} />
                     </Stack>
                 </div>
-                <TableContainer component={Paper}>
-                    <Table sx={{ minWidth: 700 }} aria-label="customized table">
-                        <TableHead>
-                            <TableRow>
-                                <MyTC>Id</MyTC>
-                                <MyTC>Feestdag</MyTC>
-                                <MyTC>Datum</MyTC>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {renderTableData()}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+                <div>
+                    <DataGrid
+                        rows={data}
+                        columns={columns}
+                        pageSize={5}
+                        rowSelection={false}
+                        rowHeight={69}
+                    />
+                </div>
             </Container>
         </Fragment>
     );

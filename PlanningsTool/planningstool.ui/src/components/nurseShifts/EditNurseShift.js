@@ -118,11 +118,16 @@ function EditNurseShift(props) {
     return shiftData.map((item) => (
       <MenuItem key={item.id} value={item.id}>{
         item.shiftType.name + ' - ' +
-        item.starttime + ' - ' +
-        item.endtime
+        formatTime(item.starttime) + ' - ' +
+        formatTime(item.endtime)
       }</MenuItem>
     ));
   }
+
+  const formatTime = (timeString) => {
+    const date = new Date(`2000-01-01T${timeString}`);
+    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  };
 
   return (
     <>

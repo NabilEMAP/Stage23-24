@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { DataGrid } from '@mui/x-data-grid';
 import { Container, Typography, Tooltip, IconButton } from "@mui/material";
 import { format } from 'date-fns';
+import nlBE from "date-fns/locale/nl-BE";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import { API_BASE_URL } from "../config";
@@ -47,12 +48,12 @@ function VacationPage() {
 
     const renderTooltip = (item) => {
         return (
-        <Tooltip title={showReason(item.row)} placement="left-end">
-            <IconButton style={{ marginRight: '6px' }} size="medium" color="inherit">
-                <FontAwesomeIcon icon={faCircleInfo} />
-            </IconButton>
-            {item.value}
-        </Tooltip>
+            <Tooltip title={showReason(item.row)} placement="left-end">
+                <IconButton style={{ marginRight: '6px' }} size="medium" color="inherit">
+                    <FontAwesomeIcon icon={faCircleInfo} />
+                </IconButton>
+                {item.value}
+            </Tooltip>
         );
     };
 
@@ -66,10 +67,10 @@ function VacationPage() {
 
     const columns = [
         { field: 'id', headerName: 'Id', flex: 0.5 },
-        { field: 'nurseFullname', headerName: 'Zorgkundige', flex: 1.5, renderCell: renderTooltip ,},
-        { field: 'startdate', headerName: 'Startdatum', flex: 1, valueGetter: (params) => format(new Date(params.row.startdate), 'dd/MM/yyyy') },
-        { field: 'enddate', headerName: 'Einddatum', flex: 1, valueGetter: (params) => format(new Date(params.row.enddate), 'dd/MM/yyyy') },
-        { field: 'vacationType', headerName: 'Verlof', flex: 1, valueGetter: (params) => params.row.vacationType.name },
+        { field: 'nurseFullname', headerName: 'Zorgkundige', flex: 1.5, renderCell: renderTooltip, },
+        { field: 'startdate', headerName: 'Startdatum', flex: 1.25, valueGetter: (params) => format(new Date(params.row.startdate), 'dd MMMM yyyy', { locale: nlBE }) },
+        { field: 'enddate', headerName: 'Einddatum', flex: 1.25, valueGetter: (params) => format(new Date(params.row.enddate), 'dd MMMM yyyy', { locale: nlBE }) },
+        { field: 'vacationType', headerName: 'Verlof', flex: 0.75, valueGetter: (params) => params.row.vacationType.name },
         {
             field: 'actions',
             headerName: 'Veranderingen',
@@ -92,7 +93,7 @@ function VacationPage() {
             <Container>
                 <div style={{ margin: '24px 0px' }}>
                     <Typography variant="h5" style={{ width: 'fit-content', verticalAlign: 'sub', display: 'inline-block' }}>Verlof Lijst</Typography>
-                    <AddVacation onUpdate={handleUpdate}/>
+                    <AddVacation onUpdate={handleUpdate} />
                 </div>
                 <div>
                     <DataGrid

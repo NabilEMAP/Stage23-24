@@ -1,23 +1,16 @@
 import React, { Fragment, useEffect, useState } from "react";
 import axios from "axios";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import { MyTC, MyTR } from "../components/MyTable";
+import { DataGrid, GridToolbar } from '@mui/x-data-grid';
+import { Container, Typography } from "@mui/material";
+import { format } from 'date-fns';
+import nlBE from "date-fns/locale/nl-BE";
+import { API_BASE_URL } from "../config";
 import AddNurseShift from "../components/nurseShifts/AddNurseShift";
 import EditNurseShift from "../components/nurseShifts/EditNurseShift";
 import DeleteNurseShift from "../components/nurseShifts/DeleteNurseShift";
-import { Container, Typography } from "@mui/material";
-import { format } from 'date-fns';
-import { API_BASE_URL } from "../config";
 
 function NurseShiftPage() {
     const [data, setData] = useState([]);
-    const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
 
     useEffect(() => {
         getData();
@@ -38,56 +31,38 @@ function NurseShiftPage() {
             });
     }
 
-    const requestSort = (key) => {
-        let direction = 'asc';
-        if (sortConfig && sortConfig.key === key && sortConfig.direction === 'asc') {
-            direction = 'desc';
-        }
-        setSortConfig({ key, direction });
-    }
+    const rows = data.map((item) => ({
+        id: item.id,
+        nurseFullName: item.nurse.firstName + ' ' + item.nurse.lastName,
+        regimeType: item.nurse.regimeType.name,
+        shift: item.shift,
+        date: item.date,
+    }));
 
-    const sortedData = [...data];
-    if (sortConfig !== null) {
-        sortedData.sort((a, b) => {
-            if (sortConfig.key === null) return 0;
-            const keys = sortConfig.key.split('.');
-            let aValue = a;
-            let bValue = b;
-            for (const key of keys) {
-                aValue = aValue[key];
-                bValue = bValue[key];
-            }
-            if (aValue < bValue) return sortConfig.direction === 'asc' ? -1 : 1;
-            if (aValue > bValue) return sortConfig.direction === 'asc' ? 1 : -1;
-            return 0;
-        });
-    }
+    const renderChanges = (item) => (
+        <div style={{ width: '150px' }}>
+            <EditNurseShift id={item.id} onUpdate={handleUpdate} />
+            <DeleteNurseShift id={item.id} onUpdate={handleUpdate} />
+        </div>
+    );
 
+    const formatTime = (timeString) => {
+        const date = new Date(`2000-01-01T${timeString}`);
+        return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      };
 
-    const renderTableData = () => {
-        if (sortedData && sortedData.length > 0) {
-            return sortedData.map((item, index) => (
-                <MyTR key={index}>
-                    <MyTC>{item.id}</MyTC>
-                    <MyTC>{item.nurse.firstName + ' ' + item.nurse.lastName}</MyTC>
-                    <MyTC>{item.nurse.regimeType.name}</MyTC>
-                    <MyTC>{
-                        item.shift.shiftType.name + ' - ' +
-                        item.shift.starttime + ' - ' +
-                        item.shift.endtime
-                    }
-                    </MyTC>
-                    <MyTC>{format(new Date(item.date), 'dd/MM/yyyy')}</MyTC>
-                    <MyTC style={{ width: '150px' }}>
-                        <EditNurseShift id={item.id} onUpdate={handleUpdate} />
-                        <DeleteNurseShift id={item.id} onUpdate={handleUpdate} />
-                    </MyTC>
-                </MyTR>
-            ));
-        } else {
-            return <TableRow><MyTC colSpan={5}>Geen data gevonden</MyTC></TableRow>;
-        }
-    }
+    const renderShiftCell = (params) => (
+        `${params.row.shift.shiftType.name} - ${formatTime(params.row.shift.starttime)} - ${formatTime(params.row.shift.endtime)}`
+    );
+
+    const columns = [
+        { field: 'id', headerName: 'Id', flex: 0.5 },
+        { field: 'nurseFullName', headerName: 'Zorgkundige', flex: 1 },
+        { field: 'regimeType', headerName: 'Regime', flex: 1 },
+        { field: 'shift', headerName: 'Shift', flex: 1.25, renderCell: renderShiftCell },
+        { field: 'date', headerName: 'Datum', flex: 1, valueGetter: (params) => format(new Date(params.row.date), 'dd MMMM yyyy', { locale: nlBE }) },
+        { field: 'actions', headerName: 'Veranderingen', flex: 1, renderCell: (params) => renderChanges(params.row) },
+    ];
 
     return (
         <Fragment>
@@ -96,23 +71,15 @@ function NurseShiftPage() {
                     <Typography variant="h5" style={{ width: 'fit-content', verticalAlign: 'sub', display: 'inline-block' }}>Zorgkundige Shift Lijst</Typography>
                     <AddNurseShift onUpdate={handleUpdate} />
                 </div>
-                <TableContainer component={Paper}>
-                    <Table sx={{ minWidth: 700 }} aria-label="customized table">
-                        <TableHead>
-                            <TableRow>
-                                <MyTC onClick={() => requestSort("id")}>Id</MyTC>
-                                <MyTC onClick={() => requestSort("nurse.firstName")}>Zorgkundige</MyTC>
-                                <MyTC onClick={() => requestSort("nurse.regimeType.name")}>Regime</MyTC>
-                                <MyTC onClick={() => requestSort("shift.shiftType.shift")}>Shift</MyTC>
-                                <MyTC onClick={() => requestSort("date")}>Datum</MyTC>
-                                <MyTC style={{ width: '150px' }}>Veranderingen</MyTC>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {renderTableData()}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+                <div>
+                    <DataGrid
+                        rows={rows}
+                        columns={columns}
+                        pageSize={5}
+                        rowSelection={false}
+                        rowHeight={69}
+                    />
+                </div>
             </Container>
         </Fragment>
     );
