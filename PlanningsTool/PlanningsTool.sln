@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlanningsTool.DAL", "Planni
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlanningsTool.Common", "PlanningsTool.Common\PlanningsTool.Common.csproj", "{DB3C1CCA-4809-4A38-9A47-A4D697E7FDC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanningsTool.Unittests", "PlanningsTool.Unittests\PlanningsTool.Unittests.csproj", "{27F474B2-9189-4DF0-A0A6-6B746C5B20BF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanningsTool.Tests", "PlanningsTool.Tests\PlanningsTool.Tests.csproj", "{371F0956-BD7A-4BCF-9E71-4C699E423397}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{DB3C1CCA-4809-4A38-9A47-A4D697E7FDC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB3C1CCA-4809-4A38-9A47-A4D697E7FDC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB3C1CCA-4809-4A38-9A47-A4D697E7FDC4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{27F474B2-9189-4DF0-A0A6-6B746C5B20BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{27F474B2-9189-4DF0-A0A6-6B746C5B20BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{27F474B2-9189-4DF0-A0A6-6B746C5B20BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{27F474B2-9189-4DF0-A0A6-6B746C5B20BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{371F0956-BD7A-4BCF-9E71-4C699E423397}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{371F0956-BD7A-4BCF-9E71-4C699E423397}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{371F0956-BD7A-4BCF-9E71-4C699E423397}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{371F0956-BD7A-4BCF-9E71-4C699E423397}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
