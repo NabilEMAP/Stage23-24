@@ -35,10 +35,10 @@ export const NavBar = () => {
                     </a>
                 </Typography>
                 <Stack direction='row' spacing={2}>
-                    <Button href='/teamplanning' color='inherit'>Teamplanning</Button>
-                    <Button href='/zorgkundige' color='inherit'>Zorgkundige</Button>
-                    <Button href='/verlof' color='inherit'>Verlof</Button>
-                    <Button href='/shift' color='inherit'>Shift</Button>
+                    <Button id="navPlanning" href='/teamplanning' color='inherit'>Teamplanning</Button>
+                    <Button id="navNurse" href='/zorgkundige' color='inherit'>Zorgkundige</Button>
+                    <Button id="navVacation" href='/verlof' color='inherit'>Verlof</Button>
+                    <Button id="navNurseShift" href='/shift' color='inherit'>Shift</Button>
                     <Button
                         color='inherit'
                         id='types-button'
@@ -66,10 +66,10 @@ export const NavBar = () => {
                     MenuListProps={{
                         'aria-labelledby': 'types-button'
                     }}>
-                    <MenuItem onClick={handleClose}><Button href='/regimetype' color='inherit'>Regime Type</Button></MenuItem>
-                    <MenuItem onClick={handleClose}><Button href='/verloftype' color='inherit'>Verlof Type</Button></MenuItem>
-                    <MenuItem onClick={handleClose}><Button href='/shifttype' color='inherit'>Shift Type</Button></MenuItem>
-                    <MenuItem onClick={handleClose}><Button href='/feestdag' color='inherit'>Feestdag</Button></MenuItem>
+                    <MenuItem id="navRegimeType" onClick={handleClose}><Button href='/regimetype' color='inherit'>Regime Type</Button></MenuItem>
+                    <MenuItem id="navVacationType" onClick={handleClose}><Button href='/verloftype' color='inherit'>Verlof Type</Button></MenuItem>
+                    <MenuItem id="navShiftType" onClick={handleClose}><Button href='/shifttype' color='inherit'>Shift Type</Button></MenuItem>
+                    <MenuItem id="navHoliday" onClick={handleClose}><Button href='/feestdag' color='inherit'>Feestdag</Button></MenuItem>
                 </Menu>
             </Toolbar>
         </AppBar>

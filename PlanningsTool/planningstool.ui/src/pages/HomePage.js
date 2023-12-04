@@ -56,8 +56,8 @@ function HomePage() {
                             spacing={2}
                             justifyContent="center"
                         >
-                            <Button href="/teamplanning" variant="contained" color="error">Maak een teamplanning</Button>
-                            {/*<Button href="/over" variant="outlined" color="error">Over</Button>*/}
+                            <Button id="btnPlanning" href="/teamplanning" variant="contained" color="error">Maak een teamplanning</Button>
+                            {/*<Button id="btnAbout" href="/over" variant="outlined" color="error">Over</Button>*/}
                         </Stack>
                     </Container>
                 </Box>
