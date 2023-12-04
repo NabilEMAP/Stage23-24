@@ -86,7 +86,7 @@ function AddVacation(props) {
       "reason": reason
     }
     axios.post(API, data)
-      .then(() => {        
+      .then(() => {
         toast.success('Verlof is toegevoegd');
         clear();
         handleClose();
@@ -100,7 +100,7 @@ function AddVacation(props) {
         }
         console.log(JSON.stringify(error));
       })
-      console.log(data);
+    console.log(data);
   }
 
   const clear = () => {
@@ -131,6 +131,7 @@ function AddVacation(props) {
   return (
     <>
       <Button
+        id="addVacation"
         variant="contained"
         style={{ float: 'right' }}
         color="success"

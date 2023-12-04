@@ -141,6 +141,7 @@ function EditNurse(props) {
           >
             <TextField
               required
+              id="txtInputFirstname"
               label="Voornaam"
               style={{ width: '75%' }}
               type="text"
@@ -150,6 +151,7 @@ function EditNurse(props) {
             />
             <TextField
               required
+              id="txtInputLastname"
               label="Achternaam"
               style={{ width: '75%' }}
               type="text"
@@ -161,6 +163,7 @@ function EditNurse(props) {
               <InputLabel>Regime *</InputLabel>
               <Select
                 required
+                id="selectRegime"
                 label="Regime"
                 value={regimeTypeId}
                 onChange={(e) => setRegimeTypeId(e.target.value)}
@@ -169,7 +172,9 @@ function EditNurse(props) {
               </Select>
             </FormControl>
             <FormControlLabel label="Vaste Nacht" control={
-              <Checkbox type="checkbox"
+              <Checkbox
+                id="fixedNightInput"
+                type="checkbox"
                 checked={isFixedNight === true ? true : false}
                 value={isFixedNight}
                 onChange={(e) => handleEditActiveChange(e)}
@@ -179,10 +184,10 @@ function EditNurse(props) {
         </Modal.Body>
         <Modal.Footer>
           <Stack direction="row" alignItems="center" spacing={2}>
-            <Button variant="contained" color="inherit" onClick={handleClose}>
+            <Button id="goBack" variant="contained" color="inherit" onClick={handleClose}>
               Terug
             </Button>
-            <Button variant="contained" color="primary" onClick={handleUpdate}>
+            <Button id="submitNurseForm" variant="contained" color="primary" onClick={handleUpdate}>
               Wijzigen
             </Button>
           </Stack>

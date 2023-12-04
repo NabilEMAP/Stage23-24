@@ -111,6 +111,7 @@ function AddNurse(props) {
   return (
     <>
       <Button
+        id="createNurse"
         variant="contained"
         style={{ float: 'right' }}
         color="success"
@@ -131,6 +132,7 @@ function AddNurse(props) {
           >
             <TextField
               required
+              id="txtInputFirstname"
               label="Voornaam"
               style={{ width: '75%' }}
               type="text"
@@ -140,6 +142,7 @@ function AddNurse(props) {
             />
             <TextField
               required
+              id="txtInputLastname"
               label="Achternaam"
               style={{ width: '75%' }}
               type="text"
@@ -151,6 +154,7 @@ function AddNurse(props) {
               <InputLabel>Regime *</InputLabel>
               <Select
                 required
+                id="selectRegime"
                 label="Regime"
                 value={regimeTypeId}
                 onChange={(e) => setRegimeTypeId(e.target.value)}
@@ -160,6 +164,7 @@ function AddNurse(props) {
             </FormControl>
             <FormControlLabel label="Vaste Nacht" control={
               <Checkbox
+                id="fixedNightInput"
                 type="checkbox"
                 checked={isFixedNight === true ? true : false}
                 value={isFixedNight}
@@ -170,10 +175,10 @@ function AddNurse(props) {
         </Modal.Body>
         <Modal.Footer>
           <Stack direction="row" alignItems="center" spacing={2}>
-            <Button variant="contained" color="inherit" onClick={handleClose}>
+            <Button id="goBack" variant="contained" color="inherit" onClick={handleClose}>
               Terug
             </Button>
-            <Button variant="contained" color="success" onClick={handleCreate}>
+            <Button id="submitNurseForm" variant="contained" color="success" onClick={handleCreate}>
               Toevoegen
             </Button>
           </Stack>

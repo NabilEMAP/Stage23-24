@@ -157,10 +157,10 @@ function DeleteNurse(props) {
         </Modal.Body>
         <Modal.Footer>
           <Stack direction="row" alignItems="center" spacing={2}>
-            <Button variant="contained" color="inherit" onClick={handleClose}>
+            <Button id="goBack" variant="contained" color="inherit" onClick={handleClose}>
               Terug
             </Button>
-            <Button variant="contained" color="error" onClick={handlePostDelete}>
+            <Button id="submitNurseForm" variant="contained" color="error" onClick={handlePostDelete}>
               Verwijderen
             </Button>
           </Stack>

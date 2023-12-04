@@ -121,6 +121,7 @@ function AddNurseShift(props) {
   return (
     <>
       <Button
+        id="addNurseShift"
         variant="contained"
         style={{ float: 'right' }}
         color="success"
