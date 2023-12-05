@@ -131,7 +131,7 @@ function AddVacation(props) {
   return (
     <>
       <Button
-        id="addVacation"
+        id="createVacation"
         variant="contained"
         style={{ float: 'right' }}
         color="success"
@@ -154,6 +154,7 @@ function AddVacation(props) {
               <InputLabel>Zorgkundige *</InputLabel>
               <Select
                 required
+                id="selectNurse"
                 label="Zorgkundige"
                 value={nurseId}
                 onChange={(e) => setNurseId(e.target.value)}
@@ -164,6 +165,7 @@ function AddVacation(props) {
             <FormControl style={{ width: '75%' }}>
               <DatePicker slotProps={{ textField: { error: false } }}
                 required
+                id="txtInputStartDate"
                 label="Startdatum *"
                 onChange={(e) => setStartdate(dayjs(e).format('YYYY-MM-DD'))}
               />
@@ -171,6 +173,7 @@ function AddVacation(props) {
             <FormControl style={{ width: '75%' }}>
               <DatePicker slotProps={{ textField: { error: false } }}
                 required
+                id="txtInputEndDate"
                 label="Einddatum *"
                 onChange={(e) => setEnddate(dayjs(e).format('YYYY-MM-DD'))}
               />
@@ -179,6 +182,7 @@ function AddVacation(props) {
               <InputLabel>Verlof *</InputLabel>
               <Select
                 required
+                id="selectVacation"
                 label="Verlof"
                 value={vacationTypeId}
                 onChange={(e) => setVacationTypeId(e.target.value)}
@@ -187,6 +191,7 @@ function AddVacation(props) {
               </Select>
             </FormControl>
             <TextField
+              id="txtInputReason"
               label="Reden"
               style={{ width: '75%' }}
               type="text"
@@ -200,10 +205,10 @@ function AddVacation(props) {
         </Modal.Body>
         <Modal.Footer>
           <Stack direction="row" alignItems="center" spacing={2}>
-            <Button variant="contained" color="inherit" onClick={handleClose}>
+            <Button id="goBack" variant="contained" color="inherit" onClick={handleClose}>
               Terug
             </Button>
-            <Button variant="contained" color="success" onClick={handleCreate}>
+            <Button id="submitVacationForm" variant="contained" color="success" onClick={handleCreate}>
               Toevoegen
             </Button>
           </Stack>

@@ -134,6 +134,7 @@ function DeleteVacation(props) {
                             <InputLabel>Zorgkundige *</InputLabel>
                             <Select
                                 required
+                                id="selectNurse"
                                 label="Zorgkundige"
                                 value={nurseId}
                                 onChange={(e) => setNurseId(e.target.value)}
@@ -144,6 +145,7 @@ function DeleteVacation(props) {
                         <FormControl style={{ width: '75%' }}>
                             <DatePicker slotProps={{ textField: { error: false } }}
                                 required
+                                id="txtInputStartDate"
                                 label="Startdatum *"
                                 value={dayjs(startdate)}
                                 onChange={(e) => setStartdate(dayjs(e).format('YYYY-MM-DD'))}
@@ -153,6 +155,7 @@ function DeleteVacation(props) {
                         <FormControl style={{ width: '75%' }}>
                             <DatePicker slotProps={{ textField: { error: false } }}
                                 required
+                                id="txtInputEndDate"
                                 label="Einddatum *"
                                 value={dayjs(enddate)}
                                 onChange={(e) => setEnddate(dayjs(e).format('YYYY-MM-DD'))}
@@ -163,6 +166,7 @@ function DeleteVacation(props) {
                             <InputLabel>Verlof *</InputLabel>
                             <Select
                                 required
+                                id="selectVacation"
                                 label="Verlof"
                                 value={vacationTypeId}
                                 onChange={(e) => setVacationTypeId(e.target.value)}
@@ -171,6 +175,7 @@ function DeleteVacation(props) {
                             </Select>
                         </FormControl>
                         <TextField
+                            id="txtInputReason"
                             label="Reden"
                             style={{ width: '75%' }}
                             type="date"
@@ -185,10 +190,10 @@ function DeleteVacation(props) {
                 </Modal.Body>
                 <Modal.Footer>
                     <Stack direction="row" alignItems="center" spacing={2}>
-                        <Button variant="contained" color="inherit" onClick={handleClose}>
+                        <Button id="goBack" variant="contained" color="inherit" onClick={handleClose}>
                             Terug
                         </Button>
-                        <Button variant="contained" color="error" onClick={handlePostDelete}>
+                        <Button id="submitVacationForm" variant="contained" color="error" onClick={handlePostDelete}>
                             Verwijderen
                         </Button>
                     </Stack>

@@ -183,10 +183,10 @@ function EditNurseShift(props) {
         </Modal.Body>
         <Modal.Footer>
           <Stack direction="row" alignItems="center" spacing={2}>
-            <Button variant="contained" color="inherit" onClick={handleClose}>
+            <Button id="goBack" variant="contained" color="inherit" onClick={handleClose}>
               Terug
             </Button>
-            <Button variant="contained" color="primary" onClick={handleUpdate}>
+            <Button id="submitNurseShiftForm" variant="contained" color="primary" onClick={handleUpdate}>
               Wijzigen
             </Button>
           </Stack>

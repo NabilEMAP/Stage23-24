@@ -121,7 +121,7 @@ function AddNurseShift(props) {
   return (
     <>
       <Button
-        id="addNurseShift"
+        id="createNurseShift"
         variant="contained"
         style={{ float: 'right' }}
         color="success"
@@ -173,10 +173,10 @@ function AddNurseShift(props) {
         </Modal.Body>
         <Modal.Footer>
           <Stack direction="row" alignItems="center" spacing={2}>
-            <Button variant="contained" color="inherit" onClick={handleClose}>
+            <Button id="goBack" variant="contained" color="inherit" onClick={handleClose}>
               Terug
             </Button>
-            <Button variant="contained" color="success" onClick={handleCreate}>
+            <Button id="submitNurseShiftForm" variant="contained" color="success" onClick={handleCreate}>
               Toevoegen
             </Button>
           </Stack>

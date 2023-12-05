@@ -31,14 +31,6 @@ namespace PlanningsTool.Tests.SeleniumTests.NurseTests
             _updatedLastName = "TestUpdateLastname";
         }
 
-        public void NavigateToContainer(string container)
-        {
-            _driver.Navigate().GoToUrl(_URL);
-            _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
-            var submitButton = _driver.FindElement(By.XPath($"//h2[normalize-space()='{container}']"));
-            submitButton.Click();
-        }
-
         [TestMethod]
         public void NurseCRUD_ST01_CreateNurse()
         {

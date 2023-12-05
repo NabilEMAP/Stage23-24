@@ -82,7 +82,7 @@ function AddNurse(props) {
         console.log(JSON.stringify(error));
         clear();
       })
-      console.log(data);
+    console.log(data);
   }
 
   const handleActiveChange = (e) => {
@@ -131,20 +131,20 @@ function AddNurse(props) {
             spacing={4}
           >
             <TextField
+              style={{ width: '75%' }}
               required
               id="txtInputFirstname"
               label="Voornaam"
-              style={{ width: '75%' }}
               type="text"
               className="form-control"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
             />
             <TextField
+              style={{ width: '75%' }}
               required
               id="txtInputLastname"
               label="Achternaam"
-              style={{ width: '75%' }}
               type="text"
               className="form-control"
               value={lastName}

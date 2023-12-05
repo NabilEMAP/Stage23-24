@@ -117,6 +117,7 @@ function DeleteNurse(props) {
             <TextField
               style={{ width: '75%' }}
               required
+              id="txtInputFirstname"
               label="Voornaam"
               type="text"
               className="form-control"
@@ -127,6 +128,7 @@ function DeleteNurse(props) {
             <TextField
               style={{ width: '75%' }}
               required
+              id="txtInputLastname"
               label="Voornaam"
               type="text"
               className="form-control"
