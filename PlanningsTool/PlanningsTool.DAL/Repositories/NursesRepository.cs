@@ -26,22 +26,26 @@ namespace PlanningsTool.DAL.Repositories
 
         public async Task<IEnumerable<Nurse>> GetNursesByLastName(string lastName)
         {
-            string query = $"SELECT * FROM [dbo].[Nurses] AS z WHERE z.LastName like '%{lastName}%'";
-            return await _context.Nurses.FromSqlRaw(query).Include(r => r.RegimeType).ToListAsync();
+            return await _context.Nurses
+                .Where(z => z.LastName.Contains(lastName))
+                .Include(r => r.RegimeType)
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<Nurse>> GetNursesByFirstName(string firstName)
         {
-            string query = $"SELECT * FROM [dbo].[Nurses] AS z WHERE z.FirstName like '%{firstName}%'";
-            return await _context.Nurses.FromSqlRaw(query).Include(r => r.RegimeType).ToListAsync();
+            return await _context.Nurses
+                .Where(z => z.FirstName.Contains(firstName))
+                .Include(r => r.RegimeType)
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<Nurse>> GetNursesByFullName(string fullName)
         {
-            string query = $"SELECT * FROM [dbo].[Nurses] AS z WHERE CONCAT(z.FirstName, z.LastName) = '{fullName}'";
-            return await _context.Nurses.FromSqlRaw(query).Include(r => r.RegimeType).ToListAsync();
+            return await _context.Nurses
+                .Where(z => string.Concat(z.FirstName, z.LastName) == fullName)
+                .Include(r => r.RegimeType)
+                .ToListAsync();
         }
-
-        
     }
 }

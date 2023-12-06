@@ -26,14 +26,19 @@ namespace PlanningsTool.DAL.Repositories
 
         public async Task<IEnumerable<Shift>> GetShiftsByEndtime(string endtime)
         {
-            string query = $"SELECT * FROM [dbo].[Shifts] AS z WHERE z.Endtime like '%{endtime}%'";
-            return await _context.Shifts.FromSqlRaw(query).Include(s => s.ShiftType).ToListAsync();
+            return await _context.Shifts
+                .Include(s => s.ShiftType)
+                .Where(z => z.Endtime.ToString().Contains(endtime))
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<Shift>> GetShiftsByStarttime(string starttime)
         {
-            string query = $"SELECT * FROM [dbo].[Shifts] AS z WHERE z.Starttime like '%{starttime}%'";
-            return await _context.Shifts.FromSqlRaw(query).Include(s => s.ShiftType).ToListAsync();
+            return await _context.Shifts
+                .Include(s => s.ShiftType)
+                .Where(z => z.Starttime.ToString().Contains(starttime))
+                .ToListAsync();
         }
     }
+
 }

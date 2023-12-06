@@ -28,25 +28,29 @@ namespace PlanningsTool.DAL.Repositories
 
         public async Task<IEnumerable<Vacation>> GetVacationsByStartdate(string startdate)
         {
-            string query = $"SELECT * FROM [dbo].[Vacations] AS z WHERE z.Startdate like '%{startdate}%'";
-            return await _context.Vacations.FromSqlRaw(query).Include(v => v.VacationType)
-                .Include(z => z.Nurse).ToListAsync();
+            return await _context.Vacations
+                .Where(z => z.Startdate.ToString().Contains(startdate))
+                .Include(v => v.VacationType)
+                .Include(z => z.Nurse)
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<Vacation>> GetVacationsByEnddate(string enddate)
         {
-            string query = $"SELECT * FROM [dbo].[Vacations] AS z WHERE z.Enddate like '%{enddate}%'";
-            return await _context.Vacations.FromSqlRaw(query).Include(v => v.VacationType)
-                .Include(z => z.Nurse).ToListAsync();
+            return await _context.Vacations
+                .Where(z => z.Enddate.ToString().Contains(enddate))
+                .Include(v => v.VacationType)
+                .Include(z => z.Nurse)
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<Vacation>> GetVacationsByReason(string reason)
         {
-            string query = $"SELECT * FROM [dbo].[Vacations] AS z WHERE z.Reason like '%{reason}%'";
-            return await _context.Vacations.FromSqlRaw(query).Include(v => v.VacationType)
-                .Include(z => z.Nurse).ToListAsync();
+            return await _context.Vacations
+                .Where(z => z.Reason.Contains(reason))
+                .Include(v => v.VacationType)
+                .Include(z => z.Nurse)
+                .ToListAsync();
         }
-
-
     }
 }

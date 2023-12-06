@@ -34,15 +34,15 @@ namespace PlanningsTool.DAL.Repositories
 
         public async Task<IEnumerable<NurseShift>> GetNurseShiftsByDate(string date)
         {
-            string query = $"SELECT * FROM [dbo].[NurseShifts] AS z WHERE z.Date like '%{date}%'";
             return await _context.NurseShifts
-                .FromSqlRaw(query)
                 .Include(n => n.Nurse)
                 .Include(s => s.Shift)
                 .Include(t => t.Teamplan)
                 .Include(st => st.Shift.ShiftType)
                 .Include(nr => nr.Nurse.RegimeType)
+                .Where(z => z.Date.ToString().Contains(date))
                 .ToListAsync();
         }
     }
+
 }

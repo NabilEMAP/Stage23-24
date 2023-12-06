@@ -12,8 +12,10 @@ namespace PlanningsTool.DAL.Repositories
 
         public async Task<IEnumerable<ShiftType>> GetShiftTypesByName(string name)
         {
-            string query = $"SELECT * FROM [dbo].[ShiftTypes] AS z WHERE z.Name like '%{name}%'";
-            return await _context.ShiftTypes.FromSqlRaw(query).ToListAsync();
+            return await _context.ShiftTypes
+                .Where(z => z.Name.Contains(name))
+                .ToListAsync();
         }
     }
+
 }

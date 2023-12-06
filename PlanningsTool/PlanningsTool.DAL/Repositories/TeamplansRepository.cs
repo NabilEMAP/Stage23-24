@@ -12,8 +12,10 @@ namespace PlanningsTool.DAL.Repositories
 
         public async Task<IEnumerable<Teamplan>> GetTeamplansByMonth(string month)
         {
-            string query = $"SELECT * FROM [dbo].[Teamplans] AS z WHERE z.Month like '%{month}%'";
-            return await _context.Teamplans.FromSqlRaw(query).ToListAsync();
+            return await _context.Teamplans
+                .Where(z => z.Month.ToString().Contains(month))
+                .ToListAsync();
         }
     }
+
 }

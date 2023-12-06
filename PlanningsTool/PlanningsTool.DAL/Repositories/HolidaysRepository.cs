@@ -37,21 +37,24 @@ namespace PlanningsTool.DAL.Repositories
 
         public async Task<IEnumerable<Holiday>> GetHolidaysByName(string name)
         {
-            string query = $"SELECT * FROM [dbo].[Holidays] AS z WHERE z.Name like '%{name}%'";
-            return await _context.Holidays.FromSqlRaw(query).ToListAsync();
+            return await _context.Holidays
+                .Where(z => z.Name.Contains(name))
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<Holiday>> GetHolidaysByDate(string date)
         {
-            string query = $"SELECT * FROM [dbo].[Holidays] AS z WHERE z.Date like '%{date}%'";
-            return await _context.Holidays.FromSqlRaw(query).ToListAsync();
+            return await _context.Holidays
+                .Where(z => z.Date.ToString().Contains(date))
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<Holiday>> GetHolidayByYear(int year)
         {
-            string query = $"SELECT * FROM [dbo].[Holidays] AS z WHERE YEAR(z.Date) like '{year}'";
-            return await _context.Holidays.FromSqlRaw(query).ToListAsync();
-            throw new NotImplementedException();
+            return await _context.Holidays
+                .Where(z => z.Date.Year == year)
+                .ToListAsync();
         }
+
     }
 }
