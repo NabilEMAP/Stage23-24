@@ -15,12 +15,12 @@ namespace PlanningsTool.Tests.SeleniumTests.VacationTests
         private IWebDriver _driver;
         private string _URL;
         private string _nurse;
-        private string _startDate;
+        private string _startdate;
         private string _enddate;
         private string _vacation;
         private string _reason;
         private string _updatedNurse;
-        private string _updatedStartDate;
+        private string _updatedStartdate;
         private string _updatedEnddate;
         private string _updatedVacation;
         private string _updatedReason;
@@ -31,12 +31,12 @@ namespace PlanningsTool.Tests.SeleniumTests.VacationTests
             _driver = new ChromeDriver();
             _URL = "http://localhost:3000/verlof";
             _nurse = "Fatima Tsridh";
-            _startDate = "20/04/2004";
+            _startdate = "20/04/2004";
             _enddate = "21/04/2004";
             _vacation = "Verlof";
             _reason = "Verlof test van 2 dagen";
             _updatedNurse = "Fatima Tsridh";
-            _updatedStartDate = "01/05/2004";
+            _updatedStartdate = "01/05/2004";
             _updatedEnddate = "07/05/2004";
             _updatedVacation = "Ziekte";
             _updatedReason = "Ziekte test van een week in mei";
@@ -64,7 +64,7 @@ namespace PlanningsTool.Tests.SeleniumTests.VacationTests
             // Inserting startdate and enddate
             var txtInputStartDate = _driver.FindElement(By.XPath("//body//div[@role='dialog']//div//div//div//div[2]//div[1]//div[1]//input[1]"));
             txtInputStartDate.Click();
-            txtInputStartDate.SendKeys(_startDate);
+            txtInputStartDate.SendKeys(_startdate);
             var txtInputEndDate = _driver.FindElement(By.XPath("//body/div[@role='dialog']/div/div/div/div/div[3]/div[1]/div[1]//input[1]"));
             txtInputEndDate.Click();
             txtInputEndDate.SendKeys(_enddate);
@@ -96,24 +96,20 @@ namespace PlanningsTool.Tests.SeleniumTests.VacationTests
             var sortByNew = _driver.FindElement(By.XPath("//div[contains(text(),'Id')]"));
             sortByNew.Click(); sortByNew.Click();
 
-            // Reading in update modal
-            var read = _driver.FindElement(By.XPath("//body//div[@id='root']//div[@role='presentation']//div[@role='presentation']//div[@role='rowgroup']//div[1]//div[6]//button[1]//*[name()='svg']//*[name()='path' and contains(@fill,'currentCol')]"));
+            // Reading in delete modal
+            var read = _driver.FindElement(By.XPath("//body//div[@id='root']//div[@role='presentation']//div[@role='presentation']//div[@role='rowgroup']//div[1]//div[6]//button[2]//*[name()='svg']//*[name()='path' and contains(@fill,'currentCol')]"));
             read.Click();
 
-            // Read nurse
-            //var readNurse = _driver.FindElement(By.XPath("//div[@id='selectNurse']")).GetAttribute("value");
-            //Assert.AreEqual(_nurse, readNurse);
-
-            // Read vacation
-            //var readVacation = _driver.FindElement(By.XPath("//div[@id='selectVacation']")).GetAttribute("value");
-            //Assert.AreEqual(_vacation, readVacation);
-
-            // Read startdate, enddate and reason
-            var readStartDate = _driver.FindElement(By.XPath("//body//div[@role='dialog']//div//div//div//div[2]//div[1]//div[1]//input[1]")).GetAttribute("value");
-            var readEndDate = _driver.FindElement(By.XPath("//body/div[@role='dialog']/div/div/div/div/div[3]/div[1]/div[1]//input[1]")).GetAttribute("value");
-            var readReason = _driver.FindElement(By.XPath("//textarea[@id='txtInputReason']")).GetAttribute("value");
-            Assert.AreEqual(_startDate, readStartDate);
+            // Read data
+            var readNurse = _driver.FindElement(By.Id("nurse")).GetAttribute("value");
+            var readStartDate = _driver.FindElement(By.Id("startdate")).GetAttribute("value");
+            var readEndDate = _driver.FindElement(By.Id("enddate")).GetAttribute("value");
+            var readVacation = _driver.FindElement(By.Id("vacationType")).GetAttribute("value");
+            var readReason = _driver.FindElement(By.Id("reason")).GetAttribute("value");
+            Assert.AreEqual(_nurse, readNurse);
+            Assert.AreEqual(_startdate, readStartDate);
             Assert.AreEqual(_enddate, readEndDate);
+            Assert.AreEqual(_vacation, readVacation);
             Assert.AreEqual(_reason, readReason);
 
             // Driver quit
@@ -145,7 +141,7 @@ namespace PlanningsTool.Tests.SeleniumTests.VacationTests
             var txtInputStartDate = _driver.FindElement(By.XPath("//body//div[@role='dialog']//div//div//div//div[2]//div[1]//div[1]//input[1]"));
             txtInputStartDate.Click();
             txtInputStartDate.SendKeys(clear);
-            txtInputStartDate.SendKeys(_updatedStartDate);
+            txtInputStartDate.SendKeys(_updatedStartdate);
             var txtInputEndDate = _driver.FindElement(By.XPath("//body/div[@role='dialog']/div/div/div/div/div[3]/div[1]/div[1]//input[1]"));
             txtInputEndDate.Click();
             txtInputEndDate.SendKeys(clear);
@@ -180,24 +176,23 @@ namespace PlanningsTool.Tests.SeleniumTests.VacationTests
             sortByNew.Click(); sortByNew.Click();
 
             // Read in update modal
-            var read = _driver.FindElement(By.XPath("//body//div[@id='root']//div[@role='presentation']//div[@role='presentation']//div[@role='rowgroup']//div[1]//div[6]//button[1]//*[name()='svg']//*[name()='path' and contains(@fill,'currentCol')]"));
+            var read = _driver.FindElement(By.XPath("//body//div[@id='root']//div[@role='presentation']//div[@role='presentation']//div[@role='rowgroup']//div[1]//div[6]//button[2]//*[name()='svg']//*[name()='path' and contains(@fill,'currentCol')]"));
             read.Click();
 
-            // Read nurse
-            //var readNurse = _driver.FindElement(By.XPath("//div[@id='selectNurse']")).GetAttribute("value");
-            //Assert.AreEqual(_updatedNurse, readNurse);
-
-            // Read vacation
-            //var readVacation = _driver.FindElement(By.XPath("//div[@id='selectVacation']")).GetAttribute("value");
-            //Assert.AreEqual(_updatedVacation, readVacation);
-
-            // Read startdate, enddate and reason
-            var readStartDate = _driver.FindElement(By.XPath("//body//div[@role='dialog']//div//div//div//div[2]//div[1]//div[1]//input[1]")).GetAttribute("value");
-            var readEndDate = _driver.FindElement(By.XPath("//body/div[@role='dialog']/div/div/div/div/div[3]/div[1]/div[1]//input[1]")).GetAttribute("value");
-            var readReason = _driver.FindElement(By.XPath("//textarea[@id='txtInputReason']")).GetAttribute("value");
-            Assert.AreEqual(_updatedStartDate, readStartDate);
+            // Read updated data
+            var readNurse = _driver.FindElement(By.Id("nurse")).GetAttribute("value");
+            var readStartDate = _driver.FindElement(By.Id("startdate")).GetAttribute("value");
+            var readEndDate = _driver.FindElement(By.Id("enddate")).GetAttribute("value");
+            var readVacation = _driver.FindElement(By.Id("vacationType")).GetAttribute("value");
+            var readReason = _driver.FindElement(By.Id("reason")).GetAttribute("value");
+            Assert.AreEqual(_updatedNurse, readNurse);
+            Assert.AreEqual(_updatedStartdate, readStartDate);
             Assert.AreEqual(_updatedEnddate, readEndDate);
+            Assert.AreEqual(_updatedVacation, readVacation);
             Assert.AreEqual(_updatedReason, readReason);
+
+            // Driver quit
+            _driver.Quit();
         }
 
         [TestMethod]

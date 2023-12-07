@@ -68,10 +68,12 @@ function DeleteVacation(props) {
         const API = `${API_BASE_URL}/Vacations/${id}`;
         axios.get(API)
             .then((result) => {
-                setStartdate(result.data.startdate);
-                setEnddate(result.data.enddate);
-                setNurseId(result.data.nurseId);
-                setVacationTypeId(result.data.vacationTypeId);
+                setStartdate(dayjs(result.data.startdate).format('DD/MM/YYYY'));
+                setEnddate(dayjs(result.data.enddate).format('DD/MM/YYYY'));
+                const nurse = nurseData.find((item) => item.id === result.data.nurseId);
+                setNurseId(nurse ? nurse.firstName + " " + nurse.lastName : '');
+                const vacationType = vacationTypeData.find((item) => item.id === result.data.vacationTypeId);
+                setVacationTypeId(vacationType ? vacationType.name : '');
                 setReason(result.data.reason);
                 editId(id);
             })
@@ -91,22 +93,6 @@ function DeleteVacation(props) {
             .catch((error) => {
                 toast.warning(`${error}`);
             })
-    }
-
-    const renderNurse = () => {
-        return nurseData.map((item) => (
-            <MenuItem key={item.id} value={item.id}>
-                {item.firstName + ' ' + item.lastName}
-            </MenuItem>
-        ));
-    }
-
-    const renderVacationsType = () => {
-        return vacationTypeData.map((item) => (
-            <MenuItem key={item.id} value={item.id}>
-                {item.name}
-            </MenuItem>
-        ));
     }
 
     return (
@@ -130,62 +116,18 @@ function DeleteVacation(props) {
                         spacing={4}
                     >
                         <h6>Ben je zeker dat je dit verlof wilt verwijderen?</h6>
-                        <FormControl style={{ width: '75%' }} disabled>
-                            <InputLabel>Zorgkundige *</InputLabel>
-                            <Select
-                                required
-                                id="selectNurse"
-                                label="Zorgkundige"
-                                value={nurseId}
-                                onChange={(e) => setNurseId(e.target.value)}
-                            >
-                                {renderNurse()}
-                            </Select>
-                        </FormControl>
                         <FormControl style={{ width: '75%' }}>
-                            <DatePicker slotProps={{ textField: { error: false } }}
-                                required
-                                id="txtInputStartDate"
-                                label="Startdatum *"
-                                value={dayjs(startdate)}
-                                onChange={(e) => setStartdate(dayjs(e).format('YYYY-MM-DD'))}
-                                disabled
-                            />
+                            <h4>Zorgkundige</h4>
+                            <p id="nurse" value={nurseId}>{nurseId}</p>
+                            <h4>Startdatum</h4>
+                            <p id="startdate" value={startdate}>{startdate}</p>
+                            <h4>Einddatum</h4>
+                            <p id="enddate" value={enddate}>{enddate}</p>
+                            <h4>Verlof</h4>
+                            <p id="vacationType" value={vacationTypeId}>{vacationTypeId}</p>
+                            <h4>Reden</h4>
+                            <p id="reason" value={reason}>{reason}</p>
                         </FormControl>
-                        <FormControl style={{ width: '75%' }}>
-                            <DatePicker slotProps={{ textField: { error: false } }}
-                                required
-                                id="txtInputEndDate"
-                                label="Einddatum *"
-                                value={dayjs(enddate)}
-                                onChange={(e) => setEnddate(dayjs(e).format('YYYY-MM-DD'))}
-                                disabled
-                            />
-                        </FormControl>
-                        <FormControl style={{ width: '75%' }} disabled>
-                            <InputLabel>Verlof *</InputLabel>
-                            <Select
-                                required
-                                id="selectVacation"
-                                label="Verlof"
-                                value={vacationTypeId}
-                                onChange={(e) => setVacationTypeId(e.target.value)}
-                            >
-                                {renderVacationsType()}
-                            </Select>
-                        </FormControl>
-                        <TextField
-                            id="txtInputReason"
-                            label="Reden"
-                            style={{ width: '75%' }}
-                            type="date"
-                            className="form-control"
-                            value={reason}
-                            multiline={true}
-                            minRows={6}
-                            onChange={(e) => setReason(e.target.value)}
-                            disabled
-                        />
                     </Stack>
                 </Modal.Body>
                 <Modal.Footer>
