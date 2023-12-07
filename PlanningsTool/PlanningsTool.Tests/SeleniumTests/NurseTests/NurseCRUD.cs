@@ -18,9 +18,11 @@ namespace PlanningsTool.Tests.SeleniumTests.NurseTests
         private string _firstName;
         private string _lastName;
         private string _regime;
+        private string _fixedNight;
         private string _updatedFirstName;
         private string _updatedLastName;
         private string _updatedRegime;
+        private string _updatedFixedNight;
 
         [TestInitialize]
         public void Setup()
@@ -30,9 +32,11 @@ namespace PlanningsTool.Tests.SeleniumTests.NurseTests
             _firstName = "TestFirstname";
             _lastName = "TestLastname";
             _regime = "Voltijds";
+            _fixedNight = "Ja";
             _updatedFirstName = "TestUpdateFirstname";
             _updatedLastName = "TestUpdateLastname";
             _updatedRegime = "Deeltijds 4/5";
+            _updatedFixedNight = "Nee";
         }
 
         [TestMethod]
@@ -81,15 +85,19 @@ namespace PlanningsTool.Tests.SeleniumTests.NurseTests
             var sortByNew = _driver.FindElement(By.XPath("//div[contains(text(),'Id')]"));
             sortByNew.Click(); sortByNew.Click();
 
-            // Reading in update modal
-            var read = _driver.FindElement(By.XPath("//div[1]//div[6]//div[1]//button[1]//*[name()='svg']//*[name()='path' and contains(@fill,'currentCol')]"));
+            // Reading in delete modal
+            var read = _driver.FindElement(By.XPath("//div[1]//div[6]//div[1]//button[2]//*[name()='svg']//*[name()='path' and contains(@fill,'currentCol')]"));
             read.Click();
 
-            // Read firstname and lastname
-            var readFirstname = _driver.FindElement(By.XPath("//input[@id='txtInputFirstname']")).GetAttribute("value");
-            var readLastname = _driver.FindElement(By.XPath("//input[@id='txtInputLastname']")).GetAttribute("value");
+            // Reading data
+            var readFirstname = _driver.FindElement(By.Id("firstName")).GetAttribute("value");
+            var readLastname = _driver.FindElement(By.Id("lastName")).GetAttribute("value");
+            var readRegime = _driver.FindElement(By.Id("regime")).GetAttribute("value");
+            var readFixedNight = _driver.FindElement(By.Id("fixedNight")).GetAttribute("value");
             Assert.AreEqual(_firstName, readFirstname);
             Assert.AreEqual(_lastName, readLastname);
+            Assert.AreEqual(_regime, readRegime);
+            Assert.AreEqual(_fixedNight, readFixedNight);
 
             // Driver quit
             _driver.Quit();
@@ -145,15 +153,19 @@ namespace PlanningsTool.Tests.SeleniumTests.NurseTests
             var sortByNew = _driver.FindElement(By.XPath("//div[contains(text(),'Id')]"));
             sortByNew.Click(); sortByNew.Click();
 
-            // Read in update modal
-            var readNurse = _driver.FindElement(By.XPath("//div[1]//div[6]//div[1]//button[1]//*[name()='svg']//*[name()='path' and contains(@fill,'currentCol')]"));
+            // Read in delete modal
+            var readNurse = _driver.FindElement(By.XPath("//div[1]//div[6]//div[1]//button[2]//*[name()='svg']//*[name()='path' and contains(@fill,'currentCol')]"));
             readNurse.Click();
 
-            // Read firstname and lastname
-            var readFirstname = _driver.FindElement(By.XPath("//input[@id='txtInputFirstname']")).GetAttribute("value");
-            var readLastname = _driver.FindElement(By.XPath("//input[@id='txtInputLastname']")).GetAttribute("value");
+            // Read updated data
+            var readFirstname = _driver.FindElement(By.Id("firstName")).GetAttribute("value");
+            var readLastname = _driver.FindElement(By.Id("lastName")).GetAttribute("value");
+            var readRegime = _driver.FindElement(By.Id("regime")).GetAttribute("value");
+            var readFixedNight = _driver.FindElement(By.Id("fixedNight")).GetAttribute("value");
             Assert.AreEqual(_updatedFirstName, readFirstname);
             Assert.AreEqual(_updatedLastName, readLastname);
+            Assert.AreEqual(_updatedRegime, readRegime);
+            Assert.AreEqual(_updatedFixedNight, readFixedNight);
 
             // Driver quit
             _driver.Quit();

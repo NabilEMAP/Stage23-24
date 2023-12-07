@@ -19,6 +19,8 @@ function DeleteNurse(props) {
   const [isFixedNight, setIsFixedNight] = useState(false);
   const [data, setData] = useState([]);
   const [regimeTypeData, setRegimeTypeData] = useState([]);
+  const [regime, setRegime] = useState([]);
+  const [fixedNight, setFixedNight] = useState([]);
 
   useEffect(() => {
     getData();
@@ -57,6 +59,10 @@ function DeleteNurse(props) {
         setRegimeTypeId(result.data.regimeTypeId);
         setIsFixedNight(result.data.isVasteNacht);
         editId(id);
+
+        const regime = regimeTypeData.find((item) => item.id === result.data.regimeTypeId);
+        setRegime(regime ? regime.name : '');
+        setFixedNight(result.data.isFixedNight ? 'Ja' : 'Nee');
       })
       .catch((error) => {
         console.log(error);
@@ -74,23 +80,6 @@ function DeleteNurse(props) {
       .catch((error) => {
         toast.warning(`${error}`);
       })
-  }
-
-  const handleEditActiveChange = (e) => {
-    if (e.target.checked) {
-      setIsFixedNight(true);
-    }
-    else {
-      setIsFixedNight(false);
-    }
-  }
-
-  const renderRegimeType = () => {
-    return regimeTypeData.map((item) => (
-      <MenuItem key={item.id} value={item.id}>
-        {item.name}
-      </MenuItem>
-    ));
   }
 
   return (
@@ -114,47 +103,16 @@ function DeleteNurse(props) {
             spacing={4}
           >
             <h6>Ben je zeker dat je deze zorgkundige wilt verwijderen?</h6>
-            <TextField
-              style={{ width: '75%' }}
-              required
-              id="txtInputFirstname"
-              label="Voornaam"
-              type="text"
-              className="form-control"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              disabled
-            />
-            <TextField
-              style={{ width: '75%' }}
-              required
-              id="txtInputLastname"
-              label="Voornaam"
-              type="text"
-              className="form-control"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              disabled
-            />
-            <FormControl style={{ width: '75%' }} disabled>
-              <InputLabel>Regime *</InputLabel>
-              <Select
-                required
-                label="Regime"
-                value={regimeTypeId}
-                onChange={(e) => setRegimeTypeId(e.target.value)}
-              >
-                {renderRegimeType()}
-              </Select>
+            <FormControl style={{ width: '75%' }}>
+              <h4>Voornaam</h4>
+              <p id="firstName" value={firstName}>{firstName}</p>
+              <h4>Achternaam</h4>
+              <p id="lastName" value={lastName}>{lastName}</p>
+              <h4>Regime</h4>
+              <p id="regime" value={regime}>{regime}</p>
+              <h4>Vaste Nacht?</h4>
+              <p id="fixedNight" value={fixedNight}>{fixedNight}</p>
             </FormControl>
-            <FormControlLabel label="Vaste Nacht" control={
-              <Checkbox type="checkbox"
-                checked={isFixedNight === true ? true : false}
-                value={isFixedNight}
-                onChange={(e) => handleEditActiveChange(e)}
-                disabled
-              />
-            } />
           </Stack>
         </Modal.Body>
         <Modal.Footer>
