@@ -1,4 +1,6 @@
 ﻿using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Edge;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -7,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Net.WebRequestMethods;
 using System.ComponentModel;
+using OpenQA.Selenium.Interactions;
 
 namespace PlanningsTool.Tests.SeleniumTests.NurseTests
 {
@@ -14,6 +17,7 @@ namespace PlanningsTool.Tests.SeleniumTests.NurseTests
     public class NurseCRUD
     {
         private IWebDriver _driver;
+        private Actions _actions;
         private string _URL;
         private string _firstName;
         private string _lastName;
@@ -27,7 +31,8 @@ namespace PlanningsTool.Tests.SeleniumTests.NurseTests
         [TestInitialize]
         public void Setup()
         {
-            _driver = new ChromeDriver();
+            _driver = new EdgeDriver();
+            _actions = new Actions(_driver);
             _URL = "http://localhost:3000/zorgkundige";
             _firstName = "TestFirstname";
             _lastName = "TestLastname";
@@ -66,7 +71,7 @@ namespace PlanningsTool.Tests.SeleniumTests.NurseTests
 
             // Added fixednight
             var fixedNightInput = _driver.FindElement(By.Id("fixedNightInput"));
-            fixedNightInput.Click();
+            _actions.MoveToElement(fixedNightInput).Click().Perform();
 
             // Added nurse
             var submitForm = _driver.FindElement(By.Id("submitNurseForm"));
@@ -134,7 +139,7 @@ namespace PlanningsTool.Tests.SeleniumTests.NurseTests
 
             // Updating fixednight
             var fixedNightInput = _driver.FindElement(By.Id("fixedNightInput"));
-            fixedNightInput.Click();
+            _actions.MoveToElement(fixedNightInput).Click().Perform();
 
             // Update nurse
             var submitForm = _driver.FindElement(By.Id("submitNurseForm"));

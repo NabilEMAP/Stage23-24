@@ -1,4 +1,6 @@
 ﻿using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Edge;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -6,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using OpenQA.Selenium.Interactions;
 
 namespace PlanningsTool.Tests.SeleniumTests.VacationTests
 {
@@ -13,6 +16,7 @@ namespace PlanningsTool.Tests.SeleniumTests.VacationTests
     public class VacationCRUD
     {
         private IWebDriver _driver;
+        private Actions _actions;
         private string _URL;
         private string _nurse;
         private string _startdate;
@@ -28,7 +32,8 @@ namespace PlanningsTool.Tests.SeleniumTests.VacationTests
         [TestInitialize]
         public void Setup()
         {
-            _driver = new ChromeDriver();
+            _driver = new FirefoxDriver();
+            _actions = new Actions(_driver);
             _URL = "http://localhost:3000/verlof";
             _nurse = "Fatima Tsridh";
             _startdate = "20/04/2004";
@@ -61,19 +66,21 @@ namespace PlanningsTool.Tests.SeleniumTests.VacationTests
             var selectSpecificNurse = _driver.FindElement(By.XPath($"//li[normalize-space()='{_nurse}']"));
             selectSpecificNurse.Click();
 
-            // Inserting startdate and enddate
+            // Inserting startdate
             var txtInputStartDate = _driver.FindElement(By.XPath("//body//div[@role='dialog']//div//div//div//div[2]//div[1]//div[1]//input[1]"));
-            txtInputStartDate.Click();
-            txtInputStartDate.SendKeys(_startdate);
-            var txtInputEndDate = _driver.FindElement(By.XPath("//body/div[@role='dialog']/div/div/div/div/div[3]/div[1]/div[1]//input[1]"));
-            txtInputEndDate.Click();
-            txtInputEndDate.SendKeys(_enddate);
+            _actions.MoveToElement(txtInputStartDate).Click().Perform();
+            txtInputStartDate.SendKeys(_startdate);            
 
             // Selecting vacation
             var selectVacation = _driver.FindElement(By.Id("selectVacation"));
             selectVacation.Click();
             var selectSpecificVacation = _driver.FindElement(By.XPath($"//li[normalize-space()='{_vacation}']"));
             selectSpecificVacation.Click();
+
+            // Inserting enddate
+            var txtInputEndDate = _driver.FindElement(By.XPath("//body/div[@role='dialog']/div/div/div/div/div[3]/div[1]/div[1]//input[1]"));
+            _actions.MoveToElement(txtInputEndDate).Click().Perform();
+            txtInputEndDate.SendKeys(_enddate);
 
             // Inserting reason
             var txtInputReason = _driver.FindElement(By.Id("txtInputReason"));
@@ -137,21 +144,23 @@ namespace PlanningsTool.Tests.SeleniumTests.VacationTests
             var selectSpecificNurse = _driver.FindElement(By.XPath($"//li[normalize-space()='{_updatedNurse}']"));
             selectSpecificNurse.Click();
 
-            // Updating startdate and enddate
+            // Updating startdate
             var txtInputStartDate = _driver.FindElement(By.XPath("//body//div[@role='dialog']//div//div//div//div[2]//div[1]//div[1]//input[1]"));
-            txtInputStartDate.Click();
+            _actions.MoveToElement(txtInputStartDate).Click().Perform();
             txtInputStartDate.SendKeys(clear);
             txtInputStartDate.SendKeys(_updatedStartdate);
-            var txtInputEndDate = _driver.FindElement(By.XPath("//body/div[@role='dialog']/div/div/div/div/div[3]/div[1]/div[1]//input[1]"));
-            txtInputEndDate.Click();
-            txtInputEndDate.SendKeys(clear);
-            txtInputEndDate.SendKeys(_updatedEnddate);
-
+            
             // Updating vacation
             var selectVacation = _driver.FindElement(By.Id("selectVacation"));
             selectVacation.Click();
             var selectSpecificVacation = _driver.FindElement(By.XPath($"//li[normalize-space()='{_updatedVacation}']"));
             selectSpecificVacation.Click();
+
+            // Updating enddate
+            var txtInputEndDate = _driver.FindElement(By.XPath("//body/div[@role='dialog']/div/div/div/div/div[3]/div[1]/div[1]//input[1]"));
+            _actions.MoveToElement(txtInputEndDate).Click().Perform();
+            txtInputEndDate.SendKeys(clear);
+            txtInputEndDate.SendKeys(_updatedEnddate);
 
             // Updating reason
             var txtInputReason = _driver.FindElement(By.Id("txtInputReason"));
