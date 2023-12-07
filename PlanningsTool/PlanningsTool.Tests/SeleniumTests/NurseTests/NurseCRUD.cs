@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using static System.Net.WebRequestMethods;
 using System.ComponentModel;
 using OpenQA.Selenium.Interactions;
+using System.Drawing;
 
 namespace PlanningsTool.Tests.SeleniumTests.NurseTests
 {
@@ -44,10 +45,17 @@ namespace PlanningsTool.Tests.SeleniumTests.NurseTests
             _updatedFixedNight = "Nee";
         }
 
+        public void StartUp()
+        {
+            _driver.Manage().Window.Maximize();
+            _driver.Navigate().GoToUrl(_URL);
+            Thread.Sleep(TimeSpan.FromMilliseconds(500));
+        }
+
         [TestMethod]
         public void NurseCRUD_ST01_CreateNurse()
         {
-            _driver.Navigate().GoToUrl(_URL);
+            StartUp();
 
             // Addressing first record
             var sortByNew = _driver.FindElement(By.XPath("//div[contains(text(),'Id')]"));
@@ -64,10 +72,10 @@ namespace PlanningsTool.Tests.SeleniumTests.NurseTests
             txtInputLastname.SendKeys(_lastName);
 
             // Selecting regime
-            var selectRegime = _driver.FindElement(By.Id("selectRegime"));
+            var openRegimeTypes = _driver.FindElement(By.Id("selectRegime"));
+            openRegimeTypes.Click();
+            var selectRegime = _driver.FindElement(By.XPath($"//li[normalize-space()='{_regime}']"));
             selectRegime.Click();
-            var selectSpecificRegime = _driver.FindElement(By.XPath($"//li[normalize-space()='{_regime}']"));
-            selectSpecificRegime.Click();
 
             // Added fixednight
             var fixedNightInput = _driver.FindElement(By.Id("fixedNightInput"));
@@ -84,7 +92,7 @@ namespace PlanningsTool.Tests.SeleniumTests.NurseTests
         [TestMethod]
         public void NurseCRUD_ST02_ReadNurse()
         {
-            _driver.Navigate().GoToUrl(_URL);
+            StartUp();
 
             // Addressing first record
             var sortByNew = _driver.FindElement(By.XPath("//div[contains(text(),'Id')]"));
@@ -113,7 +121,7 @@ namespace PlanningsTool.Tests.SeleniumTests.NurseTests
         public void NurseCRUD_ST03_UpdateNurse()
         {
             var clear = Keys.Control + "A" + Keys.Backspace;
-            _driver.Navigate().GoToUrl(_URL);
+            StartUp();
 
             // Addressing first record
             var sortByNew = _driver.FindElement(By.XPath("//div[contains(text(),'Id')]"));
@@ -132,10 +140,10 @@ namespace PlanningsTool.Tests.SeleniumTests.NurseTests
             txtInputLastname.SendKeys(_updatedLastName);
 
             // Updating regime
-            var selectRegime = _driver.FindElement(By.Id("selectRegime"));
+            var openRegimeTypes = _driver.FindElement(By.Id("selectRegime"));
+            openRegimeTypes.Click();
+            var selectRegime = _driver.FindElement(By.XPath($"//li[normalize-space()='{_updatedRegime}']"));
             selectRegime.Click();
-            var selectSpecificRegime = _driver.FindElement(By.XPath($"//li[normalize-space()='{_updatedRegime}']"));
-            selectSpecificRegime.Click();
 
             // Updating fixednight
             var fixedNightInput = _driver.FindElement(By.Id("fixedNightInput"));
@@ -152,7 +160,7 @@ namespace PlanningsTool.Tests.SeleniumTests.NurseTests
         [TestMethod]
         public void NurseCRUD_ST04_ReadUpdatedNurse()
         {
-            _driver.Navigate().GoToUrl(_URL);
+            StartUp();
 
             // Addressing first record
             var sortByNew = _driver.FindElement(By.XPath("//div[contains(text(),'Id')]"));
@@ -179,7 +187,7 @@ namespace PlanningsTool.Tests.SeleniumTests.NurseTests
         [TestMethod]
         public void NurseCRUD_ST05_DeleteNurse()
         {
-            _driver.Navigate().GoToUrl(_URL);
+            StartUp();
 
             // Addressing first record
             var sortByNew = _driver.FindElement(By.XPath("//div[contains(text(),'Id')]"));

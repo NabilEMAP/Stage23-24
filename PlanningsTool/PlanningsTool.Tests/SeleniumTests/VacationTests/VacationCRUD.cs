@@ -32,7 +32,7 @@ namespace PlanningsTool.Tests.SeleniumTests.VacationTests
         [TestInitialize]
         public void Setup()
         {
-            _driver = new FirefoxDriver();
+            _driver = new EdgeDriver();
             _actions = new Actions(_driver);
             _URL = "http://localhost:3000/verlof";
             _nurse = "Fatima Tsridh";
@@ -47,10 +47,17 @@ namespace PlanningsTool.Tests.SeleniumTests.VacationTests
             _updatedReason = "Ziekte test van een week in mei";
         }
 
+        public void StartUp()
+        {
+            _driver.Manage().Window.Maximize();
+            _driver.Navigate().GoToUrl(_URL);
+            Thread.Sleep(TimeSpan.FromMilliseconds(500));
+        }
+
         [TestMethod]
         public void VacationCRUD_ST01_CreateVacation()
         {
-            _driver.Navigate().GoToUrl(_URL);
+            StartUp();
 
             // Addressing first record
             var sortByNew = _driver.FindElement(By.XPath("//div[contains(text(),'Id')]"));
@@ -68,8 +75,17 @@ namespace PlanningsTool.Tests.SeleniumTests.VacationTests
 
             // Inserting startdate
             var txtInputStartDate = _driver.FindElement(By.XPath("//body//div[@role='dialog']//div//div//div//div[2]//div[1]//div[1]//input[1]"));
-            _actions.MoveToElement(txtInputStartDate).Click().Perform();
-            txtInputStartDate.SendKeys(_startdate);            
+            _actions.MoveToElement(txtInputStartDate).Click();
+            Thread.Sleep(TimeSpan.FromMilliseconds(500));
+            _actions.MoveToElement(txtInputStartDate).Perform();
+            txtInputStartDate.SendKeys(_startdate);
+
+            // Inserting enddate
+            var txtInputEndDate = _driver.FindElement(By.XPath("//body/div[@role='dialog']/div/div/div/div/div[3]/div[1]/div[1]//input[1]"));
+            _actions.MoveToElement(txtInputEndDate).Click();
+            Thread.Sleep(TimeSpan.FromMilliseconds(500));
+            _actions.MoveToElement(txtInputEndDate).Perform();
+            txtInputEndDate.SendKeys(_enddate);
 
             // Selecting vacation
             var selectVacation = _driver.FindElement(By.Id("selectVacation"));
@@ -77,19 +93,14 @@ namespace PlanningsTool.Tests.SeleniumTests.VacationTests
             var selectSpecificVacation = _driver.FindElement(By.XPath($"//li[normalize-space()='{_vacation}']"));
             selectSpecificVacation.Click();
 
-            // Inserting enddate
-            var txtInputEndDate = _driver.FindElement(By.XPath("//body/div[@role='dialog']/div/div/div/div/div[3]/div[1]/div[1]//input[1]"));
-            _actions.MoveToElement(txtInputEndDate).Click().Perform();
-            txtInputEndDate.SendKeys(_enddate);
-
             // Inserting reason
             var txtInputReason = _driver.FindElement(By.Id("txtInputReason"));
             txtInputReason.SendKeys(_reason);
-
+            
             // Added vacation
             var submitForm = _driver.FindElement(By.Id("submitVacationForm"));
             submitForm.Click();
-
+            
             // Driver quit
             _driver.Quit();
         }
@@ -97,7 +108,7 @@ namespace PlanningsTool.Tests.SeleniumTests.VacationTests
         [TestMethod]
         public void VacationCRUD_ST02_ReadVacation()
         {
-            _driver.Navigate().GoToUrl(_URL);
+            StartUp();
 
             // Addressing first record
             var sortByNew = _driver.FindElement(By.XPath("//div[contains(text(),'Id')]"));
@@ -128,7 +139,7 @@ namespace PlanningsTool.Tests.SeleniumTests.VacationTests
         public void VacationCRUD_ST03_UpdateVacation()
         {
             var clear = Keys.Control + "A" + Keys.Backspace;
-            _driver.Navigate().GoToUrl(_URL);
+            StartUp();
 
             // Addressing first record
             var sortByNew = _driver.FindElement(By.XPath("//div[contains(text(),'Id')]"));
@@ -146,21 +157,25 @@ namespace PlanningsTool.Tests.SeleniumTests.VacationTests
 
             // Updating startdate
             var txtInputStartDate = _driver.FindElement(By.XPath("//body//div[@role='dialog']//div//div//div//div[2]//div[1]//div[1]//input[1]"));
-            _actions.MoveToElement(txtInputStartDate).Click().Perform();
+            _actions.MoveToElement(txtInputStartDate).Click();
+            Thread.Sleep(TimeSpan.FromMilliseconds(500));
+            _actions.MoveToElement(txtInputStartDate).Perform();
             txtInputStartDate.SendKeys(clear);
             txtInputStartDate.SendKeys(_updatedStartdate);
-            
+
+            // Updating enddate
+            var txtInputEndDate = _driver.FindElement(By.XPath("//body/div[@role='dialog']/div/div/div/div/div[3]/div[1]/div[1]//input[1]"));
+            _actions.MoveToElement(txtInputEndDate).Click();
+            Thread.Sleep(TimeSpan.FromMilliseconds(500));
+            _actions.MoveToElement(txtInputEndDate).Perform();
+            txtInputEndDate.SendKeys(clear);
+            txtInputEndDate.SendKeys(_updatedEnddate);
+
             // Updating vacation
             var selectVacation = _driver.FindElement(By.Id("selectVacation"));
             selectVacation.Click();
             var selectSpecificVacation = _driver.FindElement(By.XPath($"//li[normalize-space()='{_updatedVacation}']"));
             selectSpecificVacation.Click();
-
-            // Updating enddate
-            var txtInputEndDate = _driver.FindElement(By.XPath("//body/div[@role='dialog']/div/div/div/div/div[3]/div[1]/div[1]//input[1]"));
-            _actions.MoveToElement(txtInputEndDate).Click().Perform();
-            txtInputEndDate.SendKeys(clear);
-            txtInputEndDate.SendKeys(_updatedEnddate);
 
             // Updating reason
             var txtInputReason = _driver.FindElement(By.Id("txtInputReason"));
@@ -178,7 +193,7 @@ namespace PlanningsTool.Tests.SeleniumTests.VacationTests
         [TestMethod]
         public void VacationCRUD_ST04_ReadUpdatedVacation()
         {
-            _driver.Navigate().GoToUrl(_URL);
+            StartUp();
 
             // Addressing first record
             var sortByNew = _driver.FindElement(By.XPath("//div[contains(text(),'Id')]"));
@@ -207,7 +222,7 @@ namespace PlanningsTool.Tests.SeleniumTests.VacationTests
         [TestMethod]
         public void VacationCRUD_ST05_DeleteVacation()
         {
-            _driver.Navigate().GoToUrl(_URL);
+            StartUp();
 
             // Addressing first record
             var sortByNew = _driver.FindElement(By.XPath("//div[contains(text(),'Id')]"));
