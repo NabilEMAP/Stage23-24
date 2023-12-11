@@ -11,11 +11,12 @@ using static System.Net.WebRequestMethods;
 using System.ComponentModel;
 using OpenQA.Selenium.Interactions;
 using System.Drawing;
+using OpenQA.Selenium.Support.UI;
 
 namespace PlanningsTool.Tests.SeleniumTests.NurseTests
 {
     [TestClass]
-    public class NurseCRUD
+    public class CheckIfExistAdd
     {
         private IWebDriver _driver;
         private Actions _actions;
@@ -32,17 +33,13 @@ namespace PlanningsTool.Tests.SeleniumTests.NurseTests
         [TestInitialize]
         public void Setup()
         {
-            _driver = new EdgeDriver();
+            _driver = new ChromeDriver();
             _actions = new Actions(_driver);
             _URL = "http://localhost:3000/zorgkundige";
             _firstName = "TestFirstname";
             _lastName = "TestLastname";
             _regime = "Voltijds";
             _fixedNight = "Ja";
-            _updatedFirstName = "TestUpdateFirstname";
-            _updatedLastName = "TestUpdateLastname";
-            _updatedRegime = "Deeltijds 4/5";
-            _updatedFixedNight = "Nee";
         }
 
         public void StartUp()
@@ -90,7 +87,7 @@ namespace PlanningsTool.Tests.SeleniumTests.NurseTests
         }
 
         [TestMethod]
-        public void ST02_ReadNurse()
+        public void ST02_CreateSameNurse()
         {
             StartUp();
 
@@ -98,94 +95,43 @@ namespace PlanningsTool.Tests.SeleniumTests.NurseTests
             var sortByNew = _driver.FindElement(By.XPath("//div[contains(text(),'Id')]"));
             sortByNew.Click(); sortByNew.Click();
 
-            // Reading in delete modal
-            var read = _driver.FindElement(By.XPath("//div[1]//div[6]//div[1]//button[2]//*[name()='svg']//*[name()='path' and contains(@fill,'currentCol')]"));
-            read.Click();
+            // Making a new nurse
+            var createNurse = _driver.FindElement(By.Id("createNurse"));
+            createNurse.Click();
 
-            // Reading data
-            var readFirstname = _driver.FindElement(By.Id("firstName")).GetAttribute("value");
-            var readLastname = _driver.FindElement(By.Id("lastName")).GetAttribute("value");
-            var readRegime = _driver.FindElement(By.Id("regime")).GetAttribute("value");
-            var readFixedNight = _driver.FindElement(By.Id("fixedNight")).GetAttribute("value");
-            Assert.AreEqual(_firstName, readFirstname);
-            Assert.AreEqual(_lastName, readLastname);
-            Assert.AreEqual(_regime, readRegime);
-            Assert.AreEqual(_fixedNight, readFixedNight);
-
-            // Driver quit
-            _driver.Quit();
-        }
-
-
-        [TestMethod]
-        public void ST03_UpdateNurse()
-        {
-            var clear = Keys.Control + "A" + Keys.Backspace;
-            StartUp();
-
-            // Addressing first record
-            var sortByNew = _driver.FindElement(By.XPath("//div[contains(text(),'Id')]"));
-            sortByNew.Click(); sortByNew.Click();
-
-            // Update first record
-            var updateNurse = _driver.FindElement(By.XPath("//div[1]//div[6]//div[1]//button[1]//*[name()='svg']//*[name()='path' and contains(@fill,'currentCol')]"));
-            updateNurse.Click();
-
-            // Updating firstname and lastname
+            // Inserting firstname and lastname
             var txtInputFirstname = _driver.FindElement(By.Id("txtInputFirstname"));
-            txtInputFirstname.SendKeys(clear);
-            txtInputFirstname.SendKeys(_updatedFirstName);
+            txtInputFirstname.SendKeys(_firstName);
             var txtInputLastname = _driver.FindElement(By.Id("txtInputLastname"));
-            txtInputLastname.SendKeys(clear);
-            txtInputLastname.SendKeys(_updatedLastName);
+            txtInputLastname.SendKeys(_lastName);
 
-            // Updating regime
+            // Selecting regime
             var openRegimeTypes = _driver.FindElement(By.Id("selectRegime"));
             openRegimeTypes.Click();
-            var selectRegime = _driver.FindElement(By.XPath($"//li[normalize-space()='{_updatedRegime}']"));
+            var selectRegime = _driver.FindElement(By.XPath($"//li[normalize-space()='{_regime}']"));
             selectRegime.Click();
 
-            // Updating fixednight
+            // Added fixednight
             var fixedNightInput = _driver.FindElement(By.Id("fixedNightInput"));
             _actions.MoveToElement(fixedNightInput).Click().Perform();
 
-            // Update nurse
+            // Added nurse
             var submitForm = _driver.FindElement(By.Id("submitNurseForm"));
             submitForm.Click();
 
-            // Driver quit
-            _driver.Quit();
-        }
+            // Check ErrorMessage Popup
+            WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
+            IWebElement element = wait.Until(d => d.FindElement(By.XPath("//div[contains(text(),'De zorgkundige bestaat al')]")));
 
-        [TestMethod]
-        public void ST04_ReadUpdatedNurse()
-        {
-            StartUp();
-
-            // Addressing first record
-            var sortByNew = _driver.FindElement(By.XPath("//div[contains(text(),'Id')]"));
-            sortByNew.Click(); sortByNew.Click();
-
-            // Read in delete modal
-            var readNurse = _driver.FindElement(By.XPath("//div[1]//div[6]//div[1]//button[2]//*[name()='svg']//*[name()='path' and contains(@fill,'currentCol')]"));
-            readNurse.Click();
-
-            // Read updated data
-            var readFirstname = _driver.FindElement(By.Id("firstName")).GetAttribute("value");
-            var readLastname = _driver.FindElement(By.Id("lastName")).GetAttribute("value");
-            var readRegime = _driver.FindElement(By.Id("regime")).GetAttribute("value");
-            var readFixedNight = _driver.FindElement(By.Id("fixedNight")).GetAttribute("value");
-            Assert.AreEqual(_updatedFirstName, readFirstname);
-            Assert.AreEqual(_updatedLastName, readLastname);
-            Assert.AreEqual(_updatedRegime, readRegime);
-            Assert.AreEqual(_updatedFixedNight, readFixedNight);
+            // Assertion to check if the element is not null
+            Assert.IsNotNull(element, "The error message element was not found on the page.");
 
             // Driver quit
             _driver.Quit();
         }
 
         [TestMethod]
-        public void ST05_DeleteNurse()
+        public void ST03_DeleteNurse()
         {
             StartUp();
 

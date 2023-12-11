@@ -61,14 +61,29 @@ function DeleteNurseShift(props) {
       })
   }
 
+  const formatTime = (timeString) => {
+    const date = new Date(`2000-01-01T${timeString}`);
+    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  };
+
   const handleDelete = (id) => {
     handleShow();
     const API = `${API_BASE_URL}/NurseShifts/${id}`;
     axios.get(API)
       .then((result) => {
-        setDate(result.data.date);
-        setNurseId(result.data.nurseId);
-        setShiftId(result.data.shiftId);
+        setDate(dayjs(result.data.date).format('DD/MM/YYYY'));
+        const nurse = nurseData.find((item) => item.id === result.data.nurseId);
+        setNurseId(nurse ?
+          nurse.firstName + " " +
+          nurse.lastName + ' (' +
+          nurse.regimeType.name + ') '
+          : '');
+        const shift = shiftData.find((item) => item.id === result.data.shiftId);
+        setShiftId(shift ?
+          shift.shiftType.name + ' - ' +
+          formatTime(shift.starttime) + ' - ' +
+          formatTime(shift.endtime)
+          : '');
         editId(id);
       })
       .catch((error) => {
@@ -88,31 +103,6 @@ function DeleteNurseShift(props) {
         toast.warning(`${error}`);
       })
   }
-
-  const renderNurse = () => {
-    return nurseData.map((item) => (
-      <MenuItem key={item.id} value={item.id}>{
-        item.firstName + ' ' +
-        item.lastName + ' (' +
-        item.regimeType.name + ')'
-      }</MenuItem>
-    ));
-  }
-
-  const renderShift = () => {
-    return shiftData.map((item) => (
-      <MenuItem key={item.id} value={item.id}>{
-        item.shiftType.name + ' - ' +
-        formatTime(item.starttime) + ' - ' +
-        formatTime(item.endtime)
-      }</MenuItem>
-    ));
-  }
-
-  const formatTime = (timeString) => {
-    const date = new Date(`2000-01-01T${timeString}`);
-    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-  };
 
   return (
     <>
@@ -135,36 +125,13 @@ function DeleteNurseShift(props) {
             spacing={4}
           >
             <h6>Ben je zeker dat je deze zorgkundige shift wilt verwijderen?</h6>
-            <FormControl style={{ width: '75%' }} disabled>
-              <InputLabel>Zorgkundige *</InputLabel>
-              <Select
-                required
-                label="Zorgkundige"
-                value={nurseId}
-                onChange={(e) => setNurseId(e.target.value)}
-              >
-                {renderNurse()}
-              </Select>
-            </FormControl>
-            <FormControl style={{ width: '75%' }} disabled>
-              <InputLabel>Shift *</InputLabel>
-              <Select
-                required
-                label="Shift"
-                value={shiftId}
-                onChange={(e) => setShiftId(e.target.value)}
-              >
-                {renderShift()}
-              </Select>
-            </FormControl>
-            <FormControl style={{ width: '75%' }} >
-              <DatePicker slotProps={{ textField: { error: false } }}
-                required
-                label="Datum *"
-                value={dayjs(date)}
-                onChange={(e) => setDate(dayjs(e).format('YYYY-MM-DD'))}
-                disabled
-              />
+            <FormControl style={{ width: '75%' }}>
+              <h4>Zorgkundige</h4>
+              <p id="nurse" value={nurseId}>{nurseId}</p>
+              <h4>Shift</h4>
+              <p id="shift" value={shiftId}>{shiftId}</p>
+              <h4>Datum</h4>
+              <p id="date" value={date}>{date}</p>
             </FormControl>
           </Stack>
         </Modal.Body>

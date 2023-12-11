@@ -55,7 +55,7 @@ namespace PlanningsTool.Tests.SeleniumTests.VacationTests
         }
 
         [TestMethod]
-        public void VacationCRUD_ST01_CreateVacation()
+        public void ST01_CreateVacation()
         {
             StartUp();
 
@@ -106,7 +106,7 @@ namespace PlanningsTool.Tests.SeleniumTests.VacationTests
         }
 
         [TestMethod]
-        public void VacationCRUD_ST02_ReadVacation()
+        public void ST02_ReadVacation()
         {
             StartUp();
 
@@ -136,7 +136,7 @@ namespace PlanningsTool.Tests.SeleniumTests.VacationTests
 
 
         [TestMethod]
-        public void VacationCRUD_ST03_UpdateVacation()
+        public void ST03_UpdateVacation()
         {
             var clear = Keys.Control + "A" + Keys.Backspace;
             StartUp();
@@ -191,7 +191,7 @@ namespace PlanningsTool.Tests.SeleniumTests.VacationTests
         }
 
         [TestMethod]
-        public void VacationCRUD_ST04_ReadUpdatedVacation()
+        public void ST04_ReadUpdatedVacation()
         {
             StartUp();
 
@@ -220,7 +220,7 @@ namespace PlanningsTool.Tests.SeleniumTests.VacationTests
         }
 
         [TestMethod]
-        public void VacationCRUD_ST05_DeleteVacation()
+        public void ST05_DeleteVacation()
         {
             StartUp();
 
