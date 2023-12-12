@@ -57,6 +57,18 @@ namespace PlanningsTool.BLL.Services
             return false;
         }
 
+        public async Task<bool> CheckIfExist(int id, string firstName, string lastName)
+        {
+            foreach (var item in await _uow.NursesRepository.GetAllNursesAsync())
+            {
+                if (item.Id != id && item.FirstName == firstName && item.LastName == lastName)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public async Task<int> Delete(int id)
         {
             var toDeleteNurse = await _uow.NursesRepository.GetNurseAsyncById(id);
@@ -102,7 +114,7 @@ namespace PlanningsTool.BLL.Services
                 throw new CustomValidationException(validationResult.Errors);
             }
 
-            if (await CheckIfExist(entity.FirstName, entity.LastName))
+            if (await CheckIfExist(id, entity.FirstName, entity.LastName))
             {
                 throw new Exception($"De zorgkundige bestaat al");
             }

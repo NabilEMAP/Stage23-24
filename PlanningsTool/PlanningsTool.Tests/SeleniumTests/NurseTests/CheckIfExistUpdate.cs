@@ -16,7 +16,7 @@ using OpenQA.Selenium.Support.UI;
 namespace PlanningsTool.Tests.SeleniumTests.NurseTests
 {
     [TestClass]
-    public class CheckIfExistAdd
+    public class CheckIfExistUpdate
     {
         private IWebDriver _driver;
         private Actions _actions;
@@ -31,8 +31,8 @@ namespace PlanningsTool.Tests.SeleniumTests.NurseTests
             _driver = new ChromeDriver();
             _actions = new Actions(_driver);
             _URL = "http://localhost:3000/zorgkundige";
-            _firstName = "TestFirstname";
-            _lastName = "TestLastname";
+            _firstName = "Mariem";
+            _lastName = "Sariedh";
             _regime = "Voltijds";
         }
 
@@ -44,72 +44,38 @@ namespace PlanningsTool.Tests.SeleniumTests.NurseTests
         }
 
         [TestMethod]
-        public void ST01_CreateNurse()
+        public void ST01_UpdateNurse_CheckIfExist()
         {
+            var clear = Keys.Control + "A" + Keys.Backspace;
             StartUp();
 
             // Addressing first record
             var sortByNew = _driver.FindElement(By.XPath("//div[contains(text(),'Id')]"));
             sortByNew.Click(); sortByNew.Click();
 
-            // Making a new nurse
-            var createNurse = _driver.FindElement(By.Id("createNurse"));
-            createNurse.Click();
+            // Update first record
+            var updateNurse = _driver.FindElement(By.XPath("//div[1]//div[6]//div[1]//button[1]//*[name()='svg']//*[name()='path' and contains(@fill,'currentCol')]"));
+            updateNurse.Click();
 
-            // Inserting firstname and lastname
+            // Updating firstname and lastname
             var txtInputFirstname = _driver.FindElement(By.Id("txtInputFirstname"));
+            txtInputFirstname.SendKeys(clear);
             txtInputFirstname.SendKeys(_firstName);
             var txtInputLastname = _driver.FindElement(By.Id("txtInputLastname"));
+            txtInputLastname.SendKeys(clear);
             txtInputLastname.SendKeys(_lastName);
 
-            // Selecting regime
+            // Updating regime
             var openRegimeTypes = _driver.FindElement(By.Id("selectRegime"));
             openRegimeTypes.Click();
             var selectRegime = _driver.FindElement(By.XPath($"//li[normalize-space()='{_regime}']"));
             selectRegime.Click();
 
-            // Added fixednight
+            // Updating fixednight
             var fixedNightInput = _driver.FindElement(By.Id("fixedNightInput"));
             _actions.MoveToElement(fixedNightInput).Click().Perform();
 
-            // Added nurse
-            var submitForm = _driver.FindElement(By.Id("submitNurseForm"));
-            submitForm.Click();
-
-            // Driver quit
-            _driver.Quit();
-        }
-
-        [TestMethod]
-        public void ST02_CreateSameNurse_CheckIfExist()
-        {
-            StartUp();
-
-            // Addressing first record
-            var sortByNew = _driver.FindElement(By.XPath("//div[contains(text(),'Id')]"));
-            sortByNew.Click(); sortByNew.Click();
-
-            // Making a new nurse
-            var createNurse = _driver.FindElement(By.Id("createNurse"));
-            createNurse.Click();
-
-            // Inserting firstname and lastname
-            var txtInputFirstname = _driver.FindElement(By.Id("txtInputFirstname"));
-            txtInputFirstname.SendKeys(_firstName);
-            var txtInputLastname = _driver.FindElement(By.Id("txtInputLastname"));
-            txtInputLastname.SendKeys(_lastName);
-
-            // Selecting regime
-            var openRegimeTypes = _driver.FindElement(By.Id("selectRegime"));
-            openRegimeTypes.Click();
-            var selectRegime = _driver.FindElement(By.XPath($"//li[normalize-space()='{_regime}']"));
-            selectRegime.Click();
-
-            // Added fixednight
-            var fixedNightInput = _driver.FindElement(By.Id("fixedNightInput"));
-            _actions.MoveToElement(fixedNightInput).Click().Perform();
-
-            // Added nurse
+            // Update nurse
             var submitForm = _driver.FindElement(By.Id("submitNurseForm"));
             submitForm.Click();
 
@@ -119,27 +85,6 @@ namespace PlanningsTool.Tests.SeleniumTests.NurseTests
 
             // Assertion to check if the element is not null
             Assert.IsNotNull(element, "The error message element was not found on the page.");
-
-            // Driver quit
-            _driver.Quit();
-        }
-
-        [TestMethod]
-        public void ST03_DeleteNurse()
-        {
-            StartUp();
-
-            // Addressing first record
-            var sortByNew = _driver.FindElement(By.XPath("//div[contains(text(),'Id')]"));
-            sortByNew.Click(); sortByNew.Click();
-
-            // Delete first record
-            var deleteNurse = _driver.FindElement(By.XPath("//div[1]//div[6]//div[1]//button[2]//*[name()='svg']//*[name()='path' and contains(@fill,'currentCol')]"));
-            deleteNurse.Click();
-
-            // Deleted nurse
-            var submitForm = _driver.FindElement(By.Id("submitNurseForm"));
-            submitForm.Click();
 
             // Driver quit
             _driver.Quit();
