@@ -54,8 +54,11 @@ namespace PlanningsTool.Tests.SeleniumTests.VacationTests
             Thread.Sleep(TimeSpan.FromMilliseconds(500));
         }
 
+        /// <summary>
+        /// CreateVacation
+        /// </summary>
         [TestMethod]
-        public void ST01_CreateVacation()
+        public void ST_VP_01_01()
         {
             StartUp();
 
@@ -105,8 +108,11 @@ namespace PlanningsTool.Tests.SeleniumTests.VacationTests
             _driver.Quit();
         }
 
+        /// <summary>
+        /// ReadVacation
+        /// </summary>
         [TestMethod]
-        public void ST02_ReadVacation()
+        public void ST_VP_01_02()
         {
             StartUp();
 
@@ -134,9 +140,11 @@ namespace PlanningsTool.Tests.SeleniumTests.VacationTests
             _driver.Quit();
         }
 
-
+        /// <summary>
+        /// UpdateVacation
+        /// </summary>
         [TestMethod]
-        public void ST03_UpdateVacation()
+        public void ST_VP_01_03()
         {
             var clear = Keys.Control + "A" + Keys.Backspace;
             StartUp();
@@ -190,8 +198,11 @@ namespace PlanningsTool.Tests.SeleniumTests.VacationTests
             _driver.Quit();
         }
 
+        /// <summary>
+        /// ReadUpdatedVacation
+        /// </summary>
         [TestMethod]
-        public void ST04_ReadUpdatedVacation()
+        public void ST_VP_01_04()
         {
             StartUp();
 
@@ -219,8 +230,11 @@ namespace PlanningsTool.Tests.SeleniumTests.VacationTests
             _driver.Quit();
         }
 
+        /// <summary>
+        /// DeleteVacation
+        /// </summary>
         [TestMethod]
-        public void ST05_DeleteVacation()
+        public void ST_VP_01_05()
         {
             StartUp();
 

@@ -33,8 +33,12 @@ namespace PlanningsTool.Tests.UnitTests
             };
         }
 
+        /// <summary>
+        /// GetAll_ReturnsOkResultWithNurses
+        /// </summary>
+        /// <returns></returns>
         [TestMethod]
-        public async Task GetAll_ReturnsOkResultWithNurses()
+        public async Task UT_01_01()
         {
             // Arrange
             var testNurses = GetTestNurses();
@@ -50,8 +54,12 @@ namespace PlanningsTool.Tests.UnitTests
             CollectionAssert.AreEqual(testNurses.ToList(), nurses.ToList());
         }
 
+        /// <summary>
+        /// GetById_ReturnsOkResultWithNurse
+        /// </summary>
+        /// <returns></returns>
         [TestMethod]
-        public async Task GetById_ReturnsOkResultWithNurse()
+        public async Task UT_01_02()
         {
             // Arrange
             var testNurse = GetTestNurses().FirstOrDefault();
@@ -67,8 +75,12 @@ namespace PlanningsTool.Tests.UnitTests
             Assert.AreEqual(testNurse, nurse);
         }
 
+        /// <summary>
+        /// GetNursesByFirstName_ReturnsOkResultWithNurses
+        /// </summary>
+        /// <returns></returns>
         [TestMethod]
-        public async Task GetNursesByFirstName_ReturnsOkResultWithNurses()
+        public async Task UT_01_03()
         {
             // Arrange
             var testNurses = GetTestNurses();
@@ -84,8 +96,12 @@ namespace PlanningsTool.Tests.UnitTests
             CollectionAssert.AreEqual(testNurses.ToList(), nurses.ToList());
         }
 
+        /// <summary>
+        /// GetNursesByLastName_ReturnsOkResultWithNurses
+        /// </summary>
+        /// <returns></returns>
         [TestMethod]
-        public async Task GetNursesByLastName_ReturnsOkResultWithNurses()
+        public async Task UT_01_04()
         {
             // Arrange
             var testNurses = GetTestNurses();
@@ -101,8 +117,12 @@ namespace PlanningsTool.Tests.UnitTests
             CollectionAssert.AreEqual(testNurses.ToList(), nurses.ToList());
         }
 
+        /// <summary>
+        /// Post_ReturnsOkResultWithCreatedNurse
+        /// </summary>
+        /// <returns></returns>
         [TestMethod]
-        public async Task Post_ReturnsOkResultWithCreatedNurse()
+        public async Task UT_01_05()
         {
             // Arrange
             var createNurseDTO = new CreateNurseDTO { FirstName = "John", LastName = "Doe", RegimeTypeId = 1, IsFixedNight = false };
@@ -125,11 +145,12 @@ namespace PlanningsTool.Tests.UnitTests
             Assert.AreEqual(createNurseDTO.IsFixedNight, nurse.IsFixedNight);
         }
 
-
-
-
+        /// <summary>
+        /// Put_ReturnsOkResultWithUpdatedNurse
+        /// </summary>
+        /// <returns></returns>
         [TestMethod]
-        public async Task Put_ReturnsOkResultWithUpdatedNurse()
+        public async Task UT_01_06()
         {
             // Arrange
             int nurseId = 1;
@@ -155,9 +176,12 @@ namespace PlanningsTool.Tests.UnitTests
             Assert.AreEqual(updateNurseDTO.IsFixedNight, nurse.IsFixedNight);
         }
 
-
+        /// <summary>
+        /// Delete_ReturnsNoContentResult
+        /// </summary>
+        /// <returns></returns>
         [TestMethod]
-        public async Task Delete_ReturnsNoContentResult()
+        public async Task UT_01_07()
         {
             // Arrange
             var testNurseId = 1;
@@ -169,6 +193,5 @@ namespace PlanningsTool.Tests.UnitTests
             // Assert
             Assert.IsInstanceOfType(result, typeof(NoContentResult));
         }
-
     }
 }

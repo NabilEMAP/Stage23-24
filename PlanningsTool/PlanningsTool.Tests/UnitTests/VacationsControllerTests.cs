@@ -48,17 +48,21 @@ namespace PlanningsTool.Tests.UnitTests
                 new VacationDetailDTO
                 {
                     Id = 3,
-                    Startdate = new DateTime(2023, 9, 24),
-                    Enddate = new DateTime(2023, 9, 18),
-                    Reason = "Ik ga eens terug in de tijd :D, eens zien of ik een error kan geven.",
+                    Startdate = new DateTime(2023, 9, 18),
+                    Enddate = new DateTime(2023, 9, 24),
+                    Reason = "Test.",
                     NurseId = 3,
                     VacationTypeId = 5
                 },
             };
         }
 
+        /// <summary>
+        /// GetAll_ReturnsOkResultWithVacations
+        /// </summary>
+        /// <returns></returns>
         [TestMethod]
-        public async Task GetAll_ReturnsOkResultWithVacations()
+        public async Task UT_02_01()
         {
             // Arrange
             var testVacations = GetTestVacations();
@@ -74,8 +78,12 @@ namespace PlanningsTool.Tests.UnitTests
             CollectionAssert.AreEqual(testVacations.ToList(), vacations.ToList());
         }
 
+        /// <summary>
+        /// GetById_ReturnsOkResultWithVacation
+        /// </summary>
+        /// <returns></returns>
         [TestMethod]
-        public async Task GetById_ReturnsOkResultWithVacation()
+        public async Task UT_02_02()
         {
             // Arrange
             var testVacation = GetTestVacations().FirstOrDefault();
@@ -91,8 +99,12 @@ namespace PlanningsTool.Tests.UnitTests
             Assert.AreEqual(testVacation, vacation);
         }
 
+        /// <summary>
+        /// GetVacationsByReason_ReturnsOkResultWithVacations
+        /// </summary>
+        /// <returns></returns>
         [TestMethod]
-        public async Task GetVacationsByReason_ReturnsOkResultWithVacations()
+        public async Task UT_02_03()
         {
             // Arrange
             var testVacations = GetTestVacations();
@@ -108,8 +120,12 @@ namespace PlanningsTool.Tests.UnitTests
             CollectionAssert.AreEqual(testVacations.ToList(), vacations.ToList());
         }
 
+        /// <summary>
+        /// Post_ReturnsOkResultWithCreatedVacation
+        /// </summary>
+        /// <returns></returns>
         [TestMethod]
-        public async Task Post_ReturnsOkResultWithCreatedVacation()
+        public async Task UT_02_04()
         {
             // Arrange
             var createVacationDTO = new CreateVacationDTO 
@@ -148,8 +164,12 @@ namespace PlanningsTool.Tests.UnitTests
             Assert.AreEqual(createVacationDTO.VacationTypeId, vacation.VacationTypeId);
         }
 
+        /// <summary>
+        /// Put_ReturnsOkResultWithUpdatedVacation
+        /// </summary>
+        /// <returns></returns>
         [TestMethod]
-        public async Task Put_ReturnsOkResultWithUpdatedVacation()
+        public async Task UT_02_05()
         {
             // Arrange
             int vacationId = 1;
@@ -199,9 +219,12 @@ namespace PlanningsTool.Tests.UnitTests
             Assert.AreEqual(updateVacationDTO.VacationTypeId, vacation.VacationTypeId);
         }
 
-
+        /// <summary>
+        /// Delete_ReturnsNoContentResult
+        /// </summary>
+        /// <returns></returns>
         [TestMethod]
-        public async Task Delete_ReturnsNoContentResult()
+        public async Task UT_02_06()
         {
             // Arrange
             var testVacationId = 1;
@@ -213,8 +236,5 @@ namespace PlanningsTool.Tests.UnitTests
             // Assert
             Assert.IsInstanceOfType(result, typeof(NoContentResult));
         }
-
-
-
     }
 }

@@ -43,8 +43,11 @@ namespace PlanningsTool.Tests.SeleniumTests.NurseTests
             Thread.Sleep(TimeSpan.FromMilliseconds(500));
         }
 
+        /// <summary>
+        /// UpdateNurse_CheckIfExist
+        /// </summary>
         [TestMethod]
-        public void ST01_UpdateNurse_CheckIfExist()
+        public void ST_NP_03_01()
         {
             var clear = Keys.Control + "A" + Keys.Backspace;
             StartUp();

@@ -52,8 +52,11 @@ namespace PlanningsTool.Tests.SeleniumTests.NurseTests
             Thread.Sleep(TimeSpan.FromMilliseconds(500));
         }
 
+        /// <summary>
+        /// CreateNurse
+        /// </summary>
         [TestMethod]
-        public void ST01_CreateNurse()
+        public void ST_NP_01_01()
         {
             StartUp();
 
@@ -89,8 +92,11 @@ namespace PlanningsTool.Tests.SeleniumTests.NurseTests
             _driver.Quit();
         }
 
+        /// <summary>
+        /// ReadNurse
+        /// </summary>
         [TestMethod]
-        public void ST02_ReadNurse()
+        public void ST_NP_01_02()
         {
             StartUp();
 
@@ -116,9 +122,11 @@ namespace PlanningsTool.Tests.SeleniumTests.NurseTests
             _driver.Quit();
         }
 
-
+        /// <summary>
+        /// UpdateNurse
+        /// </summary>
         [TestMethod]
-        public void ST03_UpdateNurse()
+        public void ST_NP_01_03()
         {
             var clear = Keys.Control + "A" + Keys.Backspace;
             StartUp();
@@ -157,8 +165,11 @@ namespace PlanningsTool.Tests.SeleniumTests.NurseTests
             _driver.Quit();
         }
 
+        /// <summary>
+        /// ReadUpdatedNurse
+        /// </summary>
         [TestMethod]
-        public void ST04_ReadUpdatedNurse()
+        public void ST_NP_01_04()
         {
             StartUp();
 
@@ -184,8 +195,11 @@ namespace PlanningsTool.Tests.SeleniumTests.NurseTests
             _driver.Quit();
         }
 
+        /// <summary>
+        /// DeleteNurse
+        /// </summary>
         [TestMethod]
-        public void ST05_DeleteNurse()
+        public void ST_NP_01_05()
         {
             StartUp();
 

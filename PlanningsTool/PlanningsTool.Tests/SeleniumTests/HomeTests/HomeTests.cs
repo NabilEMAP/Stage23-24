@@ -24,8 +24,11 @@ namespace PlanningsTool.Tests.SeleniumTests.HomeTests
             _title = "React App";
         }
 
+        /// <summary>
+        /// GetTitleHomePage
+        /// </summary>
         [TestMethod]
-        public void HomeTest_ST01_GetTitleHomePage()
+        public void ST_HP_01_01()
         {
             _driver.Navigate().GoToUrl(_URL);
             Assert.AreEqual(_title, _driver.Title);
@@ -39,32 +42,44 @@ namespace PlanningsTool.Tests.SeleniumTests.HomeTests
             _driver.FindElement(By.XPath($"//h2[normalize-space()='{container}']")).Click();
         }
 
+        /// <summary>
+        /// GoToContainerNurse
+        /// </summary>
         [TestMethod]
-        public void HomeTest_ST02_GoToContainerNurse()
+        public void ST_HP_01_02()
         {
             GoToContainer("Zorgkundige");
             Assert.AreEqual(_URL + "zorgkundige", _driver.Url);
             _driver.Quit();
         }
 
+        /// <summary>
+        /// GoToContainerVacation
+        /// </summary>
         [TestMethod]
-        public void HomeTest_ST03_GoToContainerVacation()
+        public void ST_HP_01_03()
         {
             GoToContainer("Verlof");
             Assert.AreEqual(_URL + "verlof", _driver.Url);
             _driver.Quit();
         }
 
+        /// <summary>
+        /// GoToContainerNurseShift
+        /// </summary>
         [TestMethod]
-        public void HomeTest_ST04_GoToContainerNurseShift()
+        public void ST_HP_01_04()
         {
             GoToContainer("Shift");
             Assert.AreEqual(_URL + "shift", _driver.Url);
             _driver.Quit();
         }
 
+        /// <summary>
+        /// GoToContainerPlanning
+        /// </summary>
         [TestMethod]
-        public void HomeTest_ST05_GoToContainerPlanning()
+        public void ST_HP_01_05()
         {
             _driver.Navigate().GoToUrl(_URL);
             _driver.FindElement(By.Id("btnPlanning")).Click();
@@ -72,8 +87,11 @@ namespace PlanningsTool.Tests.SeleniumTests.HomeTests
             _driver.Quit();
         }
 
+        /// <summary>
+        /// NavigateToPlanning
+        /// </summary>
         [TestMethod]
-        public void HomeTest_ST06_NavigateToPlanning()
+        public void ST_HP_01_06()
         {
             _driver.Navigate().GoToUrl(_URL);
             _driver.FindElement(By.Id("navPlanning")).Click();
@@ -81,8 +99,11 @@ namespace PlanningsTool.Tests.SeleniumTests.HomeTests
             _driver.Quit();
         }
 
+        /// <summary>
+        /// NavigateToNurse
+        /// </summary>
         [TestMethod]
-        public void HomeTest_ST07_NavigateToNurse()
+        public void ST_HP_01_07()
         {
             _driver.Navigate().GoToUrl(_URL);
             _driver.FindElement(By.Id("navNurse")).Click();
@@ -90,8 +111,11 @@ namespace PlanningsTool.Tests.SeleniumTests.HomeTests
             _driver.Quit();
         }
 
+        /// <summary>
+        /// NavigateToVacation
+        /// </summary>
         [TestMethod]
-        public void HomeTest_ST08_NavigateToVacation()
+        public void ST_HP_01_08()
         {
             _driver.Navigate().GoToUrl(_URL);
             _driver.FindElement(By.Id("navVacation")).Click();
@@ -99,8 +123,11 @@ namespace PlanningsTool.Tests.SeleniumTests.HomeTests
             _driver.Quit();
         }
 
+        /// <summary>
+        /// NavigateToNurseShift
+        /// </summary>
         [TestMethod]
-        public void HomeTest_ST09_NavigateToNurseShift()
+        public void ST_HP_01_09()
         {
             _driver.Navigate().GoToUrl(_URL);
             _driver.FindElement(By.Id("navNurseShift")).Click();
@@ -108,8 +135,11 @@ namespace PlanningsTool.Tests.SeleniumTests.HomeTests
             _driver.Quit();
         }
 
+        /// <summary>
+        /// NavigateToRegimeType
+        /// </summary>
         [TestMethod]
-        public void HomeTest_ST10_NavigateToRegimeType()
+        public void ST_HP_01_10()
         {
             _driver.Navigate().GoToUrl(_URL);
             _driver.FindElement(By.Id("types-button")).Click();
@@ -118,8 +148,11 @@ namespace PlanningsTool.Tests.SeleniumTests.HomeTests
             _driver.Quit();
         }
 
+        /// <summary>
+        /// NavigateToVacationType
+        /// </summary>
         [TestMethod]
-        public void HomeTest_ST11_NavigateToVacationType()
+        public void ST_HP_01_11()
         {
             _driver.Navigate().GoToUrl(_URL);
             _driver.FindElement(By.Id("types-button")).Click();
@@ -128,8 +161,11 @@ namespace PlanningsTool.Tests.SeleniumTests.HomeTests
             _driver.Quit();
         }
 
+        /// <summary>
+        /// NavigateToShiftType
+        /// </summary>
         [TestMethod]
-        public void HomeTest_ST12_NavigateToShiftType()
+        public void ST_HP_01_12()
         {
             _driver.Navigate().GoToUrl(_URL);
             _driver.FindElement(By.Id("types-button")).Click();
@@ -138,8 +174,11 @@ namespace PlanningsTool.Tests.SeleniumTests.HomeTests
             _driver.Quit();
         }
 
+        /// <summary>
+        /// NavigateToHoliday
+        /// </summary>
         [TestMethod]
-        public void HomeTest_ST13_NavigateToHoliday()
+        public void ST_HP_01_13()
         {
             _driver.Navigate().GoToUrl(_URL);
             _driver.FindElement(By.Id("types-button")).Click();
