@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import BasicCalendar from '../components/calendars/BasicCalendar';
+import AdvancedCalendar from '../components/calendar/AdvancedCalendar';
 
 function TeamplanPage() {
         return (
             <div style={{ height: '95vh' }}>
-                <BasicCalendar />
+                <AdvancedCalendar />
             </div>
         )
     }
