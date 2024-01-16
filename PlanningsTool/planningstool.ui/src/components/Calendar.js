@@ -4,16 +4,7 @@ import {
     momentLocalizer,
 } from 'react-big-calendar';
 import moment from 'moment';
-
-moment.locale('nl-be');
-
-// Set Monday as the first day of the week
-moment.updateLocale('nl-be', {
-    week: {
-      dow: 1, // Monday is the first day of the week
-      doy: 4, // First week of the year is the one that contains January 4th
-    },
-  });
+import 'moment/locale/nl-be';
 
 const localizer = momentLocalizer(moment);
 
