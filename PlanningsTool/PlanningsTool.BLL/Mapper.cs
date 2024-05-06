@@ -3,6 +3,7 @@ using PlanningsTool.Common.DTO.Holidays;
 using PlanningsTool.Common.DTO.RegimeTypes;
 using PlanningsTool.Common.DTO.Shifts;
 using PlanningsTool.Common.DTO.ShiftTypes;
+using PlanningsTool.Common.DTO.Teams;
 using PlanningsTool.Common.DTO.Teamplans;
 using PlanningsTool.Common.DTO.VacationTypes;
 using PlanningsTool.Common.DTO.Vacations;
@@ -30,6 +31,10 @@ namespace PlanningsTool.BLL
             CreateMap<NurseShift, NurseShiftDTO>().ReverseMap();
             CreateMap<NurseShift, CreateNurseShiftDTO>().ReverseMap();
             CreateMap<NurseShift, UpdateNurseShiftDTO>().ReverseMap();
+
+            CreateMap<Team, TeamDTO>().ReverseMap();
+            CreateMap<Team, CreateTeamDTO>().ReverseMap();
+            CreateMap<Team, UpdateTeamDTO>().ReverseMap();
 
             CreateMap<Teamplan, TeamplanDTO>().ReverseMap();
             CreateMap<Teamplan, CreateTeamplanDTO>().ReverseMap();

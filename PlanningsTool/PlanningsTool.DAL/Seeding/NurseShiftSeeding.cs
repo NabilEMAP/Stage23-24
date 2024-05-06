@@ -11,7 +11,7 @@ namespace PlanningsTool.DAL.Seeding
                 new NurseShift() 
                 {
                     Id = 1,
-                    Date = new DateTime(2024, 01, 08),
+                    Date = new DateTime(2024, 05, 08),
                     NurseId = 1,
                     ShiftId = 1,
                     TeamplanId = 1,
@@ -19,7 +19,7 @@ namespace PlanningsTool.DAL.Seeding
                 new NurseShift()
                 {
                     Id = 2,
-                    Date = new DateTime(2024, 01, 08),
+                    Date = new DateTime(2024, 05, 06),
                     NurseId = 2,
                     ShiftId = 4,
                     TeamplanId = 1,
@@ -27,7 +27,7 @@ namespace PlanningsTool.DAL.Seeding
                 new NurseShift()
                 {
                     Id = 3,
-                    Date = new DateTime(2024, 01, 08),
+                    Date = new DateTime(2024, 05, 07),
                     NurseId = 3,
                     ShiftId = 7,
                     TeamplanId = 1,

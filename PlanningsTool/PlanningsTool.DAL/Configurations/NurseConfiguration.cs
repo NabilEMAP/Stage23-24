@@ -36,6 +36,14 @@ namespace PlanningsTool.DAL.Configurations
             builder.Property(p => p.IsFixedNight)
                     .IsRequired()
                     .HasColumnType("char(1)");
+
+            builder.HasOne(p => p.Team)
+                    .WithMany()
+                    .HasForeignKey(p => p.TeamId);
+
+            builder.Property(p => p.TeamId)
+                    .IsRequired()
+                    .HasColumnType("int");
         }
     }
 }

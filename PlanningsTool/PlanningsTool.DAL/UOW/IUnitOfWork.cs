@@ -11,6 +11,7 @@ namespace PlanningsTool.DAL.UOW
         public IVacationsRepository VacationsRepository { get; }
         public IShiftsRepository ShiftsRepository { get; }
         public INurseShiftsRepository NurseShiftsRepository { get; }
+        public ITeamsRepository TeamsRepository { get; }
         public ITeamplansRepository TeamplansRepository { get; }
         public IHolidaysRepository HolidaysRepository { get; }
         Task Save();

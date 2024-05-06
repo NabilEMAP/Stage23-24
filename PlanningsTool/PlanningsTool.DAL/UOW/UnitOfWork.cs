@@ -13,6 +13,7 @@ namespace PlanningsTool.DAL.UOW
         public readonly IVacationsRepository _vacationsRepository;
         public readonly IShiftsRepository _shiftsRepository;
         public readonly INurseShiftsRepository _nurseShiftsRepository;
+        public readonly ITeamsRepository _teamsRepository;
         public readonly ITeamplansRepository _teamplansRepository;
         public readonly IHolidaysRepository _holidaysRepository;
 
@@ -25,6 +26,7 @@ namespace PlanningsTool.DAL.UOW
             IVacationsRepository vacationsRepository,
             IShiftsRepository shiftsRepository,
             INurseShiftsRepository nurseShiftsRepository,
+            ITeamsRepository teamsRepository,
             ITeamplansRepository teamplansRepository,
             IHolidaysRepository holidaysRepository
             )
@@ -37,6 +39,7 @@ namespace PlanningsTool.DAL.UOW
             _vacationsRepository = vacationsRepository;
             _shiftsRepository = shiftsRepository;
             _nurseShiftsRepository = nurseShiftsRepository;
+            _teamsRepository = teamsRepository;
             _teamplansRepository = teamplansRepository;
             _holidaysRepository = holidaysRepository;
         }
@@ -48,6 +51,7 @@ namespace PlanningsTool.DAL.UOW
         public IVacationsRepository VacationsRepository { get { return _vacationsRepository; } }
         public IShiftsRepository ShiftsRepository { get { return _shiftsRepository; } }
         public INurseShiftsRepository NurseShiftsRepository { get { return _nurseShiftsRepository; } }
+        public ITeamsRepository TeamsRepository { get { return _teamsRepository; } }
         public ITeamplansRepository TeamplansRepository { get { return _teamplansRepository; } }
         public IHolidaysRepository HolidaysRepository { get { return _holidaysRepository; } }
 

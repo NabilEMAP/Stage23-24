@@ -6,5 +6,6 @@
         public string LastName { get; set; }
         public int RegimeTypeId { get; set; }
         public bool IsFixedNight { get; set; }
+        public int TeamId { get; set; }
     }
 }

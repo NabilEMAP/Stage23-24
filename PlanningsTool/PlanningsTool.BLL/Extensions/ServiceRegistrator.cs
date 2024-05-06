@@ -18,6 +18,7 @@ namespace PlanningsTool.BLL.Extensions
             services.AddScoped<IShiftsService, ShiftsService>();
             services.AddScoped<INurseShiftsService, NurseShiftService>();
             services.AddScoped<ITeamplansService, TeamplansService>();
+            services.AddScoped<ITeamsService, TeamsService>();
             services.AddScoped<IShiftsService, ShiftsService>();
             services.AddScoped<IHolidaysService, HolidaysService>();
             services.RegisterValidators();

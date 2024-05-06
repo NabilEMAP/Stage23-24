@@ -20,6 +20,7 @@ namespace PlanningsTool.DAL.Contexts
         public virtual DbSet<Vacation> Vacations { get; set; }
         public virtual DbSet<Shift> Shifts { get; set; }
         public virtual DbSet<NurseShift> NurseShifts { get; set; }
+        public virtual DbSet<Team> Teams { get; set; }
         public virtual DbSet<Teamplan> Teamplans { get; set; }
         public virtual DbSet<Holiday> Holidays { get; set; }
 
@@ -27,15 +28,17 @@ namespace PlanningsTool.DAL.Contexts
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             //base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfiguration(new HolidayConfiguration());
             modelBuilder.ApplyConfiguration(new NurseConfiguration());
             modelBuilder.ApplyConfiguration(new RegimeTypeConfiguration());
             modelBuilder.ApplyConfiguration(new VacationTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ShiftTypeConfiguration());
             modelBuilder.ApplyConfiguration(new VacationConfiguration());
             modelBuilder.ApplyConfiguration(new ShiftConfiguration());
+            modelBuilder.ApplyConfiguration(new TeamConfiguration());
             modelBuilder.ApplyConfiguration(new NurseShiftConfiguration());
             modelBuilder.ApplyConfiguration(new TeamplanConfiguration());
-            modelBuilder.ApplyConfiguration(new HolidayConfiguration());
+            modelBuilder.Entity<Holiday>().Seed();
             modelBuilder.Entity<Nurse>().Seed();
             modelBuilder.Entity<RegimeType>().Seed();
             modelBuilder.Entity<VacationType>().Seed();
@@ -44,6 +47,7 @@ namespace PlanningsTool.DAL.Contexts
             modelBuilder.Entity<Shift>().Seed();
             modelBuilder.Entity<NurseShift>().Seed();
             modelBuilder.Entity<Teamplan>().Seed();
+            modelBuilder.Entity<Team>().Seed();
         }
     }
 }

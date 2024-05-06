@@ -32,6 +32,7 @@ namespace PlanningsTool.DAL.Extensions
             services.AddScoped<IVacationsRepository, VacationsRepository>();
             services.AddScoped<IShiftsRepository, ShiftsRepository>();
             services.AddScoped<INurseShiftsRepository, NurseShiftsRepository>();
+            services.AddScoped<ITeamsRepository, TeamsRepository>();
             services.AddScoped<ITeamplansRepository, TeamplansRepository>();
             services.AddScoped<IHolidaysRepository, HolidaysRepository>();
             return services;

@@ -8,5 +8,7 @@
         public int RegimeTypeId { get; set; }
         public RegimeType RegimeType { get; set; }
         public bool? IsFixedNight { get; set; }
+        public int TeamId { get; set; }
+        public Team Team { get; set; }
     }
 }

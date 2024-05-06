@@ -1,4 +1,5 @@
 ﻿using PlanningsTool.Common.DTO.RegimeTypes;
+using PlanningsTool.Common.DTO.Teams;
 
 namespace PlanningsTool.Common.DTO.Nurses
 {
@@ -10,5 +11,7 @@ namespace PlanningsTool.Common.DTO.Nurses
         public int RegimeTypeId { get; set; }
         public RegimeTypeDTO RegimeType { get; set; }
         public bool IsFixedNight { get; set; }
+        public int TeamId { get; set; }
+        public TeamDTO Team { get; set; }
     }
 }

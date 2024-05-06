@@ -14,6 +14,7 @@ namespace PlanningsTool.DAL.Repositories
         {
             return await _context.Nurses
                 .Include(r => r.RegimeType)
+                .Include(t => t.Team)
                 .ToListAsync();
         }
 
@@ -21,6 +22,7 @@ namespace PlanningsTool.DAL.Repositories
         {
             return await _context.Nurses
                 .Include(r => r.RegimeType)
+                .Include(t => t.Team)
                 .FirstOrDefaultAsync(z => z.Id == id);
         }
 
@@ -29,6 +31,7 @@ namespace PlanningsTool.DAL.Repositories
             return await _context.Nurses
                 .Where(z => z.LastName.Contains(lastName))
                 .Include(r => r.RegimeType)
+                .Include(t => t.Team)
                 .ToListAsync();
         }
 
@@ -37,6 +40,7 @@ namespace PlanningsTool.DAL.Repositories
             return await _context.Nurses
                 .Where(z => z.FirstName.Contains(firstName))
                 .Include(r => r.RegimeType)
+                .Include(t => t.Team)
                 .ToListAsync();
         }
 
@@ -45,6 +49,7 @@ namespace PlanningsTool.DAL.Repositories
             return await _context.Nurses
                 .Where(z => string.Concat(z.FirstName, z.LastName) == fullName)
                 .Include(r => r.RegimeType)
+                .Include(t => t.Team)
                 .ToListAsync();
         }
     }
