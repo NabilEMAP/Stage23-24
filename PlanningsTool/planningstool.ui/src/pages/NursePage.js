@@ -97,7 +97,7 @@ function NursePage() {
             <Container>
                 <div style={{ margin: '24px 0px' }}>
                     <Typography variant="h5" style={{ width: 'fit-content', verticalAlign: 'sub', display: 'inline-block' }}>Zorgkundige Lijst</Typography>
-                    <AddNurse onUpdate={handleUpdate} />
+                    <AddNurse onUpdate={handleUpdate} teamId={teamId} />
                 </div>
                 <div>
                     <DataGrid

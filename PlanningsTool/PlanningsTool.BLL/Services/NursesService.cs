@@ -58,7 +58,7 @@ namespace PlanningsTool.BLL.Services
                 throw new CustomValidationException(validationResult.Errors);
             }
 
-            if (await CheckIfExist(entity.FirstName, entity.LastName))
+            if (await CheckIfExist(entity.FirstName, entity.LastName, entity.TeamId))
             {
                 throw new Exception($"De zorgkundige bestaat al");
             }
@@ -78,7 +78,7 @@ namespace PlanningsTool.BLL.Services
                 throw new CustomValidationException(validationResult.Errors);
             }
 
-            if (await CheckIfExist(id, entity.FirstName, entity.LastName))
+            if (await CheckIfExist(id, entity.FirstName, entity.LastName, entity.TeamId))
             {
                 throw new Exception($"De zorgkundige bestaat al");
             }
@@ -113,11 +113,15 @@ namespace PlanningsTool.BLL.Services
             return 0;
         }
 
-        public async Task<bool> CheckIfExist(string firstName, string lastName)
+        public async Task<bool> CheckIfExist(string firstName, string lastName, int teamId)
         {
             foreach (var item in await _uow.NursesRepository.GetAllNursesAsync())
             {
-                if (item.FirstName == firstName && item.LastName == lastName)
+                if (
+                    item.FirstName == firstName &&
+                    item.LastName == lastName &&
+                    item.TeamId == teamId
+                )
                 {
                     return true;
                 }
@@ -125,14 +129,15 @@ namespace PlanningsTool.BLL.Services
             return false;
         }
 
-        public async Task<bool> CheckIfExist(int id, string firstName, string lastName)
+        public async Task<bool> CheckIfExist(int id, string firstName, string lastName, int teamId)
         {
             foreach (var item in await _uow.NursesRepository.GetAllNursesAsync())
             {
                 if (
                     item.Id != id &&
                     item.FirstName == firstName &&
-                    item.LastName == lastName
+                    item.LastName == lastName &&
+                    item.TeamId == teamId
                 )
                 {
                     return true;

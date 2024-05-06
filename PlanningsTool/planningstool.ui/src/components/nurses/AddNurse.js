@@ -64,7 +64,8 @@ function AddNurse(props) {
       "firstName": firstName,
       "lastName": lastName,
       "regimeTypeId": regimeTypeId,
-      "isFixedNight": isFixedNight
+      "isFixedNight": isFixedNight,
+      "teamId": props.teamId
     }
     axios.post(API, data)
       .then(() => {
