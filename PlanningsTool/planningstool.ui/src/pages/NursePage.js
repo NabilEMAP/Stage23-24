@@ -10,23 +10,30 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { API_BASE_URL } from "../config";
 import { DataGrid } from '@mui/x-data-grid';
 import '../App.css';
+import { useParams } from 'react-router-dom';
 
 function NursePage() {
+    const { teamId } = useParams();
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        getData();
-    }, []);
+        if (teamId) {
+            getData(teamId);
+        }
+    }, [teamId]);
 
     const handleUpdate = () => {
-        getData();
+        if (teamId) {
+            getData(teamId);
+        }
     };
 
-    const getData = () => {
+    const getData = (teamId) => {
         const API = `${API_BASE_URL}/Nurses`;
         axios.get(API)
             .then((result) => {
-                setData(result.data);
+                const nurses = result.data.filter(nurse => nurse.teamId == teamId);
+                setData(nurses);
             })
             .catch((error) => {
                 console.log(error);
@@ -75,7 +82,7 @@ function NursePage() {
             renderCell: (params) => renderChanges(params)
         },
     ];
-    
+
     const rows = data.map((item) => ({
         id: item.id,
         firstName: item.firstName,

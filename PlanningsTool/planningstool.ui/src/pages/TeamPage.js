@@ -39,7 +39,7 @@ function TeamPage() {
     );
 
     const renderTeamName = (params) => (
-        <Link to={`/zorgkundige/`} style={{ textDecoration: 'none', color: 'inherit' }}>
+        <Link to={`/team/${params.row.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
             {params.value}
         </Link>
     );

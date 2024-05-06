@@ -18,7 +18,7 @@ export default function Routing() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/team" element={<TeamPage />} />
                 <Route path="/teamplanning" element={<TeamplanPage />} />
-                <Route path="/zorgkundige" element={<NursePage />} />
+                <Route path="/team/:teamId" element={<NursePage />} />
                 <Route path="/shift" element={<NurseShiftPage/>} />
                 <Route path="/verlof" element={<VacationPage />} />
                 <Route path="/regimetype" element={<RegimeTypePage/>} />
