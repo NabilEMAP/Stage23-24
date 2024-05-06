@@ -25,71 +25,6 @@ namespace PlanningsTool.BLL.Services
             _updateValidator = updateValidator;
         }
 
-        public async Task<VacationDetailDTO> Add(CreateVacationDTO entity)
-        {
-            ValidationResult validationResult = _createValidator.Validate(entity);
-
-            if (!validationResult.IsValid)
-            {
-                throw new CustomValidationException(validationResult.Errors);
-            }
-
-            if (await CheckIfExist(entity.NurseId, entity.Startdate,entity.Enddate))
-            {
-                throw new Exception($"Het verlof bestaat al voor deze zorgkundige");
-            }
-
-            if (await CheckIfDatesOverlap(entity.NurseId, entity.Startdate, entity.Enddate))
-            {
-                throw new Exception($"Het verlof wordt overlapt met een bestaande verlof voor deze zorgkundige");
-            }
-
-            var vacation = _mapper.Map<Vacation>(entity);
-            await _uow.VacationsRepository.Add(vacation);
-            await _uow.Save();
-            return _mapper.Map<VacationDetailDTO>(vacation);
-        }
-
-        public async Task<bool> CheckIfExist(int nurseId, DateTime startDate, DateTime endDate)
-        {
-            foreach (var item in await _uow.VacationsRepository.GetAllVacationsAsync())
-            {
-                if (
-                    item.NurseId == nurseId &&
-                    item.Startdate == startDate &&
-                    item.Enddate == endDate
-                )
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public async Task<bool> CheckIfDatesOverlap(int nurseId, DateTime startDate, DateTime endDate)
-        {
-            foreach (var item in await _uow.VacationsRepository.GetAllVacationsAsync())
-            {
-                if(item.NurseId == nurseId && item.Startdate <= endDate && item.Enddate >= startDate) 
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public async Task<int> Delete(int id)
-        {
-            var toDeleteVerlof = await _uow.VacationsRepository.GetVacationAsyncById(id);
-            if (toDeleteVerlof == null)
-            {
-                throw new KeyNotFoundException("Het verlof bestaat niet");
-            }
-            _uow.VacationsRepository.Delete(toDeleteVerlof);
-            await _uow.Save();
-            return 0;
-        }
-
         public async Task<IEnumerable<VacationDTO>> GetAll()
         {
             var vacations = await _uow.VacationsRepository.GetAllVacationsAsync();
@@ -126,6 +61,31 @@ namespace PlanningsTool.BLL.Services
             return _mapper.Map<IEnumerable<VacationDetailDTO>>(vacations);
         }
 
+        public async Task<VacationDetailDTO> Add(CreateVacationDTO entity)
+        {
+            ValidationResult validationResult = _createValidator.Validate(entity);
+
+            if (!validationResult.IsValid)
+            {
+                throw new CustomValidationException(validationResult.Errors);
+            }
+
+            if (await CheckIfExist(entity.NurseId, entity.Startdate, entity.Enddate))
+            {
+                throw new Exception($"Het verlof bestaat al voor deze zorgkundige");
+            }
+
+            if (await CheckIfDatesOverlap(entity.NurseId, entity.Startdate, entity.Enddate))
+            {
+                throw new Exception($"Het verlof wordt overlapt met een bestaande verlof voor deze zorgkundige");
+            }
+
+            var vacation = _mapper.Map<Vacation>(entity);
+            await _uow.VacationsRepository.Add(vacation);
+            await _uow.Save();
+            return _mapper.Map<VacationDetailDTO>(vacation);
+        }
+
         public async Task<VacationDetailDTO> Update(int id, UpdateVacationDTO entity)
         {
             ValidationResult validationResult = _updateValidator.Validate(entity);
@@ -135,7 +95,7 @@ namespace PlanningsTool.BLL.Services
                 throw new CustomValidationException(validationResult.Errors);
             }
 
-            if (await CheckIfExist(entity.NurseId, entity.Startdate, entity.Enddate))
+            if (await CheckIfExist(id, entity.NurseId, entity.Startdate, entity.Enddate))
             {
                 throw new Exception($"Het verlof bestaat al voor deze zorgkundige");
             }
@@ -163,5 +123,63 @@ namespace PlanningsTool.BLL.Services
             await _uow.Save();
             return _mapper.Map<VacationDetailDTO>(vacationToUpdate);
         }
+
+        public async Task<int> Delete(int id)
+        {
+            var toDeleteVerlof = await _uow.VacationsRepository.GetVacationAsyncById(id);
+            if (toDeleteVerlof == null)
+            {
+                throw new KeyNotFoundException("Het verlof bestaat niet");
+            }
+            _uow.VacationsRepository.Delete(toDeleteVerlof);
+            await _uow.Save();
+            return 0;
+        }
+
+        public async Task<bool> CheckIfExist(int nurseId, DateTime startDate, DateTime endDate)
+        {
+            foreach (var item in await _uow.VacationsRepository.GetAllVacationsAsync())
+            {
+                if (
+                    item.NurseId == nurseId &&
+                    item.Startdate == startDate &&
+                    item.Enddate == endDate
+                )
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public async Task<bool> CheckIfExist(int id, int nurseId, DateTime startDate, DateTime endDate)
+        {
+            foreach (var item in await _uow.VacationsRepository.GetAllVacationsAsync())
+            {
+                if (
+                    item.Id != id &&
+                    item.NurseId == nurseId &&
+                    item.Startdate == startDate &&
+                    item.Enddate == endDate
+                )
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public async Task<bool> CheckIfDatesOverlap(int nurseId, DateTime startDate, DateTime endDate)
+        {
+            foreach (var item in await _uow.VacationsRepository.GetAllVacationsAsync())
+            {
+                if (item.NurseId == nurseId && item.Startdate <= endDate && item.Enddate >= startDate)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
     }
 }

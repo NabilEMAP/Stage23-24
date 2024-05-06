@@ -15,10 +15,20 @@ namespace PlanningsTool.DAL.Repositories
         {
         }
 
+        public async Task<IEnumerable<Team>> GetAllTeamsAsync()
+        {
+            return await _context.Teams.ToListAsync();
+        }
+   
+        public async Task<Team> GetTeamAsyncById(int id)
+        {
+            return await _context.Teams.FirstOrDefaultAsync(z => z.Id == id);
+        }
+
         public async Task<IEnumerable<Team>> GetTeamsByTeamName(string teamName)
         {
             return await _context.Teams
-                .Where(z => z.TeamName.ToString().Contains(teamName))
+                .Where(z => z.TeamName.Contains(teamName))
                 .ToListAsync();
         }
     }

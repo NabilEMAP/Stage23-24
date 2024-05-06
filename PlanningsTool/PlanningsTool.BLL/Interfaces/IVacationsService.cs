@@ -13,5 +13,8 @@ namespace PlanningsTool.BLL.Interfaces
         public Task<VacationDetailDTO> Add(CreateVacationDTO vacation);
         public Task<VacationDetailDTO> Update(int id, UpdateVacationDTO vacation);
         public Task<int> Delete(int id);
+        public Task<bool> CheckIfExist(int nurseId, DateTime startDate, DateTime endDate);
+        public Task<bool> CheckIfExist(int id, int nurseId, DateTime startDate, DateTime endDate);
+        public Task<bool> CheckIfDatesOverlap(int nurseId, DateTime startDate, DateTime endDate);
     }
 }

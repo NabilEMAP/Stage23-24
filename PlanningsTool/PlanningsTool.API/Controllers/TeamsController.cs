@@ -37,14 +37,7 @@ namespace PlanningsTool.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateTeamDTO team)
         {
-            try
-            {
-                await _teamsServices.Add(team);
-            }
-            catch (Exception ex)
-            {
-                return NotFound(ex.Message);
-            }
+            await _teamsServices.Add(team);
             return Ok(team);
         }
 

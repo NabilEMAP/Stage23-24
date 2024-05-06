@@ -7,8 +7,8 @@ namespace PlanningsTool.BLL.Services
 {
     public class RegimeTypesService : IRegimeTypesService
     {
-        public readonly IUnitOfWork _uow;
-        public readonly IMapper _mapper;
+        private readonly IUnitOfWork _uow;
+        private readonly IMapper _mapper;
 
         public RegimeTypesService(IUnitOfWork uow, IMapper mapper)
         {
@@ -18,13 +18,13 @@ namespace PlanningsTool.BLL.Services
 
         public async Task<IEnumerable<RegimeTypeDTO>> GetAll()
         {
-            var regimeTypes = await _uow.RegimeTypesRepository.GetAllAsync();
+            var regimeTypes = await _uow.RegimeTypesRepository.GetAllRegimeTypesAsync();
             return _mapper.Map<IEnumerable<RegimeTypeDTO>>(regimeTypes);
         }
 
         public async Task<RegimeTypeDTO> GetById(int id)
         {
-            var regimeType = await _uow.RegimeTypesRepository.GetByIdAsync(id);
+            var regimeType = await _uow.RegimeTypesRepository.GetRegimeTypeAsyncById(id);
             return _mapper.Map<RegimeTypeDTO>(regimeType);
         }
 

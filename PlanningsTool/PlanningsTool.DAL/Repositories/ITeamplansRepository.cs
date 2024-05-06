@@ -4,6 +4,8 @@ namespace PlanningsTool.DAL.Repositories
 {
     public interface ITeamplansRepository : IGenericRepository<Teamplan>
     {
+        Task<IEnumerable<Teamplan>> GetAllTeamplansAsync();
+        Task<Teamplan> GetTeamplanAsyncById(int id);
         Task<IEnumerable<Teamplan>> GetTeamplansByMonth(string month);
     }
 }

@@ -7,8 +7,8 @@ namespace PlanningsTool.BLL.Services
 {
     public class VacationTypesService : IVacationTypesService
     {
-        public readonly IUnitOfWork _uow;
-        public readonly IMapper _mapper;
+        private readonly IUnitOfWork _uow;
+        private readonly IMapper _mapper;
 
         public VacationTypesService(IUnitOfWork uow, IMapper mapper)
         {
@@ -18,13 +18,13 @@ namespace PlanningsTool.BLL.Services
 
         public async Task<IEnumerable<VacationTypeDTO>> GetAll()
         {
-            var verlofTypes = await _uow.VacationTypesRepository.GetAllAsync();
+            var verlofTypes = await _uow.VacationTypesRepository.GetAllVacationTypesAsync();
             return _mapper.Map<IEnumerable<VacationTypeDTO>>(verlofTypes);
         }
 
         public async Task<VacationTypeDTO> GetById(int id)
         {
-            var verlofType = await _uow.VacationTypesRepository.GetByIdAsync(id);
+            var verlofType = await _uow.VacationTypesRepository.GetVacationTypeAsyncById(id);
             return _mapper.Map<VacationTypeDTO>(verlofType);
         }
 

@@ -14,27 +14,22 @@ namespace PlanningsTool.DAL.Extensions
             services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseSqlServer("name=ConnectionStrings:Stage2324");
-
-                // Set up a logger factory that doesn't log anything
-                // options.UseLoggerFactory(LoggerFactory.Create(builder => builder.AddFilter((category, level) => false)));
             });
-
             return services;
         }
 
-
         public static IServiceCollection RegisterRepositories(this IServiceCollection services)
         {
+            services.AddScoped<IHolidaysRepository, HolidaysRepository>();
             services.AddScoped<INursesRepository, NursesRepository>();
-            services.AddScoped<IRegimeTypesRepository, RegimeTypesRepository>();
-            services.AddScoped<IVacationTypesRepository, VacationTypesRepository>();
-            services.AddScoped<IShiftTypesRepository, ShiftTypesRepository>();
-            services.AddScoped<IVacationsRepository, VacationsRepository>();
-            services.AddScoped<IShiftsRepository, ShiftsRepository>();
             services.AddScoped<INurseShiftsRepository, NurseShiftsRepository>();
+            services.AddScoped<IShiftsRepository, ShiftsRepository>();
             services.AddScoped<ITeamsRepository, TeamsRepository>();
             services.AddScoped<ITeamplansRepository, TeamplansRepository>();
-            services.AddScoped<IHolidaysRepository, HolidaysRepository>();
+            services.AddScoped<IRegimeTypesRepository, RegimeTypesRepository>();
+            services.AddScoped<IShiftTypesRepository, ShiftTypesRepository>();
+            services.AddScoped<IVacationTypesRepository, VacationTypesRepository>();            
+            services.AddScoped<IVacationsRepository, VacationsRepository>();
             return services;
         }
 

@@ -4,16 +4,16 @@ namespace PlanningsTool.DAL.UOW
 {
     public interface IUnitOfWork
     {
+        public IHolidaysRepository HolidaysRepository { get; }
         public INursesRepository NursesRepository { get; }
-        public IRegimeTypesRepository RegimeTypesRepository { get; }
-        public IVacationTypesRepository VacationTypesRepository { get; }
-        public IShiftTypesRepository ShiftTypesRepository { get; }
-        public IVacationsRepository VacationsRepository { get; }
-        public IShiftsRepository ShiftsRepository { get; }
         public INurseShiftsRepository NurseShiftsRepository { get; }
+        public IShiftsRepository ShiftsRepository { get; }
         public ITeamsRepository TeamsRepository { get; }
         public ITeamplansRepository TeamplansRepository { get; }
-        public IHolidaysRepository HolidaysRepository { get; }
+        public IRegimeTypesRepository RegimeTypesRepository { get; }
+        public IShiftTypesRepository ShiftTypesRepository { get; }
+        public IVacationTypesRepository VacationTypesRepository { get; }        
+        public IVacationsRepository VacationsRepository { get; }
         Task Save();
     }
 }

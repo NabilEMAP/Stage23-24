@@ -10,5 +10,7 @@ namespace PlanningsTool.BLL.Interfaces
         public Task<NurseShiftDTO> Add(CreateNurseShiftDTO nurseShift);
         public Task<NurseShiftDTO> Update(int id, UpdateNurseShiftDTO nurseShift);
         public Task<int> Delete(int id);
+        public Task<bool> CheckIfExist(int nurseId, int shiftId, DateTime date);
+        public Task<bool> CheckIfExist(int id, int nurseId, int shiftId, DateTime date);
     }
 }

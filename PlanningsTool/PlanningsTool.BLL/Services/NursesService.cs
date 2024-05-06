@@ -25,6 +25,30 @@ namespace PlanningsTool.BLL.Services
             _updateValidator = updateValidator;
         }
 
+        public async Task<IEnumerable<NurseDTO>> GetAll()
+        {
+            var nurses = await _uow.NursesRepository.GetAllNursesAsync();
+            return _mapper.Map<IEnumerable<NurseDTO>>(nurses);
+        }
+
+        public async Task<NurseDTO> GetById(int id)
+        {
+            var nurse = await _uow.NursesRepository.GetNurseAsyncById(id);
+            return _mapper.Map<NurseDTO>(nurse);
+        }
+
+        public async Task<IEnumerable<NurseDTO>> GetNursesByFirstName(string firstName)
+        {
+            var nurses = await _uow.NursesRepository.GetNursesByFirstName(firstName);
+            return _mapper.Map<IEnumerable<NurseDTO>>(nurses);
+        }
+
+        public async Task<IEnumerable<NurseDTO>> GetNursesByLastName(string lastName)
+        {
+            var nurses = await _uow.NursesRepository.GetNursesByLastName(lastName);
+            return _mapper.Map<IEnumerable<NurseDTO>>(nurses);
+        }
+
         public async Task<NurseDTO> Add(CreateNurseDTO entity)
         {
             ValidationResult validationResult = _createValidator.Validate(entity);
@@ -43,66 +67,6 @@ namespace PlanningsTool.BLL.Services
             await _uow.NursesRepository.Add(nurse);
             await _uow.Save();
             return _mapper.Map<NurseDTO>(nurse);
-        }
-
-        public async Task<bool> CheckIfExist(string firstName, string lastName)
-        {
-            foreach (var item in await _uow.NursesRepository.GetAllNursesAsync())
-            {
-                if(item.FirstName == firstName && item.LastName == lastName)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public async Task<bool> CheckIfExist(int id, string firstName, string lastName)
-        {
-            foreach (var item in await _uow.NursesRepository.GetAllNursesAsync())
-            {
-                if (item.Id != id && item.FirstName == firstName && item.LastName == lastName)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public async Task<int> Delete(int id)
-        {
-            var toDeleteNurse = await _uow.NursesRepository.GetNurseAsyncById(id);
-            if (toDeleteNurse == null)
-            {
-                throw new KeyNotFoundException("Deze zorgkundige bestaat niet");
-            }
-            _uow.NursesRepository.Delete(toDeleteNurse);
-            await _uow.Save();
-            return 0;
-        }
-
-        public async Task<IEnumerable<NurseDTO>> GetAll()
-        {
-            var nurses = await _uow.NursesRepository.GetAllNursesAsync();
-            return _mapper.Map<IEnumerable<NurseDTO>>(nurses);
-        }
-
-        public async Task<NurseDTO> GetById(int id)
-        {
-            var nurse = await _uow.NursesRepository.GetNurseAsyncById(id);
-            return _mapper.Map<NurseDTO>(nurse);
-        }
-
-        public async Task<IEnumerable<NurseDTO>> GetNursesByLastName(string lastName)
-        {
-            var nurses = await _uow.NursesRepository.GetNursesByLastName(lastName);
-            return _mapper.Map<IEnumerable<NurseDTO>>(nurses);
-        }
-
-        public async Task<IEnumerable<NurseDTO>> GetNursesByFirstName(string firstName)
-        {
-            var nurses = await _uow.NursesRepository.GetNursesByFirstName(firstName);
-            return _mapper.Map<IEnumerable<NurseDTO>>(nurses);
         }
 
         public async Task<NurseDTO> Update(int id, UpdateNurseDTO entity)
@@ -135,6 +99,46 @@ namespace PlanningsTool.BLL.Services
             await _uow.NursesRepository.Update(nurseToUpdate);
             await _uow.Save();
             return _mapper.Map<NurseDTO>(nurseToUpdate);
+        }
+
+        public async Task<int> Delete(int id)
+        {
+            var toDeleteNurse = await _uow.NursesRepository.GetNurseAsyncById(id);
+            if (toDeleteNurse == null)
+            {
+                throw new KeyNotFoundException("Deze zorgkundige bestaat niet");
+            }
+            _uow.NursesRepository.Delete(toDeleteNurse);
+            await _uow.Save();
+            return 0;
+        }
+
+        public async Task<bool> CheckIfExist(string firstName, string lastName)
+        {
+            foreach (var item in await _uow.NursesRepository.GetAllNursesAsync())
+            {
+                if (item.FirstName == firstName && item.LastName == lastName)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public async Task<bool> CheckIfExist(int id, string firstName, string lastName)
+        {
+            foreach (var item in await _uow.NursesRepository.GetAllNursesAsync())
+            {
+                if (
+                    item.Id != id &&
+                    item.FirstName == firstName &&
+                    item.LastName == lastName
+                )
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

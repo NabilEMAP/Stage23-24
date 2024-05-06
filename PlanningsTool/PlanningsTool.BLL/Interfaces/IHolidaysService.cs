@@ -10,6 +10,11 @@ namespace PlanningsTool.BLL.Interfaces
         public Task<IEnumerable<HolidayDTO>> GetHolidaysByDate(string date);
         public Task<int> Generate(int year);
         public Task<int> ClearAll();
-        public Task<bool> CheckIfExist(int year);
+        public Task<HolidayDTO> Add(CreateHolidayDTO entity);
+        public Task<HolidayDTO> Update(int id, UpdateHolidayDTO entity);
+        public Task<int> Delete(int id);
+        public Task<bool> CheckIfYearExist(int year);
+        public Task<bool> CheckIfExist(string name, DateTime date);
+        public Task<bool> CheckIfExist(int id, string name, DateTime date);
     }
 }

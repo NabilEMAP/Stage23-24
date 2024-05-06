@@ -7,8 +7,8 @@ namespace PlanningsTool.BLL.Services
 {
     public class ShiftTypesService : IShiftTypesService
     {
-        public readonly IUnitOfWork _uow;
-        public readonly IMapper _mapper;
+        private readonly IUnitOfWork _uow;
+        private readonly IMapper _mapper;
 
         public ShiftTypesService(IUnitOfWork uow, IMapper mapper)
         {
@@ -18,13 +18,13 @@ namespace PlanningsTool.BLL.Services
 
         public async Task<IEnumerable<ShiftTypeDTO>> GetAll()
         {
-            var shiftTypes = await _uow.ShiftTypesRepository.GetAllAsync();
+            var shiftTypes = await _uow.ShiftTypesRepository.GetAllShiftTypesAsync();
             return _mapper.Map<IEnumerable<ShiftTypeDTO>>(shiftTypes);
         }
 
         public async Task<ShiftTypeDTO> GetById(int id)
         {
-            var shiftType = await _uow.ShiftTypesRepository.GetByIdAsync(id);
+            var shiftType = await _uow.ShiftTypesRepository.GetShiftTypeAsyncById(id);
             return _mapper.Map<ShiftTypeDTO>(shiftType);
         }
 

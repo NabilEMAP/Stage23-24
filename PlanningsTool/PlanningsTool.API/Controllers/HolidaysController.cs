@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PlanningsTool.BLL.Interfaces;
+using PlanningsTool.BLL.Services;
+using PlanningsTool.Common.DTO.Holidays;
+using PlanningsTool.Common.DTO.Vacations;
 
 namespace PlanningsTool.API.Controllers
 {
@@ -51,22 +54,42 @@ namespace PlanningsTool.API.Controllers
         }
 
         // POST api/Holidays
-        [HttpPost]
+        [HttpPost("generate")]
         public async Task<IActionResult> Post(int year)
         {
-            try
-            {
-                await _holidaysServices.Generate(year);
-            }
-            catch (Exception ex)
-            {
-                return NotFound(ex.Message);
-            }
+            //try
+            //{
+            await _holidaysServices.Generate(year);
+            //}
+            //catch (Exception ex)
+            //{
+            //    return NotFound(ex.Message);
+            //}
             return Ok(year);
         }
 
+        // POST api/Holidays
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] CreateHolidayDTO holiday)
+        {
+            await _holidaysServices.Add(holiday);
+            return Ok(holiday);
+        }
+
+        // PUT api/Vacations
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, UpdateHolidayDTO holiday)
+        {
+            if (holiday == null)
+            {
+                return NotFound();
+            }
+            await _holidaysServices.Update(id, holiday);
+            return Ok(holiday);
+        }
+
         // DELETE api/Holidays
-        [HttpDelete]
+        [HttpDelete("clear")]
         public async Task<IActionResult> Delete()
         {
             var holidays = await _holidaysServices.GetAll(); ;
@@ -75,6 +98,19 @@ namespace PlanningsTool.API.Controllers
                 return NotFound();
             }
             await _holidaysServices.ClearAll();
+            return NoContent();
+        }
+
+        // DELETE api/Holidays
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var holidays = await _holidaysServices.GetById(id);
+            if (holidays == null)
+            {
+                return NotFound();
+            }
+            await _holidaysServices.Delete(id);
             return NoContent();
         }
     }

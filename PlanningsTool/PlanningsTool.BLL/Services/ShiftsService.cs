@@ -8,8 +8,8 @@ namespace PlanningsTool.BLL.Services
 {
     public class ShiftsService : IShiftsService
     {
-        public readonly IUnitOfWork _uow;
-        public readonly IMapper _mapper;
+        private readonly IUnitOfWork _uow;
+        private readonly IMapper _mapper;
 
         public ShiftsService(IUnitOfWork uow, IMapper mapper)
         {
@@ -18,12 +18,6 @@ namespace PlanningsTool.BLL.Services
         }
 
         public async Task<IEnumerable<ShiftDTO>> GetAll()
-        {
-            var shifts = await _uow.ShiftsRepository.GetAllShiftsAsync();
-            return _mapper.Map<IEnumerable<ShiftDTO>>(shifts);
-        }
-
-        public async Task<IEnumerable<ShiftDTO>> GetAllDetails()
         {
             var shifts = await _uow.ShiftsRepository.GetAllShiftsAsync();
             return _mapper.Map<IEnumerable<ShiftDTO>>(shifts);

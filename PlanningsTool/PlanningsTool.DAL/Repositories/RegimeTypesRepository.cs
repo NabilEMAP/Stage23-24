@@ -10,6 +10,16 @@ namespace PlanningsTool.DAL.Repositories
         {
         }
 
+        public async Task<IEnumerable<RegimeType>> GetAllRegimeTypesAsync()
+        {
+            return await _context.RegimeTypes.ToListAsync();
+        }
+
+        public async Task<RegimeType> GetRegimeTypeAsyncById(int id)
+        {
+            return await _context.RegimeTypes.FirstOrDefaultAsync(z => z.Id == id);
+        }
+
         public async Task<IEnumerable<RegimeType>> GetRegimeTypesByName(string name)
         {
             return await _context.RegimeTypes
@@ -24,5 +34,4 @@ namespace PlanningsTool.DAL.Repositories
                 .ToListAsync();
         }
     }
-
 }

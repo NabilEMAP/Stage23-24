@@ -10,6 +10,16 @@ namespace PlanningsTool.DAL.Repositories
         {
         }
 
+        public async Task<IEnumerable<Teamplan>> GetAllTeamplansAsync()
+        {
+            return await _context.Teamplans.ToListAsync();
+        }
+
+        public async Task<Teamplan> GetTeamplanAsyncById(int id)
+        {
+            return await _context.Teamplans.FirstOrDefaultAsync(z => z.Id == id);
+        }
+
         public async Task<IEnumerable<Teamplan>> GetTeamplansByMonth(string month)
         {
             return await _context.Teamplans

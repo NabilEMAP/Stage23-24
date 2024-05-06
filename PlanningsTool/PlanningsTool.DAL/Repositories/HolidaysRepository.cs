@@ -10,6 +10,16 @@ namespace PlanningsTool.DAL.Repositories
         {
         }
 
+        public async Task<IEnumerable<Holiday>> GetAllHolidaysAsync()
+        {
+            return await _context.Holidays.ToListAsync();
+        }
+
+        public async Task<Holiday> GetHolidayAsyncById(int id)
+        {
+            return await _context.Holidays.FirstOrDefaultAsync(z => z.Id == id);
+        }
+
         public async Task AddHolidaysByYear(int year)
         {
             List<Holiday> holidays = new List<Holiday>
@@ -54,7 +64,6 @@ namespace PlanningsTool.DAL.Repositories
             return await _context.Holidays
                 .Where(z => z.Date.Year == year)
                 .ToListAsync();
-        }
-
+        }        
     }
 }
