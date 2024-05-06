@@ -26,10 +26,14 @@ namespace PlanningsTool.BLL.Extensions
 
         public static IServiceCollection RegisterValidators(this IServiceCollection services)
         {
+            services.AddTransient<CreateHolidayValidator>();
+            services.AddTransient<UpdateHolidayValidator>();
             services.AddTransient<CreateNurseValidator>();
             services.AddTransient<UpdateNurseValidator>();
             services.AddTransient<CreateNurseShiftValidator>();
             services.AddTransient<UpdateNurseShiftValidator>();
+            services.AddTransient<CreateTeamValidator>();
+            services.AddTransient<UpdateTeamValidator>();
             services.AddTransient<CreateVacationValidator>();
             services.AddTransient<UpdateVacationValidator>();
             return services;
