@@ -9,12 +9,14 @@ import RegimeTypePage from '../pages/overige/RegimeTypePage';
 import VacationTypePage from '../pages/overige/VerlofTypePage';
 import ShiftTypePage from '../pages/overige/ShiftTypePage';
 import HolidayPage from '../pages/overige/HolidayPage';
+import TeamPage from '../pages/TeamPage';
 
 export default function Routing() {
     return (
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<HomePage />} />
+                <Route path="/team" element={<TeamPage />} />
                 <Route path="/teamplanning" element={<TeamplanPage />} />
                 <Route path="/zorgkundige" element={<NursePage />} />
                 <Route path="/shift" element={<NurseShiftPage/>} />

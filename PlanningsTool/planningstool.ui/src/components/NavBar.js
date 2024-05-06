@@ -36,7 +36,7 @@ export const NavBar = () => {
                 </Typography>
                 <Stack direction='row' spacing={2}>
                     <Button id="navPlanning" href='/teamplanning' color='inherit'>Teamplanning</Button>
-                    <Button id="navNurse" href='/zorgkundige' color='inherit'>Zorgkundige</Button>
+                    <Button id="navTeam" href='/team' color='inherit'>Team</Button>
                     <Button id="navVacation" href='/verlof' color='inherit'>Verlof</Button>
                     <Button id="navNurseShift" href='/shift' color='inherit'>Shift</Button>
                     <Button

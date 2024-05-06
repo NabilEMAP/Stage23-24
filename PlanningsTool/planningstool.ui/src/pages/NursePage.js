@@ -64,6 +64,11 @@ function NursePage() {
             renderCell: showIsFixedNight,
         },
         {
+            field: 'teamId',
+            headerName: 'Team Id',
+            flex: 1,
+        },
+        {
             field: 'actions',
             headerName: 'Veranderingen',
             flex: 1,
@@ -77,6 +82,7 @@ function NursePage() {
         lastName: item.lastName,
         regimeType: item.regimeType.name,
         isFixedNight: item.isFixedNight,
+        teamId: item.teamId,
     }));
 
     return (

@@ -6,9 +6,9 @@ import {
 
 const homecards = [
     {
-        heading: "Zorgkundige",
-        description: "Lijst van zorgkundigen",
-        url: "/zorgkundige",
+        heading: "Teams",
+        description: "Lijst van teams",
+        url: "/team",
         image: zorgkundige,
     },
     {
