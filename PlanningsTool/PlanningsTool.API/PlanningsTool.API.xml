@@ -360,5 +360,25 @@
             <param name="id">The ID of the vacation to delete.</param>
             <returns></returns>
         </member>
+        <member name="M:PlanningsTool.API.Controllers.VacationTypesController.GetAll">
+            <summary>
+            Retrieves all vacation types.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.VacationTypesController.GetById(System.Int32)">
+            <summary>
+            Retrieves a vacation type by its ID.
+            </summary>
+            <param name="id">The ID of the vacation type to retrieve.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.VacationTypesController.GetVacationTypesByNaam(System.String)">
+            <summary>
+            Retrieves vacation types by name.
+            </summary>
+            <param name="name">The name of the vacation type to search for.</param>
+            <returns></returns>
+        </member>
     </members>
 </doc>
