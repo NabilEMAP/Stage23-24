@@ -16,6 +16,10 @@ namespace PlanningsTool.API.Controllers
         }
 
         // GET api/Teams
+        /// <summary>
+        /// Retrieves all teams.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -25,6 +29,11 @@ namespace PlanningsTool.API.Controllers
         }
 
         // GET api/Teams/{id}
+        /// <summary>
+        /// Retrieves a team by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the team to retrieve.</param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -34,6 +43,10 @@ namespace PlanningsTool.API.Controllers
         }
 
         // POST api/Teams
+        /// <summary>
+        /// Creates a new team.
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateTeamDTO team)
         {
@@ -42,6 +55,11 @@ namespace PlanningsTool.API.Controllers
         }
 
         // PUT api/Teams
+        /// <summary>
+        /// Updates an existing team by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the team to update</param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, UpdateTeamDTO team)
         {
@@ -54,6 +72,11 @@ namespace PlanningsTool.API.Controllers
         }
 
         // DELETE api/Teams
+        /// <summary>
+        /// Deletes a team by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the team to delete.</param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

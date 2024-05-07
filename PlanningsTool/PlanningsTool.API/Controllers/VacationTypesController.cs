@@ -15,6 +15,10 @@ namespace PlanningsTool.API.Controllers
         }
 
         // GET api/VacationTypes
+        /// <summary>
+        /// Retrieves all vacation types.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -24,6 +28,11 @@ namespace PlanningsTool.API.Controllers
         }
 
         // GET api/VacationTypes/{id}
+        /// <summary>
+        /// Retrieves a vacation type by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the vacation type to retrieve.</param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -33,6 +42,11 @@ namespace PlanningsTool.API.Controllers
         }
 
         // GET api/VacationTypes/name/{name}
+        /// <summary>
+        /// Retrieves vacation types by name.
+        /// </summary>
+        /// <param name="name">The name of the vacation type to search for.</param>
+        /// <returns></returns>
         [HttpGet("name/{name}")]
         public async Task<IActionResult> GetVacationTypesByNaam(string name)
         {

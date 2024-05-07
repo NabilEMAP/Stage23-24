@@ -16,6 +16,10 @@ namespace PlanningsTool.API.Controllers
         }
 
         // GET api/Teamplans
+        /// <summary>
+        /// Retrieves all team plans.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -25,6 +29,11 @@ namespace PlanningsTool.API.Controllers
         }
 
         // GET api/Teamplans/{id}
+        /// <summary>
+        /// Retrieves a team plan by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the team plan to retrieve.</param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -34,6 +43,11 @@ namespace PlanningsTool.API.Controllers
         }
 
         // GET api/Teamplans/date/{date}
+        /// <summary>
+        /// Retrieves team plans by month.
+        /// </summary>
+        /// <param name="month">The month of the team plans to retrieve (format: YYYY-MM).</param>
+        /// <returns></returns>
         [HttpGet("date/{date}")]
         public async Task<IActionResult> GetTeamplansByMonth(string month)
         {
@@ -43,6 +57,10 @@ namespace PlanningsTool.API.Controllers
         }
 
         // POST api/Teamplans
+        /// <summary>
+        /// Creates a new team plan.
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateTeamplanDTO teamplan)
         {
@@ -58,6 +76,11 @@ namespace PlanningsTool.API.Controllers
         }
 
         // PUT api/Teamplans
+        /// <summary>
+        /// Updates an existing team plan by its ID
+        /// </summary>
+        /// <param name="id">The ID of the team plan to update.</param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, UpdateTeamplanDTO teamplan)
         {
@@ -70,6 +93,11 @@ namespace PlanningsTool.API.Controllers
         }
 
         // DELETE api/Teamplans
+        /// <summary>
+        /// Deletes a team plan by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the team plan to delete.</param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

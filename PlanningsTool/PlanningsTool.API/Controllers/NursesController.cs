@@ -16,6 +16,10 @@ namespace PlanningsTool.API.Controllers
         }
 
         // GET api/Nurses
+        /// <summary>
+        /// Retrieves all nurses.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -25,6 +29,11 @@ namespace PlanningsTool.API.Controllers
         }
 
         // GET api/Nurses/{id}
+        /// <summary>
+        /// Retrieves a nurse by their ID.
+        /// </summary>
+        /// <param name="id">The ID of the nurse to retrieve.</param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -34,6 +43,11 @@ namespace PlanningsTool.API.Controllers
         }
 
         // GET api/Nurses/firstName/{firstName}
+        /// <summary>
+        /// Retrieves nurses by their first name.
+        /// </summary>
+        /// <param name="firstName">The first name of the nurse to search for.</param>
+        /// <returns></returns>
         [HttpGet("firstName/{firstName}")]
         public async Task<IActionResult> GetNursesByFirstName(string firstName)
         {
@@ -43,6 +57,11 @@ namespace PlanningsTool.API.Controllers
         }
 
         // GET api/Nurses/lastName/{lastName}
+        /// <summary>
+        /// Retrieves nurses by their last name.
+        /// </summary>
+        /// <param name="lastName">The last name of the nurse to search for.</param>
+        /// <returns></returns>
         [HttpGet("lastName/{lastName}")]
         public async Task<IActionResult> GetNursesByLastName(string lastName)
         {
@@ -52,6 +71,10 @@ namespace PlanningsTool.API.Controllers
         }
 
         // POST api/Nurses
+        /// <summary>
+        /// Creates a new nurse.
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateNurseDTO nurse)
         {
@@ -60,6 +83,11 @@ namespace PlanningsTool.API.Controllers
         }
 
         // PUT api/Nurses
+        /// <summary>
+        /// Updates an existing nurse by their ID.
+        /// </summary>
+        /// <param name="id">The ID of the nurse to update.</param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, UpdateNurseDTO nurse)
         {
@@ -72,6 +100,11 @@ namespace PlanningsTool.API.Controllers
         }
 
         // DELETE api/Nurses
+        /// <summary>
+        /// Deletes a nurse by their ID.
+        /// </summary>
+        /// <param name="id">The ID of the nurse to delete.</param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

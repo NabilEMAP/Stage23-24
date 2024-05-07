@@ -15,6 +15,10 @@ namespace PlanningsTool.API.Controllers
         }
 
         // GET api/RegimeTypes
+        /// <summary>
+        /// Retrieves all regime types.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -24,6 +28,11 @@ namespace PlanningsTool.API.Controllers
         }
 
         // GET api/RegimeTypes/{id}
+        /// <summary>
+        /// Retrieves a regime type by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the regime type to retrieve.</param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -33,6 +42,11 @@ namespace PlanningsTool.API.Controllers
         }
 
         // GET api/RegimeTypes/name/{name}
+        /// <summary>
+        /// Retrieves regime types by name.
+        /// </summary>
+        /// <param name="name">The name of the regime type to search for.</param>
+        /// <returns></returns>
         [HttpGet("name/{name}")]
         public async Task<IActionResult> GetRegimeTypesByName(string name)
         {
@@ -42,6 +56,11 @@ namespace PlanningsTool.API.Controllers
         }
 
         // GET api/RegimeTypes/countHours/{countHours}
+        /// <summary>
+        /// Retrieves regime types by count of hours.
+        /// </summary>
+        /// <param name="countHours">The count of hours of the regime type to search for.</param>
+        /// <returns></returns>
         [HttpGet("countHours/{countHours}")]
         public async Task<IActionResult> GetRegimeTypesByCountHours(string countHours)
         {

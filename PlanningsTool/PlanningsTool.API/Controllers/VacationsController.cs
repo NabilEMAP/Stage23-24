@@ -16,6 +16,10 @@ namespace PlanningsTool.API.Controllers
         }
 
         // GET api/Vacations
+        /// <summary>
+        /// Retrieves all vacations.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -25,6 +29,10 @@ namespace PlanningsTool.API.Controllers
         }
 
         // GET api/Vacations/Details
+        /// <summary>
+        /// Retrieves all vacations with additional details.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("details")]
         public async Task<IActionResult> GetAllDetails()
         {
@@ -34,6 +42,11 @@ namespace PlanningsTool.API.Controllers
         }
 
         // GET api/Vacations/{id}
+        /// <summary>
+        /// Retrieves a vacation by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the vacation to retrieve.</param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -43,6 +56,11 @@ namespace PlanningsTool.API.Controllers
         }
 
         // GET api/Vacations/startdate/{startdate}
+        /// <summary>
+        /// Retrieves vacations by start date.
+        /// </summary>
+        /// <param name="startdate">The start date of the vacations to retrieve (format: YYYY-MM-DD).</param>
+        /// <returns></returns>
         [HttpGet("startdate/{startdate}")]
         public async Task<IActionResult> GetVacationsByStartdate(string startdate)
         {
@@ -52,6 +70,11 @@ namespace PlanningsTool.API.Controllers
         }
 
         // GET api/Vacations/enddate/{enddate}
+        /// <summary>
+        /// Retrieves vacations by end date.
+        /// </summary>
+        /// <param name="enddate">The end date of the vacations to retrieve (format: YYYY-MM-DD).</param>
+        /// <returns></returns>
         [HttpGet("enddate/{enddate}")]
         public async Task<IActionResult> GetVacationsByEnddate(string enddate)
         {
@@ -61,6 +84,11 @@ namespace PlanningsTool.API.Controllers
         }
 
         // GET api/Vacations/reason/{reason}
+        /// <summary>
+        /// Retrieves vacations by reason.
+        /// </summary>
+        /// <param name="reason">The reason for the vacations to retrieve.</param>
+        /// <returns></returns>
         [HttpGet("reason/{reason}")]
         public async Task<IActionResult> GetVacationsByReason(string reason)
         {
@@ -70,6 +98,10 @@ namespace PlanningsTool.API.Controllers
         }
 
         // POST api/Vacations
+        /// <summary>
+        /// Creates a new vacation.
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateVacationDTO vacation)
         {
@@ -78,6 +110,11 @@ namespace PlanningsTool.API.Controllers
         }
 
         // PUT api/Vacations
+        /// <summary>
+        /// Updates an existing vacation by its ID
+        /// </summary>
+        /// <param name="id">The ID of the vacation to update.</param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, UpdateVacationDTO vacation)
         {
@@ -90,6 +127,11 @@ namespace PlanningsTool.API.Controllers
         }
 
         // DELETE api/Vacations
+        /// <summary>
+        /// Deletes a vacation by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the vacation to delete.</param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

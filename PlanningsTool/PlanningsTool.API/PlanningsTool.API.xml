@@ -1,0 +1,364 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PlanningsTool.API</name>
+    </assembly>
+    <members>
+        <member name="M:PlanningsTool.API.Controllers.HolidaysController.GetAll">
+            <summary>
+            Retrieves all holidays.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.HolidaysController.GetById(System.Int32)">
+            <summary>
+            Retrieves a holiday by its ID.
+            </summary>
+            <param name="id">The ID of the holiday to retrieve.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.HolidaysController.GetHolidaysByDate(System.String)">
+            <summary>
+            Retrieves holidays based on a specified date.
+            </summary>
+            <param name="date">The date to filter holidays.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.HolidaysController.GetHolidaysByName(System.String)">
+            <summary>
+            Retrieves holidays by their name.
+            </summary>
+            <param name="name">The name of the holiday.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.HolidaysController.Post(System.Int32)">
+            <summary>
+            Generates holidays for a specified year.
+            </summary>
+            <param name="year">The year for which holidays are generated.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.HolidaysController.Post(PlanningsTool.Common.DTO.Holidays.CreateHolidayDTO)">
+            <summary>
+            Creates a new holiday.
+            </summary>
+            <param name="holiday">The holiday information to be created.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.HolidaysController.Put(System.Int32,PlanningsTool.Common.DTO.Holidays.UpdateHolidayDTO)">
+            <summary>
+            Updates an existing holiday.
+            </summary>
+            <param name="id">The ID of the holiday to update.</param>
+            <param name="holiday">The updated holiday information.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.HolidaysController.Delete">
+            <summary>
+            Deletes all holidays.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.HolidaysController.Delete(System.Int32)">
+            <summary>
+            Deletes a holiday by its ID.
+            </summary>
+            <param name="id">The ID of the holiday to delete.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.NursesController.GetAll">
+            <summary>
+            Retrieves all nurses.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.NursesController.GetById(System.Int32)">
+            <summary>
+            Retrieves a nurse by their ID.
+            </summary>
+            <param name="id">The ID of the nurse to retrieve.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.NursesController.GetNursesByFirstName(System.String)">
+            <summary>
+            Retrieves nurses by their first name.
+            </summary>
+            <param name="firstName">The first name of the nurse to search for.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.NursesController.GetNursesByLastName(System.String)">
+            <summary>
+            Retrieves nurses by their last name.
+            </summary>
+            <param name="lastName">The last name of the nurse to search for.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.NursesController.Post(PlanningsTool.Common.DTO.Nurses.CreateNurseDTO)">
+            <summary>
+            Creates a new nurse.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.NursesController.Put(System.Int32,PlanningsTool.Common.DTO.Nurses.UpdateNurseDTO)">
+            <summary>
+            Updates an existing nurse by their ID.
+            </summary>
+            <param name="id">The ID of the nurse to update.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.NursesController.Delete(System.Int32)">
+            <summary>
+            Deletes a nurse by their ID.
+            </summary>
+            <param name="id">The ID of the nurse to delete.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.NurseShiftsController.GetAll">
+            <summary>
+            Retrieves all nurse shifts.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.NurseShiftsController.GetById(System.Int32)">
+            <summary>
+            Retrieves a nurse shift by its ID.
+            </summary>
+            <param name="id">The ID of the nurse shift to retrieve.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.NurseShiftsController.GetNurseShiftsByDatum(System.String)">
+            <summary>
+            Retrieves nurse shifts by date.
+            </summary>
+            <param name="date">The date of the nurse shifts to retrieve (format: YYYY-MM-DD).</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.NurseShiftsController.Post(PlanningsTool.Common.DTO.NurseShifts.CreateNurseShiftDTO)">
+            <summary>
+            Creates a new nurse shift.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.NurseShiftsController.Put(System.Int32,PlanningsTool.Common.DTO.NurseShifts.UpdateNurseShiftDTO)">
+            <summary>
+            Updates an existing nurse shift by its ID.
+            </summary>
+            <param name="id">The ID of the nurse shift to update.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.NurseShiftsController.Delete(System.Int32)">
+            <summary>
+            Deletes a nurse shift by its ID.
+            </summary>
+            <param name="id">The ID of the nurse shift to delete.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.RegimeTypesController.GetAll">
+            <summary>
+            Retrieves all regime types.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.RegimeTypesController.GetById(System.Int32)">
+            <summary>
+            Retrieves a regime type by its ID.
+            </summary>
+            <param name="id">The ID of the regime type to retrieve.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.RegimeTypesController.GetRegimeTypesByName(System.String)">
+            <summary>
+            Retrieves regime types by name.
+            </summary>
+            <param name="name">The name of the regime type to search for.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.RegimeTypesController.GetRegimeTypesByCountHours(System.String)">
+            <summary>
+            Retrieves regime types by count of hours.
+            </summary>
+            <param name="countHours">The count of hours of the regime type to search for.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.ShiftsController.GetAll">
+            <summary>
+            Retrieves all shifts.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.ShiftsController.GetById(System.Int32)">
+            <summary>
+            Retrieves a shift by its ID
+            </summary>
+            <param name="id">The ID of the shift to retrieve.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.ShiftsController.GetShiftsByStarttime(System.String)">
+            <summary>
+            Retrieves shifts by start time.
+            </summary>
+            <param name="starttime">The start time of the shifts to retrieve (format: HH:mm:ss).</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.ShiftsController.GetShiftsByEndtime(System.String)">
+            <summary>
+            Retrieves shifts by end time.
+            </summary>
+            <param name="endtime">The end time of the shifts to retrieve (format: HH:mm:ss).</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.ShiftTypesController.GetAll">
+            <summary>
+            Retrieves all shift types.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.ShiftTypesController.GetById(System.Int32)">
+            <summary>
+            Retrieves a shift type by its ID.
+            </summary>
+            <param name="id">The ID of the shift type to retrieve.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.ShiftTypesController.GetShiftTypesByNaam(System.String)">
+            <summary>
+            Retrieves shift types by name.
+            </summary>
+            <param name="name">The name of the shift type to search for.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.TeamplansController.GetAll">
+            <summary>
+            Retrieves all team plans.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.TeamplansController.GetById(System.Int32)">
+            <summary>
+            Retrieves a team plan by its ID.
+            </summary>
+            <param name="id">The ID of the team plan to retrieve.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.TeamplansController.GetTeamplansByMonth(System.String)">
+            <summary>
+            Retrieves team plans by month.
+            </summary>
+            <param name="month">The month of the team plans to retrieve (format: YYYY-MM).</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.TeamplansController.Post(PlanningsTool.Common.DTO.Teamplans.CreateTeamplanDTO)">
+            <summary>
+            Creates a new team plan.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.TeamplansController.Put(System.Int32,PlanningsTool.Common.DTO.Teamplans.UpdateTeamplanDTO)">
+            <summary>
+            Updates an existing team plan by its ID
+            </summary>
+            <param name="id">The ID of the team plan to update.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.TeamplansController.Delete(System.Int32)">
+            <summary>
+            Deletes a team plan by its ID.
+            </summary>
+            <param name="id">The ID of the team plan to delete.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.TeamsController.GetAll">
+            <summary>
+            Retrieves all teams.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.TeamsController.GetById(System.Int32)">
+            <summary>
+            Retrieves a team by its ID.
+            </summary>
+            <param name="id">The ID of the team to retrieve.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.TeamsController.Post(PlanningsTool.Common.DTO.Teams.CreateTeamDTO)">
+            <summary>
+            Creates a new team.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.TeamsController.Put(System.Int32,PlanningsTool.Common.DTO.Teams.UpdateTeamDTO)">
+            <summary>
+            Updates an existing team by its ID.
+            </summary>
+            <param name="id">The ID of the team to update</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.TeamsController.Delete(System.Int32)">
+            <summary>
+            Deletes a team by its ID.
+            </summary>
+            <param name="id">The ID of the team to delete.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.VacationsController.GetAll">
+            <summary>
+            Retrieves all vacations.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.VacationsController.GetAllDetails">
+            <summary>
+            Retrieves all vacations with additional details.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.VacationsController.GetById(System.Int32)">
+            <summary>
+            Retrieves a vacation by its ID.
+            </summary>
+            <param name="id">The ID of the vacation to retrieve.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.VacationsController.GetVacationsByStartdate(System.String)">
+            <summary>
+            Retrieves vacations by start date.
+            </summary>
+            <param name="startdate">The start date of the vacations to retrieve (format: YYYY-MM-DD).</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.VacationsController.GetVacationsByEnddate(System.String)">
+            <summary>
+            Retrieves vacations by end date.
+            </summary>
+            <param name="enddate">The end date of the vacations to retrieve (format: YYYY-MM-DD).</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.VacationsController.GetVacationsByReason(System.String)">
+            <summary>
+            Retrieves vacations by reason.
+            </summary>
+            <param name="reason">The reason for the vacations to retrieve.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.VacationsController.Post(PlanningsTool.Common.DTO.Vacations.CreateVacationDTO)">
+            <summary>
+            Creates a new vacation.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.VacationsController.Put(System.Int32,PlanningsTool.Common.DTO.Vacations.UpdateVacationDTO)">
+            <summary>
+            Updates an existing vacation by its ID
+            </summary>
+            <param name="id">The ID of the vacation to update.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.VacationsController.Delete(System.Int32)">
+            <summary>
+            Deletes a vacation by its ID.
+            </summary>
+            <param name="id">The ID of the vacation to delete.</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

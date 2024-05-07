@@ -15,7 +15,11 @@ namespace PlanningsTool.API.Controllers
             _nurseShiftsServices = nurseShiftsServices;
         }
 
-        // GET api/Zorgkundigen
+        // GET api/NurseShifts
+        /// <summary>
+        /// Retrieves all nurse shifts.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -24,7 +28,12 @@ namespace PlanningsTool.API.Controllers
             return Ok(nurseShifts);
         }
 
-        // GET api/Zorgkundigen/{id}
+        // GET api/NurseShifts/{id}
+        /// <summary>
+        /// Retrieves a nurse shift by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the nurse shift to retrieve.</param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -34,6 +43,11 @@ namespace PlanningsTool.API.Controllers
         }
 
         // GET api/NurseShifts/date/{date}
+        /// <summary>
+        /// Retrieves nurse shifts by date.
+        /// </summary>
+        /// <param name="date">The date of the nurse shifts to retrieve (format: YYYY-MM-DD).</param>
+        /// <returns></returns>
         [HttpGet("date/{date}")]
         public async Task<IActionResult> GetNurseShiftsByDatum(string date)
         {
@@ -43,6 +57,10 @@ namespace PlanningsTool.API.Controllers
         }
 
         // POST api/NurseShifts
+        /// <summary>
+        /// Creates a new nurse shift.
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateNurseShiftDTO nurseShift)
         {
@@ -51,6 +69,11 @@ namespace PlanningsTool.API.Controllers
         }
 
         // PUT api/NurseShifts
+        /// <summary>
+        /// Updates an existing nurse shift by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the nurse shift to update.</param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, UpdateNurseShiftDTO nurseShift)
         {
@@ -63,6 +86,11 @@ namespace PlanningsTool.API.Controllers
         }
 
         // DELETE api/NurseShifts
+        /// <summary>
+        /// Deletes a nurse shift by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the nurse shift to delete.</param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

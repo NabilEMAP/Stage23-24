@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PlanningsTool.API</name>
+    </assembly>
+    <members>
+        <member name="M:PlanningsTool.API.Controllers.HolidaysController.GetAll">
+            <summary>
+            Returns all Holidays
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.HolidaysController.GetById(System.Int32)">
+            <summary>
+            Returns a Holiday for a given id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

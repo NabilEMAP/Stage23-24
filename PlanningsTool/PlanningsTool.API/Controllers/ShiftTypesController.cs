@@ -15,6 +15,10 @@ namespace PlanningsTool.API.Controllers
         }
 
         // GET api/ShiftTypes
+        /// <summary>
+        /// Retrieves all shift types.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -24,6 +28,11 @@ namespace PlanningsTool.API.Controllers
         }
 
         // GET api/ShiftTypes/{id}
+        /// <summary>
+        /// Retrieves a shift type by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the shift type to retrieve.</param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -33,6 +42,11 @@ namespace PlanningsTool.API.Controllers
         }
 
         // GET api/ShiftTypes/name/{name}
+        /// <summary>
+        /// Retrieves shift types by name.
+        /// </summary>
+        /// <param name="name">The name of the shift type to search for.</param>
+        /// <returns></returns>
         [HttpGet("name/{name}")]
         public async Task<IActionResult> GetShiftTypesByNaam(string name)
         {

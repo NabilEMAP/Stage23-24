@@ -16,6 +16,10 @@ namespace PlanningsTool.API.Controllers
         }
 
         // GET api/Shifts
+        /// <summary>
+        /// Retrieves all shifts.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -25,6 +29,11 @@ namespace PlanningsTool.API.Controllers
         }
 
         // GET api/Shifts/{id}
+        /// <summary>
+        /// Retrieves a shift by its ID
+        /// </summary>
+        /// <param name="id">The ID of the shift to retrieve.</param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -34,6 +43,11 @@ namespace PlanningsTool.API.Controllers
         }
 
         // GET api/Shifts/starttime/{starttime}
+        /// <summary>
+        /// Retrieves shifts by start time.
+        /// </summary>
+        /// <param name="starttime">The start time of the shifts to retrieve (format: HH:mm:ss).</param>
+        /// <returns></returns>
         [HttpGet("starttime/{starttime}")]
         public async Task<IActionResult> GetShiftsByStarttime(string starttime)
         {
@@ -43,6 +57,11 @@ namespace PlanningsTool.API.Controllers
         }
 
         // GET api/Shifts/endtime/{endtime}
+        /// <summary>
+        /// Retrieves shifts by end time.
+        /// </summary>
+        /// <param name="endtime">The end time of the shifts to retrieve (format: HH:mm:ss).</param>
+        /// <returns></returns>
         [HttpGet("endtime/{endtime}")]
         public async Task<IActionResult> GetShiftsByEndtime(string endtime)
         {

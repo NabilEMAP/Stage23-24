@@ -18,6 +18,10 @@ namespace PlanningsTool.API.Controllers
         }
 
         // GET api/Holidays
+        /// <summary>
+        /// Retrieves all holidays.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -27,6 +31,11 @@ namespace PlanningsTool.API.Controllers
         }
 
         // GET api/Holidays/{id}
+        /// <summary>
+        /// Retrieves a holiday by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the holiday to retrieve.</param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -36,6 +45,11 @@ namespace PlanningsTool.API.Controllers
         }
 
         // GET api/Holidays/date/{date}
+        /// <summary>
+        /// Retrieves holidays based on a specified date.
+        /// </summary>
+        /// <param name="date">The date to filter holidays.</param>
+        /// <returns></returns>
         [HttpGet("date/{date}")]
         public async Task<IActionResult> GetHolidaysByDate(string date)
         {
@@ -45,6 +59,11 @@ namespace PlanningsTool.API.Controllers
         }
 
         // GET api/Holidays/name/{name}
+        /// <summary>
+        /// Retrieves holidays by their name.
+        /// </summary>
+        /// <param name="name">The name of the holiday.</param>
+        /// <returns></returns>
         [HttpGet("name/{name}")]
         public async Task<IActionResult> GetHolidaysByName(string name)
         {
@@ -54,21 +73,24 @@ namespace PlanningsTool.API.Controllers
         }
 
         // POST api/Holidays
+        /// <summary>
+        /// Generates holidays for a specified year.
+        /// </summary>
+        /// <param name="year">The year for which holidays are generated.</param>
+        /// <returns></returns>
         [HttpPost("generate")]
         public async Task<IActionResult> Post(int year)
         {
-            //try
-            //{
             await _holidaysServices.Generate(year);
-            //}
-            //catch (Exception ex)
-            //{
-            //    return NotFound(ex.Message);
-            //}
             return Ok(year);
         }
 
         // POST api/Holidays
+        /// <summary>
+        /// Creates a new holiday.
+        /// </summary>
+        /// <param name="holiday">The holiday information to be created.</param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateHolidayDTO holiday)
         {
@@ -77,6 +99,12 @@ namespace PlanningsTool.API.Controllers
         }
 
         // PUT api/Vacations
+        /// <summary>
+        /// Updates an existing holiday.
+        /// </summary>
+        /// <param name="id">The ID of the holiday to update.</param>
+        /// <param name="holiday">The updated holiday information.</param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, UpdateHolidayDTO holiday)
         {
@@ -89,6 +117,10 @@ namespace PlanningsTool.API.Controllers
         }
 
         // DELETE api/Holidays
+        /// <summary>
+        /// Deletes all holidays.
+        /// </summary>
+        /// <returns></returns>
         [HttpDelete("clear")]
         public async Task<IActionResult> Delete()
         {
@@ -102,6 +134,11 @@ namespace PlanningsTool.API.Controllers
         }
 
         // DELETE api/Holidays
+        /// <summary>
+        /// Deletes a holiday by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the holiday to delete.</param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
