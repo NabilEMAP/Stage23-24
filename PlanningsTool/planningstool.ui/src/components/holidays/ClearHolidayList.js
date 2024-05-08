@@ -15,7 +15,7 @@ function ClearHolidayList(props) {
     }, []);
 
     const handlePostClear = () => {
-        const API = `${API_BASE_URL}/Holidays`;
+        const API = `${API_BASE_URL}/Holidays/clear`;
         axios.delete(API)
             .then(() => {
                 toast.error('Feestdag lijst is verwijderd');

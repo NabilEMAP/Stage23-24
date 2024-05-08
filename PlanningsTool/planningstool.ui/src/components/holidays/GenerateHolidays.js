@@ -16,7 +16,7 @@ function GenerateHolidays(props) {
   }, []);
 
   const handleCreate = () => {
-    const API = `${API_BASE_URL}/Holidays?year=${year}`;
+    const API = `${API_BASE_URL}/Holidays/generate?year=${year}`;
     axios.post(API)
       .then(() => {
         props.onUpdate();
@@ -25,8 +25,12 @@ function GenerateHolidays(props) {
         handleClose();
       })
       .catch((error) => {
-        toast.warning(`${error.response.data}`);
-        clear();
+        if (error.response.status === 400) {
+          toast.warning('Zie dat de gegevens correct ingevuld zijn');
+        } else {
+          toast.warning(`${error.response.data.Message}`);
+        }
+        console.log(JSON.stringify(error));
       })
   }
 
