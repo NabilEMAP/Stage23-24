@@ -18,10 +18,13 @@ function AddNurseShift(props) {
   const [data, setData] = useState([]);
   const [nurseData, setNurseData] = useState([]);
   const [shiftData, setShiftData] = useState([]);
+  const [teamId, setTeamId] = useState('');
+  const [teamData, setTeamData] = useState([]);
+  const [nurseSelectDisabled, setNurseSelectDisabled] = useState(true);
 
   useEffect(() => {
     getData();
-    getNurseData();
+    getTeamData();
     getShiftData();
   }, []);
 
@@ -36,8 +39,19 @@ function AddNurseShift(props) {
       })
   }
 
-  const getNurseData = () => {
-    const API = `${API_BASE_URL}/Nurses`;
+  const getTeamData = () => {
+    const API = `${API_BASE_URL}/Teams`;
+    axios.get(API)
+      .then((result) => {
+        setTeamData(result.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
+  const getNurseData = (teamId) => {
+    const API = `${API_BASE_URL}/Nurses?teamId=${teamId}`;
     axios.get(API)
       .then((result) => {
         setNurseData(result.data);
@@ -59,10 +73,24 @@ function AddNurseShift(props) {
   }
 
   const handleCreate = () => {
+    const errorMessages = [];
+
+    if (!date) errorMessages.push('Datum mag niet leeg zijn');
+    if (!teamId) errorMessages.push('Team mag niet leeg zijn');
+    if (!nurseId) errorMessages.push('Zorgkundige mag niet leeg zijn');
+    if (!shiftId) errorMessages.push('Shift mag niet leeg zijn');
+
+    if (errorMessages.length > 0) {
+      const errorMessage = errorMessages.join('\n');
+      toast.warning(errorMessage);
+      return;
+    }
+
     const API = `${API_BASE_URL}/NurseShifts`;
     const data =
     {
       "date": date,
+      "teamId": teamId,
       "nurseId": nurseId,
       "shiftId": shiftId,
       "teamplanId": 1 //ik ga die even op 1 houden (hardcoded)
@@ -73,7 +101,6 @@ function AddNurseShift(props) {
         toast.success('Nurse shift is toegevoegd');
         clear();
         handleClose();
-        console.log(data);
       })
       .catch((error) => {
         if (error.response.status === 400) {
@@ -89,12 +116,22 @@ function AddNurseShift(props) {
 
   const clear = () => {
     //setDate('');
+    setTeamId('');
     setNurseId('');
     setShiftId('');
   }
 
+  const renderTeam = () => {
+    return teamData.map((item) => (
+      <MenuItem key={item.id} value={item.id}>
+        {item.teamName}
+      </MenuItem>
+    ));
+  }
+
   const renderNurse = () => {
-    return nurseData.map((item) => (
+    const filteredNurses = nurseData.filter(nurse => nurse.teamId === teamId);
+    return filteredNurses.map((item) => (
       <MenuItem key={item.id} value={item.id}>{
         item.firstName + ' ' +
         item.lastName + ' (' +
@@ -117,6 +154,14 @@ function AddNurseShift(props) {
     const date = new Date(`2000-01-01T${timeString}`);
     return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   };
+
+  const handleTeamChange = (e) => {
+    const selectedTeamId = e.target.value;
+    setTeamId(selectedTeamId);
+    setNurseId('');
+    setNurseSelectDisabled(false);
+    getNurseData(selectedTeamId);
+  }
 
   return (
     <>
@@ -141,12 +186,26 @@ function AddNurseShift(props) {
             spacing={4}
           >
             <FormControl style={{ width: '75%' }}>
+              <InputLabel>Teams *</InputLabel>
+              <Select
+                required
+                id="selectTeam"
+                label="Team"
+                value={teamId}
+                onChange={handleTeamChange}
+              >
+                {renderTeam()}
+              </Select>
+            </FormControl>
+            <FormControl style={{ width: '75%' }}>
               <InputLabel>Zorgkundige *</InputLabel>
               <Select
                 required
+                id="selectNurse"
                 label="Zorgkundige"
                 value={nurseId}
                 onChange={(e) => setNurseId(e.target.value)}
+                disabled={nurseSelectDisabled}
               >
                 {renderNurse()}
               </Select>
@@ -155,6 +214,7 @@ function AddNurseShift(props) {
               <InputLabel>Shift *</InputLabel>
               <Select
                 required
+                id="selectShift"
                 label="Shift"
                 value={shiftId}
                 onChange={(e) => setShiftId(e.target.value)}
@@ -165,6 +225,7 @@ function AddNurseShift(props) {
             <FormControl style={{ width: '75%' }}>
               <DatePicker slotProps={{ textField: { error: false } }}
                 required
+                id="txtInputDate"
                 label="Datum *"
                 onChange={(e) => setDate(dayjs(e).format('YYYY-MM-DD'))}
               />

@@ -21,9 +21,12 @@ function DeleteNurseShift(props) {
   const [data, setData] = useState([]);
   const [nurseData, setNurseData] = useState([]);
   const [shiftData, setShiftData] = useState([]);
+  const [teamId, setTeamId] = useState('');
+  const [teamData, setTeamData] = useState([]);
 
   useEffect(() => {
     getData();
+    getTeamData();
     getNurseData();
     getShiftData();
   }, []);
@@ -39,8 +42,19 @@ function DeleteNurseShift(props) {
       })
   }
 
-  const getNurseData = () => {
-    const API = `${API_BASE_URL}/Nurses`;
+  const getTeamData = () => {
+    const API = `${API_BASE_URL}/Teams`;
+    axios.get(API)
+      .then((result) => {
+        setTeamData(result.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
+  const getNurseData = (teamId) => {
+    const API = `${API_BASE_URL}/Nurses?teamId=${teamId}`;
     axios.get(API)
       .then((result) => {
         setNurseData(result.data);
@@ -72,6 +86,8 @@ function DeleteNurseShift(props) {
     axios.get(API)
       .then((result) => {
         setDate(dayjs(result.data.date).format('DD/MM/YYYY'));
+        const team = teamData.find((item) => item.id === result.data.nurse.teamId);
+        setTeamId(team ? team.teamName : '');
         const nurse = nurseData.find((item) => item.id === result.data.nurseId);
         setNurseId(nurse ?
           nurse.firstName + " " +
@@ -126,6 +142,8 @@ function DeleteNurseShift(props) {
           >
             <h6>Ben je zeker dat je deze zorgkundige shift wilt verwijderen?</h6>
             <FormControl style={{ width: '75%' }}>
+              <h4>Team</h4>
+              <p id="team" value={teamId}>{teamId}</p>
               <h4>Zorgkundige</h4>
               <p id="nurse" value={nurseId}>{nurseId}</p>
               <h4>Shift</h4>

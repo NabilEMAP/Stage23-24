@@ -15,10 +15,12 @@ import { useParams } from 'react-router-dom';
 function NursePage() {
     const { teamId } = useParams();
     const [data, setData] = useState([]);
+    const [teamName, setTeamName] = useState('');
 
     useEffect(() => {
         if (teamId) {
             getData(teamId);
+            getTeamName(teamId);
         }
     }, [teamId]);
 
@@ -39,6 +41,17 @@ function NursePage() {
                 console.log(error);
             });
     }
+
+    const getTeamName = (teamId) => {
+        const teamAPI = `${API_BASE_URL}/Teams/${teamId}`;
+        axios.get(teamAPI)
+            .then((result) => {
+                setTeamName(result.data.teamName);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
 
     const showIsFixedNight = (params) => {
         return params.value ? (
@@ -71,11 +84,6 @@ function NursePage() {
             renderCell: showIsFixedNight,
         },
         {
-            field: 'teamId',
-            headerName: 'Team Id',
-            flex: 1,
-        },
-        {
             field: 'actions',
             headerName: 'Veranderingen',
             flex: 1,
@@ -89,14 +97,13 @@ function NursePage() {
         lastName: item.lastName,
         regimeType: item.regimeType.name,
         isFixedNight: item.isFixedNight,
-        teamId: item.teamId,
     }));
 
     return (
         <Fragment>
             <Container>
                 <div style={{ margin: '24px 0px' }}>
-                    <Typography variant="h5" style={{ width: 'fit-content', verticalAlign: 'sub', display: 'inline-block' }}>Zorgkundige Lijst</Typography>
+                    <Typography variant="h5" style={{ width: 'fit-content', verticalAlign: 'sub', display: 'inline-block' }}>Zorgkundige Lijst van: {teamName}</Typography>
                     <AddNurse onUpdate={handleUpdate} teamId={teamId} />
                 </div>
                 <div>

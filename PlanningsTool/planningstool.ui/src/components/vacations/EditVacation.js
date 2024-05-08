@@ -23,9 +23,12 @@ function EditVacation(props) {
     const [data, setData] = useState([]);
     const [nurseData, setNurseData] = useState([]);
     const [vacationTypeData, setVacationTypeData] = useState([]);
+    const [teamId, setTeamId] = useState('');
+    const [teamData, setTeamData] = useState([]);
 
     useEffect(() => {
         getData();
+        getTeamData();
         getNurseData();
         getVacationTypeData();
     }, []);
@@ -41,8 +44,19 @@ function EditVacation(props) {
             })
     }
 
-    const getNurseData = () => {
-        const API = `${API_BASE_URL}/Nurses`;
+    const getTeamData = () => {
+        const API = `${API_BASE_URL}/Teams`;
+        axios.get(API)
+            .then((result) => {
+                setTeamData(result.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+
+    const getNurseData = (teamId) => {
+        const API = `${API_BASE_URL}/Nurses?teamId=${teamId}`;
         axios.get(API)
             .then((result) => {
                 setNurseData(result.data);
@@ -70,6 +84,7 @@ function EditVacation(props) {
             .then((result) => {
                 setStartdate(result.data.startdate);
                 setEnddate(result.data.enddate);
+                setTeamId(result.data.nurse.teamId);
                 setNurseId(result.data.nurseId);
                 setVacationTypeId(result.data.vacationTypeId);
                 setReason(result.data.reason);
@@ -85,6 +100,7 @@ function EditVacation(props) {
 
         if (!startdate) errorMessages.push('Startdatum mag niet leeg zijn');
         if (!enddate) errorMessages.push('Einddatum mag niet leeg zijn');
+        if (!teamId) errorMessages.push('Team mag niet leeg zijn');
         if (!nurseId) errorMessages.push('Zorgkundige mag niet leeg zijn');
         if (!vacationTypeId) errorMessages.push('Verlof mag niet leeg zijn');
 
@@ -100,6 +116,7 @@ function EditVacation(props) {
             "id": Id,
             "startdate": startdate,
             "enddate": enddate,
+            "teamId": teamId,
             "nurseId": nurseId,
             "vacationTypeId": vacationTypeId,
             "reason": reason
@@ -121,8 +138,17 @@ function EditVacation(props) {
         console.log(data);
     }
 
+    const renderTeam = () => {
+        return teamData.map((item) => (
+            <MenuItem key={item.id} value={item.id}>
+                {item.teamName}
+            </MenuItem>
+        ));
+    }
+
     const renderNurse = () => {
-        return nurseData.map((item) => (
+        const filteredNurses = nurseData.filter(nurse => nurse.teamId === teamId);
+        return filteredNurses.map((item) => (
             <MenuItem key={item.id} value={item.id}>
                 {item.firstName + ' ' + item.lastName}
             </MenuItem>
@@ -135,6 +161,13 @@ function EditVacation(props) {
                 {item.name}
             </MenuItem>
         ));
+    }
+
+    const handleTeamChange = (e) => {
+        const selectedTeamId = e.target.value;
+        setTeamId(selectedTeamId);
+        setNurseId('');
+        getNurseData(selectedTeamId);
     }
 
     return (
@@ -157,6 +190,18 @@ function EditVacation(props) {
                         alignItems="center"
                         spacing={4}
                     >
+                        <FormControl style={{ width: '75%' }}>
+                            <InputLabel>Teams *</InputLabel>
+                            <Select
+                                required
+                                id="selectTeam"
+                                label="Team"
+                                value={teamId}
+                                onChange={handleTeamChange}
+                            >
+                                {renderTeam()}
+                            </Select>
+                        </FormControl>
                         <FormControl style={{ width: '75%' }}>
                             <InputLabel>Zorgkundige *</InputLabel>
                             <Select
