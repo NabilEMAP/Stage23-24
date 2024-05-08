@@ -1,6 +1,6 @@
 import moment from "moment";
 import Calendar from "../Calendar";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../config";
 import axios from "axios";
 
@@ -61,8 +61,8 @@ function AdvancedCalendar() {
 
   const formatNurseShiftData = (data) => {
     return data.map(nurseShift => ({
-      start: moment(nurseShift.date).toDate(),
-      end: moment(nurseShift.date).toDate(),
+      start: moment(nurseShift.date).add(nurseShift.shift.starttime, 'hours').toDate(),
+      end: moment(nurseShift.date).add(nurseShift.shift.endtime, 'hours').toDate(),
       title: `Shift - ${nurseShift.nurse.firstName} ${nurseShift.nurse.lastName}`,
       data: {
         type: "Shift",
