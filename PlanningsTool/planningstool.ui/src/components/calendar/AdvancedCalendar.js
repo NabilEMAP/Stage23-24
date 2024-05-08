@@ -82,38 +82,6 @@ function AdvancedCalendar() {
   };
 
   const events = [
-    {
-      start: moment("2023-12-27T15:20:00").toDate(),
-      end: moment("2024-01-05T16:00:00").toDate(),
-      title: "UZA Opname - Ontslag",
-      data: {
-        type: "Vacation",
-      },
-    },
-    {
-      start: moment("2023-12-29T16:00:00").toDate(),
-      end: moment("2023-12-29T18:00:00").toDate(),
-      title: "UZA Medicatie herstructurering",
-      data: {
-        type: "Vacation",
-      },
-    },
-    {
-      start: moment("2024-01-17T08:20:00").toDate(),
-      end: moment("2024-01-17T09:20:00").toDate(),
-      title: "UZA Bloedafname",
-      data: {
-        type: "Holiday",
-      },
-    },
-    {
-      start: moment("2024-01-17T10:00:00").toDate(),
-      end: moment("2024-01-17T11:00:00").toDate(),
-      title: "UZA Gastro",
-      data: {
-        type: "Shift",
-      },
-    },
     ...formatVacationData(vacationData),
     ...formatNurseShiftData(nurseShiftData),
     ...formatHolidayData(holidayData),
