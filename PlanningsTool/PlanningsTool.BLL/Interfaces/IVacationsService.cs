@@ -16,5 +16,6 @@ namespace PlanningsTool.BLL.Interfaces
         public Task<bool> CheckIfExist(int nurseId, DateTime startDate, DateTime endDate);
         public Task<bool> CheckIfExist(int id, int nurseId, DateTime startDate, DateTime endDate);
         public Task<bool> CheckIfDatesOverlap(int nurseId, DateTime startDate, DateTime endDate);
+        public Task<bool> CheckIfDatesOverlap(int id, int nurseId, DateTime startDate, DateTime endDate);
     }
 }
