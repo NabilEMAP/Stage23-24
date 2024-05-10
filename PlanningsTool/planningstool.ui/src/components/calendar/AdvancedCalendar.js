@@ -11,8 +11,6 @@ function AdvancedCalendar() {
   const [vacationData, setVacationData] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [showCurrentModal, setShowCurrentModal] = useState(false);
-  const [showNewModal, setShowNewModal] = useState(false);
-  const [selectedDay, setSelectedDay] = useState(null);
 
   useEffect(() => {
     getVacationData();
@@ -51,21 +49,8 @@ function AdvancedCalendar() {
     setShowCurrentModal(true); // Open the modal when an event is selected
   };
 
-  const handleDayClick = (date) => {
-    setSelectedDay(date);
-    setShowNewModal(true); // Open the modal when a day is clicked
-  };
-
   const handleCloseModal = () => {
     setShowCurrentModal(false);
-    setShowNewModal(false);
-  };
-
-  const handleAddEvent = () => {
-    // Here you can handle adding the event for the selected day
-    console.log("Adding event for:", selectedDay);
-    // You can handle further actions like submitting data to the server or updating state
-    handleCloseModal(); // Close the modal after adding the event
   };
 
   const components = {
@@ -92,7 +77,6 @@ function AdvancedCalendar() {
         events={events}
         components={components}
         onSelectEvent={handleEventSelect}
-        onSelectSlot={handleDayClick}
       />
       <Modal show={showCurrentModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
@@ -107,19 +91,6 @@ function AdvancedCalendar() {
             </>
           )}
         </Modal.Body>
-      </Modal>
-      <Modal show={showNewModal} onHide={handleCloseModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Add Event</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p>Add event for</p>
-          
-        </Modal.Body>
-        <Modal.Footer>
-          <button onClick={handleCloseModal}>Cancel</button>
-          <button onClick={handleAddEvent} variant="contained" color="primary">Add Event</button>
-        </Modal.Footer>
       </Modal>
     </>
   );
