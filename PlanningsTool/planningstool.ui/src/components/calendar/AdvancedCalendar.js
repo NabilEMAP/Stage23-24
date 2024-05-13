@@ -2,94 +2,48 @@ import moment from "moment";
 import Calendar from "../Calendar";
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../config";
-import axios from "axios";
 import Modal from 'react-bootstrap/Modal';
-import EditVacation from '../vacations/EditVacation'
-import DeleteVacation from '../vacations/DeleteVacation'
+import { Button, FormControl, InputLabel, MenuItem, Select, Stack, TextField } from "@mui/material";
 
 function AdvancedCalendar() {
-  const [vacationData, setVacationData] = useState([]);
-  const [selectedEvent, setSelectedEvent] = useState(null);
-  const [showCurrentModal, setShowCurrentModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedSlot, setSelectedSlot] = useState(null);
 
   useEffect(() => {
-    getVacationData();
+
   }, []);
 
-  const getVacationData = () => {
-    const API = `${API_BASE_URL}/Vacations/details`;
-    axios.get(API)
-      .then((result) => {
-        setVacationData(result.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const formatVacationData = (data) => {
-    return data.map(vacation => ({
-      start: moment(vacation.startdate).toDate(),
-      end: moment(vacation.enddate).add(1, 'day').toDate(),
-      title: `Vacation - ${vacation.nurse.firstName} ${vacation.nurse.lastName}`,
-      data: {
-        type: "Vacation",
-        id: vacation.id,
-      },
-    }));
-  };
-
-  const events = [
-    ...formatVacationData(vacationData),
-  ];
-
-  const handleEventSelect = (event) => {
-    setSelectedEvent(event);
-    console.log(event.data.id);
-    setShowCurrentModal(true); // Open the modal when an event is selected
+  const handleSlotSelect = (slotInfo) => {
+    setSelectedSlot(slotInfo);
+    setShowModal(true);
   };
 
   const handleCloseModal = () => {
-    setShowCurrentModal(false);
+    setShowModal(false);
+    setSelectedSlot(null);
   };
-
-  const components = {
-    event: (props) => {
-      const eventType = props?.event?.data?.type;
-      switch (eventType) {
-        case "Vacation":
-          return (
-            <div
-              style={{ background: "orange", color: "black", height: "100%" }}
-            >
-              {props.title}
-            </div>
-          );
-        default:
-          return null;
-      }
-    },
-  };
+  
+  const handleAddEvent = () => {
+    console.log("Adding event for slot:", selectedSlot);
+    setShowModal(false);
+  }
 
   return (
     <>
       <Calendar
-        events={events}
-        components={components}
-        onSelectEvent={handleEventSelect}
+        selectable
+        onSelectSlot={handleSlotSelect}
       />
-      <Modal show={showCurrentModal} onHide={handleCloseModal}>
+      <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
-          <Modal.Title>Selected Event</Modal.Title>
+          <Modal.Title>Add Event</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {selectedEvent && (
             <>
-              <p>{selectedEvent.title}</p>
-              <EditVacation id={selectedEvent.data.id} onUpdate={getVacationData} />
-              <DeleteVacation id={selectedEvent.data.id} onUpdate={getVacationData} />
+            <p>Selected Slot: {selectedSlot && selectedSlot.start.toLocaleString()}</p>
+              <Button>Add</Button>
+              <Button>Cancel</Button>
             </>
-          )}
         </Modal.Body>
       </Modal>
     </>
