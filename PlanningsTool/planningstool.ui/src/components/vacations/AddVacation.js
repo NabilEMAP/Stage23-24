@@ -105,7 +105,9 @@ function AddVacation(props) {
         clear();
         handleClose();
         props.onUpdate();
-        props.onAddComplete();
+        if (props.onAddComplete) {
+          props.onAddComplete();
+        }
       })
       .catch((error) => {
         if (error.response.status === 400) {

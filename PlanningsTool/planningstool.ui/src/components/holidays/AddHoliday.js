@@ -9,6 +9,7 @@ import dayjs from 'dayjs';
 import { API_BASE_URL } from "../../config";
 
 function AddHoliday(props) {
+  const { selectedDateSlot } = props;
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -18,6 +19,9 @@ function AddHoliday(props) {
 
   useEffect(() => {
     getData();
+    if(selectedDateSlot){
+      setDate(dayjs(selectedDateSlot.start));
+    }
   }, []);
 
   const getData = () => {
@@ -55,7 +59,9 @@ function AddHoliday(props) {
         clear();
         handleClose();
         props.onUpdate();
-        props.onAddComplete();
+        if (props.onAddComplete){
+          props.onAddComplete();
+        }
       })
       .catch((error) => {
         if (error.response.status === 400) {
@@ -110,6 +116,7 @@ function AddHoliday(props) {
                 required
                 id="txtInputDate"
                 label="Datum *"
+                value={date}
                 onChange={(e) => setDate(dayjs(e).format('YYYY-MM-DD'))}
               />
             </FormControl>

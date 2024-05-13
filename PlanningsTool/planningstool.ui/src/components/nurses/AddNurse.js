@@ -59,14 +59,14 @@ function AddNurse(props) {
     }
 
     const API = `${API_BASE_URL}/Nurses`;
-    const data =
+    const data = 
     {
       "firstName": firstName,
       "lastName": lastName,
       "regimeTypeId": regimeTypeId,
       "isFixedNight": isFixedNight,
       "teamId": props.teamId
-    }
+  };
     axios.post(API, data)
       .then(() => {
         props.onUpdate();

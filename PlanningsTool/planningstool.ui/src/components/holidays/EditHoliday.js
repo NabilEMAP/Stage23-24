@@ -73,7 +73,9 @@ function EditHoliday(props) {
                 toast.success('Feestdag is gewijzigd');
                 handleClose();
                 props.onUpdate();
-                props.onEditComplete();
+                if (props.onEditComplete) {
+                    props.onEditComplete();
+                }
             })
             .catch((error) => {
                 if (error.response.status === 400) {

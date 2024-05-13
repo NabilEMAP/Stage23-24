@@ -55,7 +55,9 @@ function DeleteHoliday(props) {
                 toast.error('Feestdag is verwijderd');
                 handleClose();
                 props.onUpdate();
-                props.onDeleteComplete();
+                if (props.onDeleteComplete) {
+                    props.onDeleteComplete();
+                }
             })
             .catch((error) => {
                 toast.warning(`${error}`);

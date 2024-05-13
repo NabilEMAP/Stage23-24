@@ -98,7 +98,9 @@ function AddNurseShift(props) {
     axios.post(API, data)
       .then(() => {
         props.onUpdate();
-        props.onAddComplete();
+        if (props.onAddComplete) {
+          props.onAddComplete();
+        }
         toast.success('Nurse shift is toegevoegd');
         clear();
         handleClose();

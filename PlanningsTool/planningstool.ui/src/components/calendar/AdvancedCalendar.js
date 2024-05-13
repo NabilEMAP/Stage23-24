@@ -158,7 +158,7 @@ function AdvancedCalendar() {
       />
       <Modal show={showCurrentEvent} onSelectUpdate={handleCloseModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
-          <Modal.Title>Selected Event</Modal.Title>
+          <Modal.Title>Huidige planning</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {selectedEvent && (
@@ -210,7 +210,7 @@ function AdvancedCalendar() {
           )}
         </Modal.Body>
       </Modal>
-      <Modal show={showNewEvent} onSelectAdd={handleCloseModal} onHide={handleCloseModal}>
+      <Modal show={showNewEvent} onHide={handleCloseModal}>
         <Modal.Header closeButton>
           <Modal.Title>Planning aanmaken</Modal.Title>
         </Modal.Header>
@@ -239,6 +239,7 @@ function AdvancedCalendar() {
               <AddHoliday
                 onUpdate={getHolidayData}
                 onAddComplete={handleCloseModal}
+                selectedDateSlot={selectedDateSlot}
               />
             </FormControl>
           </Stack>

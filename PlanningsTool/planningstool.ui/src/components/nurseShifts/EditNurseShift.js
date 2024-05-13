@@ -119,7 +119,9 @@ function EditNurseShift(props) {
       .then(() => {
         toast.success('Zorgkundige is gewijzigd');
         props.onUpdate();
-        props.onEditComplete();
+        if (props.onEditComplete) {
+          props.onEditComplete();
+        }
         handleClose();
       })
       .catch((error) => {
