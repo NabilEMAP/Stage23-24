@@ -20,6 +20,7 @@ namespace PlanningsTool.BLL
         {
             CreateMap<Holiday, HolidayDTO>().ReverseMap();
             CreateMap<Holiday, CreateHolidayDTO>().ReverseMap();
+            CreateMap<Holiday, UpdateHolidayDTO>().ReverseMap();
 
             CreateMap<Nurse, NurseDTO>().ReverseMap();
             CreateMap<Nurse, CreateNurseDTO>().ReverseMap();
