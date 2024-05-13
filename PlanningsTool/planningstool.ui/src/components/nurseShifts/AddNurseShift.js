@@ -9,6 +9,7 @@ import dayjs from 'dayjs';
 import { API_BASE_URL } from "../../config";
 
 function AddNurseShift(props) {
+  const { selectedDateSlot } = props;
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -26,6 +27,9 @@ function AddNurseShift(props) {
     getData();
     getTeamData();
     getShiftData();
+    if(selectedDateSlot){
+      setDate(dayjs(selectedDateSlot.start));
+    }
   }, []);
 
   const getData = () => {
@@ -89,7 +93,7 @@ function AddNurseShift(props) {
     const API = `${API_BASE_URL}/NurseShifts`;
     const data =
     {
-      "date": date,
+      "date": dayjs(date).format('YYYY-MM-DD'),
       "teamId": teamId,
       "nurseId": nurseId,
       "shiftId": shiftId,
@@ -230,6 +234,7 @@ function AddNurseShift(props) {
                 required
                 id="txtInputDate"
                 label="Datum *"
+                value={date}
                 onChange={(e) => setDate(dayjs(e).format('YYYY-MM-DD'))}
               />
             </FormControl>

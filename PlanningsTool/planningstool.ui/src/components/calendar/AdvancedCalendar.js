@@ -227,12 +227,14 @@ function AdvancedCalendar() {
               <AddVacation
                 onUpdate={getVacationData}
                 onAddComplete={handleCloseModal}
+                selectedDateSlot={selectedDateSlot}
               />
             </FormControl>
             <FormControl style={{ width: '75%' }}>
               <AddNurseShift
                 onUpdate={getNurseShiftData}
                 onAddComplete={handleCloseModal}
+                selectedDateSlot={selectedDateSlot}
               />
             </FormControl>
             <FormControl style={{ width: '75%' }}>

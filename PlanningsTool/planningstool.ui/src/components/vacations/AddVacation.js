@@ -9,6 +9,7 @@ import dayjs from 'dayjs';
 import { API_BASE_URL } from "../../config";
 
 function AddVacation(props) {
+  const { selectedDateSlot } = props;
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -28,6 +29,10 @@ function AddVacation(props) {
     getData();
     getTeamData();
     getVacationTypeData();
+    if(selectedDateSlot){
+      setStartdate(dayjs(selectedDateSlot.start));
+      setEnddate(dayjs(selectedDateSlot.start));
+    }
   }, []);
 
   const getData = () => {
@@ -214,6 +219,7 @@ function AddVacation(props) {
                 required
                 id="txtInputStartDate"
                 label="Startdatum *"
+                value={startdate}
                 onChange={(e) => setStartdate(dayjs(e).format('YYYY-MM-DD'))}
               />
             </FormControl>
@@ -222,6 +228,7 @@ function AddVacation(props) {
                 required
                 id="txtInputEndDate"
                 label="Einddatum *"
+                value={enddate}
                 onChange={(e) => setEnddate(dayjs(e).format('YYYY-MM-DD'))}
               />
             </FormControl>
