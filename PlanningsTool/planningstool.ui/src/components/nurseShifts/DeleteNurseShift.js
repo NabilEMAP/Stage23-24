@@ -113,6 +113,7 @@ function DeleteNurseShift(props) {
       .then(() => {
         toast.error('Nurse shift is verwijderd');
         props.onUpdate();
+        props.onDeleteComplete();
         handleClose();
       })
       .catch((error) => {

@@ -105,6 +105,7 @@ function DeleteVacation(props) {
                 toast.error('Verlof is verwijderd');
                 handleClose();
                 props.onUpdate();
+                props.onDeleteComplete();
             })
             .catch((error) => {
                 toast.warning(`${error}`);

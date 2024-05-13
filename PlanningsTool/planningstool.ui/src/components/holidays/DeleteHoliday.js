@@ -32,7 +32,7 @@ function DeleteHoliday(props) {
             .catch((error) => {
                 console.log(error);
             })
-    } 
+    }
 
     const handleDelete = (id) => {
         handleShow();
@@ -55,6 +55,7 @@ function DeleteHoliday(props) {
                 toast.error('Feestdag is verwijderd');
                 handleClose();
                 props.onUpdate();
+                props.onDeleteComplete();
             })
             .catch((error) => {
                 toast.warning(`${error}`);
@@ -77,9 +78,10 @@ function DeleteHoliday(props) {
                 <Modal.Body>
                     <Stack
                         direction="column"
-                        justifyContent="center"
+                        justifyContent="top-center"
                         alignItems="center"
                         spacing={4}
+                        style={{ height: '250px' }}
                     >
                         <h6>Ben je zeker dat je dit feestdag wilt verwijderen?</h6>
                         <FormControl style={{ width: '75%' }}>

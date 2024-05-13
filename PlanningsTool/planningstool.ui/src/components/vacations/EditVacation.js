@@ -126,6 +126,7 @@ function EditVacation(props) {
                 toast.success('Verlof is gewijzigd');
                 handleClose();
                 props.onUpdate();
+                props.onEditComplete();
             })
             .catch((error) => {
                 if (error.response.status === 400) {

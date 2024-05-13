@@ -156,7 +156,7 @@ function AdvancedCalendar() {
         onSelectSlot={handleSlotSelect}
         selectable
       />
-      <Modal show={showCurrentEvent} onHide={handleCloseModal}>
+      <Modal show={showCurrentEvent} onSelectUpdate={handleCloseModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
           <Modal.Title>Selected Event</Modal.Title>
         </Modal.Header>
@@ -166,40 +166,81 @@ function AdvancedCalendar() {
               <p>{selectedEvent.title}</p>
               {selectedEvent.data.type === "Vacation" && (
                 <>
-                  <EditVacation id={selectedEvent.data.id} onUpdate={getVacationData} />
-                  <DeleteVacation id={selectedEvent.data.id} onUpdate={getVacationData} />
+                  <EditVacation
+                    id={selectedEvent.data.id}
+                    onUpdate={getVacationData}
+                    onEditComplete={handleCloseModal}
+                  />
+                  <DeleteVacation
+                    id={selectedEvent.data.id}
+                    onUpdate={getVacationData}
+                    onDeleteComplete={handleCloseModal}
+                  />
                 </>
               )}
               {selectedEvent.data.type === "Shift" && (
                 <>
-                  <EditNurseShift id={selectedEvent.data.id} onUpdate={getNurseShiftData} />
-                  <DeleteNurseShift id={selectedEvent.data.id} onUpdate={getNurseShiftData} />
+                  <EditNurseShift
+                    id={selectedEvent.data.id}
+                    onUpdate={getNurseShiftData}
+                    onEditComplete={handleCloseModal}
+                  />
+                  <DeleteNurseShift
+                    id={selectedEvent.data.id}
+                    onUpdate={getNurseShiftData}
+                    onDeleteComplete={handleCloseModal}
+                  />
                 </>
               )}
               {selectedEvent.data.type === "Holiday" && (
                 <>
-                  <EditHoliday id={selectedEvent.data.id} onUpdate={getHolidayData} />
-                  <DeleteHoliday id={selectedEvent.data.id} onUpdate={getHolidayData} />
+                  <EditHoliday
+                    id={selectedEvent.data.id}
+                    onUpdate={getHolidayData}
+                    onEditComplete={handleCloseModal}
+                  />
+                  <DeleteHoliday
+                    id={selectedEvent.data.id}
+                    onUpdate={getHolidayData}
+                    onDeleteComplete={handleCloseModal}
+                  />
                 </>
               )}
             </>
           )}
         </Modal.Body>
       </Modal>
-      <Modal show={showNewEvent} onHide={handleCloseModal}>
+      <Modal show={showNewEvent} onSelectAdd={handleCloseModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
-          <Modal.Title>Add Event</Modal.Title>
+          <Modal.Title>Planning aanmaken</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <p>Selected Slot: {selectedDateSlot && selectedDateSlot.start.toLocaleString()}</p>
           <Stack
             direction="column"
             justifyContent="center"
             alignItems="center"
             spacing={4}
+            style={{ height: '250px' }}
           >
-            <FormControl style={{ width: '50%' }}><AddVacation /></FormControl>
-            <FormControl style={{ width: '50%' }}><AddNurseShift /></FormControl>
-            <FormControl style={{ width: '50%' }}><AddHoliday /></FormControl>
+            <FormControl style={{ width: '75%' }}>
+              <AddVacation
+                onUpdate={getVacationData}
+                onAddComplete={handleCloseModal}
+              />
+            </FormControl>
+            <FormControl style={{ width: '75%' }}>
+              <AddNurseShift
+                onUpdate={getNurseShiftData}
+                onAddComplete={handleCloseModal}
+              />
+            </FormControl>
+            <FormControl style={{ width: '75%' }}>
+              <AddHoliday
+                onUpdate={getHolidayData}
+                onAddComplete={handleCloseModal}
+              />
+            </FormControl>
           </Stack>
         </Modal.Body>
       </Modal>

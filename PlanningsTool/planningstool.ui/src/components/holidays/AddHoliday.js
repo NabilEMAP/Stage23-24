@@ -55,6 +55,7 @@ function AddHoliday(props) {
         clear();
         handleClose();
         props.onUpdate();
+        props.onAddComplete();
       })
       .catch((error) => {
         if (error.response.status === 400) {
@@ -90,9 +91,10 @@ function AddHoliday(props) {
         <Modal.Body>
           <Stack
             direction="column"
-            justifyContent="center"
+            justifyContent="top-center"
             alignItems="center"
             spacing={4}
+            style={{ height: '250px' }}
           >
             <TextField style={{ width: '75%' }}
               required

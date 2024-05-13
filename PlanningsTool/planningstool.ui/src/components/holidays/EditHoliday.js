@@ -51,7 +51,7 @@ function EditHoliday(props) {
     const handleUpdate = () => {
         const errorMessages = [];
 
-        if (!name) errorMessages.push('Nama mag niet leeg zijn');
+        if (!name) errorMessages.push('Naam mag niet leeg zijn');
         if (!date) errorMessages.push('Datum mag niet leeg zijn');
 
 
@@ -73,6 +73,7 @@ function EditHoliday(props) {
                 toast.success('Feestdag is gewijzigd');
                 handleClose();
                 props.onUpdate();
+                props.onEditComplete();
             })
             .catch((error) => {
                 if (error.response.status === 400) {
@@ -101,9 +102,10 @@ function EditHoliday(props) {
                 <Modal.Body>
                     <Stack
                         direction="column"
-                        justifyContent="center"
+                        justifyContent="top-center"
                         alignItems="center"
                         spacing={4}
+                        style={{ height: '250px' }}
                     >
                         <TextField style={{ width: '75%' }}
                             required
