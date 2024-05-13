@@ -4,10 +4,14 @@ import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../config";
 import axios from "axios";
 import Modal from 'react-bootstrap/Modal';
+import { Button, FormControl, InputLabel, MenuItem, Select, Stack, TextField } from "@mui/material";
+import AddVacation from '../vacations/AddVacation';
 import EditVacation from '../vacations/EditVacation';
 import DeleteVacation from '../vacations/DeleteVacation';
+import AddNurseShift from '../nurseShifts/AddNurseShift';
 import EditNurseShift from '../nurseShifts/EditNurseShift';
 import DeleteNurseShift from '../nurseShifts/DeleteNurseShift';
+import AddHoliday from '../holidays/AddHoliday';
 import EditHoliday from '../holidays/EditHoliday';
 import DeleteHoliday from '../holidays/DeleteHoliday';
 
@@ -16,7 +20,9 @@ function AdvancedCalendar() {
   const [nurseShiftData, setNurseShiftData] = useState([]);
   const [holidayData, setHolidayData] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
-  const [showModal, setShowModal] = useState(false);
+  const [showCurrentEvent, setShowCurrentEvent] = useState(false);
+  const [selectedDateSlot, setSelectedDateSlot] = useState(null);
+  const [showNewEvent, setShowNewEvent] = useState(false);
 
   useEffect(() => {
     getVacationData();
@@ -24,14 +30,20 @@ function AdvancedCalendar() {
     getHolidayData();
   }, []);
 
+  const handleSlotSelect = (slotInfo) => {
+    setSelectedDateSlot(slotInfo);
+    setShowNewEvent(true);
+  };
+
   const handleEventSelect = (event) => {
     setSelectedEvent(event);
     console.log(event);
-    setShowModal(true);
+    setShowCurrentEvent(true);
   };
 
   const handleCloseModal = () => {
-    setShowModal(false);
+    setShowCurrentEvent(false);
+    setShowNewEvent(false);
   };
 
   const getVacationData = () => {
@@ -141,8 +153,10 @@ function AdvancedCalendar() {
         events={events}
         components={components}
         onSelectEvent={handleEventSelect}
+        onSelectSlot={handleSlotSelect}
+        selectable
       />
-      <Modal show={showModal} onHide={handleCloseModal}>
+      <Modal show={showCurrentEvent} onHide={handleCloseModal}>
         <Modal.Header closeButton>
           <Modal.Title>Selected Event</Modal.Title>
         </Modal.Header>
@@ -170,6 +184,23 @@ function AdvancedCalendar() {
               )}
             </>
           )}
+        </Modal.Body>
+      </Modal>
+      <Modal show={showNewEvent} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add Event</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Stack
+            direction="column"
+            justifyContent="center"
+            alignItems="center"
+            spacing={4}
+          >
+            <FormControl style={{ width: '50%' }}><AddVacation /></FormControl>
+            <FormControl style={{ width: '50%' }}><AddNurseShift /></FormControl>
+            <FormControl style={{ width: '50%' }}><AddHoliday /></FormControl>
+          </Stack>
         </Modal.Body>
       </Modal>
     </>
