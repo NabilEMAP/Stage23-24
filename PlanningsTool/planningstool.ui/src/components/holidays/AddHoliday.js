@@ -51,7 +51,7 @@ function AddHoliday(props) {
     const data =
     {
       "name": name,
-      "date": date,
+      "date": dayjs(date).format('YYYY-MM-DD'),
     }
     axios.post(API, data)
       .then(() => {

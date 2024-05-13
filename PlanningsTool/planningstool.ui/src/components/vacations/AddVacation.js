@@ -97,8 +97,8 @@ function AddVacation(props) {
     const API = `${API_BASE_URL}/Vacations`;
     const data =
     {
-      "startdate": startdate,
-      "enddate": enddate,
+      "startdate": dayjs(startdate).format('YYYY-MM-DD'),
+      "enddate": dayjs(enddate).format('YYYY-MM-DD'),
       "teamId": teamId,
       "nurseId": nurseId,
       "vacationTypeId": vacationTypeId,
