@@ -32,7 +32,7 @@ function DeleteNurse(props) {
         setData(result.data);
       })
       .catch((error) => {
-        console.log(error);
+        toast.warning(error.message + ': ' + API.split('/api/')[1]);
       })
   }
 
@@ -43,7 +43,7 @@ function DeleteNurse(props) {
         setRegimeTypeData(result.data);
       })
       .catch((error) => {
-        console.log(error);
+        toast.warning(error.message + ': ' + API.split('/api/')[1]);
       })
   }
 
@@ -60,7 +60,7 @@ function DeleteNurse(props) {
         editId(id);
       })
       .catch((error) => {
-        console.log(error);
+        toast.warning(error.message + ': ' + API.split('/api/')[1]);
       })
   }
 

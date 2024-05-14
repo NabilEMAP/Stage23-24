@@ -30,7 +30,7 @@ function DeleteHoliday(props) {
                 setData(result.data);
             })
             .catch((error) => {
-                console.log(error);
+                toast.warning(error.message + ': ' + API.split('/api/')[1]);
             })
     }
 
@@ -44,7 +44,7 @@ function DeleteHoliday(props) {
                 editId(id);
             })
             .catch((error) => {
-                console.log(error);
+                toast.warning(error.message + ': ' + API.split('/api/')[1]);
             })
     }
 

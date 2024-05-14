@@ -24,7 +24,7 @@ function AddTeam(props) {
         setData(result.data);
       })
       .catch((error) => {
-        console.log(error);
+        toast.warning(error.message + ': ' + API.split('/api/')[1]);
       })
   }
 
@@ -57,10 +57,8 @@ function AddTeam(props) {
         } else {
           toast.warning(`${error.response.data.Message}`);
         }
-        console.log(JSON.stringify(error));
         clear();
       })
-    console.log(data);
   }
 
   const clear = () => {
@@ -88,7 +86,7 @@ function AddTeam(props) {
             justifyContent="center"
             alignItems="center"
             spacing={4}
-          >           
+          >
             <TextField
               style={{ width: '75%' }}
               required

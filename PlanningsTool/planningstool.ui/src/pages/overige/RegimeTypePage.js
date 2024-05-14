@@ -3,6 +3,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { Container, Typography } from "@mui/material";
 import { API_BASE_URL } from "../../config";
+import { toast } from 'react-toastify';
 
 function RegimeTypePage() {
     const [data, setData] = useState([]);
@@ -18,7 +19,7 @@ function RegimeTypePage() {
                 setData(result.data);
             })
             .catch((error) => {
-                console.log(error);
+                toast.warning(error.message + ': ' + API.split('/api/')[1]);
             });
     }
 

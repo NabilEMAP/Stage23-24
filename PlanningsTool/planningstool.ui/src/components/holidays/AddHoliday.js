@@ -19,7 +19,7 @@ function AddHoliday(props) {
 
   useEffect(() => {
     getData();
-    if(selectedDateSlot){
+    if (selectedDateSlot) {
       setDate(dayjs(selectedDateSlot.start));
     }
   }, []);
@@ -31,7 +31,7 @@ function AddHoliday(props) {
         setData(result.data);
       })
       .catch((error) => {
-        console.log(error);
+        toast.warning(error.message + ': ' + API.split('/api/')[1]);
       })
   }
 
@@ -59,7 +59,7 @@ function AddHoliday(props) {
         clear();
         handleClose();
         props.onUpdate();
-        if (props.onAddComplete){
+        if (props.onAddComplete) {
           props.onAddComplete();
         }
       })
@@ -69,9 +69,7 @@ function AddHoliday(props) {
         } else {
           toast.warning(`${error.response.data.Message}`);
         }
-        console.log(JSON.stringify(error));
       })
-    console.log(data);
   }
 
   const clear = () => {

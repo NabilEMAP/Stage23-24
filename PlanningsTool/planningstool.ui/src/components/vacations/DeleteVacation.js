@@ -40,7 +40,7 @@ function DeleteVacation(props) {
                 setData(result.data);
             })
             .catch((error) => {
-                console.log(error);
+                toast.warning(error.message + ': ' + API.split('/api/')[1]);
             })
     }
 
@@ -51,7 +51,7 @@ function DeleteVacation(props) {
                 setTeamData(result.data);
             })
             .catch((error) => {
-                console.log(error);
+                toast.warning(error.message + ': ' + API.split('/api/')[1]);
             })
     }
 
@@ -62,7 +62,7 @@ function DeleteVacation(props) {
                 setNurseData(result.data);
             })
             .catch((error) => {
-                console.log(error);
+                toast.warning(error.message + ': ' + API.split('/api/')[1]);
             })
     }
 
@@ -73,7 +73,7 @@ function DeleteVacation(props) {
                 setVacationTypeData(result.data);
             })
             .catch((error) => {
-                console.log(error);
+                toast.warning(error.message + ': ' + API.split('/api/')[1]);
             })
     }
 
@@ -94,7 +94,7 @@ function DeleteVacation(props) {
                 editId(id);
             })
             .catch((error) => {
-                console.log(error);
+                toast.warning(error.message + ': ' + API.split('/api/')[1]);
             })
     }
 
@@ -105,7 +105,7 @@ function DeleteVacation(props) {
                 toast.error('Verlof is verwijderd');
                 handleClose();
                 props.onUpdate();
-                if(props.onDeleteComplete){
+                if (props.onDeleteComplete) {
                     props.onDeleteComplete();
                 }
             })

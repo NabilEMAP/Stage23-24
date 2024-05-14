@@ -27,7 +27,7 @@ function AddNurseShift(props) {
     getData();
     getTeamData();
     getShiftData();
-    if(selectedDateSlot){
+    if (selectedDateSlot) {
       setDate(dayjs(selectedDateSlot.start));
     }
   }, []);
@@ -39,7 +39,7 @@ function AddNurseShift(props) {
         setData(result.data);
       })
       .catch((error) => {
-        console.log(error);
+        toast.warning(error.message + ': ' + API.split('/api/')[1]);
       })
   }
 
@@ -50,7 +50,7 @@ function AddNurseShift(props) {
         setTeamData(result.data);
       })
       .catch((error) => {
-        console.log(error);
+        toast.warning(error.message + ': ' + API.split('/api/')[1]);
       })
   }
 
@@ -61,7 +61,7 @@ function AddNurseShift(props) {
         setNurseData(result.data);
       })
       .catch((error) => {
-        console.log(error);
+        toast.warning(error.message + ': ' + API.split('/api/')[1]);
       })
   }
 
@@ -72,7 +72,7 @@ function AddNurseShift(props) {
         setShiftData(result.data);
       })
       .catch((error) => {
-        console.log(error);
+        toast.warning(error.message + ': ' + API.split('/api/')[1]);
       })
   }
 
@@ -115,10 +115,8 @@ function AddNurseShift(props) {
         } else {
           toast.warning(`${error.response.data.Message}`);
         }
-        console.log(JSON.stringify(error));
         clear();
       })
-    console.log(data);
   }
 
   const clear = () => {

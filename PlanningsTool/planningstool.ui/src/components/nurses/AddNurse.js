@@ -29,7 +29,7 @@ function AddNurse(props) {
         setData(result.data);
       })
       .catch((error) => {
-        console.log(error);
+        toast.warning(error.message + ': ' + API.split('/api/')[1]);
       })
   }
 
@@ -38,10 +38,9 @@ function AddNurse(props) {
     axios.get(API)
       .then((result) => {
         setRegimeTypeData(result.data);
-        //setRegimeTypeId('1'); //default value
       })
       .catch((error) => {
-        console.log(error);
+        toast.warning(error.message + ': ' + API.split('/api/')[1]);
       })
   }
 
@@ -59,14 +58,14 @@ function AddNurse(props) {
     }
 
     const API = `${API_BASE_URL}/Nurses`;
-    const data = 
+    const data =
     {
       "firstName": firstName,
       "lastName": lastName,
       "regimeTypeId": regimeTypeId,
       "isFixedNight": isFixedNight,
       "teamId": props.teamId
-  };
+    };
     axios.post(API, data)
       .then(() => {
         props.onUpdate();
@@ -80,10 +79,8 @@ function AddNurse(props) {
         } else {
           toast.warning(`${error.response.data.Message}`);
         }
-        console.log(JSON.stringify(error));
         clear();
       })
-    console.log(data);
   }
 
   const handleActiveChange = (e) => {

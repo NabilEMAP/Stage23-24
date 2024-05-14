@@ -23,7 +23,7 @@ function EditNurseShift(props) {
   const [shiftData, setShiftData] = useState([]);
   const [teamId, setTeamId] = useState('');
   const [teamData, setTeamData] = useState([]);
-  
+
   useEffect(() => {
     getData();
     getTeamData();
@@ -38,7 +38,7 @@ function EditNurseShift(props) {
         setData(result.data);
       })
       .catch((error) => {
-        console.log(error);
+        toast.warning(error.message + ': ' + API.split('/api/')[1]);
       })
   }
 
@@ -49,7 +49,7 @@ function EditNurseShift(props) {
         setTeamData(result.data);
       })
       .catch((error) => {
-        console.log(error);
+        toast.warning(error.message + ': ' + API.split('/api/')[1]);
       })
   }
 
@@ -60,7 +60,7 @@ function EditNurseShift(props) {
         setNurseData(result.data);
       })
       .catch((error) => {
-        console.log(error);
+        toast.warning(error.message + ': ' + API.split('/api/')[1]);
       })
   }
 
@@ -71,7 +71,7 @@ function EditNurseShift(props) {
         setShiftData(result.data);
       })
       .catch((error) => {
-        console.log(error);
+        toast.warning(error.message + ': ' + API.split('/api/')[1]);
       })
   }
 
@@ -87,7 +87,7 @@ function EditNurseShift(props) {
         editId(id);
       })
       .catch((error) => {
-        console.log(error);
+        toast.warning(error.message + ': ' + API.split('/api/')[1]);
       })
   }
 
@@ -130,9 +130,7 @@ function EditNurseShift(props) {
         } else {
           toast.warning(`${error.response.data.Message}`);
         }
-        console.log(JSON.stringify(error));
       })
-    console.log(data);
   }
 
   const renderTeam = () => {

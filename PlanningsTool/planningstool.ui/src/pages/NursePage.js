@@ -11,6 +11,7 @@ import { API_BASE_URL } from "../config";
 import { DataGrid } from '@mui/x-data-grid';
 import '../App.css';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function NursePage() {
     const { teamId } = useParams();
@@ -38,18 +39,18 @@ function NursePage() {
                 setData(nurses);
             })
             .catch((error) => {
-                console.log(error);
+                toast.warning(error.message + ': ' + API.split('/api/')[1]);
             });
     }
 
     const getTeamName = (teamId) => {
-        const teamAPI = `${API_BASE_URL}/Teams/${teamId}`;
-        axios.get(teamAPI)
+        const API = `${API_BASE_URL}/Teams/${teamId}`;
+        axios.get(API)
             .then((result) => {
                 setTeamName(result.data.teamName);
             })
             .catch((error) => {
-                console.log(error);
+                toast.warning(error.message + ': ' + API.split('/api/')[1]);
             });
     };
 

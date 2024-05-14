@@ -14,6 +14,7 @@ import DeleteNurseShift from '../nurseShifts/DeleteNurseShift';
 import AddHoliday from '../holidays/AddHoliday';
 import EditHoliday from '../holidays/EditHoliday';
 import DeleteHoliday from '../holidays/DeleteHoliday';
+import { toast } from 'react-toastify';
 
 function AdvancedCalendar() {
   const [vacationData, setVacationData] = useState([]);
@@ -37,7 +38,6 @@ function AdvancedCalendar() {
 
   const handleEventSelect = (event) => {
     setSelectedEvent(event);
-    console.log(event);
     setShowCurrentEvent(true);
   };
 
@@ -53,7 +53,7 @@ function AdvancedCalendar() {
         setVacationData(result.data);
       })
       .catch((error) => {
-        console.log(error);
+        toast.warning(error.message + ': ' + API.split('/api/')[1]);
       });
   };
   const getNurseShiftData = () => {
@@ -63,7 +63,7 @@ function AdvancedCalendar() {
         setNurseShiftData(result.data);
       })
       .catch((error) => {
-        console.log(error);
+        toast.warning(error.message + ': ' + API.split('/api/')[1]);
       });
   };
   const getHolidayData = () => {
@@ -73,7 +73,7 @@ function AdvancedCalendar() {
         setHolidayData(result.data);
       })
       .catch((error) => {
-        console.log(error);
+        toast.warning(error.message + ': ' + API.split('/api/')[1]);
       });
   };
   const formatVacationData = (data) => {

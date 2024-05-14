@@ -2,7 +2,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function MyToastify(slide) {
-    return(
+    return (
         <ToastContainer
             position="bottom-center"
             autoClose={6000}

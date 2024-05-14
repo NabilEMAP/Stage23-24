@@ -3,6 +3,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { DataGrid } from '@mui/x-data-grid';
 import { Container, Typography } from "@mui/material";
 import { API_BASE_URL } from "../config";
+import { toast } from 'react-toastify';
 
 function ShiftPage() {
     const [data, setData] = useState([]);
@@ -18,7 +19,7 @@ function ShiftPage() {
                 setData(result.data);
             })
             .catch((error) => {
-                console.log(error);
+                toast.warning(error.message + ': ' + API.split('/api/')[1]);
             });
     }
 
@@ -28,7 +29,7 @@ function ShiftPage() {
         { field: 'starttime', headerName: 'Starttijd', flex: 1, valueFormatter: (params) => formatTime(params.value) },
         { field: 'endtime', headerName: 'Eindtijd', flex: 1, valueFormatter: (params) => formatTime(params.value) },
     ];
-    
+
     const formatTime = (timeString) => {
         const date = new Date(`2000-01-01T${timeString}`);
         return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });

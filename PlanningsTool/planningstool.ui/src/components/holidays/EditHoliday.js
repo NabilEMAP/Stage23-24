@@ -30,7 +30,7 @@ function EditHoliday(props) {
                 setData(result.data);
             })
             .catch((error) => {
-                console.log(error);
+                toast.warning(error.message + ': ' + API.split('/api/')[1]);
             })
     }
 
@@ -44,7 +44,7 @@ function EditHoliday(props) {
                 editId(id);
             })
             .catch((error) => {
-                console.log(error);
+                toast.warning(error.message + ': ' + API.split('/api/')[1]);
             })
     }
 
@@ -83,9 +83,7 @@ function EditHoliday(props) {
                 } else {
                     toast.warning(`${error.response.data.Message}`);
                 }
-                console.log(JSON.stringify(error));
             })
-        console.log(data);
     }
 
     return (
@@ -112,7 +110,7 @@ function EditHoliday(props) {
                         <TextField style={{ width: '75%' }}
                             required
                             id="txtInputName"
-                            label="Naam"                            
+                            label="Naam"
                             type="text"
                             className="form-control"
                             value={name}

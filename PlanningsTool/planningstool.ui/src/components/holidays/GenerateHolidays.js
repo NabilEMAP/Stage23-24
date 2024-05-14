@@ -30,7 +30,6 @@ function GenerateHolidays(props) {
         } else {
           toast.warning(`${error.response.data.Message}`);
         }
-        console.log(JSON.stringify(error));
       })
   }
 

@@ -3,6 +3,7 @@ import axios from "axios";
 import { DataGrid } from '@mui/x-data-grid';
 import { Container, Typography } from "@mui/material";
 import { API_BASE_URL } from "../../config";
+import { toast } from 'react-toastify';
 
 function VerlofTypePage() {
     const [data, setData] = useState([]);
@@ -18,7 +19,7 @@ function VerlofTypePage() {
                 setData(result.data);
             })
             .catch((error) => {
-                console.log(error);
+                toast.warning(error.message + ': ' + API.split('/api/')[1]);
             })
     }
 

@@ -10,7 +10,7 @@ import DeleteHoliday from "../../components/holidays/DeleteHoliday";
 import { format } from 'date-fns';
 import nlBE from "date-fns/locale/nl-BE";
 import { API_BASE_URL } from "../../config";
-
+import { toast } from 'react-toastify';
 
 
 function HolidayPage() {
@@ -31,7 +31,7 @@ function HolidayPage() {
                 setData(result.data);
             })
             .catch((error) => {
-                console.log(error);
+                toast.warning(error.message + ': ' + API.split('/api/')[1]);
             });
     }
 
@@ -69,7 +69,7 @@ function HolidayPage() {
                         spacing={2}
                         style={{ float: 'right' }}
                     >
-                        <AddHoliday onUpdate={handleUpdate} />                        
+                        <AddHoliday buttonColor='success' onUpdate={handleUpdate} />
                         <GenerateHolidays onUpdate={handleUpdate} />
                         <ClearHolidayList onUpdate={handleUpdate} />
                     </Stack>

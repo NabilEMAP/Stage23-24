@@ -29,7 +29,7 @@ function AddVacation(props) {
     getData();
     getTeamData();
     getVacationTypeData();
-    if(selectedDateSlot){
+    if (selectedDateSlot) {
       setStartdate(dayjs(selectedDateSlot.start));
       setEnddate(dayjs(selectedDateSlot.start));
     }
@@ -42,7 +42,7 @@ function AddVacation(props) {
         setData(result.data);
       })
       .catch((error) => {
-        console.log(error);
+        toast.warning(error.message + ': ' + API.split('/api/')[1]);
       })
   }
 
@@ -53,7 +53,7 @@ function AddVacation(props) {
         setTeamData(result.data);
       })
       .catch((error) => {
-        console.log(error);
+        toast.warning(error.message + ': ' + API.split('/api/')[1]);
       })
   }
 
@@ -64,7 +64,7 @@ function AddVacation(props) {
         setNurseData(result.data);
       })
       .catch((error) => {
-        console.log(error);
+        toast.warning(error.message + ': ' + API.split('/api/')[1]);
       })
   }
 
@@ -75,7 +75,7 @@ function AddVacation(props) {
         setVacationTypeData(result.data);
       })
       .catch((error) => {
-        console.log(error);
+        toast.warning(error.message + ': ' + API.split('/api/')[1]);
       })
   }
 
@@ -120,9 +120,7 @@ function AddVacation(props) {
         } else {
           toast.warning(`${error.response.data.Message}`);
         }
-        console.log(JSON.stringify(error));
       })
-    console.log(data);
   }
 
   const clear = () => {

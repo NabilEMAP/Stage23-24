@@ -38,7 +38,7 @@ function DeleteNurseShift(props) {
         setData(result.data);
       })
       .catch((error) => {
-        console.log(error);
+        toast.warning(error.message + ': ' + API.split('/api/')[1]);
       })
   }
 
@@ -49,7 +49,7 @@ function DeleteNurseShift(props) {
         setTeamData(result.data);
       })
       .catch((error) => {
-        console.log(error);
+        toast.warning(error.message + ': ' + API.split('/api/')[1]);
       })
   }
 
@@ -60,7 +60,7 @@ function DeleteNurseShift(props) {
         setNurseData(result.data);
       })
       .catch((error) => {
-        console.log(error);
+        toast.warning(error.message + ': ' + API.split('/api/')[1]);
       })
   }
 
@@ -71,7 +71,7 @@ function DeleteNurseShift(props) {
         setShiftData(result.data);
       })
       .catch((error) => {
-        console.log(error);
+        toast.warning(error.message + ': ' + API.split('/api/')[1]);
       })
   }
 
@@ -103,7 +103,7 @@ function DeleteNurseShift(props) {
         editId(id);
       })
       .catch((error) => {
-        console.log(error);
+        toast.warning(error.message + ': ' + API.split('/api/')[1]);
       })
   }
 

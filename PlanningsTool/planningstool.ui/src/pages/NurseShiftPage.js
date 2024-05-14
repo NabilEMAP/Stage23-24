@@ -8,6 +8,7 @@ import { API_BASE_URL } from "../config";
 import AddNurseShift from "../components/nurseShifts/AddNurseShift";
 import EditNurseShift from "../components/nurseShifts/EditNurseShift";
 import DeleteNurseShift from "../components/nurseShifts/DeleteNurseShift";
+import { toast } from 'react-toastify';
 
 function NurseShiftPage() {
     const [data, setData] = useState([]);
@@ -27,7 +28,7 @@ function NurseShiftPage() {
                 setData(result.data);
             })
             .catch((error) => {
-                console.log(error);
+                toast.warning(error.message + ': ' + API.split('/api/')[1]);
             });
     }
 
@@ -49,7 +50,7 @@ function NurseShiftPage() {
     const formatTime = (timeString) => {
         const date = new Date(`2000-01-01T${timeString}`);
         return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-      };
+    };
 
     const renderShiftCell = (params) => (
         `${params.row.shift.shiftType.name} - ${formatTime(params.row.shift.starttime)} - ${formatTime(params.row.shift.endtime)}`
@@ -69,7 +70,7 @@ function NurseShiftPage() {
             <Container>
                 <div style={{ margin: '24px 0px' }}>
                     <Typography variant="h5" style={{ width: 'fit-content', verticalAlign: 'sub', display: 'inline-block' }}>Zorgkundige Shift Lijst</Typography>
-                    <AddNurseShift onUpdate={handleUpdate} />
+                    <AddNurseShift buttonColor='success' onUpdate={handleUpdate} />
                 </div>
                 <div>
                     <DataGrid

@@ -40,7 +40,7 @@ function EditVacation(props) {
                 setData(result.data);
             })
             .catch((error) => {
-                console.log(error);
+                toast.warning(error.message + ': ' + API.split('/api/')[1]);
             })
     }
 
@@ -51,7 +51,7 @@ function EditVacation(props) {
                 setTeamData(result.data);
             })
             .catch((error) => {
-                console.log(error);
+                toast.warning(error.message + ': ' + API.split('/api/')[1]);
             })
     }
 
@@ -62,7 +62,7 @@ function EditVacation(props) {
                 setNurseData(result.data);
             })
             .catch((error) => {
-                console.log(error);
+                toast.warning(error.message + ': ' + API.split('/api/')[1]);
             })
     }
 
@@ -73,7 +73,7 @@ function EditVacation(props) {
                 setVacationTypeData(result.data);
             })
             .catch((error) => {
-                console.log(error);
+                toast.warning(error.message + ': ' + API.split('/api/')[1]);
             })
     }
 
@@ -91,7 +91,7 @@ function EditVacation(props) {
                 editId(id);
             })
             .catch((error) => {
-                console.log(error);
+                toast.warning(error.message + ': ' + API.split('/api/')[1]);
             })
     }
 
@@ -136,9 +136,7 @@ function EditVacation(props) {
                 } else {
                     toast.warning(`${error.response.data.Message}`);
                 }
-                console.log(JSON.stringify(error));
             })
-        console.log(data);
     }
 
     const renderTeam = () => {

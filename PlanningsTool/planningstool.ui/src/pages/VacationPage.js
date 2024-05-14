@@ -12,6 +12,7 @@ import AddVacation from "../components/vacations/AddVacation";
 import EditVacation from "../components/vacations/EditVacation";
 import DeleteVacation from "../components/vacations/DeleteVacation";
 import '../App.css';
+import { toast } from 'react-toastify';
 
 function VacationPage() {
     const [data, setData] = useState([]);
@@ -31,7 +32,7 @@ function VacationPage() {
                 setData(result.data);
             })
             .catch((error) => {
-                console.log(error);
+                toast.warning(error.message + ': ' + API.split('/api/')[1]);
             });
     };
 
@@ -93,7 +94,7 @@ function VacationPage() {
             <Container>
                 <div style={{ margin: '24px 0px' }}>
                     <Typography variant="h5" style={{ width: 'fit-content', verticalAlign: 'sub', display: 'inline-block' }}>Verlof Lijst</Typography>
-                    <AddVacation onUpdate={handleUpdate} />
+                    <AddVacation buttonColor='success' onUpdate={handleUpdate} />
                 </div>
                 <div>
                     <DataGrid

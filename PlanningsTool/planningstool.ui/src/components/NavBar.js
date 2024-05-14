@@ -47,7 +47,7 @@ export const NavBar = () => {
                         aria-expanded={open ? 'true' : undefined}
                         endIcon={<KeyboardArrowDownIcon />}
                         onClick={handleClick}>
-                        <SettingsIcon/>
+                        <SettingsIcon />
                     </Button>
                 </Stack>
                 <Menu

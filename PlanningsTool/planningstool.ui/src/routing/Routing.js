@@ -19,12 +19,12 @@ export default function Routing() {
                 <Route path="/team" element={<TeamPage />} />
                 <Route path="/teamplanning" element={<TeamplanPage />} />
                 <Route path="/team/:teamId" element={<NursePage />} />
-                <Route path="/shift" element={<NurseShiftPage/>} />
+                <Route path="/shift" element={<NurseShiftPage />} />
                 <Route path="/verlof" element={<VacationPage />} />
-                <Route path="/regimetype" element={<RegimeTypePage/>} />
-                <Route path="/verloftype" element={<VacationTypePage/>} />
-                <Route path="/shifttype" element={<ShiftTypePage/>} />
-                <Route path="/feestdag" element={<HolidayPage/>} />
+                <Route path="/regimetype" element={<RegimeTypePage />} />
+                <Route path="/verloftype" element={<VacationTypePage />} />
+                <Route path="/shifttype" element={<ShiftTypePage />} />
+                <Route path="/feestdag" element={<HolidayPage />} />
             </Routes>
         </BrowserRouter>
     );

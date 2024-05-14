@@ -27,7 +27,7 @@ function DeleteTeam(props) {
         setData(result.data);
       })
       .catch((error) => {
-        console.log(error);
+        toast.warning(error.message + ': ' + API.split('/api/')[1]);
       })
   }
 
@@ -40,7 +40,7 @@ function DeleteTeam(props) {
         editId(id);
       })
       .catch((error) => {
-        console.log(error);
+        toast.warning(error.message + ': ' + API.split('/api/')[1]);
       })
   }
 
@@ -80,7 +80,7 @@ function DeleteTeam(props) {
             <h6>Ben je zeker dat je deze team wilt verwijderen?</h6>
             <FormControl style={{ width: '75%' }}>
               <h4>Teamnaam</h4>
-              <p id="teamName" value={teamName}>{teamName}</p>              
+              <p id="teamName" value={teamName}>{teamName}</p>
             </FormControl>
           </Stack>
         </Modal.Body>

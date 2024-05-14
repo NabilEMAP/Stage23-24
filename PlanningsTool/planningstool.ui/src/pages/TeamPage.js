@@ -9,6 +9,7 @@ import { API_BASE_URL } from "../config";
 import { DataGrid } from '@mui/x-data-grid';
 import '../App.css';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function TeamPage() {
     const [data, setData] = useState([]);
@@ -28,9 +29,10 @@ function TeamPage() {
                 setData(result.data);
             })
             .catch((error) => {
-                console.log(error);
+                toast.warning(error.message + ': ' + API.split('/api/')[1]);
             });
     }
+
     const renderChanges = (item) => (
         <div style={{ width: '150px' }}>
             <EditTeam id={item.id} onUpdate={handleUpdate} />
@@ -54,6 +56,7 @@ function TeamPage() {
             renderCell: (params) => renderChanges(params)
         },
     ];
+
 
     const rows = data.map((item) => ({
         id: item.id,
