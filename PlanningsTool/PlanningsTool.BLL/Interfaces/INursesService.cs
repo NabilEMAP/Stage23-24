@@ -11,7 +11,7 @@ namespace PlanningsTool.BLL.Interfaces
         public Task<NurseDTO> Add(CreateNurseDTO nurse);
         public Task<NurseDTO> Update(int id, UpdateNurseDTO nurse);
         public Task<int> Delete(int id);
-        public Task<bool> CheckIfExist(string firstName, string lastName, int teamId);
-        public Task<bool> CheckIfExist(int id, string firstName, string lastName, int teamId);
+        public Task<bool> CheckIfExist(string firstName, string lastName);
+        public Task<bool> CheckIfExist(int id, string firstName, string lastName);
     }
 }

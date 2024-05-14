@@ -18,13 +18,13 @@ namespace PlanningsTool.BLL.Services
 
         public async Task<IEnumerable<RegimeTypeDTO>> GetAll()
         {
-            var regimeTypes = await _uow.RegimeTypesRepository.GetAllRegimeTypesAsync();
+            var regimeTypes = await _uow.RegimeTypesRepository.GetAllAsync();
             return _mapper.Map<IEnumerable<RegimeTypeDTO>>(regimeTypes);
         }
 
         public async Task<RegimeTypeDTO> GetById(int id)
         {
-            var regimeType = await _uow.RegimeTypesRepository.GetRegimeTypeAsyncById(id);
+            var regimeType = await _uow.RegimeTypesRepository.GetByIdAsync(id);
             return _mapper.Map<RegimeTypeDTO>(regimeType);
         }
 

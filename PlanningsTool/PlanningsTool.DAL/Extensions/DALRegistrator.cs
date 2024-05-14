@@ -15,21 +15,23 @@ namespace PlanningsTool.DAL.Extensions
             {
                 options.UseSqlServer("name=ConnectionStrings:Stage2324");
             });
+
             return services;
         }
 
+
         public static IServiceCollection RegisterRepositories(this IServiceCollection services)
         {
-            services.AddScoped<IHolidaysRepository, HolidaysRepository>();
             services.AddScoped<INursesRepository, NursesRepository>();
-            services.AddScoped<INurseShiftsRepository, NurseShiftsRepository>();
+            services.AddScoped<IRegimeTypesRepository, RegimeTypesRepository>();
+            services.AddScoped<IVacationTypesRepository, VacationTypesRepository>();
+            services.AddScoped<IShiftTypesRepository, ShiftTypesRepository>();
+            services.AddScoped<IVacationsRepository, VacationsRepository>();
             services.AddScoped<IShiftsRepository, ShiftsRepository>();
+            services.AddScoped<INurseShiftsRepository, NurseShiftsRepository>();
             services.AddScoped<ITeamsRepository, TeamsRepository>();
             services.AddScoped<ITeamplansRepository, TeamplansRepository>();
-            services.AddScoped<IRegimeTypesRepository, RegimeTypesRepository>();
-            services.AddScoped<IShiftTypesRepository, ShiftTypesRepository>();
-            services.AddScoped<IVacationTypesRepository, VacationTypesRepository>();            
-            services.AddScoped<IVacationsRepository, VacationsRepository>();
+            services.AddScoped<IHolidaysRepository, HolidaysRepository>();
             return services;
         }
 

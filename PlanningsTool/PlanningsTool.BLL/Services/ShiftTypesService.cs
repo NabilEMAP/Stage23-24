@@ -18,13 +18,13 @@ namespace PlanningsTool.BLL.Services
 
         public async Task<IEnumerable<ShiftTypeDTO>> GetAll()
         {
-            var shiftTypes = await _uow.ShiftTypesRepository.GetAllShiftTypesAsync();
+            var shiftTypes = await _uow.ShiftTypesRepository.GetAllAsync();
             return _mapper.Map<IEnumerable<ShiftTypeDTO>>(shiftTypes);
         }
 
         public async Task<ShiftTypeDTO> GetById(int id)
         {
-            var shiftType = await _uow.ShiftTypesRepository.GetShiftTypeAsyncById(id);
+            var shiftType = await _uow.ShiftTypesRepository.GetByIdAsync(id);
             return _mapper.Map<ShiftTypeDTO>(shiftType);
         }
 

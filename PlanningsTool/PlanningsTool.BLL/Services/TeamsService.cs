@@ -45,7 +45,7 @@ namespace PlanningsTool.BLL.Services
         public async Task<TeamDTO> Add(CreateTeamDTO entity)
         {
             ValidationResult validationResult = _createValidator.Validate(entity);
-
+            
             if (!validationResult.IsValid)
             {
                 throw new CustomValidationException(validationResult.Errors);

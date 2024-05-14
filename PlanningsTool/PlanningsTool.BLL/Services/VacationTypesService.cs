@@ -18,13 +18,13 @@ namespace PlanningsTool.BLL.Services
 
         public async Task<IEnumerable<VacationTypeDTO>> GetAll()
         {
-            var verlofTypes = await _uow.VacationTypesRepository.GetAllVacationTypesAsync();
+            var verlofTypes = await _uow.VacationTypesRepository.GetAllAsync();
             return _mapper.Map<IEnumerable<VacationTypeDTO>>(verlofTypes);
         }
 
         public async Task<VacationTypeDTO> GetById(int id)
         {
-            var verlofType = await _uow.VacationTypesRepository.GetVacationTypeAsyncById(id);
+            var verlofType = await _uow.VacationTypesRepository.GetByIdAsync(id);
             return _mapper.Map<VacationTypeDTO>(verlofType);
         }
 

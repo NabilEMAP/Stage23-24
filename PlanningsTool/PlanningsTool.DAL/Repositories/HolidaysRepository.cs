@@ -64,6 +64,7 @@ namespace PlanningsTool.DAL.Repositories
             return await _context.Holidays
                 .Where(z => z.Date.Year == year)
                 .ToListAsync();
-        }        
+        }
+
     }
 }

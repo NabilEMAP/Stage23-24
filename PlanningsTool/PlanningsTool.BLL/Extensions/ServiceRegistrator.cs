@@ -10,34 +10,35 @@ namespace PlanningsTool.BLL.Extensions
     {
         public static IServiceCollection RegisterServices(this IServiceCollection services)
         {
-            services.AddScoped<IHolidaysService, HolidaysService>();
             services.AddScoped<INursesService, NursesService>();
-            services.AddScoped<INurseShiftsService, NurseShiftService>();
-            services.AddScoped<IShiftsService, ShiftsService>();
-            services.AddScoped<ITeamsService, TeamsService>();
-            services.AddScoped<ITeamplansService, TeamplansService>();
             services.AddScoped<IRegimeTypesService, RegimeTypesService>();
-            services.AddScoped<IShiftTypesService, ShiftTypesService>();
             services.AddScoped<IVacationTypesService, VacationTypesService>();
+            services.AddScoped<IShiftTypesService, ShiftTypesService>();
             services.AddScoped<IVacationsService, VacationsService>();
+            services.AddScoped<IShiftsService, ShiftsService>();
+            services.AddScoped<INurseShiftsService, NurseShiftService>();
+            services.AddScoped<ITeamplansService, TeamplansService>();
+            services.AddScoped<ITeamsService, TeamsService>();
+            services.AddScoped<IShiftsService, ShiftsService>();
+            services.AddScoped<IHolidaysService, HolidaysService>();
             services.RegisterValidators();
             return services;
         }
 
         public static IServiceCollection RegisterValidators(this IServiceCollection services)
         {
-            services.AddTransient<CreateHolidayValidator>();
-            services.AddTransient<UpdateHolidayValidator>();
             services.AddTransient<CreateNurseValidator>();
             services.AddTransient<UpdateNurseValidator>();
+            services.AddTransient<CreateVacationValidator>();
+            services.AddTransient<UpdateVacationValidator>();
             services.AddTransient<CreateNurseShiftValidator>();
             services.AddTransient<UpdateNurseShiftValidator>();
             services.AddTransient<CreateTeamplanValidator>();
             services.AddTransient<UpdateTeamplanValidator>();
             services.AddTransient<CreateTeamValidator>();
             services.AddTransient<UpdateTeamValidator>();
-            services.AddTransient<CreateVacationValidator>();
-            services.AddTransient<UpdateVacationValidator>();
+            services.AddTransient<CreateHolidayValidator>();
+            services.AddTransient<UpdateHolidayValidator>();
             return services;
         }
 

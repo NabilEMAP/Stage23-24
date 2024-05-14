@@ -10,16 +10,6 @@ namespace PlanningsTool.DAL.Repositories
         {
         }
 
-        public async Task<IEnumerable<ShiftType>> GetAllShiftTypesAsync()
-        {
-            return await _context.ShiftTypes.ToListAsync();
-        }
-
-        public async Task<ShiftType> GetShiftTypeAsyncById(int id)
-        {
-            return await _context.ShiftTypes.FirstOrDefaultAsync(z => z.Id == id);
-        }
-
         public async Task<IEnumerable<ShiftType>> GetShiftTypesByName(string name)
         {
             return await _context.ShiftTypes

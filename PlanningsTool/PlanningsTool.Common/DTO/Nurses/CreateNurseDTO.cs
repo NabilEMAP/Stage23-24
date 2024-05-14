@@ -1,4 +1,6 @@
-﻿namespace PlanningsTool.Common.DTO.Nurses
+﻿using PlanningsTool.Common.DTO.Teams;
+
+namespace PlanningsTool.Common.DTO.Nurses
 {
     public class CreateNurseDTO
     {
