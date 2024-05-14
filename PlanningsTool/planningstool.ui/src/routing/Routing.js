@@ -4,7 +4,6 @@ import HomePage from '../pages/HomePage';
 import TeamplanPage from '../pages/TeamplanPage';
 import NurseShiftPage from '../pages/NurseShiftPage';
 import VacationPage from '../pages/VacationPage';
-import ShiftPage from '../pages/ShiftPage';
 import RegimeTypePage from '../pages/overige/RegimeTypePage';
 import VacationTypePage from '../pages/overige/VerlofTypePage';
 import ShiftTypePage from '../pages/overige/ShiftTypePage';

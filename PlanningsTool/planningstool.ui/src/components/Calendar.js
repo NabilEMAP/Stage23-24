@@ -1,6 +1,5 @@
 import {
     Calendar as BigCalendar,
-    CalendarProps,
     momentLocalizer,
 } from 'react-big-calendar';
 import moment from 'moment';

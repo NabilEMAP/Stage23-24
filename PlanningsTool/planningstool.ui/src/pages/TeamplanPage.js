@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import AdvancedCalendar from '../components/calendar/AdvancedCalendar';
 
 function TeamplanPage() {

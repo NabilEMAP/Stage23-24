@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { Fragment, useEffect, useState } from "react";
-import { DataGrid, GridToolbar } from '@mui/x-data-grid';
+import { DataGrid } from '@mui/x-data-grid';
 import { Container, Typography } from "@mui/material";
 import { API_BASE_URL } from "../../config";
 import { toast } from 'react-toastify';

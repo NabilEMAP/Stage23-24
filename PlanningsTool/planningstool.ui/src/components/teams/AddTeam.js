@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Modal from 'react-bootstrap/Modal';
 import { toast } from 'react-toastify';
-import { Button, Checkbox, FormControl, FormControlLabel, InputLabel, MenuItem, Select, Stack, TextField } from "@mui/material";
+import { Button, Stack, TextField } from "@mui/material";
 import { API_BASE_URL } from "../../config";
 
 function AddTeam(props) {

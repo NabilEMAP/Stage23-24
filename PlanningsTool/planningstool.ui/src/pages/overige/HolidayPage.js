@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { Fragment, useEffect, useState } from "react";
-import { DataGrid, GridToolbar } from '@mui/x-data-grid';
+import { DataGrid } from '@mui/x-data-grid';
 import { Container, Stack, Typography } from "@mui/material";
 import ClearHolidayList from "../../components/holidays/ClearHolidayList";
 import GenerateHolidays from "../../components/holidays/GenerateHolidays";

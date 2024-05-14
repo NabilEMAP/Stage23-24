@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import axios from "axios";
-import { DataGrid, GridToolbar } from '@mui/x-data-grid';
+import { DataGrid } from '@mui/x-data-grid';
 import { Container, Typography } from "@mui/material";
 import { format } from 'date-fns';
 import nlBE from "date-fns/locale/nl-BE";
