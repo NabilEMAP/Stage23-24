@@ -19,7 +19,7 @@ namespace PlanningsTool.DAL.Repositories
         {
             return await _context.Teams.ToListAsync();
         }
-   
+
         public async Task<Team> GetTeamAsyncById(int id)
         {
             return await _context.Teams.FirstOrDefaultAsync(z => z.Id == id);

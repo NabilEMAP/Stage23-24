@@ -6,6 +6,8 @@ namespace PlanningsTool.DAL.Repositories
     {
         Task<IEnumerable<Teamplan>> GetAllTeamplansAsync();
         Task<Teamplan> GetTeamplanAsyncById(int id);
-        Task<IEnumerable<Teamplan>> GetTeamplansByMonth(string month);
+        Task<IEnumerable<Teamplan>> GetTeamplansByName(string name);
+        Task<IEnumerable<Teamplan>> GetTeamplansByPlanFor(string planFor);
+        Task<IEnumerable<Teamplan>> GetTeamplansByCreatedOn(string createdOn);
     }
 }

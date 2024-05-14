@@ -16,10 +16,17 @@ namespace PlanningsTool.DAL.Configurations
             builder.Property(p => p.Id)
                    .HasColumnType("int");
 
-            builder.Property(p => p.Month)
+            builder.Property(p => p.Name)
                     .IsRequired()
-                    .HasColumnType("int");
+                    .HasColumnType("varchar(100)");
 
+            builder.Property(p => p.PlanFor)
+                    .IsRequired()
+                    .HasColumnType("date");
+
+            builder.Property(p => p.CreatedOn)
+                    .IsRequired()
+                    .HasColumnType("datetime");
         }
     }
 }

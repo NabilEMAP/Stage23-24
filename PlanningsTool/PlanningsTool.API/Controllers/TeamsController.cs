@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PlanningsTool.BLL.Interfaces;
+using PlanningsTool.BLL.Services;
 using PlanningsTool.Common.DTO.Teams;
 
 namespace PlanningsTool.API.Controllers
@@ -26,6 +27,15 @@ namespace PlanningsTool.API.Controllers
             var teams = await _teamsServices.GetAll();
             if (teams == null) { return NotFound(); }
             return Ok(teams);
+        }
+
+        // GET api/Teams/teamName/{teamName}
+        [HttpGet("teamName/{teamName}")]
+        public async Task<IActionResult> GetTeamsByTeamName(string teamName)
+        {
+            var teamplans = await _teamsServices.GetTeamsByTeamName(teamName);
+            if (teamplans == null) { return NotFound(); }
+            return Ok(teamplans);
         }
 
         // GET api/Teams/{id}

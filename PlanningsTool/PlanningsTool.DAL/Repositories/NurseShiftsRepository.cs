@@ -16,6 +16,7 @@ namespace PlanningsTool.DAL.Repositories
                 .Include(n => n.Nurse)
                 .Include(s => s.Shift)
                 .Include(t => t.Teamplan)
+                .Include(nt => nt.Nurse.Team)
                 .Include(st => st.Shift.ShiftType)
                 .Include(nr => nr.Nurse.RegimeType)
                 .ToListAsync();
@@ -27,6 +28,7 @@ namespace PlanningsTool.DAL.Repositories
                 .Include(n => n.Nurse)
                 .Include(s => s.Shift)
                 .Include(t => t.Teamplan)
+                .Include(nt => nt.Nurse.Team)
                 .Include(st => st.Shift.ShiftType)
                 .Include(nr => nr.Nurse.RegimeType)
                 .FirstOrDefaultAsync(d => d.Id == id);
@@ -38,6 +40,7 @@ namespace PlanningsTool.DAL.Repositories
                 .Include(n => n.Nurse)
                 .Include(s => s.Shift)
                 .Include(t => t.Teamplan)
+                .Include(nt => nt.Nurse.Team)
                 .Include(st => st.Shift.ShiftType)
                 .Include(nr => nr.Nurse.RegimeType)
                 .Where(z => z.Date.ToString().Contains(date))

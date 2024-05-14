@@ -8,7 +8,7 @@ namespace PlanningsTool.DAL.Seeding
         public static void Seed(this EntityTypeBuilder<NurseShift> modelBuilder)
         {
             modelBuilder.HasData(
-                new NurseShift() 
+                new NurseShift()
                 {
                     Id = 1,
                     Date = new DateTime(2024, 05, 08),

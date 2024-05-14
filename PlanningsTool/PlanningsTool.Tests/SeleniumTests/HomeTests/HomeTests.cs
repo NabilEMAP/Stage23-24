@@ -82,8 +82,8 @@ namespace PlanningsTool.Tests.SeleniumTests.HomeTests
         public void ST_HP_01_05()
         {
             _driver.Navigate().GoToUrl(_URL);
-            _driver.FindElement(By.Id("btnPlanning")).Click();
-            Assert.AreEqual(_URL + "teamplanning", _driver.Url);
+            _driver.FindElement(By.Id("btnPlan")).Click();
+            Assert.AreEqual(_URL + "plan", _driver.Url);
             _driver.Quit();
         }
 
@@ -94,8 +94,8 @@ namespace PlanningsTool.Tests.SeleniumTests.HomeTests
         public void ST_HP_01_06()
         {
             _driver.Navigate().GoToUrl(_URL);
-            _driver.FindElement(By.Id("navPlanning")).Click();
-            Assert.AreEqual(_URL + "teamplanning", _driver.Url);
+            _driver.FindElement(By.Id("navPlan")).Click();
+            Assert.AreEqual(_URL + "plan", _driver.Url);
             _driver.Quit();
         }
 

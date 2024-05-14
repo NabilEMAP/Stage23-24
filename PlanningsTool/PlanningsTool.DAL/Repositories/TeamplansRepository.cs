@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PlanningsTool.DAL.Contexts;
 using PlanningsTool.DAL.Models;
+using System;
 
 namespace PlanningsTool.DAL.Repositories
 {
@@ -20,12 +21,25 @@ namespace PlanningsTool.DAL.Repositories
             return await _context.Teamplans.FirstOrDefaultAsync(z => z.Id == id);
         }
 
-        public async Task<IEnumerable<Teamplan>> GetTeamplansByMonth(string month)
+        public async Task<IEnumerable<Teamplan>> GetTeamplansByName(string name)
         {
             return await _context.Teamplans
-                .Where(z => z.Month.ToString().Contains(month))
+                .Where(z => z.Name.Contains(name))
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Teamplan>> GetTeamplansByPlanFor(string planFor)
+        {
+            return await _context.Teamplans
+                .Where(z => z.PlanFor.ToString().Contains(planFor))
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Teamplan>> GetTeamplansByCreatedOn(string createdOn)
+        {
+            return await _context.Teamplans
+                .Where(z => z.CreatedOn.ToString().Contains(createdOn))
                 .ToListAsync();
         }
     }
-
 }

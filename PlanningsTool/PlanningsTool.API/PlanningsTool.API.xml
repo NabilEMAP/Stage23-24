@@ -240,11 +240,25 @@
             <param name="id">The ID of the team plan to retrieve.</param>
             <returns></returns>
         </member>
-        <member name="M:PlanningsTool.API.Controllers.TeamplansController.GetTeamplansByMonth(System.String)">
+        <member name="M:PlanningsTool.API.Controllers.TeamplansController.GetTeamplansByName(System.String)">
             <summary>
-            Retrieves team plans by month.
+            Retrieves team plans by name.
             </summary>
-            <param name="month">The month of the team plans to retrieve (format: YYYY-MM).</param>
+            <param name="name">The name of the team plans to retrieve.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.TeamplansController.GetTeamplansByPlanFor(System.String)">
+            <summary>
+            Retrieves team plans by planned for.
+            </summary>
+            <param name="planFor">The planned date of the team plans to retrieve (format: YYYY-MM).</param>
+            <returns></returns>
+        </member>
+        <member name="M:PlanningsTool.API.Controllers.TeamplansController.GetTeamplansByCreatedOn(System.String)">
+            <summary>
+            Retrieves team plans by planned for.
+            </summary>
+            <param name="createdOn">What date the team plan is created on.(format: YYYY-MM).</param>
             <returns></returns>
         </member>
         <member name="M:PlanningsTool.API.Controllers.TeamplansController.Post(PlanningsTool.Common.DTO.Teamplans.CreateTeamplanDTO)">

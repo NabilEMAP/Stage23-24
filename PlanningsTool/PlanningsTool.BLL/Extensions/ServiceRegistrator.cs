@@ -32,6 +32,8 @@ namespace PlanningsTool.BLL.Extensions
             services.AddTransient<UpdateNurseValidator>();
             services.AddTransient<CreateNurseShiftValidator>();
             services.AddTransient<UpdateNurseShiftValidator>();
+            services.AddTransient<CreateTeamplanValidator>();
+            services.AddTransient<UpdateTeamplanValidator>();
             services.AddTransient<CreateTeamValidator>();
             services.AddTransient<UpdateTeamValidator>();
             services.AddTransient<CreateVacationValidator>();

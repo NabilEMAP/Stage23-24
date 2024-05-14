@@ -42,16 +42,44 @@ namespace PlanningsTool.API.Controllers
             return Ok(teamplan);
         }
 
-        // GET api/Teamplans/date/{date}
+        // GET api/Teamplans/name/{name}
         /// <summary>
-        /// Retrieves team plans by month.
+        /// Retrieves team plans by name.
         /// </summary>
-        /// <param name="month">The month of the team plans to retrieve (format: YYYY-MM).</param>
+        /// <param name="name">The name of the team plans to retrieve.</param>
         /// <returns></returns>
-        [HttpGet("date/{date}")]
-        public async Task<IActionResult> GetTeamplansByMonth(string month)
+        [HttpGet("name/{name}")]
+        public async Task<IActionResult> GetTeamplansByName(string name)
         {
-            var teamplans = await _teamplansServices.GetTeamplansByMonth(month);
+            var teamplans = await _teamplansServices.GetTeamplansByName(name);
+            if (teamplans == null) { return NotFound(); }
+            return Ok(teamplans);
+        }
+
+        // GET api/Teamplans/planFor/{planFor}        
+        /// <summary>
+        /// Retrieves team plans by planned for.
+        /// </summary>
+        /// <param name="planFor">The planned date of the team plans to retrieve (format: YYYY-MM).</param>
+        /// <returns></returns>
+        [HttpGet("planFor/{planFor}")]
+        public async Task<IActionResult> GetTeamplansByPlanFor(string planFor)
+        {
+            var teamplans = await _teamplansServices.GetTeamplansByPlanFor(planFor);
+            if (teamplans == null) { return NotFound(); }
+            return Ok(teamplans);
+        }
+
+        // GET api/Teamplans/createdOn/{createdOn}
+        /// <summary>
+        /// Retrieves team plans by planned for.
+        /// </summary>
+        /// <param name="createdOn">What date the team plan is created on.(format: YYYY-MM).</param>
+        /// <returns></returns>
+        [HttpGet("createdOn/{createdOn}")]
+        public async Task<IActionResult> GetTeamplansByCreatedOn(string createdOn)
+        {
+            var teamplans = await _teamplansServices.GetTeamplansByCreatedOn(createdOn);
             if (teamplans == null) { return NotFound(); }
             return Ok(teamplans);
         }
@@ -64,14 +92,7 @@ namespace PlanningsTool.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateTeamplanDTO teamplan)
         {
-            try
-            {
-                await _teamplansServices.Add(teamplan);
-            }
-            catch (Exception ex)
-            {
-                return NotFound(ex.Message);
-            }
+            await _teamplansServices.Add(teamplan);
             return Ok(teamplan);
         }
 
