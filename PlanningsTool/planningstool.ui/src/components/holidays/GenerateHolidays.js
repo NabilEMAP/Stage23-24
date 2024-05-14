@@ -19,10 +19,10 @@ function GenerateHolidays(props) {
     const API = `${API_BASE_URL}/Holidays/generate?year=${year}`;
     axios.post(API)
       .then(() => {
-        props.onUpdate();
         toast.success('Feestdagen zijn gegenereerd');
         clear();
         handleClose();
+        props.onUpdate();
       })
       .catch((error) => {
         if (error.response.status === 400) {

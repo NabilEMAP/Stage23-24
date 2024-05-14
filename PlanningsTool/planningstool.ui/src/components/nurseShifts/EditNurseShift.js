@@ -113,16 +113,16 @@ function EditNurseShift(props) {
       "teamId": teamId,
       "nurseId": nurseId,
       "shiftId": shiftId,
-      "teamplanId": 1 //ik ga die even op 1 houden (hardcoded)
+      "teamplanId": 1 //dat wordt alleen maar geincremented als ik een nieuwe planning genereer!
     }
     axios.put(API, data)
       .then(() => {
         toast.success('Zorgkundige is gewijzigd');
+        handleClose();
         props.onUpdate();
         if (props.onEditComplete) {
           props.onEditComplete();
         }
-        handleClose();
       })
       .catch((error) => {
         if (error.response.status === 400) {

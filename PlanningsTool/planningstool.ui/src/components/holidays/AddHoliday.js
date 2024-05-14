@@ -69,6 +69,7 @@ function AddHoliday(props) {
         } else {
           toast.warning(`${error.response.data.Message}`);
         }
+        clear();
       })
   }
 

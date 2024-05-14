@@ -49,8 +49,8 @@ function DeleteTeam(props) {
     axios.delete(API)
       .then(() => {
         toast.error('Team is verwijderd');
-        props.onUpdate();
         handleClose();
+        props.onUpdate();
       })
       .catch((error) => {
         toast.warning(`${error}`);

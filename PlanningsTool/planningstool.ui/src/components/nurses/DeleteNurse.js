@@ -69,8 +69,8 @@ function DeleteNurse(props) {
     axios.delete(API)
       .then(() => {
         toast.error('Zorgkundige is verwijderd');
-        props.onUpdate();
         handleClose();
+        props.onUpdate();
       })
       .catch((error) => {
         toast.warning(`${error}`);

@@ -68,10 +68,10 @@ function AddNurse(props) {
     };
     axios.post(API, data)
       .then(() => {
-        props.onUpdate();
         toast.success('Zorgkundige is toegevoegd');
         clear();
         handleClose();
+        props.onUpdate();
       })
       .catch((error) => {
         if (error.response.status === 400) {
@@ -95,6 +95,7 @@ function AddNurse(props) {
   const clear = () => {
     setFirstName('');
     setLastName('');
+    setRegimeTypeId('');
     setIsFixedNight(false);
   }
 

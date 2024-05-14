@@ -120,12 +120,11 @@ function AddVacation(props) {
         } else {
           toast.warning(`${error.response.data.Message}`);
         }
+        clear();
       })
   }
 
   const clear = () => {
-    //setStartdate('');
-    //setEnddate('');
     setTeamId('');
     setNurseId('');
     setVacationTypeId('');

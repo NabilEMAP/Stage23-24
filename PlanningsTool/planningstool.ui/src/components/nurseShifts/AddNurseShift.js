@@ -97,17 +97,17 @@ function AddNurseShift(props) {
       "teamId": teamId,
       "nurseId": nurseId,
       "shiftId": shiftId,
-      "teamplanId": 1 //ik ga die even op 1 houden (hardcoded)
+      "teamplanId": 1 //dat wordt alleen maar geincremented als ik een nieuwe planning genereer!
     }
     axios.post(API, data)
       .then(() => {
-        props.onUpdate();
-        if (props.onAddComplete) {
-          props.onAddComplete();
-        }
         toast.success('Nurse shift is toegevoegd');
         clear();
         handleClose();
+        props.onUpdate();
+        if (props.onAddComplete) {
+          props.onAddComplete();
+        }        
       })
       .catch((error) => {
         if (error.response.status === 400) {
@@ -120,7 +120,6 @@ function AddNurseShift(props) {
   }
 
   const clear = () => {
-    //setDate('');
     setTeamId('');
     setNurseId('');
     setShiftId('');

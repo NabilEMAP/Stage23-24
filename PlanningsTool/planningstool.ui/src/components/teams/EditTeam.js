@@ -64,8 +64,8 @@ function EditTeam(props) {
     axios.put(API, data)
       .then(() => {
         toast.success('Team is gewijzigd');
-        props.onUpdate();
         handleClose();
+        props.onUpdate();
       })
       .catch((error) => {
         if (error.response.status === 400) {

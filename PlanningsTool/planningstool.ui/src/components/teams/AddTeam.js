@@ -45,11 +45,11 @@ function AddTeam(props) {
       "teamName": teamName,
     }
     axios.post(API, data)
-      .then(() => {
-        props.onUpdate();
+      .then(() => {        
         toast.success('Team is toegevoegd');
         clear();
         handleClose();
+        props.onUpdate();
       })
       .catch((error) => {
         if (error.response.status === 400) {

@@ -88,8 +88,8 @@ function EditNurse(props) {
     axios.put(API, data)
       .then(() => {
         toast.success('Zorgkundige is gewijzigd');
-        props.onUpdate();
         handleClose();
+        props.onUpdate();
       })
       .catch((error) => {
         if (error.response.status === 400) {

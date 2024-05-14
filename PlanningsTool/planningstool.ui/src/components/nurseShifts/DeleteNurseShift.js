@@ -112,11 +112,11 @@ function DeleteNurseShift(props) {
     axios.delete(API)
       .then(() => {
         toast.error('Nurse shift is verwijderd');
+        handleClose();
         props.onUpdate();
         if (props.onDeleteComplete) {
           props.onDeleteComplete();
         }
-        handleClose();
       })
       .catch((error) => {
         toast.warning(`${error}`);
