@@ -113,6 +113,7 @@ function EditNurseShift(props) {
       "teamId": teamId,
       "nurseId": nurseId,
       "shiftId": shiftId,
+      "teamplanId": props.teamplanId,
     }
     axios.put(API, data)
       .then(() => {

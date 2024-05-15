@@ -62,7 +62,7 @@ function NurseShiftPage() {
 
     const renderChanges = (item) => (
         <div style={{ width: '150px' }}>
-            <EditNurseShift id={item.id} onUpdate={handleUpdate} />
+            <EditNurseShift id={item.id} onUpdate={handleUpdate} teamplanId={teamplanId} />
             <DeleteNurseShift id={item.id} onUpdate={handleUpdate} />
         </div>
     );

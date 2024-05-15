@@ -209,6 +209,7 @@ function AdvancedCalendar() {
                     id={selectedEvent.data.id}
                     onUpdate={getNurseShiftData}
                     onEditComplete={handleCloseModal}
+                    teamplanId={teamplanId}
                   />
                   <DeleteNurseShift
                     id={selectedEvent.data.id}
@@ -260,6 +261,7 @@ function AdvancedCalendar() {
                 onUpdate={getNurseShiftData}
                 onAddComplete={handleCloseModal}
                 selectedDateSlot={selectedDateSlot}
+                teamplanId={teamplanId}
               />
             </FormControl>
             <FormControl style={{ width: '75%' }}>
