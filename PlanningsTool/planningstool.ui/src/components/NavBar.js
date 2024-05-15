@@ -35,10 +35,10 @@ export const NavBar = () => {
                     </a>
                 </Typography>
                 <Stack direction='row' spacing={2}>
-                    <Button id="navPlanning" href='/teamplanning' color='inherit'>Planning</Button>
-                    <Button id="navTeam" href='/team' color='inherit'>Teams</Button>
+                    <Button id="navPlan" href='/plan' color='inherit'>Planning</Button>
+                    <Button id="navTeam" href='/team' color='inherit'>Team</Button>
                     <Button id="navVacation" href='/verlof' color='inherit'>Verlof</Button>
-                    <Button id="navNurseShift" href='/shift' color='inherit'>Shift</Button>
+                    <Button id="navTeamplan" href='/teamplan' color='inherit'>Teamplanning</Button>
                     <Button
                         color='inherit'
                         id='types-button'

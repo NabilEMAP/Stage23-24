@@ -97,7 +97,7 @@ function AddNurseShift(props) {
       "teamId": teamId,
       "nurseId": nurseId,
       "shiftId": shiftId,
-      "teamplanId": 1 //dat wordt alleen maar geincremented als ik een nieuwe planning genereer!
+      "teamplanId": props.teamplanId,
     }
     axios.post(API, data)
       .then(() => {

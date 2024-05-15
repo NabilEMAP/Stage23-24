@@ -113,7 +113,6 @@ function EditNurseShift(props) {
       "teamId": teamId,
       "nurseId": nurseId,
       "shiftId": shiftId,
-      "teamplanId": 1 //dat wordt alleen maar geincremented als ik een nieuwe planning genereer!
     }
     axios.put(API, data)
       .then(() => {

@@ -8,29 +8,49 @@ import { API_BASE_URL } from "../config";
 import AddNurseShift from "../components/nurseShifts/AddNurseShift";
 import EditNurseShift from "../components/nurseShifts/EditNurseShift";
 import DeleteNurseShift from "../components/nurseShifts/DeleteNurseShift";
+import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 function NurseShiftPage() {
+    const { teamplanId } = useParams();
     const [data, setData] = useState([]);
+    const [name, setName] = useState('');
 
     useEffect(() => {
-        getData();
-    }, []);
+        if (teamplanId) {
+            getData(teamplanId);
+            getName(teamplanId);
+        }
+    }, [teamplanId]);
 
     const handleUpdate = () => {
-        getData();
+        if (teamplanId) {
+            getData(teamplanId);
+        }
     };
 
-    const getData = () => {
+    const getData = (teamplanId) => {
         const API = `${API_BASE_URL}/NurseShifts`;
         axios.get(API)
             .then((result) => {
-                setData(result.data);
+                const nurseShifts = result.data.filter(nurseShift => nurseShift.teamplanId == teamplanId);
+                setData(nurseShifts);
             })
             .catch((error) => {
                 toast.warning(error.message + ': ' + API.split('/api/')[1]);
             });
     }
+
+    const getName = (teamplanId) => {
+        const API = `${API_BASE_URL}/Teamplans/${teamplanId}`;
+        axios.get(API)
+            .then((result) => {
+                setName(result.data.name);
+            })
+            .catch((error) => {
+                toast.warning(error.message + ': ' + API.split('/api/')[1]);
+            });
+    };
 
     const rows = data.map((item) => ({
         id: item.id,
@@ -70,7 +90,7 @@ function NurseShiftPage() {
             <Container>
                 <div style={{ margin: '24px 0px' }}>
                     <Typography variant="h5" style={{ width: 'fit-content', verticalAlign: 'sub', display: 'inline-block' }}>Zorgkundige Shift Lijst</Typography>
-                    <AddNurseShift buttonColor='success' onUpdate={handleUpdate} />
+                    <AddNurseShift buttonColor='success' onUpdate={handleUpdate} teamplanId={teamplanId} />
                 </div>
                 <div>
                     <DataGrid
