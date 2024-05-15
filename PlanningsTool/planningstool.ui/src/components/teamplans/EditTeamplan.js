@@ -115,18 +115,16 @@ function EditTeamplan(props) {
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                         />
-                        {/*
                         <FormControl style={{ width: '75%' }}>
                             <DatePicker slotProps={{ textField: { error: false } }}
                                 required
                                 id="txtInputPlanFor"
                                 label="Plan voor *"
                                 views={['month', 'year']}
-                                value={dayjs(planFor).format('YYYY-MM')}
-                                onChange={(e) => setPlanFor(dayjs(e))}
+                                value={dayjs(planFor)}
+                                onChange={(e) => {setPlanFor(dayjs(e))}}
                             />
                         </FormControl>
-                        */}
                     </Stack>
                 </Modal.Body>
                 <Modal.Footer>
