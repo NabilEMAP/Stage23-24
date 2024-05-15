@@ -17,6 +17,8 @@ import DeleteHoliday from '../holidays/DeleteHoliday';
 import { toast } from 'react-toastify';
 
 function AdvancedCalendar() {
+  const [teamplanData, setTeamplanData] = useState([]);
+  const [teamplanId, setTeamplanId] = useState('');
   const [vacationData, setVacationData] = useState([]);
   const [nurseShiftData, setNurseShiftData] = useState([]);
   const [holidayData, setHolidayData] = useState([]);
@@ -29,6 +31,7 @@ function AdvancedCalendar() {
     getVacationData();
     getNurseShiftData();
     getHolidayData();
+    getTeamplanData();
   }, []);
 
   const handleSlotSelect = (slotInfo) => {
@@ -46,6 +49,17 @@ function AdvancedCalendar() {
     setShowNewEvent(false);
   };
 
+  const getTeamplanData = () => {
+    const API = `${API_BASE_URL}/Teamplans`;
+    axios.get(API)
+      .then((result) => {
+        setTeamplanData(result.data);
+      })
+      .catch((error) => {
+        toast.warning(error.message + ': ' + API.split('/api/')[1]);
+      });
+  }
+
   const getVacationData = () => {
     const API = `${API_BASE_URL}/Vacations/details`;
     axios.get(API)
@@ -56,8 +70,8 @@ function AdvancedCalendar() {
         toast.warning(error.message + ': ' + API.split('/api/')[1]);
       });
   };
-  const getNurseShiftData = () => {
-    const API = `${API_BASE_URL}/NurseShifts`;
+  const getNurseShiftData = (teamplanId) => {
+    const API = `${API_BASE_URL}/NurseShifts?teamplanId=${teamplanId}`;
     axios.get(API)
       .then((result) => {
         setNurseShiftData(result.data);
@@ -88,7 +102,8 @@ function AdvancedCalendar() {
     }));
   };
   const formatNurseShiftData = (data) => {
-    return data.map(nurseShift => ({
+    const filteredNurseshifts = data.filter(nurseShift => nurseShift.teamplanId === teamplanId);
+    return filteredNurseshifts.map(nurseShift => ({
       start: moment(nurseShift.date).add(nurseShift.shift.starttime, 'hours').toDate(),
       end: moment(nurseShift.date).add(nurseShift.shift.endtime, 'hours').toDate(),
       title: `Shift - ${nurseShift.nurse.firstName} ${nurseShift.nurse.lastName}`,
@@ -109,6 +124,16 @@ function AdvancedCalendar() {
       },
     }));
   };
+  const renderTeamplan = () => {
+    return teamplanData.map((item) => (
+      <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>
+    ));
+  }
+  const handleTeamplanChange = (e) => {
+    const selectedTeamplanId = e.target.value;
+    setTeamplanId(selectedTeamplanId);
+    getNurseShiftData(selectedTeamplanId);
+  }
   const events = [
     ...formatVacationData(vacationData),
     ...formatNurseShiftData(nurseShiftData),
@@ -247,6 +272,18 @@ function AdvancedCalendar() {
           </Stack>
         </Modal.Body>
       </Modal>
+      <FormControl style={{ width: '75%' }}>
+        <InputLabel>Teamplanningen *</InputLabel>
+        <Select
+          required
+          id="selectTeamplan"
+          label="Teamplan"
+          value={teamplanId}
+          onChange={handleTeamplanChange}
+        >
+          {renderTeamplan()}
+        </Select>
+      </FormControl>
     </>
   );
 }
