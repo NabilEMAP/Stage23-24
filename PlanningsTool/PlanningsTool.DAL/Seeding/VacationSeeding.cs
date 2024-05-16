@@ -8,60 +8,28 @@ namespace PlanningsTool.DAL.Seeding
         public static void Seed(this EntityTypeBuilder<Vacation> modelBuilder)
         {
             modelBuilder.HasData(
-                new Vacation()
-                {
-                    Id = 1,
-                    Startdate = new DateTime(2024, 05, 03),
-                    Enddate = new DateTime(2024, 05, 03),
-                    Reason = "Verlofdagje op vrijdag.",
-                    NurseId = 1,
-                    VacationTypeId = 1
-                },
-                new Vacation()
-                {
-                    Id = 2,
-                    Startdate = new DateTime(2024, 04, 29),
-                    Enddate = new DateTime(2024, 05, 03),
-                    Reason = "Heel de week ziek geweest.",
-                    NurseId = 2,
-                    VacationTypeId = 2
-                },
-                new Vacation()
-                {
-                    Id = 3,
-                    Startdate = new DateTime(2024, 05, 14),
-                    Enddate = new DateTime(2024, 05, 14),
-                    Reason = "Afwezig.",
-                    NurseId = 3,
-                    VacationTypeId = 5
-                },
-                new Vacation()
-                {
-                    Id = 4,
-                    Startdate = new DateTime(2024, 05, 25),
-                    Enddate = new DateTime(2024, 05, 1),
-                    Reason = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse fringilla nibh eu justo ullamcorper iaculis. Quisque at tellus at ex faucibus tempus ac eu nisi. In sapien sapien, pellentesque eu velit a, sodales faucibus urna. Ut est eros, efficitur eu suscipit quis, vulputate a metus. Vestibulum non ullamcorper lectus. Ut aliquam nunc sed arcu laoreet eleifend. Nam venenatis purus ipsum, ut condimentum quam vulputate id. Mauris id orci vel purus convallis volutpat ac sed nibh. Donec vitae dolor in tortor mollis consectetur. Nunc in ante tortor. Mauris sit amet semper lacus. Vivamus lacus neque, sodales id dolor vel, iaculis dictum tellus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Proin eu dui vel risus aliquam elementum eget id ligula.",
-                    NurseId = 4,
-                    VacationTypeId = 5
-                },
-                new Vacation()
-                {
-                    Id = 5,
-                    Startdate = new DateTime(2024, 05, 13),
-                    Enddate = new DateTime(2024, 05, 13),
-                    Reason = "Afspraak UZA Gastro",
-                    NurseId = 25,
-                    VacationTypeId = 2
-                },
-                new Vacation()
-                {
-                    Id = 6,
-                    Startdate = new DateTime(2024, 06, 01),
-                    Enddate = new DateTime(2024, 06, 05),
-                    Reason = "Afspraak plannen voor Rijbewijs terugkommoment",
-                    NurseId = 25,
-                    VacationTypeId = 4
-                }
+                new Vacation() { Id =  1, Startdate = new DateTime(2022, 03, 01), Enddate = new DateTime(2022, 03, 01), Reason = "", NurseId =  1, VacationTypeId = 1 },
+                new Vacation() { Id =  2, Startdate = new DateTime(2022, 03, 03), Enddate = new DateTime(2022, 03, 04), Reason = "", NurseId =  1, VacationTypeId = 1 },
+                new Vacation() { Id =  3, Startdate = new DateTime(2022, 03, 03), Enddate = new DateTime(2022, 03, 03), Reason = "", NurseId =  2, VacationTypeId = 1 },
+                new Vacation() { Id =  4, Startdate = new DateTime(2022, 03, 16), Enddate = new DateTime(2022, 03, 16), Reason = "", NurseId =  2, VacationTypeId = 1 },
+                new Vacation() { Id =  5, Startdate = new DateTime(2022, 03, 01), Enddate = new DateTime(2022, 03, 09), Reason = "", NurseId =  3, VacationTypeId = 2 },
+                new Vacation() { Id =  6, Startdate = new DateTime(2022, 03, 10), Enddate = new DateTime(2022, 04, 01), Reason = "", NurseId =  3, VacationTypeId = 2 },
+                new Vacation() { Id =  7, Startdate = new DateTime(2022, 03, 01), Enddate = new DateTime(2022, 03, 11), Reason = "", NurseId =  4, VacationTypeId = 2 },
+                new Vacation() { Id =  8, Startdate = new DateTime(2022, 03, 12), Enddate = new DateTime(2022, 04, 01), Reason = "", NurseId =  4, VacationTypeId = 1 },
+                new Vacation() { Id =  9, Startdate = new DateTime(2022, 03, 16), Enddate = new DateTime(2022, 03, 23), Reason = "", NurseId =  5, VacationTypeId = 1 },
+                new Vacation() { Id = 10, Startdate = new DateTime(2022, 03, 21), Enddate = new DateTime(2022, 03, 22), Reason = "", NurseId =  6, VacationTypeId = 1 },
+                new Vacation() { Id = 11, Startdate = new DateTime(2022, 03, 24), Enddate = new DateTime(2022, 03, 25), Reason = "", NurseId =  7, VacationTypeId = 1 },
+                new Vacation() { Id = 12, Startdate = new DateTime(2022, 03, 28), Enddate = new DateTime(2022, 04, 01), Reason = "", NurseId =  7, VacationTypeId = 1 },
+                new Vacation() { Id = 13, Startdate = new DateTime(2022, 03, 01), Enddate = new DateTime(2022, 03, 01), Reason = "", NurseId =  8, VacationTypeId = 1 },
+                new Vacation() { Id = 14, Startdate = new DateTime(2022, 03, 03), Enddate = new DateTime(2022, 03, 04), Reason = "", NurseId =  8, VacationTypeId = 1 },
+                new Vacation() { Id = 15, Startdate = new DateTime(2022, 03, 23), Enddate = new DateTime(2022, 03, 24), Reason = "", NurseId = 10, VacationTypeId = 1 },
+                new Vacation() { Id = 16, Startdate = new DateTime(2022, 03, 02), Enddate = new DateTime(2022, 03, 02), Reason = "", NurseId = 11, VacationTypeId = 1 },
+                new Vacation() { Id = 17, Startdate = new DateTime(2022, 03, 11), Enddate = new DateTime(2022, 03, 11), Reason = "", NurseId = 11, VacationTypeId = 1 },
+                new Vacation() { Id = 18, Startdate = new DateTime(2022, 03, 21), Enddate = new DateTime(2022, 03, 21), Reason = "", NurseId = 11, VacationTypeId = 1 },
+                new Vacation() { Id = 19, Startdate = new DateTime(2022, 03, 03), Enddate = new DateTime(2022, 03, 04), Reason = "", NurseId = 12, VacationTypeId = 1 },
+                new Vacation() { Id = 20, Startdate = new DateTime(2022, 03, 15), Enddate = new DateTime(2022, 03, 18), Reason = "", NurseId = 12, VacationTypeId = 1 },
+                new Vacation() { Id = 21, Startdate = new DateTime(2022, 03, 29), Enddate = new DateTime(2022, 03, 29), Reason = "", NurseId = 12, VacationTypeId = 1 },
+                new Vacation() { Id = 22, Startdate = new DateTime(2022, 04, 01), Enddate = new DateTime(2022, 04, 01), Reason = "", NurseId = 12, VacationTypeId = 1 }
             );
         }
     }

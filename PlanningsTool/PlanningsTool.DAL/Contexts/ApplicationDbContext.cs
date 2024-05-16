@@ -47,6 +47,7 @@ namespace PlanningsTool.DAL.Contexts
             modelBuilder.Entity<NurseShift>().Seed();
             modelBuilder.Entity<Team>().Seed();
             modelBuilder.Entity<Teamplan>().Seed();
+            modelBuilder.Entity<Holiday>().Seed();
         }
     }
 }

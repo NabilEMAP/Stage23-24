@@ -13,9 +13,7 @@ namespace PlanningsTool.DAL.Seeding
         public static void Seed(this EntityTypeBuilder<Team> modelBuilder)
         {
             modelBuilder.HasData(
-                new Team() { Id = 1, TeamName = "Team Magribien" },
-                new Team() { Id = 2, TeamName = "Team Iromien" },
-                new Team() { Id = 3, TeamName = "New Team" }
+                new Team() { Id = 1, TeamName = "Team W&L" }
             );
         }
     }
