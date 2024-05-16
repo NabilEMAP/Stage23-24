@@ -6,7 +6,7 @@ import {
 
 const homecards = [
     {
-        heading: "Teams",
+        heading: "Team",
         description: "Lijst van teams",
         url: "/team",
         image: zorgkundige,
@@ -18,9 +18,9 @@ const homecards = [
         image: verlof,
     },
     {
-        heading: "Shift",
-        description: "Lijst van shifts",
-        url: "/shift",
+        heading: "Teamplanning",
+        description: "Lijst van teamplanningen",
+        url: "/teamplan",
         image: zorgkundigeshift,
     },
 ];
