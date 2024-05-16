@@ -91,7 +91,7 @@ function AddTeam(props) {
               style={{ width: '75%' }}
               required
               id="txtInputTeamName"
-              label="TeamName"
+              label="Teamnaam"
               type="text"
               className="form-control"
               value={teamName}

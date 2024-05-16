@@ -97,7 +97,7 @@ function AddTeamplan(props) {
                             style={{ width: '75%' }}
                             required
                             id="txtInputName"
-                            label="Name"
+                            label="Naam"
                             type="text"
                             className="form-control"
                             value={name}
