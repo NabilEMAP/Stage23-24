@@ -8,6 +8,7 @@ namespace PlanningsTool.DAL.Seeding
         public static void Seed(this EntityTypeBuilder<NurseShift> modelBuilder)
         {
             modelBuilder.HasData(
+                // Teamplan W&L
                 new NurseShift() { Id =   1, Date = new DateTime(2022, 03, 07), NurseId =  1, ShiftId = 1, TeamplanId = 1, },
                 new NurseShift() { Id =   2, Date = new DateTime(2022, 03, 08), NurseId =  1, ShiftId = 1, TeamplanId = 1, },
                 new NurseShift() { Id =   3, Date = new DateTime(2022, 03, 10), NurseId =  1, ShiftId = 1, TeamplanId = 1, },
@@ -169,7 +170,20 @@ namespace PlanningsTool.DAL.Seeding
                 new NurseShift() { Id = 159, Date = new DateTime(2022, 03, 10), NurseId = 12, ShiftId = 7, TeamplanId = 1, },
                 new NurseShift() { Id = 160, Date = new DateTime(2022, 03, 21), NurseId = 12, ShiftId = 7, TeamplanId = 1, },
                 new NurseShift() { Id = 161, Date = new DateTime(2022, 03, 22), NurseId = 12, ShiftId = 7, TeamplanId = 1, },
-                new NurseShift() { Id = 162, Date = new DateTime(2022, 03, 23), NurseId = 12, ShiftId = 7, TeamplanId = 1, }
+                new NurseShift() { Id = 162, Date = new DateTime(2022, 03, 23), NurseId = 12, ShiftId = 7, TeamplanId = 1, },
+
+                // Teamplan Red & Blue
+                new NurseShift() { Id = 163, Date = new DateTime(2024, 05, 06), NurseId = 13, ShiftId = 1, TeamplanId = 2, },
+                new NurseShift() { Id = 164, Date = new DateTime(2024, 05, 07), NurseId = 14, ShiftId = 1, TeamplanId = 2, },
+                new NurseShift() { Id = 166, Date = new DateTime(2024, 05, 08), NurseId = 23, ShiftId = 4, TeamplanId = 2, },
+                new NurseShift() { Id = 167, Date = new DateTime(2024, 05, 21), NurseId = 28, ShiftId = 1, TeamplanId = 3, },
+                new NurseShift() { Id = 168, Date = new DateTime(2024, 05, 22), NurseId = 26, ShiftId = 4, TeamplanId = 3, },
+                new NurseShift() { Id = 169, Date = new DateTime(2024, 05, 23), NurseId = 27, ShiftId = 1, TeamplanId = 3, },
+                new NurseShift() { Id = 170, Date = new DateTime(2024, 05, 17), NurseId = 35, ShiftId = 2, TeamplanId = 3, },
+                new NurseShift() { Id = 171, Date = new DateTime(2024, 05, 08), NurseId = 34, ShiftId = 2, TeamplanId = 3, },
+                new NurseShift() { Id = 172, Date = new DateTime(2024, 05, 13), NurseId = 32, ShiftId = 1, TeamplanId = 3, },
+                new NurseShift() { Id = 173, Date = new DateTime(2024, 05, 13), NurseId = 18, ShiftId = 1, TeamplanId = 2, },
+                new NurseShift() { Id = 174, Date = new DateTime(2024, 05, 20), NurseId = 14, ShiftId = 1, TeamplanId = 2, }
             );
         }
     }

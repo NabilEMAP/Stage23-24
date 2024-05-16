@@ -8,6 +8,7 @@ namespace PlanningsTool.DAL.Seeding
         public static void Seed(this EntityTypeBuilder<Vacation> modelBuilder)
         {
             modelBuilder.HasData(
+                // Team W&L
                 new Vacation() { Id =  1, Startdate = new DateTime(2022, 03, 01), Enddate = new DateTime(2022, 03, 01), Reason = "", NurseId =  1, VacationTypeId = 1 },
                 new Vacation() { Id =  2, Startdate = new DateTime(2022, 03, 03), Enddate = new DateTime(2022, 03, 04), Reason = "", NurseId =  1, VacationTypeId = 1 },
                 new Vacation() { Id =  3, Startdate = new DateTime(2022, 03, 03), Enddate = new DateTime(2022, 03, 03), Reason = "", NurseId =  2, VacationTypeId = 1 },
@@ -29,7 +30,15 @@ namespace PlanningsTool.DAL.Seeding
                 new Vacation() { Id = 19, Startdate = new DateTime(2022, 03, 03), Enddate = new DateTime(2022, 03, 04), Reason = "", NurseId = 12, VacationTypeId = 1 },
                 new Vacation() { Id = 20, Startdate = new DateTime(2022, 03, 15), Enddate = new DateTime(2022, 03, 18), Reason = "", NurseId = 12, VacationTypeId = 1 },
                 new Vacation() { Id = 21, Startdate = new DateTime(2022, 03, 29), Enddate = new DateTime(2022, 03, 29), Reason = "", NurseId = 12, VacationTypeId = 1 },
-                new Vacation() { Id = 22, Startdate = new DateTime(2022, 04, 01), Enddate = new DateTime(2022, 04, 01), Reason = "", NurseId = 12, VacationTypeId = 1 }
+                new Vacation() { Id = 22, Startdate = new DateTime(2022, 04, 01), Enddate = new DateTime(2022, 04, 01), Reason = "", NurseId = 12, VacationTypeId = 1 },
+
+                // Team Red & Blue
+                new Vacation() { Id = 23, Startdate = new DateTime(2024, 05, 01), Enddate = new DateTime(2024, 06, 01), Reason = "Family Matters", NurseId = 16, VacationTypeId = 1 },
+                new Vacation() { Id = 24, Startdate = new DateTime(2024, 05, 06), Enddate = new DateTime(2024, 05, 06), Reason = "Watching Husband Stephen Thompson fight in the UFC.", NurseId = 15, VacationTypeId = 1 },
+                new Vacation() { Id = 25, Startdate = new DateTime(2024, 05, 21), Enddate = new DateTime(2024, 05, 24), Reason = "Training brother Alex Perez in training camp.", NurseId = 23, VacationTypeId = 1 },
+                new Vacation() { Id = 26, Startdate = new DateTime(2024, 05, 10), Enddate = new DateTime(2024, 05, 10), Reason = "Docters appointment.", NurseId = 24, VacationTypeId = 2 },
+                new Vacation() { Id = 27, Startdate = new DateTime(2024, 05, 13), Enddate = new DateTime(2024, 05, 17), Reason = "Visiting grandparents in Vietnam.", NurseId = 25, VacationTypeId = 1 },
+                new Vacation() { Id = 28, Startdate = new DateTime(2024, 05, 27), Enddate = new DateTime(2024, 05, 27), Reason = "Hiking with the homies.", NurseId = 36, VacationTypeId = 1 }
             );
         }
     }
