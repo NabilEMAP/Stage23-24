@@ -12,7 +12,7 @@ using PlanningsTool.DAL.Contexts;
 namespace PlanningsTool.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240517101646_initdb")]
+    [Migration("20240518115422_initdb")]
     partial class initdb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
