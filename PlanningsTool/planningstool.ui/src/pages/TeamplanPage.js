@@ -11,6 +11,7 @@ import '../App.css';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import dayjs from "dayjs";
+import JSONToExcelConverter from "../components/JSONToExcelConverter";
 
 function TeamplanPage() {
     const [data, setData] = useState([]);
@@ -33,11 +34,11 @@ function TeamplanPage() {
                 toast.warning(error.message + ': ' + API.split('/api/')[1]);
             });
     }
-
     const renderChanges = (item) => (
         <div style={{ width: '150px' }}>
             <EditTeamplan id={item.id} onUpdate={handleUpdate} />
-            <DeleteTeamplan id={item.id} onUpdate={handleUpdate} />
+            <DeleteTeamplan id={item.id} onUpdate={handleUpdate} />            
+            <JSONToExcelConverter id={item.id} />
         </div>
     );
 

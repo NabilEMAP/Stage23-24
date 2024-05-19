@@ -1,48 +1,39 @@
-import React from 'react';
-import XLSX from 'xlsx';
+import React, { useEffect, useState } from 'react';
+import * as XLSX from 'xlsx';
+import axios from 'axios';
+import { faFileExcel } from '@fortawesome/free-solid-svg-icons';
+import { IconButton } from '@mui/material';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { API_BASE_URL } from "../config";
+import dayjs from 'dayjs';
+import { toast } from 'react-toastify';
 
-function JSONToExcelConverter({ jsonData }) {
-  const convertJSONToExcel = (jsonData, month) => {
-    // Parse JSON data
-    const users = JSON.parse(jsonData);
+function JSONToExcelConverter(props) {
+    const [data, setData] = useState([]);
+    
+    useEffect(() => {
+        getData();
+    }, []);
 
-    // Determine the range of days within the desired month
-    const startDate = new Date(month);
-    const endDate = new Date(startDate.getFullYear(), startDate.getMonth() + 1, 0);
-    const daysInMonth = [];
-    for (let d = startDate; d <= endDate; d.setDate(d.getDate() + 1)) {
-      daysInMonth.push(new Date(d));
+    const getData = () => {
+        const API = `${API_BASE_URL}/Teamplans`;
+        axios.get(API)
+            .then((result) => {
+                setData(result.data);
+            })
+            .catch((error) => {
+                toast.warning(error.message + ': ' + API.split('/api/')[1]);
+            })
     }
 
-    // Create worksheet
-    const ws = XLSX.utils.aoa_to_sheet([['User', ...daysInMonth.map(day => day.getDate())]]);
-
-    // Populate rows with user data
-    users.forEach((user, index) => {
-      const row = [user.name];
-      daysInMonth.forEach(day => {
-        // Add user data for each day
-        // Example: row.push(user.data[day.toISOString()]);
-        row.push(""); // Placeholder for user data
-      });
-      XLSX.utils.sheet_add_aoa(ws, [row], {origin: -1});
-    });
-
-    // Create workbook
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Users');
-
-    // Save workbook as Excel file
-    XLSX.writeFile(wb, 'users.xlsx');
-  };
-
-  return (
-    <div>
-      <button onClick={() => convertJSONToExcel(jsonData, '2024-05')}>Export to Excel</button>
-    </div>
-  );
+    return (
+        <IconButton
+            size="medium"
+            color="success"
+        >
+            <FontAwesomeIcon icon={faFileExcel} />
+        </IconButton>
+    );
 }
 
 export default JSONToExcelConverter;
-
-{/*<JSONToExcelConverter jsonData={yourJSONData} />*/}
