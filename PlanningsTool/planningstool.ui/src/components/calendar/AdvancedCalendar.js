@@ -19,6 +19,8 @@ import { toast } from 'react-toastify';
 function AdvancedCalendar() {
   const [teamplanData, setTeamplanData] = useState([]);
   const [teamplanId, setTeamplanId] = useState('');
+  const [teamData, setTeamData] = useState([]);
+  const [teamId, setTeamId] = useState('');
   const [vacationData, setVacationData] = useState([]);
   const [nurseShiftData, setNurseShiftData] = useState([]);
   const [holidayData, setHolidayData] = useState([]);
@@ -32,6 +34,7 @@ function AdvancedCalendar() {
     getNurseShiftData();
     getHolidayData();
     getTeamplanData();
+    getTeamData();
   }, []);
 
   const handleSlotSelect = (slotInfo) => {
@@ -54,6 +57,17 @@ function AdvancedCalendar() {
     axios.get(API)
       .then((result) => {
         setTeamplanData(result.data);
+      })
+      .catch((error) => {
+        toast.warning(error.message + ': ' + API.split('/api/')[1]);
+      });
+  }
+
+  const getTeamData = () => {
+    const API = `${API_BASE_URL}/Teams`;
+    axios.get(API)
+      .then((result) => {
+        setTeamData(result.data);
       })
       .catch((error) => {
         toast.warning(error.message + ': ' + API.split('/api/')[1]);
@@ -91,10 +105,11 @@ function AdvancedCalendar() {
       });
   };
   const formatVacationData = (data) => {
-    return data.map(vacation => ({
+    const filteredVacations = data.filter(vacation => vacation.nurse.teamId === teamId);
+    return filteredVacations.map(vacation => ({
       start: moment(vacation.startdate).toDate(),
       end: moment(vacation.enddate).add(1, 'day').toDate(),
-      title: `Vacation - ${vacation.nurse.firstName} ${vacation.nurse.lastName}`,
+      title: `${vacation.nurse.firstName} ${vacation.nurse.lastName} - Team Id: ${vacation.nurse.teamId}`,
       data: {
         type: "Vacation",
         id: vacation.id,
@@ -106,7 +121,7 @@ function AdvancedCalendar() {
     return filteredNurseshifts.map(nurseShift => ({
       start: moment(nurseShift.date).add(nurseShift.shift.starttime, 'hours').toDate(),
       end: moment(nurseShift.date).add(nurseShift.shift.endtime, 'hours').toDate(),
-      title: `Shift - ${nurseShift.nurse.firstName} ${nurseShift.nurse.lastName}`,
+      title: `${nurseShift.nurse.firstName} ${nurseShift.nurse.lastName} - Team Id: ${nurseShift.nurse.teamId}`,
       data: {
         type: "Shift",
         id: nurseShift.id,
@@ -128,12 +143,22 @@ function AdvancedCalendar() {
     return teamplanData.map((item) => (
       <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>
     ));
-  }
+  };
+  const renderTeam = () => {
+    return teamData.map((item) => (
+      <MenuItem key={item.id} value={item.id}>{item.teamName}</MenuItem>
+    ));
+  };
   const handleTeamplanChange = (e) => {
     const selectedTeamplanId = e.target.value;
     setTeamplanId(selectedTeamplanId);
     getNurseShiftData(selectedTeamplanId);
   }
+  const handleTeamChange = (e) => {
+    const selectedTeamId = e.target.value;
+    setTeamId(selectedTeamId);
+    getVacationData(selectedTeamId);
+  };
   const events = [
     ...formatVacationData(vacationData),
     ...formatNurseShiftData(nurseShiftData),
@@ -241,7 +266,6 @@ function AdvancedCalendar() {
           <Modal.Title>Planning aanmaken</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>Selected Slot: {selectedDateSlot && selectedDateSlot.start.toLocaleString()}</p>
           <Stack
             direction="column"
             justifyContent="center"
@@ -249,6 +273,7 @@ function AdvancedCalendar() {
             spacing={4}
             style={{ height: '250px' }}
           >
+            <p>Selected Slot: {selectedDateSlot && selectedDateSlot.start.toLocaleDateString()}</p>
             <FormControl style={{ width: '75%' }}>
               <AddVacation
                 onUpdate={getVacationData}
@@ -274,18 +299,37 @@ function AdvancedCalendar() {
           </Stack>
         </Modal.Body>
       </Modal>
-      <FormControl style={{ width: '75%' }}>
-        <InputLabel>Teamplanningen *</InputLabel>
-        <Select
-          required
-          id="selectTeamplan"
-          label="Teamplan"
-          value={teamplanId}
-          onChange={handleTeamplanChange}
-        >
-          {renderTeamplan()}
-        </Select>
-      </FormControl>
+      <Stack
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+            spacing={4}
+          >
+        <FormControl style={{ width: '75%' }}>
+          <InputLabel>Teams *</InputLabel>
+          <Select
+            required
+            id="selectTeam"
+            label="Team"
+            value={teamId}
+            onChange={handleTeamChange}
+          >
+            {renderTeam()}
+          </Select>
+        </FormControl>
+        <FormControl style={{ width: '75%' }}>
+          <InputLabel>Teamplanningen *</InputLabel>
+          <Select
+            required
+            id="selectTeamplan"
+            label="Teamplan"
+            value={teamplanId}
+            onChange={handleTeamplanChange}
+          >
+            {renderTeamplan()}
+          </Select>
+        </FormControl>
+      </Stack>
     </>
   );
 }
