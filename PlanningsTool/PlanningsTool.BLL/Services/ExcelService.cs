@@ -11,19 +11,16 @@ using PlanningsTool.DAL.UOW;
 
 public class ExcelService : IExcelService
 {
-    private readonly IUnitOfWork _uow;
-    private readonly IMapper _mapper;
-
-    public ExcelService(IUnitOfWork uow, IMapper mapper)
+    public ExcelService()
     {
-        _uow = uow;
-        _mapper = mapper;
     }
 
-    public void GenerateExcel(IEnumerable<NurseShiftDTO> nurseShifts, IEnumerable<VacationDTO> vacations, IEnumerable<HolidayDTO> holidays, string month, string filePath)
+    public void GenerateExcel(IEnumerable<NurseShiftDTO> nurseShifts, IEnumerable<VacationDTO> vacations, IEnumerable<HolidayDTO> holidays, string month, string filePath, int teamplanId)
     {
         var startDate = DateTime.Parse($"{month}-01");
         var daysInMonth = DateTime.DaysInMonth(startDate.Year, startDate.Month);
+
+        var filteredNurseShifts = nurseShifts.Where(ns => ns.TeamplanId == teamplanId);
 
         using (var package = new ExcelPackage())
         {

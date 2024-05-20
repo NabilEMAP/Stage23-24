@@ -27,6 +27,12 @@ namespace PlanningsTool.DAL.Configurations
             builder.Property(p => p.CreatedOn)
                     .IsRequired()
                     .HasColumnType("datetime");
+
+
+
+            builder.Property(p => p.TeamId)
+                    .IsRequired()
+                    .HasColumnType("int");
         }
     }
 }

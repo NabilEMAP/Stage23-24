@@ -12,8 +12,8 @@ using PlanningsTool.DAL.Contexts;
 namespace PlanningsTool.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240518115422_initdb")]
-    partial class initdb
+    [Migration("20240520192002_addedTeamIdToTeamplan")]
+    partial class addedTeamIdToTeamplan
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -2282,6 +2282,9 @@ namespace PlanningsTool.DAL.Migrations
                     b.Property<DateTime>("PlanFor")
                         .HasColumnType("date");
 
+                    b.Property<int>("TeamId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Id")
@@ -2295,21 +2298,24 @@ namespace PlanningsTool.DAL.Migrations
                             Id = 1,
                             CreatedOn = new DateTime(2024, 5, 15, 22, 7, 19, 0, DateTimeKind.Unspecified),
                             Name = "2024-05-16-00-07-19 W&L",
-                            PlanFor = new DateTime(2022, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            PlanFor = new DateTime(2022, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TeamId = 1
                         },
                         new
                         {
                             Id = 2,
                             CreatedOn = new DateTime(2024, 5, 16, 11, 51, 59, 0, DateTimeKind.Unspecified),
                             Name = "2024-05-16-13-51-19 TeamRed",
-                            PlanFor = new DateTime(2024, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            PlanFor = new DateTime(2024, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TeamId = 2
                         },
                         new
                         {
                             Id = 3,
                             CreatedOn = new DateTime(2024, 5, 16, 11, 52, 14, 0, DateTimeKind.Unspecified),
                             Name = "2024-05-16-13-52-19 TeamBlue",
-                            PlanFor = new DateTime(2024, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            PlanFor = new DateTime(2024, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TeamId = 3
                         });
                 });
 

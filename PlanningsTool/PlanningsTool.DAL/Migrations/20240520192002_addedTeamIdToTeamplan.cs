@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PlanningsTool.DAL.Migrations
 {
-    public partial class initdb : Migration
+    public partial class addedTeamIdToTeamplan : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -79,7 +79,8 @@ namespace PlanningsTool.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "varchar(100)", nullable: false),
                     PlanFor = table.Column<DateTime>(type: "date", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime", nullable: false)
+                    CreatedOn = table.Column<DateTime>(type: "datetime", nullable: false),
+                    TeamId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -312,12 +313,12 @@ namespace PlanningsTool.DAL.Migrations
             migrationBuilder.InsertData(
                 schema: "dbo",
                 table: "Teamplans",
-                columns: new[] { "Id", "CreatedOn", "Name", "PlanFor" },
+                columns: new[] { "Id", "CreatedOn", "Name", "PlanFor", "TeamId" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 5, 15, 22, 7, 19, 0, DateTimeKind.Unspecified), "2024-05-16-00-07-19 W&L", new DateTime(2022, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, new DateTime(2024, 5, 16, 11, 51, 59, 0, DateTimeKind.Unspecified), "2024-05-16-13-51-19 TeamRed", new DateTime(2024, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, new DateTime(2024, 5, 16, 11, 52, 14, 0, DateTimeKind.Unspecified), "2024-05-16-13-52-19 TeamBlue", new DateTime(2024, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 1, new DateTime(2024, 5, 15, 22, 7, 19, 0, DateTimeKind.Unspecified), "2024-05-16-00-07-19 W&L", new DateTime(2022, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 2, new DateTime(2024, 5, 16, 11, 51, 59, 0, DateTimeKind.Unspecified), "2024-05-16-13-51-19 TeamRed", new DateTime(2024, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 3, new DateTime(2024, 5, 16, 11, 52, 14, 0, DateTimeKind.Unspecified), "2024-05-16-13-52-19 TeamBlue", new DateTime(2024, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3 }
                 });
 
             migrationBuilder.InsertData(

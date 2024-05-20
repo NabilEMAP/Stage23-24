@@ -34,11 +34,12 @@ function TeamplanPage() {
                 toast.warning(error.message + ': ' + API.split('/api/')[1]);
             });
     }
+
     const renderChanges = (item) => (
         <div style={{ width: '150px' }}>
             <EditTeamplan id={item.id} onUpdate={handleUpdate} />
             <DeleteTeamplan id={item.id} onUpdate={handleUpdate} />            
-            <DownloadExcel />
+            <DownloadExcel teamplanId={item.id} month={dayjs(item.planFor).format('YYYY-MM')} />
         </div>
     );
 
@@ -60,7 +61,6 @@ function TeamplanPage() {
             renderCell: (params) => renderChanges(params)
         },
     ];
-
 
     const rows = data.map((item) => ({
         id: item.id,

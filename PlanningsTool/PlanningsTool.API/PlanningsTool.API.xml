@@ -4,7 +4,7 @@
         <name>PlanningsTool.API</name>
     </assembly>
     <members>
-        <member name="M:ExcelController.GenerateExcel(System.String)">
+        <member name="M:ExcelController.GenerateExcel(System.String,System.Int32)">
             <summary>
             Generates an Excel for a specified month and year.
             </summary>
