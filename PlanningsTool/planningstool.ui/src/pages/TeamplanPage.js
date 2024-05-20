@@ -11,7 +11,7 @@ import '../App.css';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import dayjs from "dayjs";
-import JSONToExcelConverter from "../components/JSONToExcelConverter";
+import DownloadExcel from "../components/DownloadExcel";
 
 function TeamplanPage() {
     const [data, setData] = useState([]);
@@ -38,7 +38,7 @@ function TeamplanPage() {
         <div style={{ width: '150px' }}>
             <EditTeamplan id={item.id} onUpdate={handleUpdate} />
             <DeleteTeamplan id={item.id} onUpdate={handleUpdate} />            
-            <JSONToExcelConverter id={item.id} />
+            <DownloadExcel />
         </div>
     );
 

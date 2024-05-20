@@ -4,6 +4,13 @@
         <name>PlanningsTool.API</name>
     </assembly>
     <members>
+        <member name="M:ExcelController.GenerateExcel(System.String)">
+            <summary>
+            Generates an Excel for a specified month and year.
+            </summary>
+            <param name="month">The month and year for which the Excel is generated.</param>
+            <returns></returns>
+        </member>
         <member name="M:PlanningsTool.API.Controllers.HolidaysController.GetAll">
             <summary>
             Retrieves all holidays.

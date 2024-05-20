@@ -21,6 +21,7 @@ namespace PlanningsTool.BLL.Extensions
             services.AddScoped<ITeamsService, TeamsService>();
             services.AddScoped<IShiftsService, ShiftsService>();
             services.AddScoped<IHolidaysService, HolidaysService>();
+            services.AddScoped<IExcelService, ExcelService>();
             services.RegisterValidators();
             return services;
         }
