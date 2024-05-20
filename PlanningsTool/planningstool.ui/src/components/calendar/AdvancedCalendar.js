@@ -28,6 +28,7 @@ function AdvancedCalendar() {
   const [showCurrentEvent, setShowCurrentEvent] = useState(false);
   const [selectedDateSlot, setSelectedDateSlot] = useState(null);
   const [showNewEvent, setShowNewEvent] = useState(false);
+  const [teamplanSelectDisabled, setTeamplanSelectDisabled] = useState(true);
 
   useEffect(() => {
     getVacationData();
@@ -109,7 +110,7 @@ function AdvancedCalendar() {
     return filteredVacations.map(vacation => ({
       start: moment(vacation.startdate).toDate(),
       end: moment(vacation.enddate).add(1, 'day').toDate(),
-      title: `${vacation.nurse.firstName} ${vacation.nurse.lastName} - Team Id: ${vacation.nurse.teamId}`,
+      title: `${vacation.nurse.firstName} ${vacation.nurse.lastName}`,
       data: {
         type: "Vacation",
         id: vacation.id,
@@ -121,7 +122,7 @@ function AdvancedCalendar() {
     return filteredNurseshifts.map(nurseShift => ({
       start: moment(nurseShift.date).add(nurseShift.shift.starttime, 'hours').toDate(),
       end: moment(nurseShift.date).add(nurseShift.shift.endtime, 'hours').toDate(),
-      title: `${nurseShift.nurse.firstName} ${nurseShift.nurse.lastName} - Team Id: ${nurseShift.nurse.teamId}`,
+      title: `${nurseShift.nurse.firstName} ${nurseShift.nurse.lastName}`,
       data: {
         type: "Shift",
         id: nurseShift.id,
@@ -140,7 +141,8 @@ function AdvancedCalendar() {
     }));
   };
   const renderTeamplan = () => {
-    return teamplanData.map((item) => (
+    const filteredTeamplanData = teamplanData.filter(teamplan => teamplan.teamId === teamId);
+    return filteredTeamplanData.map((item) => (
       <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>
     ));
   };
@@ -157,6 +159,8 @@ function AdvancedCalendar() {
   const handleTeamChange = (e) => {
     const selectedTeamId = e.target.value;
     setTeamId(selectedTeamId);
+    setTeamplanId('');
+    setTeamplanSelectDisabled(false);
     getVacationData(selectedTeamId);
   };
   const events = [
@@ -300,11 +304,11 @@ function AdvancedCalendar() {
         </Modal.Body>
       </Modal>
       <Stack
-            direction="row"
-            justifyContent="center"
-            alignItems="center"
-            spacing={4}
-          >
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        spacing={4}
+      >
         <FormControl style={{ width: '75%' }}>
           <InputLabel>Teams *</InputLabel>
           <Select
@@ -325,6 +329,7 @@ function AdvancedCalendar() {
             label="Teamplan"
             value={teamplanId}
             onChange={handleTeamplanChange}
+            disabled={teamplanSelectDisabled}
           >
             {renderTeamplan()}
           </Select>
