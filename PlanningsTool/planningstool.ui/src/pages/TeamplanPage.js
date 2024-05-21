@@ -39,7 +39,7 @@ function TeamplanPage() {
         <div style={{ width: '150px' }}>
             <EditTeamplan id={item.id} onUpdate={handleUpdate} />
             <DeleteTeamplan id={item.id} onUpdate={handleUpdate} />            
-            <DownloadExcel teamplanId={item.id} month={dayjs(item.planFor).format('YYYY-MM')} />
+            <DownloadExcel teamplanId={item.id} />
         </div>
     );
 

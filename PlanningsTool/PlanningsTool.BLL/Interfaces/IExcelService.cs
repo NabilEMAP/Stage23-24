@@ -10,7 +10,6 @@ namespace PlanningsTool.BLL.Interfaces
             IEnumerable<NurseShiftDTO> nurseShifts,
             IEnumerable<VacationDTO> vacations,
             IEnumerable<HolidayDTO> holidays,
-            string month,
             string filePath,
             int teamplanId
             );

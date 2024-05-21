@@ -5,11 +5,11 @@ import { IconButton } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileExcel } from '@fortawesome/free-solid-svg-icons';
 
-const DownloadExcel = ({ teamplanId, month }) => {
+const DownloadExcel = ({ teamplanId }) => {
   const handleDownload = async () => {
       try {
           const response = await axios.get(`${API_BASE_URL}/excel/generate`, {
-              params: { month, teamplanId },
+              params: { teamplanId },
               responseType: 'blob'
           });
 
@@ -23,6 +23,7 @@ const DownloadExcel = ({ teamplanId, month }) => {
       } catch (error) {
           console.error('Error downloading the file', error);
       }
+      console.log(teamplanId);
   };
   return (
     <IconButton

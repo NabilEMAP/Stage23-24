@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using OfficeOpenXml;
 using PlanningsTool.Common.DTO.NurseShifts;
 using PlanningsTool.Common.DTO.Vacations;
 using PlanningsTool.Common.DTO.Holidays;
 using PlanningsTool.BLL.Interfaces;
-using AutoMapper;
-using PlanningsTool.DAL.UOW;
 
 public class ExcelService : IExcelService
 {
@@ -15,12 +14,15 @@ public class ExcelService : IExcelService
     {
     }
 
-    public void GenerateExcel(IEnumerable<NurseShiftDTO> nurseShifts, IEnumerable<VacationDTO> vacations, IEnumerable<HolidayDTO> holidays, string month, string filePath, int teamplanId)
+    public void GenerateExcel(IEnumerable<NurseShiftDTO> nurseShifts, IEnumerable<VacationDTO> vacations, IEnumerable<HolidayDTO> holidays, string filePath, int teamplanId)
     {
-        var startDate = DateTime.Parse($"{month}-01");
+        var teamplan = nurseShifts.FirstOrDefault(ns => ns.TeamplanId == teamplanId)?.Teamplan;
+        if (teamplan == null) throw new Exception("Teamplan not found.");
+
+        var startDate = new DateTime(teamplan.PlanFor.Year, teamplan.PlanFor.Month, 1);
         var daysInMonth = DateTime.DaysInMonth(startDate.Year, startDate.Month);
 
-        var filteredNurseShifts = nurseShifts.Where(ns => ns.TeamplanId == teamplanId);
+        var filteredNurseShifts = nurseShifts.Where(ns => ns.TeamplanId == teamplanId).ToList();
 
         using (var package = new ExcelPackage())
         {
@@ -35,7 +37,7 @@ public class ExcelService : IExcelService
 
             // Create nurse schedule data
             var row = 2;
-            foreach (var nurseGroup in nurseShifts.GroupBy(n => n.NurseId))
+            foreach (var nurseGroup in filteredNurseShifts.GroupBy(n => n.NurseId))
             {
                 var nurse = nurseGroup.First().Nurse;
                 worksheet.Cells[row, 1].Value = $"{nurse.FirstName} {nurse.LastName}";

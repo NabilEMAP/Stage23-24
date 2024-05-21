@@ -24,20 +24,19 @@ public class ExcelController : ControllerBase
     /// <summary>
     /// Generates an Excel for a specified month and year.
     /// </summary>
-    /// <param name="month">The month and year for which the Excel is generated.</param>
+    /// <param name="teamplanId">The team plan ID for which the Excel is generated.</param>
     /// <returns></returns>
     [HttpGet("generate")]
-    public async Task<IActionResult> GenerateExcel([FromQuery] string month, [FromQuery] int teamplanId)
+    public async Task<IActionResult> GenerateExcel([FromQuery] int teamplanId)
     {
         var nurseShifts = await _nurseShiftsService.GetAll();
         var vacations = await _vacationsService.GetAll();
         var holidays = await _holidaysService.GetAll();
 
         string filePath = Path.Combine(Path.GetTempPath(), "NurseSchedule.xlsx");
-        _excelService.GenerateExcel(nurseShifts, vacations, holidays, month, filePath, teamplanId);
+        _excelService.GenerateExcel(nurseShifts, vacations, holidays, filePath, teamplanId);
 
         byte[] fileBytes = await System.IO.File.ReadAllBytesAsync(filePath);
         return File(fileBytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "NurseSchedule.xlsx");
     }
-
 }
