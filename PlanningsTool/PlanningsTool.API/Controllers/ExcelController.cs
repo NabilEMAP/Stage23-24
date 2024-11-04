@@ -22,9 +22,9 @@ public class ExcelController : ControllerBase
 
     // POST api/Excel
     /// <summary>
-    /// Generates an Excel for a specified month and year.
+    /// Generates an Excel by the teamplanId for a specified month and year.
     /// </summary>
-    /// <param name="teamplanId">The team plan ID for which the Excel is generated.</param>
+    /// <param name="teamplanId">The teamplanId for which the Excel is generated.</param>
     /// <returns></returns>
     [HttpGet("generate")]
     public async Task<IActionResult> GenerateExcel([FromQuery] int teamplanId)

@@ -6,9 +6,9 @@
     <members>
         <member name="M:ExcelController.GenerateExcel(System.Int32)">
             <summary>
-            Generates an Excel for a specified month and year.
+            Generates an Excel by the teamplanId for a specified month and year.
             </summary>
-            <param name="teamplanId">The team plan ID for which the Excel is generated.</param>
+            <param name="teamplanId">The teamplanId for which the Excel is generated.</param>
             <returns></returns>
         </member>
         <member name="M:PlanningsTool.API.Controllers.HolidaysController.GetAll">
